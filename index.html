@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EAGLZ Hub · a pénzügyi főképernyőd</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3858; --navy-deep:#0f2035; --teal:#7DC8C0; --teal-deep:#2f7a74; --purple:#2b6cb0;
+  --teal-light:rgba(125,200,192,.12); --gold:#E63E78; --pink:#E63E78; --blue:#2b6cb0;
+  --bg:#F6F8FB; --border:#e2e8f0; --gray:#6b7280; --white:#fff;
+  --red:#E63E78; --green:#0f9d8f;
+  --fb:'Manrope',sans-serif; --fd:'Inter',sans-serif;
+  --sidebar:240px; --top:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);font-family:var(--fd);color:var(--navy);font-size:15px;min-height:100vh;
+  background-image:linear-gradient(rgba(125,200,192,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(125,200,192,.07) 1px,transparent 1px);
+  background-size:28px 28px;}
+a{color:inherit;}
+
+/* ── TOPBAR (a Nest chrome-ja) ── */
+.topbar{position:fixed;top:0;left:0;right:0;height:var(--top);background:var(--navy-deep);display:flex;align-items:center;padding:0 1.2rem;z-index:200;gap:.9rem;border-bottom:1px solid rgba(255,255,255,.07);}
+.tb-logo{font-family:var(--fb);font-weight:800;font-size:1.15rem;color:var(--teal);letter-spacing:.04em;white-space:nowrap;}
+.tb-logo span{color:#fff;}
+.tb-sub{font-size:.6rem;color:#8fb3cc;letter-spacing:.14em;text-transform:uppercase;font-family:var(--fb);font-weight:700;margin-left:-.3rem;}
+.tb-date{margin-left:auto;font-family:var(--fb);font-weight:700;font-size:.78rem;color:var(--teal);}
+.tb-user{display:flex;align-items:center;gap:.6rem;color:rgba(255,255,255,.85);font-size:.8rem;font-family:var(--fb);font-weight:600;}
+.tb-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--purple));display:flex;align-items:center;justify-content:center;font-size:.74rem;font-weight:700;color:#fff;font-family:var(--fb);box-shadow:0 0 0 3px rgba(125,200,192,.2);}
+.tb-pill{background:rgba(125,200,192,.18);border:1px solid rgba(125,200,192,.3);color:var(--teal);font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:100px;font-family:var(--fb);cursor:pointer;}
+.tb-pill.vip{background:rgba(230,62,120,.18);border-color:rgba(230,62,120,.45);color:#ffb3cc;box-shadow:0 0 14px rgba(230,62,120,.25);}
+.tb-pill.basic{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#c9d9e6;}
+.mvp-tag{font-family:var(--fb);font-weight:800;font-size:.58rem;letter-spacing:.1em;color:#ffffff;background:linear-gradient(90deg,var(--gold),#ff6b9d);border-radius:100px;padding:.2rem .55rem;}
+
+/* ── OLDALSÁV ── */
+.sidebar{position:fixed;top:var(--top);left:0;bottom:0;width:var(--sidebar);background:var(--navy);display:flex;flex-direction:column;padding:1rem 0;z-index:150;}
+.side-sec{font-family:var(--fb);font-weight:800;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);padding:.7rem 1.3rem .35rem;}
+.nav-item{position:relative;display:flex;align-items:center;gap:.7rem;padding:.62rem 1.3rem;color:rgba(255,255,255,.7);font-family:var(--fb);font-weight:600;font-size:.86rem;cursor:pointer;transition:all .13s;}
+.nav-item:hover{background:rgba(255,255,255,.06);color:#fff;}
+.nav-item.on{background:rgba(125,200,192,.15);color:var(--teal);}
+.nav-item.on::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal);border-radius:0 3px 3px 0;}
+.nav-item .dot{margin-left:auto;background:var(--red);color:#fff;font-size:.6rem;font-weight:800;border-radius:100px;padding:.05rem .4rem;box-shadow:0 0 10px rgba(230,62,120,.5);}
+.side-foot{margin:auto .8rem 0;background:linear-gradient(150deg,rgba(125,200,192,.14),rgba(43,108,176,.14));border:1px solid rgba(125,200,192,.25);border-radius:14px;padding:.8rem .85rem;}
+.side-foot .adv{display:flex;align-items:center;gap:.6rem;}
+.side-foot .ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--purple));color:#fff;font-family:var(--fb);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.82rem;box-shadow:0 0 0 3px rgba(125,200,192,.2),0 0 18px rgba(125,200,192,.35);}
+.side-foot b{font-family:var(--fb);font-size:.84rem;color:#fff;display:block;}
+.side-foot span{font-size:.62rem;color:#a9c4d8;}
+.side-cta{display:block;width:100%;margin-top:.65rem;background:var(--teal);color:var(--navy-deep);border:none;border-radius:10px;font-family:var(--fb);font-weight:800;font-size:.78rem;padding:.55rem;cursor:pointer;box-shadow:0 6px 16px rgba(125,200,192,.3);transition:all .14s;}
+.side-cta:hover{transform:translateY(-1px);filter:brightness(1.06);}
+
+/* ── TARTALOM ── */
+.main{margin-left:var(--sidebar);padding:calc(var(--top) + 1.3rem) 1.6rem 2rem;max-width:1220px;}
+.topbar-space{height:0;}
+.page{display:none;}
+.page.on{display:block;animation:fade .2s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.pt{font-family:var(--fb);font-weight:800;font-size:1.4rem;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.pt em{font-style:normal;color:var(--teal);}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem;box-shadow:0 2px 8px rgba(27,56,88,.05);}
+.btn{font-family:var(--fb);font-weight:700;font-size:.8rem;border:1px solid var(--border);background:#fff;color:var(--teal-deep);border-radius:10px;padding:.5rem .9rem;cursor:pointer;transition:all .13s;}
+.btn:hover{border-color:var(--teal);transform:translateY(-1px);box-shadow:0 4px 12px rgba(27,56,88,.1);}
+.btn.pri{background:var(--navy);border-color:var(--navy);color:#fff;}
+.btn.pri:hover{background:var(--navy-deep);}
+.btn.gold{background:linear-gradient(135deg,var(--gold),#ff6b9d);border-color:transparent;color:#fff;box-shadow:0 6px 16px rgba(230,62,120,.3);}
+.small{font-size:.72rem;color:var(--gray);line-height:1.55;}
+input,select,textarea{font-family:var(--fd);font-size:.85rem;color:var(--navy);border:1px solid var(--border);border-radius:9px;padding:.5rem .65rem;background:#fbfdfe;outline:none;transition:border-color .13s,box-shadow .13s;}
+input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(125,200,192,.2);}
+.lock{opacity:.5;position:relative;}
+.lock::after{content:'🔒 VIP';position:absolute;top:.6rem;right:.7rem;font-family:var(--fb);font-weight:800;font-size:.62rem;color:var(--gold);background:rgba(230,62,120,.14);border:1px solid rgba(230,62,120,.4);border-radius:100px;padding:.15rem .55rem;}
+
+/* ── 1) HERO ── */
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#12385f 0%,var(--navy-deep) 70%);color:#fff;border-radius:18px;padding:1.5rem 1.6rem;margin-bottom:1.1rem;box-shadow:0 14px 34px rgba(15,32,53,.28);}
+.hero::before{content:'';position:absolute;right:-90px;top:-110px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(125,200,192,.35),transparent 65%);}
+.hero::after{content:'';position:absolute;left:35%;bottom:-140px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(43,108,176,.3),transparent 65%);}
+.hero>*{position:relative;z-index:1;}
+.hero .eyebrow{font-family:var(--fb);font-weight:700;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:.45rem;}
+.hero h2{font-family:var(--fb);font-weight:800;font-size:1.6rem;margin-bottom:1.05rem;}
+.hero h2 em{font-style:normal;color:var(--teal);}
+.hero-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;}
+.hk{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:.7rem .85rem;backdrop-filter:blur(2px);transition:all .14s;}
+.hk:hover{background:rgba(255,255,255,.11);transform:translateY(-2px);}
+.hk .l{font-size:.6rem;font-family:var(--fb);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8fb3cc;}
+.hk .v{font-family:var(--fb);font-weight:800;font-size:1.18rem;margin-top:.15rem;}
+.hk .v em{font-style:normal;font-size:.72rem;color:var(--teal);}
+.hk.warn .v{color:#9ec5f0;}
+.hk.alert .v{color:#ffb3cc;}
+.dash2{display:grid;grid-template-columns:1.35fr 1fr;gap:1rem;margin-bottom:1rem;}
+@media(max-width:980px){.dash2{grid-template-columns:1fr;}.main{margin-left:0;}.sidebar{display:none;}}
+
+/* pénzügyi kerék · pgx-csempe stílus */
+.wheel{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;}
+@media(max-width:700px){.wheel{grid-template-columns:repeat(2,1fr);}}
+.wseg{position:relative;border:1px solid var(--border);border-radius:12px;padding:.75rem .75rem .65rem;cursor:pointer;transition:transform .16s,box-shadow .16s,border-color .16s;background:#fff;box-shadow:0 2px 8px rgba(15,32,53,.06);overflow:hidden;}
+.wseg::after{content:'↗';position:absolute;top:.55rem;right:.7rem;color:var(--teal);font-size:.9rem;font-weight:800;opacity:0;transition:opacity .16s;}
+.wseg:hover{transform:translateY(-3px);border-color:var(--teal);box-shadow:0 10px 24px rgba(15,32,53,.14);}
+.wseg:hover::after{opacity:1;}
+.wseg .ic{font-size:1.3rem;}
+.wseg b{display:block;font-family:var(--fb);font-size:.78rem;margin:.25rem 0 .3rem;}
+.wst{font-family:var(--fb);font-weight:800;font-size:.6rem;border-radius:100px;padding:.15rem .55rem;display:inline-block;}
+.wseg.ok{border-left:4px solid var(--green);} .wseg.ok .wst{background:rgba(15,157,143,.12);color:var(--green);}
+.wseg.rev{border-left:4px solid var(--blue);} .wseg.rev .wst{background:rgba(43,108,176,.12);color:var(--blue);}
+.wseg.miss{border-left:4px solid var(--red);background:rgba(230,62,120,.03);} .wseg.miss .wst{background:rgba(230,62,120,.1);color:var(--red);}
+.wseg.na{border-left:4px solid #cbd5e1;} .wseg.na .wst{background:#eef2f7;color:var(--gray);}
+
+.todo{display:flex;align-items:center;gap:.6rem;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:11px;padding:.6rem .8rem;margin-bottom:.45rem;background:#fff;transition:all .13s;}
+.todo:hover{transform:translateX(2px);box-shadow:0 4px 12px rgba(27,56,88,.08);}
+.todo b{font-family:var(--fb);font-size:.8rem;flex:1;}
+.ach-row{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.7rem;}
+.ach{font-family:var(--fb);font-weight:700;font-size:.66rem;border-radius:100px;padding:.32rem .75rem;border:1px solid var(--border);color:var(--gray);background:#fff;}
+.ach.done{border-color:rgba(230,62,120,.45);color:#b8285d;background:linear-gradient(135deg,rgba(230,62,120,.14),rgba(255,107,157,.08));box-shadow:0 2px 8px rgba(230,62,120,.15);}
+.life-chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.55rem;}
+.life-chips .btn{font-size:.7rem;padding:.38rem .75rem;border-radius:100px;}
+
+/* ── 2) TÉRKÉP ── */
+.map-sum{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.9rem;}
+.map-sum .hk{background:#fff;border:1px solid var(--border);color:var(--navy);box-shadow:0 2px 8px rgba(15,32,53,.06);}
+.map-sum .hk .v{color:var(--navy);}
+.mcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.75rem;}
+.mcard{position:relative;background:#fff;border:1px solid var(--border);border-left:4px solid var(--teal);border-radius:13px;padding:.85rem .95rem;box-shadow:0 2px 8px rgba(15,32,53,.06);transition:transform .16s,box-shadow .16s;}
+.mcard:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(15,32,53,.14);}
+.mcard.kulso{border-left-color:var(--purple);}
+.mcard .prov{font-size:.6rem;font-family:var(--fb);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep);}
+.mcard.kulso .prov{color:var(--purple);}
+.mcard h4{font-family:var(--fb);font-size:.94rem;margin:.15rem 0 .45rem;}
+.mcard .row{display:flex;justify-content:space-between;font-size:.74rem;color:var(--gray);padding:.16rem 0;border-bottom:1px dashed var(--border);}
+.mcard .row:last-of-type{border-bottom:none;}
+.mcard .row b{color:var(--navy);font-family:var(--fb);}
+.mcard .ask{margin-top:.6rem;width:100%;}
+.addform{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.5rem;margin-top:.7rem;}
+
+/* ── 4) SEGÍTSÉGKÖZPONT ── */
+.help3{display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;margin-bottom:1rem;}
+@media(max-width:700px){.help3{grid-template-columns:1fr;}}
+.helpbtn{position:relative;overflow:hidden;background:#fff;border:1px solid var(--border);border-radius:15px;padding:1.2rem 1rem;text-align:center;cursor:pointer;transition:all .16s;box-shadow:0 2px 8px rgba(15,32,53,.06);}
+.helpbtn::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% -20%,rgba(125,200,192,.25),transparent 60%);opacity:0;transition:opacity .16s;}
+.helpbtn:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 12px 26px rgba(15,32,53,.14);}
+.helpbtn:hover::before{opacity:1;}
+.helpbtn .ic{font-size:1.8rem;position:relative;}
+.helpbtn b{display:block;font-family:var(--fb);font-size:.95rem;margin:.45rem 0 .2rem;position:relative;}
+.steps{display:flex;align-items:center;gap:.3rem;margin-top:.5rem;flex-wrap:wrap;}
+.step{font-family:var(--fb);font-weight:700;font-size:.62rem;border-radius:100px;padding:.22rem .6rem;background:#eef2f7;color:var(--gray);}
+.step.done{background:rgba(15,157,143,.12);color:var(--green);}
+.step.cur{background:rgba(43,108,176,.14);color:var(--blue);box-shadow:0 0 0 2px rgba(43,108,176,.15);}
+.steps .sep{color:#cbd5e1;font-size:.65rem;}
+
+/* ── 5) KONZULTÁCIÓ ── */
+.slots{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.5rem;}
+.slot{font-family:var(--fb);font-weight:700;font-size:.74rem;border:1px solid var(--border);border-radius:9px;padding:.45rem .75rem;cursor:pointer;background:#fff;transition:all .13s;}
+.slot:hover{border-color:var(--teal);transform:translateY(-1px);}
+.slot.on{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 6px 14px rgba(27,56,88,.25);}
+
+/* ── 6) KALKULÁTOR ── */
+.calc3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.85rem;}
+.calc .res{position:relative;overflow:hidden;background:linear-gradient(135deg,#12385f,var(--navy-deep));color:#fff;border-radius:12px;padding:.75rem .95rem;margin-top:.65rem;font-family:var(--fb);}
+.calc .res::before{content:'';position:absolute;right:-40px;top:-50px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(125,200,192,.35),transparent 65%);}
+.calc .res b{font-size:1.35rem;color:var(--teal);display:block;position:relative;}
+.calc .frow{display:flex;align-items:center;gap:.5rem;margin-top:.45rem;font-size:.78rem;}
+.calc .frow label{flex:1;color:var(--gray);}
+.calc .frow input{width:120px;text-align:right;}
+
+/* ── 7) EDUKÁCIÓ ── */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.75rem;}
+.edu-tile{position:relative;overflow:hidden;background:#fff;border:1px solid var(--border);border-radius:13px;padding:.95rem 1rem;cursor:pointer;transition:transform .16s,box-shadow .16s,border-color .16s;box-shadow:0 2px 8px rgba(15,32,53,.06);}
+.edu-tile::after{content:'↗';position:absolute;top:.7rem;right:.8rem;color:var(--teal);font-size:.9rem;font-weight:800;opacity:0;transition:opacity .16s;}
+.edu-tile:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 10px 24px rgba(15,32,53,.14);}
+.edu-tile:hover::after{opacity:1;}
+.edu-tile .ic{font-size:1.5rem;}
+.edu-tile b{display:block;font-family:var(--fb);font-size:.88rem;margin:.35rem 0 .2rem;}
+.edu-tile span{font-size:.68rem;color:var(--gray);}
+
+/* értesítések */
+.notif{display:flex;gap:.7rem;align-items:flex-start;border-bottom:1px dashed var(--border);padding:.65rem 0;}
+.notif .ic{font-size:1.1rem;width:34px;height:34px;border-radius:10px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.notif b{font-family:var(--fb);font-size:.82rem;display:block;}
+.notif span{font-size:.7rem;color:var(--gray);}
+.gate{position:fixed;inset:0;z-index:500;background:linear-gradient(135deg,#12385f 0%,var(--navy-deep) 70%);display:flex;align-items:center;justify-content:center;padding:1rem;}
+.gate::before{content:'';position:absolute;right:-120px;top:-140px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(125,200,192,.35),transparent 65%);}
+.gate::after{content:'';position:absolute;left:-100px;bottom:-160px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(43,108,176,.3),transparent 65%);}
+.gate-box{position:relative;z-index:1;width:min(440px,94vw);background:#fff;border-radius:20px;padding:1.6rem 1.7rem;box-shadow:0 30px 70px rgba(9,22,38,.5);}
+.gate-logo{font-family:var(--fb);font-weight:800;font-size:1.4rem;color:var(--navy);}
+.gate-logo em{font-style:normal;color:var(--teal);}
+.gate-sub{font-size:.72rem;color:var(--gray);margin:.15rem 0 1.1rem;}
+.gate h3{font-family:var(--fb);font-weight:800;font-size:1.05rem;margin-bottom:.35rem;}
+.gate p{font-size:.8rem;color:var(--gray);line-height:1.55;margin-bottom:.9rem;}
+.gate input{width:100%;margin-bottom:.55rem;}
+.gate .btn{width:100%;padding:.65rem;font-size:.86rem;}
+.gate .gbtn{width:100%;padding:.62rem;font-size:.84rem;background:#fff;border:1.5px solid var(--border);border-radius:10px;font-family:var(--fb);font-weight:700;cursor:pointer;margin-bottom:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;}
+.gate .gbtn:hover{border-color:var(--teal);}
+.gate .or{text-align:center;font-size:.68rem;color:var(--gray);margin:.5rem 0;}
+.code-in{font-family:var(--fb);font-weight:800;font-size:1.3rem;letter-spacing:.18em;text-align:center;text-transform:uppercase;}
+.gate .err{color:var(--red);font-size:.74rem;font-family:var(--fb);font-weight:700;min-height:1.1em;margin-bottom:.4rem;}
+.gate .hint{background:var(--teal-light);border:1px dashed rgba(125,200,192,.6);border-radius:10px;padding:.55rem .7rem;font-size:.7rem;color:var(--teal-deep);margin-top:.8rem;line-height:1.5;}
+.toast{position:fixed;bottom:1.2rem;right:1.2rem;background:var(--navy-deep);color:#fff;font-family:var(--fb);font-weight:700;font-size:.8rem;border-radius:12px;padding:.75rem 1.05rem;box-shadow:0 12px 34px rgba(9,22,38,.4);display:none;z-index:300;border-left:4px solid var(--teal);max-width:420px;line-height:1.45;}
+/* ── MVP kiegészítő stílusok ── */
+.gate .tabs{display:flex;gap:.4rem;margin-bottom:.9rem;}
+.gate .tab{flex:1;text-align:center;font-family:var(--fb);font-weight:700;font-size:.8rem;padding:.5rem;border-radius:9px;border:1px solid var(--border);cursor:pointer;color:var(--gray);}
+.gate .tab.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+.gate .msg{font-size:.76rem;font-family:var(--fb);font-weight:700;min-height:1.2em;margin:.3rem 0 .5rem;color:var(--pink);}
+.gate .msg.ok{color:var(--green);}
+.gate .link{font-size:.72rem;color:var(--teal-deep);cursor:pointer;text-decoration:underline;text-align:center;display:block;margin-top:.5rem;}
+.cfgwarn{background:rgba(230,62,120,.08);border:1px solid rgba(230,62,120,.35);border-radius:10px;padding:.6rem .8rem;font-size:.72rem;color:#b8285d;margin-bottom:.8rem;line-height:1.5;}
+.empty{font-size:.8rem;color:var(--gray);padding:1rem;text-align:center;border:1px dashed var(--border);border-radius:11px;background:#fff;}
+.tkt{border:1px solid var(--border);border-radius:11px;padding:.7rem .85rem;margin-bottom:.5rem;background:#fff;}
+.tkt b{font-family:var(--fb);font-size:.84rem;}
+.tkt .k{font-family:var(--fb);font-weight:800;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-deep);}
+.tkt .k.claim{color:var(--pink);} .tkt .k.consult{color:var(--blue);}
+.docrow{display:flex;align-items:center;gap:.6rem;border-bottom:1px dashed var(--border);padding:.5rem 0;font-size:.8rem;}
+.docrow b{font-family:var(--fb);flex:1;word-break:break-all;}
+.docrow .btn{padding:.3rem .6rem;font-size:.7rem;}
+.switch{display:flex;align-items:center;gap:.5rem;font-size:.8rem;cursor:pointer;}
+.switch input{width:auto;}
+.mcard .del{position:absolute;top:.5rem;right:.6rem;border:none;background:none;color:var(--gray);cursor:pointer;font-size:.8rem;}
+.mcard .del:hover{color:var(--pink);}
+.adv-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.7rem;}
+.adv-cl{background:#fff;border:1px solid var(--border);border-radius:13px;padding:.85rem .95rem;cursor:pointer;transition:all .14s;box-shadow:0 2px 8px rgba(15,32,53,.06);}
+.adv-cl:hover{transform:translateY(-3px);border-color:var(--teal);box-shadow:0 10px 24px rgba(15,32,53,.14);}
+.adv-cl b{font-family:var(--fb);font-size:.95rem;display:block;}
+.adv-cl .m{font-size:.7rem;color:var(--gray);margin-top:.2rem;}
+.adv-cl .bad,.tkt .bad{display:inline-block;font-family:var(--fb);font-weight:800;font-size:.6rem;border-radius:100px;padding:.14rem .5rem;margin-top:.4rem;margin-right:.25rem;}
+.bad.p{background:rgba(230,62,120,.12);color:var(--pink);} .bad.b{background:rgba(43,108,176,.12);color:var(--blue);} .bad.g{background:rgba(15,157,143,.12);color:var(--green);}
+.wheel-ed{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;}
+.wheel-ed label{display:flex;align-items:center;gap:.4rem;font-size:.78rem;border:1px solid var(--border);border-radius:9px;padding:.4rem .55rem;background:#fff;}
+.wheel-ed select{flex:1;font-size:.74rem;padding:.3rem .4rem;}
+.mode-pill{font-family:var(--fb);font-weight:800;font-size:.66rem;border-radius:100px;padding:.25rem .7rem;cursor:pointer;background:rgba(230,62,120,.18);border:1px solid rgba(230,62,120,.45);color:#ffb3cc;}
+.topbar .who{display:flex;align-items:center;gap:.5rem;cursor:pointer;}
+@media(max-width:980px){#hubFoot{margin-left:0!important;}}
+</style>
+</head>
+<body>
+<!-- ═══ KAPU ═══ -->
+<div class="gate" id="gate">
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1rem;">
+  <img src="data:image/png;base64,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" alt="EAGLZ" style="width:min(300px,70vw);height:auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));">
+  <div class="gate-box" id="gLogin" style="margin-top:.2rem;">
+    <div class="gate-sub" style="text-align:center;font-family:var(--fb);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);">Hub · a pénzügyi főképernyőd</div>
+    <div id="cfgWarn" class="cfgwarn" style="display:none;">⚙️ A kapcsolat még nincs beállítva. Szólj a tanácsadódnak!</div>
+    <div class="tabs"><div class="tab on" id="tabIn" onclick="gTab('in')">Belépés</div><div class="tab" id="tabUp" onclick="gTab('up')">Regisztráció</div></div>
+    <button class="gbtn" onclick="gGoogle()"><span style="font-weight:800;color:#4285F4;">G</span> Folytatás Google-fiókkal</button>
+    <div class="or">vagy e-mail címmel</div>
+    <input id="gName" placeholder="Teljes neved" style="display:none;">
+    <input id="gEmail" placeholder="E-mail cím" type="email" autocomplete="email">
+    <input id="gPass" placeholder="Jelszó (min. 8 karakter)" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')gSubmit()">
+    <div class="msg" id="gMsg"></div>
+    <button class="btn pri" id="gBtn" onclick="gSubmit()">Belépek</button>
+    <span class="link" onclick="gForgot()">Elfelejtettem a jelszavam</span>
+  </div>
+
+  <div class="gate-box" id="gCode" style="display:none;">
+    <div class="gate-sub" style="text-align:center;font-family:var(--fb);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);">EAGLZ Hub</div>
+    <div class="gate-sub">Még egy lépés, és bent vagy</div>
+    <h3>🔑 Add meg a meghívókódod</h3>
+    <p>A kódot a tanácsadódtól kaptad az elemzésetek végén. Ez köti össze a fiókodat vele, hogy mindig ő lásson rád.</p>
+    <input class="code-in" id="gCodeIn" placeholder="PL. ZOE-24" maxlength="16" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')gRedeem()">
+    <div class="msg" id="gCodeMsg"></div>
+    <button class="btn pri" onclick="gRedeem()">Fiók aktiválása</button>
+    <div class="hint">Nincs kódod? Akkor még nem ültetek le elemzésre. Írj nekünk: <b>hello@eaglz.hu</b>, és összekötünk egy tanácsadóval.</div>
+    <span class="link" onclick="logout()">Kilépek</span>
+  </div>
+
+  <div class="gate-box" id="gTerms" style="display:none;width:min(560px,94vw);">
+    <div class="gate-sub" style="text-align:center;font-family:var(--fb);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);">EAGLZ Hub</div>
+    <div class="gate-sub">Mielőtt belépsz</div>
+    <h3>🧪 Tesztfázis és adatvédelem</h3>
+    <div id="termsBox" style="max-height:38vh;overflow-y:auto;font-size:.78rem;line-height:1.6;color:#3d4f68;border:1px solid var(--border);border-radius:10px;padding:.7rem .85rem;background:#fbfdfe;"></div>
+    <label class="switch" style="margin:.8rem 0 .5rem;font-size:.8rem;"><input type="checkbox" id="termsChk"> <span>Elolvastam, és önkéntesen részt veszek a tesztfázisban.</span></label>
+    <div class="msg" id="termsMsg"></div>
+    <button class="btn pri" onclick="acceptTerms()">Elfogadom és belépek</button>
+    <span class="link" onclick="logout()">Mégsem, kilépek</span>
+  </div>
+
+  <div class="gate-box" id="gMail" style="display:none;">
+    <div class="gate-sub" style="text-align:center;font-family:var(--fb);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);">EAGLZ Hub</div>
+    <div class="gate-sub">Majdnem kész</div>
+    <h3>📬 Nézd meg a postafiókod</h3>
+    <p id="gMailTxt">Küldtünk egy megerősítő levelet. Kattints a benne lévő linkre, utána lépj be.</p>
+    <button class="btn pri" onclick="gTab('in');gShow('gLogin')">Vissza a belépéshez</button>
+  </div>
+
+  <div class="gate-box" id="gReset" style="display:none;">
+    <div class="gate-sub" style="text-align:center;font-family:var(--fb);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);">EAGLZ Hub</div>
+    <div class="gate-sub">Új jelszó</div>
+    <input id="gNewPass" placeholder="Új jelszó (min. 8 karakter)" type="password">
+    <div class="msg" id="gResetMsg"></div>
+    <button class="btn pri" onclick="gSetPass()">Jelszó mentése</button>
+  </div>
+  </div>
+</div>
+
+<!-- ═══ APP ═══ -->
+<div class="topbar" id="topbar" style="display:none;">
+  <img src="data:image/png;base64,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" alt="EAGLZ" style="height:26px;width:auto;">
+  <span class="tb-logo" style="font-size:.95rem;"><span>Hub</span></span>
+  <span class="mvp-tag">TESZT-FÁZIS</span>
+  <div class="tb-date" id="tbDate"></div>
+  <span class="mode-pill" id="modePill" style="display:none;" onclick="modeToggle()">👔 Tanácsadói nézet</span>
+  <span class="tb-pill vip" id="tierChip">⭐ VIP ügyfél</span>
+  <div class="tb-user who" onclick="go('profile')"><div class="tb-avatar" id="tbAva">..</div><span id="tbName"></span></div>
+</div>
+
+<div class="sidebar" id="sidebar" style="display:none;">
+  <div id="navClient">
+    <div class="side-sec">Pénzügyeim</div>
+    <div class="nav-item on" data-p="home" onclick="go('home')">🏠 Pénzügyeim ma</div>
+    <div class="nav-item" data-p="map" onclick="go('map')">🗺️ Pénzügyi térképem</div>
+    <div class="nav-item" data-p="docs" onclick="go('docs')">📁 Dokumentumtár</div>
+    <div class="side-sec">Segítség</div>
+    <div class="nav-item" data-p="help" onclick="go('help')">🆘 Segítségközpont <span class="dot" id="dotHelp" style="display:none;"></span></div>
+    <div class="nav-item" data-p="konz" onclick="go('konz')">📅 Konzultáció</div>
+    <div class="side-sec">Tudás</div>
+    <div class="nav-item" data-p="calc" onclick="go('calc')">🧮 Kalkulátorok</div>
+    <div class="nav-item" data-p="edu" onclick="go('edu')">🎓 Élethelyzeteim</div>
+    <div class="nav-item" data-p="kb" onclick="go('kb')">📚 Tudástár</div>
+    <div class="nav-item" data-p="notif" onclick="go('notif')">🔔 Értesítések <span class="dot" id="dotNotif" style="display:none;"></span></div>
+    <div class="nav-item" data-p="profile" onclick="go('profile')">👤 Fiókom</div>
+    <div class="nav-item" onclick="termsShow(true)" style="font-size:.76rem;color:rgba(255,255,255,.5);">ℹ️ Tesztfázis és adatvédelem</div>
+  </div>
+  <div id="navAdv" style="display:none;">
+    <div class="side-sec">Tanácsadói pult</div>
+    <div class="nav-item on" data-p="adv" onclick="go('adv')">👥 Ügyfeleim</div>
+    <div class="nav-item" data-p="advq" onclick="go('advq')">📥 Nyitott ügyek <span class="dot" id="dotAdv" style="display:none;"></span></div>
+    <div class="nav-item" data-p="advcode" onclick="go('advcode')">🔑 Meghívókódom</div>
+    <div class="nav-item" data-p="advs" onclick="go('advs')" id="navAdvs" style="display:none;">👑 Tanácsadók és kódok</div>
+  </div>
+  <div class="side-foot" id="sideFoot">
+    <div class="adv"><div class="ava" id="advAva">..</div><div><b id="advName">…</b><span>a személyes tanácsadód</span></div></div>
+    <button class="side-cta" onclick="go('konz')">📅 Konzultációt foglalok</button>
+  </div>
+</div>
+
+<div class="main" id="main" style="display:none;">
+
+  <!-- 1) HOME -->
+  <div class="page on" id="p-home">
+    <div class="hero">
+      <div class="eyebrow">Állapotjelentés · <span id="heroDate"></span></div>
+      <h2 id="heroTitle">Szia! 👋 <em>A pénzügyeid ma</em></h2>
+      <div class="hero-grid" id="heroGrid"></div>
+    </div>
+    <div class="dash2">
+      <div class="card">
+        <div class="pt" style="margin-bottom:.7rem;font-size:1.15rem;">🧭 Pénzügyi kerék <span class="small" style="font-weight:400;">· a tanácsadód állítja az elemzés alapján</span></div>
+        <div class="wheel" id="wheel"></div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:1rem;">
+          <div class="pt" style="margin-bottom:.6rem;font-size:1.15rem;">✅ Ajánlott teendőid</div>
+          <div id="todos"></div>
+          <div class="ach-row" id="achRow"></div>
+          <button class="btn gold" style="width:100%;margin-top:.7rem;" onclick="go('profile')">🎁 Hívd meg egy ismerősöd · adj neki VIP hozzáférést</button>
+        </div>
+        <div class="card">
+          <div class="pt" style="margin-bottom:.4rem;font-size:1.15rem;">💬 Mi változott mostanában?</div>
+          <p class="small">Egy kattintás, és a tanácsadód tudni fogja, hogy érdemes rád gondolnia.</p>
+          <div class="life-chips">
+            <button class="btn" onclick="life('uj_munkahely','💼 Új munkahely')">💼 Új munkahely</button>
+            <button class="btn" onclick="life('gyermek','👶 Gyermek érkezik')">👶 Gyermek érkezik</button>
+            <button class="btn" onclick="life('lakas','🏠 Lakásvásárlás')">🏠 Lakásvásárlás</button>
+            <button class="btn" onclick="life('hazassag','💍 Házasság')">💍 Házasság</button>
+            <button class="btn" onclick="life('vallalkozas','🚀 Vállalkozás')">🚀 Vállalkozás</button>
+            <button class="btn" onclick="life('jovedelem','💰 Jövedelemváltozás')">💰 Jövedelemváltozás</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2) TÉRKÉP -->
+  <div class="page" id="p-map">
+    <div class="pt">🗺️ <em>Pénzügyi</em> térképem <span class="small" style="font-weight:400;">· minden, amid van: nálunk és máshol is</span></div>
+    <div class="map-sum" id="mapSum"></div>
+    <div class="mcards" id="mapCards"></div>
+    <div class="card" style="margin-top:1rem;">
+      <div class="pt" style="margin-bottom:.3rem;font-size:1.1rem;">➕ Új tétel felvitele</div>
+      <p class="small">Bármit felvihetsz: máshol kötött biztosítást, bankszámlát, hitelt, ingatlant is. Ez a te áttekintőd, nem hivatalos nyilvántartás.</p>
+      <div class="addform">
+        <select id="afTyp"><option value="biztositas">Biztosítás</option><option value="megtakaritas">Megtakarítás</option><option value="hitel">Hitel</option><option value="bankszamla">Bankszámla</option><option value="ingatlan">Ingatlan</option></select>
+        <input id="afProv" placeholder="Szolgáltató (pl. Generali)">
+        <input id="afName" placeholder="Termék megnevezése *">
+        <input id="afFee" placeholder="Havi díj (Ft)" type="number">
+        <input id="afEnd" placeholder="Lejárat" type="date">
+        <label class="switch"><input type="checkbox" id="afEaglz"> EAGLZ-nél kötöttem</label>
+        <button class="btn pri" onclick="mapAdd()">Hozzáadás</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3) DOKUMENTUMTÁR -->
+  <div class="page" id="p-docs">
+    <div class="pt">📁 <em>Dokumentum</em>tár <span class="small" style="font-weight:400;">· általad vezetett áttekintő, nem hivatalos nyilvántartás</span></div>
+    <div class="card" style="margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;">
+      <b style="font-family:var(--fb);font-size:.85rem;">⬆️ Feltöltés</b>
+      <span class="small" style="flex:1;">Kötvény, éves kimutatás, kárpapír: fotó vagy PDF, max. 10 MB.</span>
+      <input type="file" id="docFile" style="max-width:260px;" accept=".pdf,.jpg,.jpeg,.png,.heic,.doc,.docx">
+      <button class="btn pri" onclick="docUpload()">Feltöltöm</button>
+    </div>
+    <div class="card">
+      <label class="switch" style="margin-bottom:.7rem;"><input type="checkbox" id="docShare" onchange="docShareToggle()"> <span>A tanácsadóm láthatja a dokumentumaimat <span class="small">(bármikor kikapcsolhatod)</span></span></label>
+      <div id="docList"><div class="empty">Betöltés…</div></div>
+    </div>
+  </div>
+
+  <!-- 4) SEGÍTSÉGKÖZPONT -->
+  <div class="page" id="p-help">
+    <div class="pt">🆘 <em>Segítség</em>központ</div>
+    <div class="help3">
+      <div class="helpbtn" onclick="helpNew('help')"><span class="ic">🙋</span><b>Segítséget kérek</b><span class="small">kérdésem van egy szerződésemről</span></div>
+      <div class="helpbtn" onclick="go('konz')"><span class="ic">📅</span><b>Konzultációt foglalok</b><span class="small">átbeszélném a pénzügyeimet</span></div>
+      <div class="helpbtn" onclick="helpNew('claim')"><span class="ic">⚡</span><b>Kárt / problémát jelentek</b><span class="small">történt valami, intézzük</span></div>
+    </div>
+    <div class="card" id="helpForm" style="display:none;margin-bottom:1rem;">
+      <div class="pt" style="margin-bottom:.5rem;font-size:1.1rem;" id="helpFormT">🙋 Segítségkérés</div>
+      <div class="addform">
+        <select id="hfItem"><option value="">· Melyik tételről van szó? ·</option></select>
+        <select id="hfUrg"><option value="low">Ráér pár napot</option><option value="normal" selected>Ezen a héten fontos</option><option value="urgent">Sürgős</option></select>
+      </div>
+      <textarea id="hfTxt" style="width:100%;margin-top:.5rem;min-height:70px;" placeholder="Írd le pár mondatban…"></textarea>
+      <div style="margin-top:.55rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
+        <button class="btn pri" onclick="helpSend()">Beküldés</button>
+        <span class="small">Vállalt válaszidő: <b>VIP: 1 munkanap</b> · Basic: 3 munkanap. A tanácsadód kapja meg, a tételed adataival együtt.</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="pt" style="margin-bottom:.5rem;font-size:1.1rem;">📌 Ügyeid</div>
+      <div id="tktList"></div>
+    </div>
+  </div>
+
+  <!-- 5) KONZULTÁCIÓ -->
+  <div class="page" id="p-konz">
+    <div class="pt">📅 Konzultáció <em id="konzAdv">a tanácsadóddal</em></div>
+    <div class="card">
+      <div class="addform">
+        <select id="kTopic"><option>Éves pénzügyi felülvizsgálat</option><option>Nyugdíj-megtakarítás indítása</option><option>Lakásbiztosítás megújítása</option><option>Gyermekjövő átbeszélése</option><option>Hitel / lakásvásárlás</option><option>Egyéb kérdés</option></select>
+        <select id="kMode"><option>💻 Online (Meet)</option><option>🤝 Személyes (iroda)</option></select>
+      </div>
+      <p class="small" style="margin-top:.7rem;font-family:var(--fb);font-weight:700;color:var(--navy);">Mikor érnél rá? (jelölj be többet is)</p>
+      <div class="slots" id="slots"></div>
+      <input id="kQ" style="width:100%;margin-top:.7rem;" placeholder="Van előzetes kérdésed? (nem kötelező)">
+      <div style="margin-top:.7rem;"><button class="btn pri" onclick="konzBook()">📅 Időpontot kérek</button>
+      <span class="small" style="margin-left:.6rem;">A tanácsadód visszaigazolja a pontos időpontot, utána írásos összefoglalót kapsz ide.</span></div>
+    </div>
+  </div>
+
+  <!-- 6) KALKULÁTOROK -->
+  <div class="page" id="p-calc">
+    <div class="pt">🧮 <em>Kalkulátorok</em> <span class="small" style="font-weight:400;">· nem tanácsadás, hanem ébresztő</span></div>
+    <div class="calc3">
+      <div class="card calc">
+        <b style="font-family:var(--fb);">🌅 Nyugdíjhiány</b>
+        <div class="frow"><label>Nettó havi jövedelmed</label><input type="number" id="c1a" value="600000" oninput="c1()"></div>
+        <div class="frow"><label>Hány év múlva mennél nyugdíjba?</label><input type="number" id="c1b" value="30" oninput="c1()"></div>
+        <div class="res"><span class="small" style="color:#8fb3cc;">Várható havi hiányod nyugdíjasként kb.</span><b id="c1r">·</b></div>
+        <button class="btn gold" style="width:100%;margin-top:.55rem;" onclick="calcSend('Nyugdíjhiány',document.getElementById('c1r').textContent)">Nézze át a tanácsadóm →</button>
+      </div>
+      <div class="card calc">
+        <b style="font-family:var(--fb);">🛟 Vésztartalék</b>
+        <div class="frow"><label>Havi kiadásaitok</label><input type="number" id="c2a" value="450000" oninput="c2()"></div>
+        <div class="frow"><label>Jelenlegi tartalékod</label><input type="number" id="c2b" value="600000" oninput="c2()"></div>
+        <div class="res"><span class="small" style="color:#8fb3cc;">A biztonságos 6 havi tartalékból megvan</span><b id="c2r">·</b></div>
+        <button class="btn gold" style="width:100%;margin-top:.55rem;" onclick="calcSend('Vésztartalék',document.getElementById('c2r').textContent)">Beszéljük meg →</button>
+      </div>
+      <div class="card calc" id="calc3wrap">
+        <b style="font-family:var(--fb);">🧒 Gyermekjövő</b>
+        <div class="frow"><label>Gyermeked életkora</label><input type="number" id="c3a" value="4" oninput="c3()"></div>
+        <div class="frow"><label>Havi félretett összeg</label><input type="number" id="c3b" value="25000" oninput="c3()"></div>
+        <div class="res"><span class="small" style="color:#8fb3cc;">18 éves korára összegyűlhet kb.</span><b id="c3r">·</b></div>
+        <button class="btn gold" style="width:100%;margin-top:.55rem;" onclick="calcSend('Gyermekjövő',document.getElementById('c3r').textContent)">Nézze át a tanácsadóm →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7) ÉLETHELYZETEK -->
+  <div class="page" id="p-edu">
+    <div class="pt">🎓 <em>Élethelyzeteim</em> <span class="small" style="font-weight:400;">· 3 perces útmutatók, checklist, konzultáció</span></div>
+    <div class="edu-grid" id="eduGrid"></div>
+    <div class="card lock" id="kidsCard" style="margin-top:1rem;">
+      <div class="pt" style="margin-bottom:.3rem;font-size:1.05rem;">🧒 Gyerek pénzügyi akadémia</div>
+      <p class="small">Életkor szerinti mini tananyagok, zsebpénz-tervező, családi megtakarítási célok. VIP ügyfeleknek, hamarosan.</p>
+    </div>
+  </div>
+
+  <!-- 7b) TUDÁSTÁR -->
+  <div class="page" id="p-kb">
+    <div class="pt">📚 <em>Tudástár</em> <span class="small" style="font-weight:400;">· rövid, érthető válaszok a leggyakoribb pénzügyi kérdésekre</span></div>
+    <div class="card" style="margin-bottom:1rem;display:flex;gap:.6rem;align-items:center;">
+      <input id="kbQ" style="flex:1;" placeholder="🔍 Keress: pl. TBSZ, kamatadó, önerő, vésztartalék…" oninput="kbRender()">
+      <span class="small" id="kbCnt"></span>
+    </div>
+    <div class="edu-grid" id="kbGrid"></div>
+    <div class="card lock" id="kbVip" style="margin-top:1rem;">
+      <div class="pt" style="margin-bottom:.3rem;font-size:1.05rem;">⭐ VIP tudástár</div>
+      <p class="small">Mélyebb anyagok: adóoptimalizálás vállalkozóknak, öröklés és vagyonátadás, befektetési stratégiák élethelyzet szerint, webinár-felvételek.</p>
+    </div>
+  </div>
+
+  <!-- 8) ÉRTESÍTÉSEK -->
+  <div class="page" id="p-notif">
+    <div class="pt">🔔 <em>Értesítések</em></div>
+    <div class="card" id="notifList"></div>
+  </div>
+
+  <!-- 9) FIÓKOM -->
+  <div class="page" id="p-profile">
+    <div class="pt">👤 <em>Fiókom</em></div>
+    <div class="dash2">
+      <div class="card">
+        <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">Adataim</div>
+        <div class="addform" style="grid-template-columns:1fr;">
+          <input id="pfName" placeholder="Teljes neved">
+          <input id="pfEmail" disabled>
+          <button class="btn pri" onclick="profileSave()">Mentés</button>
+        </div>
+        <p class="small" style="margin-top:.8rem;">Tanácsadód: <b id="pfAdv">…</b> · Szinted: <b id="pfTier">…</b></p>
+        <p class="small" style="margin-top:.4rem;">A tanácsadód látja: a pénzügyi térképed, a segítségkéréseid, az élethelyzet-jelzéseid<span id="pfDocs"></span>. Nem látja: semmi mást.</p>
+        <button class="btn" style="margin-top:.9rem;" onclick="logout()">Kilépés</button>
+      </div>
+      <div class="card">
+        <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">🎁 Hívd meg egy ismerősöd</div>
+        <p class="small">Adj VIP hozzáférést valakinek, akinek hasznos lenne rendbe tenni a pénzügyeit. Az ismerősöd ezzel a linkkel regisztrál, és a te tanácsadódhoz kerül. Az elemzésig várólistás fiókot kap.</p>
+        <input id="pfInvite" readonly style="width:100%;margin-top:.6rem;font-size:.78rem;">
+        <button class="btn gold" style="width:100%;margin-top:.5rem;" onclick="copyInvite()">📋 Meghívó link másolása</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TANÁCSADÓI NÉZET ═══ -->
+  <div class="page" id="p-adv">
+    <div class="pt">👥 <em>Ügyfeleim</em> a Hubban <span class="small" style="font-weight:400;" id="advCnt"></span></div>
+    <div class="adv-list" id="advList"></div>
+    <div id="advDetail" style="margin-top:1rem;"></div>
+  </div>
+  <div class="page" id="p-advq">
+    <div class="pt">📥 <em>Nyitott</em> ügyek</div>
+    <div id="advQ"></div>
+  </div>
+  <div class="page" id="p-advs">
+    <div class="pt">👑 <em>Tanácsadók</em> és meghívókódok <span class="small" style="font-weight:400;">· nagy admin</span></div>
+    <div class="card" style="margin-bottom:1rem;">
+      <div class="pt" style="font-size:1rem;margin-bottom:.4rem;">➕ Új kolléga</div>
+      <div class="addform">
+        <input id="naEmail" placeholder="E-mail (amivel belép) *" type="email">
+        <input id="naName" placeholder="Név, ahogy az ügyfél látja *">
+        <input id="naCode" placeholder="Meghívókód, pl. ZOE-24 *" oninput="this.value=this.value.toUpperCase()">
+        <select id="naRole"><option value="advisor">Kis admin (saját ügyfelek)</option><option value="admin">Nagy admin (mindent lát)</option></select>
+        <button class="btn pri" onclick="advsAdd()">Felveszem</button>
+      </div>
+      <p class="small" style="margin-top:.5rem;">A kolléga ezzel az e-maillel regisztrál a Hubon, és kód nélkül a Tanácsadói pultra kerül.</p>
+    </div>
+    <div class="card"><div id="advsList"></div></div>
+  </div>
+
+  <div class="page" id="p-advcode">
+    <div class="pt">🔑 <em>Meghívókódom</em></div>
+    <div class="card" style="max-width:560px;">
+      <p class="small">Ezt a kódot add át az ügyfelednek az elemzés végén. Ezzel köti hozzád a fiókját.</p>
+      <div class="code-in" id="advCodeBig" style="font-size:2rem;margin:.8rem 0;color:var(--navy);"></div>
+      <input id="advInvite" readonly style="width:100%;font-size:.78rem;">
+      <div style="display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap;">
+        <button class="btn pri" onclick="copyText(document.getElementById('advCodeBig').textContent,'Kód a vágólapon')">📋 Kód másolása</button>
+        <button class="btn" onclick="copyText(document.getElementById('advInvite').value,'Link a vágólapon')">🔗 Meghívó link másolása</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-left:var(--sidebar);padding:0 1.6rem 1.4rem;font-size:.68rem;color:var(--gray);" id="hubFoot" hidden>
+  🦅 EAGLZ Hub · tesztfázis · <span style="text-decoration:underline;cursor:pointer;" onclick="termsShow(true)">Tesztfázis és adatvédelmi tájékoztató</span> · Az itt vezetett adatok az ügyfél saját áttekintői, nem hivatalos nyilvántartás.
+</div>
+<div class="gate" id="termsModal" style="display:none;background:rgba(9,22,38,.7);" onclick="if(event.target===this)termsShow(false)">
+  <div class="gate-box" style="width:min(640px,94vw);">
+    <div class="gate-sub" style="text-align:center;font-family:var(--fb);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);">EAGLZ Hub</div>
+    <div class="gate-sub">Tesztfázis és adatvédelem</div>
+    <div id="termsBox2" style="max-height:60vh;overflow-y:auto;font-size:.8rem;line-height:1.65;color:#3d4f68;"></div>
+    <button class="btn pri" style="margin-top:.8rem;" onclick="termsShow(false)">Bezárás</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   ⚙️ BEÁLLÍTÁS · a Hub SAJÁT Supabase-projektje (nem a Nesté!)
+   Supabase → Project Settings → API → Project URL + anon public key
+   ═══════════════════════════════════════════════════════════════════ */
+var CFG={
+  url:'https://XXXXXXXXXXXX.supabase.co',
+  key:'ANON_PUBLIC_KEY_IDE'
+};
+
+var sb=null;
+var S={user:null,profile:null,advisor:null,items:[],tickets:[],life:[],docs:[],advRow:null,mode:'client',clients:[],cur:null,curData:null,slotSel:{}};
+var WHEEL=[['ingatlan','🏠','Ingatlan'],['szemely','❤️','Személybizt.'],['gyermek','🧒','Gyermekjövő'],['vagyon','🚗','Vagyonbizt.'],['nyugdij','🌅','Nyugdíj'],['befektetes','📈','Befektetések'],['ado','🧾','Adókedvezmény'],['bank','🏦','Bankolás']];
+var WST={ok:['ok','✓ rendben'],rev:['rev','↻ felülvizsgálandó'],miss:['miss','! hiányzik'],na:['na','· nem vizsgált']};
+var TYP={biztositas:'Biztosítás',megtakaritas:'Megtakarítás',hitel:'Hitel',bankszamla:'Bankszámla',ingatlan:'Ingatlan'};
+var KIND={help:'🙋 Segítségkérés',claim:'⚡ Kárbejelentés',consult:'📅 Konzultáció-igény'};
+var TST={new:'Beérkezett',assigned:'Felelős kijelölve',progress:'Folyamatban',done:'Megoldva'};
+var LIFE={uj_munkahely:'💼 Új munkahely',gyermek:'👶 Gyermek érkezik',lakas:'🏠 Lakásvásárlás',hazassag:'💍 Házasság',vallalkozas:'🚀 Vállalkozás',jovedelem:'💰 Jövedelemváltozás'};
+
+function E(x){ return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+function fmt(n){ return (+n||0).toLocaleString('hu-HU')+' Ft'; }
+function dHu(d){ if(!d) return '·'; var x=new Date(d); return isNaN(x)?d:x.toLocaleDateString('hu-HU',{year:'numeric',month:'short',day:'numeric'}); }
+var _t; function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.style.display='block'; clearTimeout(_t); _t=setTimeout(function(){t.style.display='none';},4200); }
+function copyText(txt,msg){ try{ navigator.clipboard.writeText(txt).then(function(){toast('✅ '+msg);},function(){toast('Másold ki kézzel: '+txt);}); }catch(e){ toast('Másold ki kézzel: '+txt); } }
+function ini(n){ return String(n||'?').trim().split(/\s+/).map(function(p){return p[0]||'';}).join('').slice(0,2).toUpperCase(); }
+function firstName(n){ var p=String(n||'').trim().split(/\s+/); return p.length>1?p[p.length-1]:(p[0]||''); }
+
+/* ── tesztfázis + adatvédelmi tájékoztató (belépéskor kötelező, a menüből bármikor elérhető) ── */
+var TERMS_HTML=''
++'<p><b>Köszönjük, hogy velünk tartasz!</b> Az EAGLZ Hub egy <b>tesztfázisban lévő</b> ügyfélportál. Azzal, hogy használod, önkéntesen segítesz nekünk egy olyan szolgáltatást felépíteni, amivel a pénzügyeid gondozása egyszerűbb, átláthatóbb és gyorsabb lesz. Ezért nagyon hálásak vagyunk.</p>'
++'<p><b>Mi ez, és mi nem?</b> A Hub a saját pénzügyi áttekintőd: te viszed fel, mid van, és te döntöd el, mit osztasz meg. Nem hivatalos nyilvántartás, nem helyettesíti a biztosítók és bankok saját rendszereit és kimutatásait, és nem minősül pénzügyi tanácsadásnak. A kalkulátorok tájékoztató jellegűek.</p>'
++'<p><b>Önkéntes részvétel.</b> Bármikor kiléphetsz, és kérheted a fiókod és minden adatod végleges törlését a tanácsadódnál vagy a hello@eaglz.hu címen. Törlés után az adataid nem állíthatók vissza.</p>'
++'<p><b>Milyen adatokat tárolunk?</b> A neved, e-mail címed, az általad felvitt tételeket (szolgáltató, termék, díj, lejárat), a segítségkéréseidet, az élethelyzet-jelzéseidet és az általad feltöltött dokumentumokat. Csak azt, amit te adsz meg.</p>'
++'<p><b>Hol és hogyan?</b> Az adatok az Európai Unióban, titkosított kapcsolaton keresztül, jelszóval és fiókonként elkülönítve tárolódnak. Minden adatodhoz adatbázis-szintű hozzáférési szabály tartozik: más ügyfél semmilyen módon nem láthatja.</p>'
++'<p><b>Ki látja?</b> Kizárólag a személyes tanácsadód: a térképedet, a segítségkéréseidet és az élethelyzet-jelzéseidet. A dokumentumaidat csak akkor, ha te ezt a Dokumentumtárban külön bekapcsolod. A fiókodban mindig látod, mit lát ő.</p>'
++'<p><b>Mit nem csinálunk?</b> Nem adjuk át az adataidat harmadik félnek, nem használjuk reklámra, nem kötünk össze automatikusan külső banki vagy biztosítói rendszerekkel.</p>'
++'<p><b>Tesztfázis.</b> Előfordulhatnak hibák és változások. Ha bármit észlelsz, jelezd a Segítségközpontban, ezzel is a fejlesztést segíted. Az adataid biztonsága a tesztfázisban is ugyanúgy védett.</p>'
++'<p style="color:var(--gray);">Adatkezelő: az EAGLZ-csapat (Gentischer Richárd igazgató). Kérdés, törlési kérelem: hello@eaglz.hu. Verzió: 2026.09 · teszt.</p>';
+function termsShow(on){ document.getElementById('termsBox2').innerHTML=TERMS_HTML; document.getElementById('termsModal').style.display=on?'flex':'none'; }
+async function acceptTerms(){
+  if(!document.getElementById('termsChk').checked){ document.getElementById('termsMsg').textContent='Pipáld be, hogy elolvastad.'; return; }
+  var r=await sb.from('hub_profiles').update({terms_accepted_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('user_id',S.user.id);
+  if(r.error){ document.getElementById('termsMsg').textContent='⚠️ '+r.error.message; return; }
+  S.profile.terms_accepted_at=new Date().toISOString();
+  toast('🙏 Köszönjük! Üdv a Hubban.');
+  await route();
+}
+
+/* ── kapu ── */
+var gMode='in';
+function gShow(id){ ['gLogin','gCode','gMail','gReset','gTerms'].forEach(function(x){ document.getElementById(x).style.display=(x===id?'block':'none'); }); document.getElementById('gate').style.display='flex'; }
+function gTab(m){ gMode=m; document.getElementById('tabIn').classList.toggle('on',m==='in'); document.getElementById('tabUp').classList.toggle('on',m==='up'); document.getElementById('gName').style.display=m==='up'?'block':'none'; document.getElementById('gBtn').textContent=m==='up'?'Regisztrálok':'Belépek'; document.getElementById('gMsg').textContent=''; }
+function gMsg(t,ok){ var m=document.getElementById('gMsg'); m.textContent=t; m.className='msg'+(ok?' ok':''); }
+async function gSubmit(){
+  if(!sb){ gMsg('A kapcsolat még nincs beállítva.'); return; }
+  var em=document.getElementById('gEmail').value.trim(), pw=document.getElementById('gPass').value;
+  if(!em||!pw){ gMsg('E-mail és jelszó kell.'); return; }
+  if(pw.length<8){ gMsg('A jelszó legalább 8 karakter legyen.'); return; }
+  document.getElementById('gBtn').disabled=true;
+  try{
+    if(gMode==='up'){
+      var nm=document.getElementById('gName').value.trim();
+      if(!nm){ gMsg('Add meg a neved is.'); return; }
+      var r=await sb.auth.signUp({email:em,password:pw,options:{data:{name:nm},emailRedirectTo:location.href.split('#')[0].split('?')[0]}});
+      if(r.error) throw r.error;
+      if(!r.data.session){ gShow('gMail'); return; }
+    } else {
+      var r2=await sb.auth.signInWithPassword({email:em,password:pw});
+      if(r2.error) throw r2.error;
+    }
+  }catch(e){ gMsg(_authErr(e)); }
+  finally{ document.getElementById('gBtn').disabled=false; }
+}
+function _authErr(e){
+  var m=String(e&&e.message||e);
+  if(/Invalid login/i.test(m)) return 'Hibás e-mail vagy jelszó.';
+  if(/already registered/i.test(m)) return 'Ezzel az e-maillel már van fiók. Lépj be!';
+  if(/Email not confirmed/i.test(m)) return 'Előbb erősítsd meg az e-mail címed a levélben kapott linkkel.';
+  if(/rate limit/i.test(m)) return 'Túl sok próbálkozás, várj egy percet.';
+  return 'Nem sikerült: '+m;
+}
+async function gGoogle(){
+  if(!sb){ gMsg('A kapcsolat még nincs beállítva.'); return; }
+  var r=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href.split('#')[0].split('?')[0]}});
+  if(r.error) gMsg('A Google-belépés jelenleg nem elérhető, használd az e-mailes belépést.');
+}
+async function gForgot(){
+  var em=document.getElementById('gEmail').value.trim();
+  if(!em){ gMsg('Írd be az e-mail címed, és küldünk egy jelszó-visszaállító linket.'); return; }
+  var r=await sb.auth.resetPasswordForEmail(em,{redirectTo:location.href.split('#')[0].split('?')[0]});
+  gMsg(r.error?_authErr(r.error):'📬 Elküldtük a visszaállító linket.',!r.error);
+}
+async function gSetPass(){
+  var pw=document.getElementById('gNewPass').value;
+  if(pw.length<8){ document.getElementById('gResetMsg').textContent='Legalább 8 karakter.'; return; }
+  var r=await sb.auth.updateUser({password:pw});
+  if(r.error){ document.getElementById('gResetMsg').textContent=_authErr(r.error); return; }
+  toast('✅ Jelszó mentve.'); route();
+}
+async function gRedeem(){
+  var c=document.getElementById('gCodeIn').value.trim().toUpperCase();
+  if(!c){ document.getElementById('gCodeMsg').textContent='Írd be a kódot.'; return; }
+  var nm=(S.user.user_metadata&&S.user.user_metadata.name)||S.user.email;
+  var r=await sb.rpc('hub_redeem_code',{p_code:c,p_name:nm});
+  var d=r.data||{};
+  if(r.error||!d.ok){ document.getElementById('gCodeMsg').textContent='❌ Ismeretlen kód. Kérd el újra a tanácsadódtól.'; return; }
+  toast('🎉 Aktiválva! Mostantól '+d.advisor+' a személyes tanácsadód a Hubban.');
+  await route();
+}
+async function logout(){ await sb.auth.signOut(); location.reload(); }
+
+/* ── útválasztás ── */
+async function route(){
+  var s=await sb.auth.getSession(); S.user=s.data.session?s.data.session.user:null;
+  if(!S.user){ gShow('gLogin'); hideApp(); return; }
+  var pr=await sb.from('hub_profiles').select('*').eq('user_id',S.user.id).maybeSingle();
+  S.profile=pr.data||null;
+  var ar=await sb.from('hub_advisors').select('*').eq('email',S.user.email).maybeSingle();
+  S.advRow=ar.data||null;
+  if(!S.profile&&!S.advRow){
+    var qp=new URLSearchParams(location.search).get('code');
+    if(qp) document.getElementById('gCodeIn').value=qp.toUpperCase();
+    gShow('gCode'); hideApp(); return;
+  }
+  /* ügyfélként belépőnek kötelező a tesztfázis-tájékoztató elfogadása */
+  if(S.profile&&!S.profile.terms_accepted_at&&!(S.advRow&&!S.profile)){
+    document.getElementById('termsBox').innerHTML=TERMS_HTML; gShow('gTerms'); hideApp(); return;
+  }
+  document.getElementById('gate').style.display='none';
+  S.mode=(S.advRow&&!S.profile)?'advisor':'client';
+  await loadAll();
+  showApp();
+}
+function hideApp(){ ['topbar','sidebar','main'].forEach(function(i){document.getElementById(i).style.display='none';}); document.getElementById('hubFoot').hidden=true; }
+function showApp(){
+  document.getElementById('topbar').style.display='flex'; document.getElementById('sidebar').style.display='flex'; document.getElementById('main').style.display='block'; document.getElementById('hubFoot').hidden=false;
+  var nm=(S.profile&&S.profile.name)||(S.advRow&&S.advRow.name)||S.user.email;
+  document.getElementById('tbName').textContent=nm; document.getElementById('tbAva').textContent=ini(nm);
+  document.getElementById('tbDate').textContent=new Date().toLocaleDateString('hu-HU',{month:'short',day:'numeric',weekday:'short'})+' · '+new Date().getFullYear();
+  document.getElementById('modePill').style.display=S.advRow?'':'none';
+  applyMode();
+}
+function applyMode(){
+  var adv=(S.mode==='advisor');
+  document.getElementById('navClient').style.display=adv?'none':'block';
+  document.getElementById('navAdv').style.display=adv?'block':'none';
+  document.getElementById('sideFoot').style.display=adv?'none':'block';
+  document.getElementById('tierChip').style.display=adv?'none':'';
+  document.getElementById('modePill').textContent=adv?'👤 Ügyfél-nézet':'👔 Tanácsadói nézet';
+  if(adv){ go('adv'); advLoad(); } else { renderAll(); go('home'); }
+}
+function modeToggle(){
+  if(S.mode==='client'){ S.mode='advisor'; applyMode(); }
+  else { if(!S.profile){ toast('Ügyfél-nézethez előbb váltsd be egy meghívókódot (tesztként a sajátodat is).'); gShow('gCode'); return; } S.mode='client'; applyMode(); }
+}
+function go(p){
+  document.querySelectorAll('.page').forEach(function(x){x.classList.remove('on');});
+  var el=document.getElementById('p-'+p); if(el) el.classList.add('on');
+  document.querySelectorAll('.nav-item').forEach(function(x){x.classList.toggle('on',x.getAttribute('data-p')===p);});
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(p==='docs') docsLoad();
+  if(p==='advq') advQRender();
+  if(p==='advs') advsRender();
+  if(p==='advcode') advCodeRender();
+}
+
+/* ── ügyféladatok ── */
+async function loadAll(){
+  if(!S.profile) return;
+  var a=await sb.rpc('hub_my_advisor'); S.advisor=a.data||null;
+  var it=await sb.from('hub_items').select('*').eq('user_id',S.user.id).order('created_at'); S.items=it.data||[];
+  var tk=await sb.from('hub_tickets').select('*').eq('user_id',S.user.id).order('created_at',{ascending:false}); S.tickets=tk.data||[];
+  var lf=await sb.from('hub_life_events').select('*').eq('user_id',S.user.id).order('created_at',{ascending:false}); S.life=lf.data||[];
+}
+function renderAll(){
+  if(!S.profile) return;
+  var p=S.profile, adv=S.advisor||{name:'a tanácsadód'};
+  var vip=(p.tier==='vip');
+  var tc=document.getElementById('tierChip'); tc.className='tb-pill '+(vip?'vip':'basic'); tc.textContent=vip?'⭐ VIP ügyfél':(p.status==='waitlist'?'⏳ Várólistás':'Basic ügyfél');
+  document.getElementById('advName').textContent=adv.name; document.getElementById('advAva').textContent=ini(adv.name);
+  document.getElementById('konzAdv').textContent=adv.name+'val';
+  document.getElementById('kidsCard').classList.toggle('lock',!vip); document.getElementById('kbVip').classList.toggle('lock',!vip); document.getElementById('calc3wrap').classList.toggle('lock',!vip);
+  /* hero */
+  var now=new Date(), in60=new Date(Date.now()+60*86400000);
+  var exp=S.items.filter(function(i){ return i.end_date&&new Date(i.end_date)<=in60&&new Date(i.end_date)>=now; });
+  var sum=S.items.reduce(function(a,i){return a+(+i.fee_month||0);},0);
+  var wheel=p.wheel||{}, miss=WHEEL.filter(function(w){return wheel[w[0]]==='miss';}), rev=WHEEL.filter(function(w){return wheel[w[0]]==='rev';});
+  var todos=[];
+  exp.forEach(function(i){ todos.push({t:'⏰ '+E(i.name)+' lejár: '+dHu(i.end_date),b:'Intézzük',f:"helpNew('help',"+i.id+")"}); });
+  miss.forEach(function(w){ todos.push({t:w[1]+' Hiányzó terület: '+w[2],b:'Kalkulátor',f:"go('calc')"}); });
+  rev.forEach(function(w){ todos.push({t:w[1]+' Felülvizsgálandó: '+w[2],b:'Konzultáció',f:"go('konz')"}); });
+  if(!S.items.length) todos.push({t:'🗺️ Vidd fel az első tételed a térképedre',b:'Térkép',f:"go('map')"});
+  document.getElementById('heroDate').textContent=now.toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('heroTitle').innerHTML='Szia, '+E(firstName(p.name))+'! 👋 <em>A pénzügyeid ma</em>';
+  document.getElementById('heroGrid').innerHTML=
+    '<div class="hk"><div class="l">Tételek a térképeden</div><div class="v">'+S.items.length+'</div></div>'
+   +'<div class="hk"><div class="l">Havi díjaid összesen</div><div class="v">'+fmt(sum)+'</div></div>'
+   +'<div class="hk'+(p.next_review?' warn':'')+'"><div class="l">Köv. felülvizsgálat</div><div class="v">'+(p.next_review?dHu(p.next_review):'egyeztetni')+'</div></div>'
+   +'<div class="hk'+(exp.length?' alert':'')+'"><div class="l">Lejár 60 napon belül</div><div class="v">'+exp.length+'</div></div>'
+   +'<div class="hk'+(miss.length?' alert':'')+'"><div class="l">Hiányzó terület</div><div class="v">'+(miss.length?E(miss[0][2]):'nincs')+'</div></div>'
+   +'<div class="hk'+(todos.length?' warn':'')+'"><div class="l">Ajánlott teendő</div><div class="v">'+todos.length+'</div></div>';
+  document.getElementById('wheel').innerHTML=WHEEL.map(function(w){
+    var st=WST[wheel[w[0]]||'na'];
+    return '<div class="wseg '+st[0]+'" onclick="wheelClick(\''+w[0]+'\')"><span class="ic">'+w[1]+'</span><b>'+w[2]+'</b><span class="wst">'+st[1]+'</span></div>';
+  }).join('');
+  document.getElementById('todos').innerHTML=todos.length?todos.map(function(t){ return '<div class="todo"><b>'+t.t+'</b><button class="btn" onclick="'+t.f+'">'+t.b+'</button></div>'; }).join(''):'<div class="empty">🎉 Nincs nyitott teendőd. Szép munka!</div>';
+  var ach=[['🥇 Első lépés',!!p.name],['🗂️ Rendszerező',S.items.length>=3],['🧠 Tudatos ügyfél',WHEEL.every(function(w){return wheel[w[0]]&&wheel[w[0]]!=='na';})],['🛡️ Védett család',['szemely','vagyon'].every(function(k){return wheel[k]==='ok';})],['🏗️ Jövőépítő',S.items.some(function(i){return i.typ==='megtakaritas';})],['📅 Éves kontroll',!!p.next_review]];
+  document.getElementById('achRow').innerHTML=ach.map(function(a){ return '<span class="ach'+(a[1]?' done':'')+'">'+a[0]+'</span>'; }).join('');
+  /* térkép */
+  document.getElementById('mapSum').innerHTML='<div class="hk"><div class="l">Tételek</div><div class="v">'+S.items.length+'</div></div><div class="hk"><div class="l">Havi díjaid</div><div class="v">'+fmt(sum)+'</div></div>'+(exp.length?'<div class="hk"><div class="l">Legközelebbi lejárat</div><div class="v">'+dHu(exp[0].end_date)+'</div></div>':'');
+  document.getElementById('mapCards').innerHTML=S.items.length?S.items.map(function(m){
+    return '<div class="mcard'+(m.eaglz?'':' kulso')+'"><button class="del" onclick="mapDel('+m.id+')" title="Törlés">✕</button>'
+      +'<div class="prov">'+E(m.provider||'·')+(m.eaglz?' · EAGLZ':' · máshol kötött')+'</div><h4>'+E(m.name)+'</h4>'
+      +'<div class="row"><span>Típus</span><b>'+(TYP[m.typ]||m.typ)+'</b></div><div class="row"><span>Havi díj</span><b>'+fmt(m.fee_month)+'</b></div><div class="row"><span>Lejárat</span><b>'+dHu(m.end_date)+'</b></div>'
+      +'<button class="btn ask" onclick="helpNew(\'help\','+m.id+')">💬 Kérdésem van erről</button></div>';
+  }).join(''):'<div class="empty" style="grid-column:1/-1;">Még üres a térképed. Vidd fel az első tételed lent, 30 másodperc.</div>';
+  document.getElementById('hfItem').innerHTML='<option value="">· Melyik tételről van szó? ·</option>'+S.items.map(function(i){return '<option value="'+i.id+'">'+E(i.name)+'</option>';}).join('')+'<option value="0">Nem tételhez kötődik</option>';
+  /* ügyek */
+  document.getElementById('tktList').innerHTML=S.tickets.length?S.tickets.map(tktHtml).join(''):'<div class="empty">Még nincs ügyed. A fenti gombokkal indíthatsz.</div>';
+  var open=S.tickets.filter(function(t){return t.status!=='done';}).length;
+  var dh=document.getElementById('dotHelp'); dh.style.display=open?'':'none'; dh.textContent=open;
+  /* értesítések */
+  var nf=[];
+  exp.forEach(function(i){ nf.push(['⏰',E(i.name)+' lejár '+dHu(i.end_date),'Kattints a Segítségközpontra, és a tanácsadód bekéri az ajánlatokat.']); });
+  S.tickets.filter(function(t){return t.status==='done';}).slice(0,3).forEach(function(t){ nf.push(['✅',KIND[t.kind]+' megoldva','Frissítve: '+dHu(t.updated_at)]); });
+  if(p.next_review) nf.push(['📅','Felülvizsgálatod: '+dHu(p.next_review),'Foglalj időpontot, 20 perc az egész.']);
+  S.life.slice(0,2).forEach(function(l){ nf.push([l.handled?'✅':'💬',(LIFE[l.event]||l.event)+(l.handled?' · a tanácsadód látta':' · elküldve'),dHu(l.created_at)]); });
+  document.getElementById('notifList').innerHTML=nf.length?nf.map(function(n){return '<div class="notif"><span class="ic">'+n[0]+'</span><div><b>'+n[1]+'</b><span>'+n[2]+'</span></div></div>';}).join(''):'<div class="empty">Nincs új értesítés.</div>';
+  var dn=document.getElementById('dotNotif'); dn.style.display=nf.length?'':'none'; dn.textContent=nf.length;
+  /* fiók */
+  document.getElementById('pfName').value=p.name||''; document.getElementById('pfEmail').value=S.user.email;
+  document.getElementById('pfAdv').textContent=adv.name; document.getElementById('pfTier').textContent=vip?'VIP':(p.status==='waitlist'?'Várólistás':'Basic');
+  document.getElementById('pfDocs').textContent=p.docs_shared?', a dokumentumaid':'';
+  document.getElementById('pfInvite').value=inviteLink();
+  document.getElementById('docShare').checked=!!p.docs_shared;
+}
+function inviteLink(){ var code=(S.advisor&&S.advisor.code)||''; return location.href.split('#')[0].split('?')[0]+(code?('?code='+encodeURIComponent(code)):''); }
+function copyInvite(){ copyText(document.getElementById('pfInvite').value,'Meghívó link a vágólapon'); }
+function wheelClick(k){ var w=WHEEL.filter(function(x){return x[0]===k;})[0], st=(S.profile.wheel||{})[k]||'na';
+  if(st==='miss'){ go('calc'); toast(w[1]+' '+w[2]+': ezen a területen még nincs megoldásod. Nézd meg a kalkulátort, vagy foglalj konzultációt.'); }
+  else if(st==='rev'){ go('konz'); toast(w[1]+' '+w[2]+': érdemes átnézni a tanácsadóddal.'); }
+  else if(st==='ok'){ toast(w[1]+' '+w[2]+': rendben, a tanácsadód átnézte.'); }
+  else { go('konz'); toast(w[1]+' '+w[2]+': ezt még nem vizsgáltátok. Kérj konzultációt!'); } }
+
+/* ── térkép CRUD ── */
+async function mapAdd(){
+  var n=document.getElementById('afName').value.trim(); if(!n){ toast('Adj nevet a tételnek!'); return; }
+  var row={user_id:S.user.id,typ:document.getElementById('afTyp').value,provider:document.getElementById('afProv').value.trim()||null,name:n,fee_month:+document.getElementById('afFee').value||0,end_date:document.getElementById('afEnd').value||null,eaglz:document.getElementById('afEaglz').checked};
+  var r=await sb.from('hub_items').insert(row).select();
+  if(r.error){ toast('⚠️ Nem sikerült menteni: '+r.error.message); return; }
+  S.items.push(r.data[0]); renderAll(); toast('✅ Felvéve a térképedre.');
+  ['afProv','afName','afFee','afEnd'].forEach(function(i){document.getElementById(i).value='';}); document.getElementById('afEaglz').checked=false;
+}
+async function mapDel(id){
+  if(!window.__delArm||window.__delArm!==id){ window.__delArm=id; toast('Biztos törlöd? Kattints még egyszer a ✕-re.'); return; }
+  window.__delArm=null;
+  var r=await sb.from('hub_items').delete().eq('id',id); if(r.error){ toast('⚠️ '+r.error.message); return; }
+  S.items=S.items.filter(function(i){return i.id!==id;}); renderAll(); toast('Törölve.');
+}
+
+/* ── segítségközpont ── */
+var helpKind='help';
+function helpNew(kind,itemId){
+  helpKind=kind; document.getElementById('helpForm').style.display='block';
+  document.getElementById('helpFormT').textContent=KIND[kind]||kind;
+  if(itemId) document.getElementById('hfItem').value=String(itemId);
+  go('help'); setTimeout(function(){ document.getElementById('helpForm').scrollIntoView({behavior:'smooth',block:'center'}); },100);
+}
+function slaDue(urg){ var days=(S.profile.tier==='vip')?1:3; if(urg==='urgent') days=1; return new Date(Date.now()+days*86400000).toISOString(); }
+async function helpSend(){
+  var txt=document.getElementById('hfTxt').value.trim(); if(!txt){ toast('Írd le pár mondatban, miben segítsünk!'); return; }
+  var urg=document.getElementById('hfUrg').value, it=+document.getElementById('hfItem').value||null;
+  var r=await sb.from('hub_tickets').insert({user_id:S.user.id,advisor_email:S.profile.advisor_email,kind:helpKind,item_id:it||null,urgency:urg,text:txt,status:'new',sla_due:slaDue(urg)}).select();
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  S.tickets.unshift(r.data[0]); document.getElementById('helpForm').style.display='none'; document.getElementById('hfTxt').value='';
+  renderAll(); toast('✅ Beérkezett! A tanácsadód megkapta. Az állapotát itt követheted.');
+}
+function tktHtml(t){
+  var steps=['new','assigned','progress','done'], ci=steps.indexOf(t.status);
+  var item=S.items.filter(function(i){return i.id===t.item_id;})[0];
+  return '<div class="tkt"><span class="k '+t.kind+'">'+(KIND[t.kind]||t.kind)+'</span> <span class="small">· '+dHu(t.created_at)+(item?(' · '+E(item.name)):'')+(t.urgency==='urgent'?' · <b style="color:var(--pink);">sürgős</b>':'')+'</span>'
+    +'<div style="font-size:.82rem;margin:.3rem 0;">'+E(t.text)+'</div>'
+    +'<div class="steps">'+steps.map(function(s,i){ return '<span class="step'+(i<ci?' done':(i===ci?(s==='done'?' done':' cur'):''))+'">'+TST[s]+'</span>'+(i<3?'<span class="sep">→</span>':''); }).join('')+'</div></div>';
+}
+
+/* ── konzultáció ── */
+var SLOTS=['hétfő de.','hétfő du.','kedd de.','kedd du.','szerda de.','szerda du.','csütörtök de.','csütörtök du.','péntek de.','péntek du.'];
+function slotsRender(){ document.getElementById('slots').innerHTML=SLOTS.map(function(s,i){ return '<span class="slot'+(S.slotSel[i]?' on':'')+'" onclick="S.slotSel['+i+']=!S.slotSel['+i+'];slotsRender()">'+s+'</span>'; }).join(''); }
+async function konzBook(){
+  var sel=SLOTS.filter(function(s,i){return S.slotSel[i];}); if(!sel.length){ toast('Jelölj be legalább egy időszakot!'); return; }
+  var txt='Téma: '+document.getElementById('kTopic').value+' · Forma: '+document.getElementById('kMode').value+' · Ráérek: '+sel.join(', ')+(document.getElementById('kQ').value.trim()?(' · Kérdés: '+document.getElementById('kQ').value.trim()):'');
+  var r=await sb.from('hub_tickets').insert({user_id:S.user.id,advisor_email:S.profile.advisor_email,kind:'consult',urgency:'normal',text:txt,status:'new',sla_due:slaDue('normal')}).select();
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  S.tickets.unshift(r.data[0]); S.slotSel={}; slotsRender(); document.getElementById('kQ').value=''; renderAll();
+  toast('📅 Elküldve! A tanácsadód visszaigazolja a pontos időpontot.');
+}
+
+/* ── élethelyzet ── */
+async function life(ev,lbl){
+  var r=await sb.from('hub_life_events').insert({user_id:S.user.id,advisor_email:S.profile.advisor_email,event:ev}).select();
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  S.life.unshift(r.data[0]); renderAll(); toast('💬 Elküldve: „'+lbl+'". A tanácsadód hamarosan keres.');
+}
+
+/* ── kalkulátorok ── */
+function c1(){ var j=+document.getElementById('c1a').value||0; document.getElementById('c1r').textContent='· '+(Math.max(0,Math.round(j*0.45/1000)*1000)).toLocaleString('hu-HU')+' Ft / hó'; }
+function c2(){ var k=+document.getElementById('c2a').value||0,t=+document.getElementById('c2b').value||0; var pct=k?Math.min(100,Math.round(t/(k*6)*100)):0; document.getElementById('c2r').textContent=pct+'%'+(pct<50?' · érdemes lépni':''); }
+function c3(){ var kor=+document.getElementById('c3a').value||0,havi=+document.getElementById('c3b').value||0; var n=Math.max(0,18-kor)*12,r=0.07/12; var fv=n?havi*((Math.pow(1+r,n)-1)/r):0; document.getElementById('c3r').textContent=Math.round(fv/100000)/10+' M Ft'; }
+async function calcSend(name,res){
+  var r=await sb.from('hub_tickets').insert({user_id:S.user.id,advisor_email:S.profile.advisor_email,kind:'help',urgency:'low',text:'🧮 Kalkulátor-eredmény ('+name+'): '+res+'. Szeretném, ha átnéznéd.',status:'new',sla_due:slaDue('low')}).select();
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  S.tickets.unshift(r.data[0]); renderAll(); toast('📨 Elküldve a tanácsadódnak, a Segítségközpontban követheted.');
+}
+
+/* ── dokumentumtár ── */
+async function docsLoad(){
+  if(S.mode!=='client'||!S.profile) return;
+  var l=document.getElementById('docList');
+  var r=await sb.storage.from('hub-docs').list(S.user.id,{limit:100,sortBy:{column:'created_at',order:'desc'}});
+  if(r.error){ l.innerHTML='<div class="empty">⚠️ A dokumentumtár még nincs beállítva (hub-docs bucket).</div>'; return; }
+  S.docs=(r.data||[]).filter(function(f){return f.name&&f.name!=='.emptyFolderPlaceholder';});
+  l.innerHTML=S.docs.length?S.docs.map(function(f){ return '<div class="docrow">📄<b>'+E(f.name)+'</b><span class="small">'+Math.round((f.metadata&&f.metadata.size||0)/1024)+' KB</span><button class="btn" onclick="docOpen(\''+E(f.name)+'\')">Megnyitás</button><button class="btn" onclick="docDel(\''+E(f.name)+'\')">✕</button></div>'; }).join(''):'<div class="empty">Még nincs feltöltött dokumentumod.</div>';
+}
+async function docUpload(){
+  var f=document.getElementById('docFile').files[0]; if(!f){ toast('Válassz fájlt!'); return; }
+  if(f.size>10*1024*1024){ toast('Max. 10 MB.'); return; }
+  var safe=f.name.replace(/[^\w.\-áéíóöőúüűÁÉÍÓÖŐÚÜŰ ]/g,'_');
+  var r=await sb.storage.from('hub-docs').upload(S.user.id+'/'+safe,f,{upsert:true});
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  document.getElementById('docFile').value=''; toast('✅ Feltöltve.'); docsLoad();
+}
+async function docOpen(name){ var r=await sb.storage.from('hub-docs').createSignedUrl(S.user.id+'/'+name,600); if(r.error){ toast('⚠️ '+r.error.message); return; } window.open(r.data.signedUrl,'_blank'); }
+async function docDel(name){ if(window.__docArm!==name){ window.__docArm=name; toast('Biztos törlöd? Kattints még egyszer.'); return; } window.__docArm=null; var r=await sb.storage.from('hub-docs').remove([S.user.id+'/'+name]); if(r.error){ toast('⚠️ '+r.error.message); return; } toast('Törölve.'); docsLoad(); }
+async function docShareToggle(){ var v=document.getElementById('docShare').checked; var r=await sb.from('hub_profiles').update({docs_shared:v,updated_at:new Date().toISOString()}).eq('user_id',S.user.id); if(r.error){ toast('⚠️ '+r.error.message); return; } S.profile.docs_shared=v; renderAll(); toast(v?'A tanácsadód mostantól látja a dokumentumaidat.':'A dokumentumaid privátak.'); }
+async function profileSave(){ var nm=document.getElementById('pfName').value.trim(); if(!nm){ toast('Adj meg egy nevet.'); return; } var r=await sb.from('hub_profiles').update({name:nm,updated_at:new Date().toISOString()}).eq('user_id',S.user.id); if(r.error){ toast('⚠️ '+r.error.message); return; } S.profile.name=nm; renderAll(); showApp(); toast('✅ Mentve.'); }
+
+/* ── statikus tartalom ── */
+var EDU=[['👶','Gyermeket várok','checklist + támogatások'],['🏠','Lakást vennék','önerő, hitel, biztosítás'],['👨‍👩‍👧','Családot alapítottam','védelem és megtakarítás'],['🚀','Vállalkozást indítok','adó, tartalék, nyugdíj'],['💼','Munkahelyet váltottam','mit vigyél magaddal'],['✈️','Külföldre költözöm','mi marad, mi szűnik meg'],['🌅','Nyugdíjra készülök','mennyi kell és honnan'],['🎁','Örököltem','okos első lépések'],['⚡','Káresemény történt','ezt tedd most azonnal']];
+document.getElementById('eduGrid').innerHTML=EDU.map(function(e){ return '<div class="edu-tile" onclick="toast(\'🎓 Hamarosan: „'+e[1]+'" · 3 perces útmutató, checklisttel. Addig kérdezz a Segítségközpontban!\')"><span class="ic">'+e[0]+'</span><b>'+e[1]+'</b><span>'+e[2]+'</span></div>'; }).join('');
+var KB=[{c:'Megtakarítás',t:'Mi az a TBSZ, és mikor éri meg?',d:'5 lekötési év után adómentes hozam. Kinek jó, kinek nem.'},{c:'Adó',t:'Kamatadó és szocho: mikor kell fizetni?',d:'15% + 13%, és hogyan lehet legálisan nullára vinni.'},{c:'Lakás',t:'Mennyi önerő kell egy lakáshoz?',d:'Szabályok, kivételek, és mit néz a bank valójában.'},{c:'Biztonság',t:'Mekkora vésztartalék az elég?',d:'A 3-6 havi szabály, és hol tartsd, hogy ne veszítsen.'},{c:'Nyugdíj',t:'Nyugdíjbiztosítás, NYESZ vagy pénztár?',d:'A három forma összevetése 2 percben.'},{c:'Család',t:'Gyermekjövő: babakötvény vagy biztosítós megtakarítás?',d:'Hozzáférés, hozam, támogatás, védelem.'},{c:'Biztosítás',t:'Mit fedez egy lakásbiztosítás, és mit nem?',d:'Az 5 leggyakoribb meglepetés kárnál.'},{c:'Befektetés',t:'Rendszeres vagy egyösszegű befektetés?',d:'Átlagár-hatás, időzítés, és mikor melyik.'},{c:'Hitel',t:'Fix vagy változó kamat?',d:'Mi számít most, és mi 10 év múlva.'},{c:'Adó',t:'Milyen adókedvezményeket hagysz kihasználatlanul?',d:'Nyugdíj, egészségpénztár, családi kedvezmény.'},{c:'Öröklés',t:'Ki örökli a megtakarításodat?',d:'Kedvezményezett vs hagyatéki eljárás.'},{c:'Alap',t:'Hogyan olvass egy éves kimutatást?',d:'A 4 szám, amit tényleg nézni kell.'}];
+function kbRender(){ var q=(document.getElementById('kbQ').value||'').toLowerCase().trim(); var list=KB.filter(function(k){ return !q||(k.t+' '+k.d+' '+k.c).toLowerCase().indexOf(q)>-1; }); document.getElementById('kbGrid').innerHTML=list.map(function(k){ return '<div class="edu-tile" onclick="toast(\'📚 Hamarosan: „'+k.t+'" · 2-3 perc olvasás. Addig kérdezz a Segítségközpontban!\')"><span class="wst" style="background:var(--teal-light);color:var(--teal-deep);">'+k.c+'</span><b>'+k.t+'</b><span>'+k.d+'</span></div>'; }).join('')||'<div class="empty">Nincs találat. Kérdezd meg a tanácsadódat a Segítségközpontban!</div>'; document.getElementById('kbCnt').textContent=list.length+' cikk'; }
+
+/* ═══ TANÁCSADÓI NÉZET ═══ */
+function isAdmin(){ return !!(S.advRow&&S.advRow.role==='admin'); }
+async function advLoad(){
+  var adm=isAdmin();
+  var qp=sb.from('hub_profiles').select('*'); if(!adm) qp=qp.eq('advisor_email',S.user.email);
+  var r=await qp.order('created_at',{ascending:false}); S.clients=r.data||[];
+  var qt=sb.from('hub_tickets').select('*'); if(!adm) qt=qt.eq('advisor_email',S.user.email);
+  var t=await qt.order('created_at',{ascending:false}); S.advT=t.data||[];
+  var ql=sb.from('hub_life_events').select('*'); if(!adm) ql=ql.eq('advisor_email',S.user.email);
+  var l=await ql.order('created_at',{ascending:false}); S.advL=l.data||[];
+  S.advisors=[];
+  if(adm){ var a=await sb.from('hub_advisors').select('*').order('name'); S.advisors=a.data||[]; }
+  document.getElementById('navAdvs').style.display=adm?'':'none';
+  advRender();
+}
+function advName(email){ var a=(S.advisors||[]).filter(function(x){return x.email===email;})[0]; return a?a.name:(email||'·'); }
+function advRender(){
+  var openT=S.advT.filter(function(x){return x.status!=='done';}).length, openL=S.advL.filter(function(x){return !x.handled;}).length;
+  var d=document.getElementById('dotAdv'); d.style.display=(openT+openL)?'':'none'; d.textContent=openT+openL;
+  document.getElementById('advCnt').textContent='· '+S.clients.length+' fiók · '+openT+' nyitott ügy · '+openL+' élethelyzet-jelzés'+(isAdmin()?' · 👑 nagy admin: teljes csapat':'');
+  document.getElementById('advList').innerHTML=S.clients.length?S.clients.map(function(c){
+    var ot=S.advT.filter(function(x){return x.user_id===c.user_id&&x.status!=='done';}).length, ol=S.advL.filter(function(x){return x.user_id===c.user_id&&!x.handled;}).length;
+    return '<div class="adv-cl" onclick="advOpen(\''+c.user_id+'\')"><b>'+E(c.name||c.email)+'</b><div class="m">'+E(c.email)+' · '+(c.tier==='vip'?'⭐ VIP':'Basic')+(c.status==='waitlist'?' · ⏳ várólistás':'')+(isAdmin()?' · 👤 '+E(advName(c.advisor_email)):'')+'</div>'
+      +(ot?'<span class="bad p">'+ot+' nyitott ügy</span>':'')+(ol?'<span class="bad b">'+ol+' élethelyzet</span>':'')+(c.docs_shared?'<span class="bad g">📁 doksik megosztva</span>':'')+'</div>';
+  }).join(''):'<div class="empty" style="grid-column:1/-1;">Még nincs Hub-fiókos ügyfeled. Add át a meghívókódod az elemzés végén! (🔑 Meghívókódom)</div>';
+}
+async function advOpen(uid){
+  S.cur=S.clients.filter(function(c){return c.user_id===uid;})[0]; if(!S.cur) return;
+  var it=await sb.from('hub_items').select('*').eq('user_id',uid).order('created_at'); var items=it.data||[];
+  var docs=[]; if(S.cur.docs_shared){ var dr=await sb.storage.from('hub-docs').list(uid,{limit:100}); docs=(dr.data||[]).filter(function(f){return f.name!=='.emptyFolderPlaceholder';}); }
+  var c=S.cur, w=c.wheel||{};
+  var tks=S.advT.filter(function(x){return x.user_id===uid;}), lfs=S.advL.filter(function(x){return x.user_id===uid;});
+  document.getElementById('advDetail').innerHTML='<div class="card">'
+    +'<div class="pt" style="font-size:1.15rem;margin-bottom:.6rem;">👤 '+E(c.name||c.email)+' <span class="small" style="font-weight:400;">'+E(c.email)+'</span><span style="margin-left:auto;display:flex;gap:.4rem;flex-wrap:wrap;">'
+      +'<select id="advTier" onchange="advProfileSave()"><option value="basic"'+(c.tier!=='vip'?' selected':'')+'>Basic</option><option value="vip"'+(c.tier==='vip'?' selected':'')+'>⭐ VIP</option></select>'
+      +'<select id="advStatus" onchange="advProfileSave()"><option value="active"'+(c.status!=='waitlist'?' selected':'')+'>Aktív (elemezve)</option><option value="waitlist"'+(c.status==='waitlist'?' selected':'')+'>⏳ Várólistás</option></select>'
+      +'<input type="date" id="advReview" value="'+(c.next_review||'')+'" onchange="advProfileSave()" title="Következő felülvizsgálat">'
+      +(isAdmin()?'<select id="advOwner" onchange="advProfileSave()" title="Tanácsadó átrendelése">'+(S.advisors||[]).map(function(a){return '<option value="'+E(a.email)+'"'+(a.email===c.advisor_email?' selected':'')+'>👤 '+E(a.name)+'</option>';}).join('')+'</select>':'')
+    +'</span></div>'
+    +'<div class="pt" style="font-size:.95rem;margin:.6rem 0 .4rem;">🧭 Pénzügyi kerék <span class="small" style="font-weight:400;">· te állítod, az ügyfél látja</span></div>'
+    +'<div class="wheel-ed">'+WHEEL.map(function(x){ return '<label>'+x[1]+' '+x[2]+'<select data-w="'+x[0]+'" onchange="advProfileSave()">'+Object.keys(WST).map(function(k){return '<option value="'+k+'"'+((w[x[0]]||'na')===k?' selected':'')+'>'+WST[k][1]+'</option>';}).join('')+'</select></label>'; }).join('')+'</div>'
+    +'<div class="pt" style="font-size:.95rem;margin:.9rem 0 .4rem;">🗺️ Térkép ('+items.length+' tétel · '+fmt(items.reduce(function(a,i){return a+(+i.fee_month||0);},0))+'/hó)</div>'
+    +(items.length?'<div class="mcards">'+items.map(function(m){ return '<div class="mcard'+(m.eaglz?'':' kulso')+'"><div class="prov">'+E(m.provider||'·')+(m.eaglz?' · EAGLZ':' · máshol kötött')+'</div><h4>'+E(m.name)+'</h4><div class="row"><span>'+(TYP[m.typ]||m.typ)+'</span><b>'+fmt(m.fee_month)+'</b></div><div class="row"><span>Lejárat</span><b>'+dHu(m.end_date)+'</b></div></div>'; }).join('')+'</div>':'<div class="empty">Még nem vitt fel semmit.</div>')
+    +'<div class="pt" style="font-size:.95rem;margin:.9rem 0 .4rem;">📥 Ügyek</div>'
+    +(tks.length?tks.map(advTktHtml).join(''):'<div class="empty">Nincs ügye.</div>')
+    +'<div class="pt" style="font-size:.95rem;margin:.9rem 0 .4rem;">💬 Élethelyzet-jelzések</div>'
+    +(lfs.length?lfs.map(function(l){ return '<div class="tkt"><b>'+(LIFE[l.event]||l.event)+'</b> <span class="small">· '+dHu(l.created_at)+'</span>'+(l.handled?' <span class="bad g">kezelve</span>':' <button class="btn" style="float:right;" onclick="advLifeDone('+l.id+')">✔ Kezeltem</button>')+'</div>'; }).join(''):'<div class="empty">Nincs jelzés.</div>')
+    +'<div class="pt" style="font-size:.95rem;margin:.9rem 0 .4rem;">📁 Dokumentumai</div>'
+    +(c.docs_shared?(docs.length?docs.map(function(f){return '<div class="docrow">📄<b>'+E(f.name)+'</b><button class="btn" onclick="advDocOpen(\''+uid+'\',\''+E(f.name)+'\')">Megnyitás</button></div>';}).join(''):'<div class="empty">Megosztotta, de még üres.</div>'):'<div class="empty">🔒 Az ügyfél nem osztotta meg a dokumentumait.</div>')
+    +'</div>';
+  document.getElementById('advDetail').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function advTktHtml(t){
+  return '<div class="tkt"><span class="k '+t.kind+'">'+(KIND[t.kind]||t.kind)+'</span> <span class="small">· '+dHu(t.created_at)+(t.urgency==='urgent'?' · <b style="color:var(--pink);">sürgős</b>':'')+(t.sla_due?' · határidő: '+dHu(t.sla_due):'')+'</span>'
+    +'<div style="font-size:.82rem;margin:.3rem 0;">'+E(t.text)+'</div>'
+    +'<select onchange="advTktStatus('+t.id+',this.value)" style="font-size:.76rem;">'+Object.keys(TST).map(function(k){return '<option value="'+k+'"'+(t.status===k?' selected':'')+'>'+TST[k]+'</option>';}).join('')+'</select></div>';
+}
+async function advProfileSave(){
+  var w={}; document.querySelectorAll('#advDetail select[data-w]').forEach(function(s){ w[s.getAttribute('data-w')]=s.value; });
+  var upd={wheel:w,tier:document.getElementById('advTier').value,status:document.getElementById('advStatus').value,next_review:document.getElementById('advReview').value||null,updated_at:new Date().toISOString()};
+  var ow=document.getElementById('advOwner'); if(ow&&ow.value&&ow.value!==S.cur.advisor_email){ upd.advisor_email=ow.value; }
+  var r=await sb.from('hub_profiles').update(upd).eq('user_id',S.cur.user_id);
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  if(upd.advisor_email){
+    try{ await sb.from('hub_tickets').update({advisor_email:upd.advisor_email}).eq('user_id',S.cur.user_id); await sb.from('hub_life_events').update({advisor_email:upd.advisor_email}).eq('user_id',S.cur.user_id); }catch(e){}
+    S.advT.forEach(function(t){ if(t.user_id===S.cur.user_id) t.advisor_email=upd.advisor_email; });
+  }
+  Object.assign(S.cur,upd); advRender(); toast('✅ Mentve, az ügyfél azonnal látja.');
+}
+async function advTktStatus(id,st){ var r=await sb.from('hub_tickets').update({status:st,updated_at:new Date().toISOString()}).eq('id',id); if(r.error){ toast('⚠️ '+r.error.message); return; } var t=S.advT.filter(function(x){return x.id===id;})[0]; if(t) t.status=st; advRender(); toast('✅ Állapot: '+TST[st]); }
+async function advLifeDone(id){ var r=await sb.from('hub_life_events').update({handled:true}).eq('id',id); if(r.error){ toast('⚠️ '+r.error.message); return; } var l=S.advL.filter(function(x){return x.id===id;})[0]; if(l) l.handled=true; advRender(); advOpen(S.cur.user_id); }
+async function advDocOpen(uid,name){ var r=await sb.storage.from('hub-docs').createSignedUrl(uid+'/'+name,600); if(r.error){ toast('⚠️ '+r.error.message); return; } window.open(r.data.signedUrl,'_blank'); }
+function advQRender(){
+  var list=S.advT.filter(function(x){return x.status!=='done';});
+  document.getElementById('advQ').innerHTML='<div class="card">'+(list.length?list.map(function(t){ var c=S.clients.filter(function(x){return x.user_id===t.user_id;})[0]; return '<div style="font-family:var(--fb);font-weight:800;font-size:.8rem;margin-top:.4rem;cursor:pointer;" onclick="go(\'adv\');advOpen(\''+t.user_id+'\')">👤 '+E(c?(c.name||c.email):'?')+'</div>'+advTktHtml(t); }).join(''):'<div class="empty">🎉 Nincs nyitott ügy.</div>')+'</div>';
+}
+function advsRender(){
+  var l=document.getElementById('advsList');
+  l.innerHTML=(S.advisors||[]).length?'<div style="overflow-x:auto;"><table class="c2-stat-tbl" style="width:100%;border-collapse:collapse;font-size:.8rem;">'
+    +'<tr><th style="text-align:left;">Név</th><th style="text-align:left;">E-mail</th><th>Kód</th><th>Szerep</th><th>Ügyfelek</th><th>Aktív</th></tr>'
+    +S.advisors.map(function(a){
+      var n=S.clients.filter(function(c){return c.advisor_email===a.email;}).length;
+      return '<tr style="border-top:1px solid var(--border);"><td style="padding:.45rem .3rem;font-family:var(--fb);font-weight:700;">'+E(a.name)+'</td><td style="padding:.45rem .3rem;">'+E(a.email)+'</td>'
+        +'<td style="text-align:center;font-family:var(--fb);font-weight:800;letter-spacing:.08em;">'+E(a.code)+'</td>'
+        +'<td style="text-align:center;"><select onchange="advsSet(\''+E(a.email)+'\',{role:this.value})" style="font-size:.74rem;"><option value="advisor"'+(a.role!=='admin'?' selected':'')+'>kis admin</option><option value="admin"'+(a.role==='admin'?' selected':'')+'>👑 nagy admin</option></select></td>'
+        +'<td style="text-align:center;font-family:var(--fb);font-weight:700;">'+n+'</td>'
+        +'<td style="text-align:center;"><input type="checkbox"'+(a.active!==false?' checked':'')+' onchange="advsSet(\''+E(a.email)+'\',{active:this.checked})"></td></tr>';
+    }).join('')+'</table></div>':'<div class="empty">Még nincs tanácsadó felvéve.</div>';
+}
+async function advsAdd(){
+  var em=document.getElementById('naEmail').value.trim().toLowerCase(), nm=document.getElementById('naName').value.trim(), cd=document.getElementById('naCode').value.trim().toUpperCase(), role=document.getElementById('naRole').value;
+  if(!em||!nm||!cd){ toast('E-mail, név és kód is kell.'); return; }
+  var r=await sb.from('hub_advisors').insert({email:em,name:nm,code:cd,role:role,active:true}).select();
+  if(r.error){ toast('⚠️ '+(/duplicate/i.test(r.error.message)?'Ez az e-mail vagy kód már foglalt.':r.error.message)); return; }
+  S.advisors.push(r.data[0]); advsRender(); toast('✅ Felvéve: '+nm+' · kód: '+cd);
+  ['naEmail','naName','naCode'].forEach(function(i){document.getElementById(i).value='';});
+}
+async function advsSet(email,patch){
+  var r=await sb.from('hub_advisors').update(patch).eq('email',email);
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  var a=S.advisors.filter(function(x){return x.email===email;})[0]; if(a) Object.assign(a,patch);
+  toast('✅ Mentve.');
+}
+function advCodeRender(){ var a=S.advRow||{}; document.getElementById('advCodeBig').textContent=a.code||'·'; document.getElementById('advInvite').value=location.href.split('#')[0].split('?')[0]+'?code='+encodeURIComponent(a.code||''); }
+
+/* ── indítás ── */
+(function(){
+  slotsRender(); c1(); c2(); c3(); kbRender();
+  if(!CFG.url||CFG.url.indexOf('XXXX')>-1||!CFG.key||CFG.key.indexOf('IDE')>-1){ document.getElementById('cfgWarn').style.display='block'; gShow('gLogin'); return; }
+  sb=window.supabase.createClient(CFG.url,CFG.key);
+  sb.auth.onAuthStateChange(function(ev){ if(ev==='PASSWORD_RECOVERY'){ gShow('gReset'); return; } if(ev==='SIGNED_IN'||ev==='SIGNED_OUT'||ev==='INITIAL_SESSION') route(); });
+})();
+</script>
+
+</body>
+</html>
