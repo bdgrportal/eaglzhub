@@ -220,7 +220,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 .adv-cl b{font-family:var(--fb);font-size:.95rem;display:block;}
 .adv-cl .m{font-size:.7rem;color:var(--gray);margin-top:.2rem;}
 .adv-cl .bad,.tkt .bad{display:inline-block;font-family:var(--fb);font-weight:800;font-size:.6rem;border-radius:100px;padding:.14rem .5rem;margin-top:.4rem;margin-right:.25rem;}
-.bad.p{background:rgba(230,62,120,.12);color:var(--pink);} .bad.b{background:rgba(43,108,176,.12);color:var(--blue);} .bad.g{background:rgba(15,157,143,.12);color:var(--green);}
+.bad.p{background:rgba(230,62,120,.12);color:var(--pink);} .bad.b{background:rgba(43,108,176,.12);color:var(--blue);} .bad.y{background:rgba(240,180,41,.18);color:#8a6100;} .bad.g{background:rgba(15,157,143,.12);color:var(--green);}
 .wheel-ed{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;}
 .wheel-ed label{display:flex;align-items:center;gap:.4rem;font-size:.78rem;border:1px solid var(--border);border-radius:9px;padding:.4rem .55rem;background:#fff;}
 .wheel-ed select{flex:1;font-size:.74rem;padding:.3rem .4rem;}
@@ -398,6 +398,22 @@ body.navon .nav-btn span::after{top:0;transform:rotate(-45deg);}
   .topbar img{height:19px!important;}
   .tb-pill{font-size:.56rem;padding:.16rem .42rem;}
 }
+
+/* ── SEGÍTSÉG ÉS IDŐPONT ── */
+.helpbtn.on{border-color:var(--teal);box-shadow:0 0 0 2px rgba(125,200,192,.3);background:linear-gradient(180deg,#fff,rgba(125,200,192,.08));}
+.hp-need{background:rgba(240,180,41,.14);border:1px solid rgba(240,180,41,.4);color:#7a5600;font-size:.8rem;border-radius:11px;padding:.6rem .85rem;margin-bottom:.9rem;}
+.tk-h{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.tk-ref{font-family:var(--fb);font-weight:800;font-size:.64rem;letter-spacing:.08em;background:var(--navy);color:#fff;border-radius:6px;padding:.16rem .45rem;}
+.tk-h b{font-family:var(--fb);font-size:.86rem;flex:1;}
+.tk-m{font-size:.68rem;color:var(--gray);margin-top:.25rem;}
+.tk-t{font-size:.83rem;margin:.45rem 0;}
+.tk-next{font-size:.78rem;background:rgba(125,200,192,.12);border-radius:9px;padding:.4rem .6rem;margin-bottom:.35rem;}
+.tk-need{font-size:.78rem;background:rgba(240,180,41,.14);border-radius:9px;padding:.4rem .6rem;margin-bottom:.35rem;}
+.tk-sla{font-size:.68rem;color:var(--gray);margin-top:.4rem;font-family:var(--fb);font-weight:700;}
+.tk-sla.over{color:var(--gold);}
+.tkt.need{border-left:4px solid #f0b429;}
+.hp-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem;}
+@media(max-width:700px){ .help3{grid-template-columns:1fr;} }
 
 /* ── SZERZŐDÉSEK ── */
 .ct-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.6rem;margin-bottom:.9rem;}
@@ -612,8 +628,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="nav-item on" data-p="home" onclick="go('home')">🏠 Pénzügyeim ma</div>
     <div class="nav-item" data-p="map" onclick="go('map')">📊 Szerződéseim</div>
     <div class="side-sec">Segítség</div>
-    <div class="nav-item" data-p="help" onclick="go('help')">🆘 Segítségközpont <span class="dot" id="dotHelp" style="display:none;"></span></div>
-    <div class="nav-item" data-p="konz" onclick="go('konz')">📅 Konzultáció</div>
+    <div class="nav-item" data-p="help" onclick="go('help')">🆘 Segítség és időpont <span class="dot" id="dotHelp" style="display:none;"></span></div>
     <div class="side-sec">Tudás</div>
     <div class="nav-item" data-p="calc" onclick="go('calc')">🧮 Kalkulátorok</div>
     <div class="nav-item" data-p="edu" onclick="go('edu')">🎓 Élethelyzeteim</div>
@@ -633,7 +648,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
   </div>
   <div class="side-foot" id="sideFoot">
     <div class="adv"><div class="ava" id="advAva">..</div><div><b id="advName">…</b><span>a személyes tanácsadód</span></div></div>
-    <button class="side-cta" onclick="go('konz')">📅 Konzultációt foglalok</button>
+    <button class="side-cta" onclick="helpNew('consult')">📅 Időpontot egyeztetek</button>
   </div>
 </div>
 
@@ -715,46 +730,37 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     </div>
   </div>
 
-  <!-- 4) SEGÍTSÉGKÖZPONT -->
+  <!-- 4) SEGÍTSÉG ÉS IDŐPONT -->
   <div class="page" id="p-help">
-    <div class="pt">🆘 <em>Segítség</em>központ</div>
-    <div class="help3">
-      <div class="helpbtn" onclick="helpNew('help')"><span class="ic">🙋</span><b>Segítséget kérek</b><span class="small">kérdésem van egy szerződésemről</span></div>
-      <div class="helpbtn" onclick="go('konz')"><span class="ic">📅</span><b>Konzultációt foglalok</b><span class="small">átbeszélném a pénzügyeimet</span></div>
-      <div class="helpbtn" onclick="helpNew('claim')"><span class="ic">⚡</span><b>Kárt / problémát jelentek</b><span class="small">történt valami, intézzük</span></div>
+    <div class="pt">🆘 <em>Segítség</em> és időpont <span class="small" style="font-weight:400;">· egy helyen minden, amiben a tanácsadód segít</span></div>
+    <div class="hp-need" id="hpNeed" style="display:none;"></div>
+    <div class="help3" id="hpBtns">
+      <div class="helpbtn on" data-k="help" onclick="hpPick('help')"><span class="ic">🙋</span><b>Segítséget kérek</b><span class="small">kérdésem van, kérnék valamit</span></div>
+      <div class="helpbtn" data-k="claim" onclick="hpPick('claim')"><span class="ic">⚡</span><b>Kárt jelentek be</b><span class="small">történt valami, intézni kell</span></div>
+      <div class="helpbtn" data-k="consult" onclick="hpPick('consult')"><span class="ic">📅</span><b>Időpontot egyeztetek</b><span class="small">átbeszélnénk a pénzügyeimet</span></div>
     </div>
-    <div class="card" id="helpForm" style="display:none;margin-bottom:1rem;">
-      <div class="pt" style="margin-bottom:.5rem;font-size:1.1rem;" id="helpFormT">🙋 Segítségkérés</div>
-      <div class="addform">
-        <select id="hfItem"><option value="">· Melyik tételről van szó? ·</option></select>
-        <select id="hfUrg"><option value="low">Ráér pár napot</option><option value="normal" selected>Ezen a héten fontos</option><option value="urgent">Sürgős</option></select>
-      </div>
-      <textarea id="hfTxt" style="width:100%;margin-top:.5rem;min-height:70px;" placeholder="Írd le pár mondatban…"></textarea>
-      <div style="margin-top:.55rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
-        <button class="btn pri" onclick="helpSend()">Beküldés</button>
-        <span class="small">Vállalt válaszidő: <b>VIP: 1 munkanap</b> · Basic: 3 munkanap. A tanácsadód kapja meg, a tételed adataival együtt.</span>
-      </div>
-    </div>
-    <div class="card">
-      <div class="pt" style="margin-bottom:.5rem;font-size:1.1rem;">📌 Ügyeid</div>
-      <div id="tktList"></div>
-    </div>
-  </div>
 
-  <!-- 5) KONZULTÁCIÓ -->
-  <div class="page" id="p-konz">
-    <div class="pt">📅 Konzultáció <em id="konzAdv">a tanácsadóddal</em></div>
-    <div class="card">
+    <div class="card" id="hpForm" style="display:none;margin:1rem 0;">
+      <div class="pt" style="margin-bottom:.6rem;font-size:1.1rem;" id="hpFormT"></div>
       <div class="addform">
-        <select id="kTopic"><option>Éves pénzügyi felülvizsgálat</option><option>Nyugdíj-megtakarítás indítása</option><option>Lakásbiztosítás megújítása</option><option>Gyermekjövő átbeszélése</option><option>Hitel / lakásvásárlás</option><option>Egyéb kérdés</option></select>
-        <select id="kMode"><option>💻 Online (Meet)</option><option>🤝 Személyes (iroda)</option></select>
+        <select id="hpTopic"></select>
+        <span id="hpItemWrap"><select id="hpItem" style="width:100%;"><option value="">· Melyik szerződésről? (nem kötelező) ·</option></select></span>
+        <span id="hpSlotWrap" style="display:none;"><select id="hpMode" style="width:100%;"><option>💻 Online</option><option>🤝 Személyesen az irodában</option><option>📞 Telefonon</option></select></span>
       </div>
-      <p class="small" style="margin-top:.7rem;font-family:var(--fb);font-weight:700;color:var(--navy);">Mikor érnél rá? (jelölj be többet is)</p>
-      <div class="slots" id="slots"></div>
-      <input id="kQ" style="width:100%;margin-top:.7rem;" placeholder="Van előzetes kérdésed? (nem kötelező)">
-      <div style="margin-top:.7rem;"><button class="btn pri" onclick="konzBook()">📅 Időpontot kérek</button>
-      <span class="small" style="margin-left:.6rem;">A tanácsadód visszaigazolja a pontos időpontot, utána írásos összefoglalót kapsz ide.</span></div>
+      <div id="hpSlots" style="display:none;">
+        <p class="small" style="margin-top:.8rem;font-family:var(--fb);font-weight:700;color:var(--navy);">Mikor érnél rá? Jelölj be többet is.</p>
+        <div class="slots" id="slots"></div>
+      </div>
+      <textarea id="hpTxt" style="width:100%;margin-top:.7rem;min-height:76px;"></textarea>
+      <div style="margin-top:.6rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;">
+        <button class="btn pri" id="hpSendBtn" onclick="hpSend()">Beküldöm</button>
+        <span class="small" id="hpSlaNote"></span>
+      </div>
     </div>
+
+    <div class="pt" style="font-size:1.15rem;margin:1.3rem 0 .5rem;">📌 <em>Ügyeim</em></div>
+    <div class="hp-tabs" id="hpTabs"></div>
+    <div id="hpList"></div>
   </div>
 
   <!-- 6) KALKULÁTOROK -->
@@ -1168,6 +1174,7 @@ function go(p){
   document.querySelectorAll('.nav-item').forEach(function(x){x.classList.toggle('on',x.getAttribute('data-p')===p);});
   window.scrollTo({top:0,behavior:'smooth'});
   if(p==='map'){ ctRender(); ctDates(); ctGenLoad(); }
+  if(p==='help') hpRender();
   if(p==='advq') advQRender();
   if(p==='advs') advsRender();
   if(p==='advcode') advCodeRender();
@@ -1192,7 +1199,6 @@ function renderAll(){
   if(p.status==='waitlist'){ tc.className='tb-pill basic'; tc.textContent='⏳ Várólistás'; }
   tc.title=(tr==='vip'?'A legmagasabb szinten vagy, minden tananyag és szolgáltatás nyitva.':'A tanácsadód tudja megnyitni a következő szintet.');
   document.getElementById('advName').textContent=adv.name; document.getElementById('advAva').textContent=ini(adv.name);
-  document.getElementById('konzAdv').textContent=adv.name+'val';
   refList();
   document.getElementById('kidsCard').classList.toggle('lock',!tOk('vip'));
   document.getElementById('kbVip').classList.toggle('lock',!tOk('vip'));
@@ -1206,7 +1212,7 @@ function renderAll(){
   var todos=[];
   exp.forEach(function(i){ todos.push({t:'⏰ '+E(i.name)+' lejár: '+dHu(i.end_date),b:'Intézzük',f:"helpNew('help',"+i.id+")"}); });
   miss.forEach(function(w){ todos.push({t:w[1]+' Hiányzó terület: '+w[2],b:'Kalkulátor',f:"go('calc')"}); });
-  rev.forEach(function(w){ todos.push({t:w[1]+' Felülvizsgálandó: '+w[2],b:'Konzultáció',f:"go('konz')"}); });
+  rev.forEach(function(w){ todos.push({t:w[1]+' Felülvizsgálandó: '+w[2],b:'Időpont',f:"helpNew('consult')"}); });
   if(!S.items.length) todos.push({t:'🗺️ Vidd fel az első tételed a térképedre',b:'Térkép',f:"go('map')"});
   document.getElementById('heroDate').textContent=now.toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'});
   document.getElementById('heroTitle').innerHTML='Szia, '+E(firstName(p.name))+'! 👋 <em>A pénzügyeid ma</em>';
@@ -1229,9 +1235,10 @@ function renderAll(){
   document.getElementById('achRow').innerHTML=ach.map(function(a){ return '<span class="ach'+(a[1]?' done':'')+'">'+a[0]+'</span>'; }).join('');
   /* szerződések */
   ctRender();
-  document.getElementById('hfItem').innerHTML='<option value="">· Melyik tételről van szó? ·</option>'+S.items.map(function(i){return '<option value="'+i.id+'">'+E(i.name)+'</option>';}).join('')+'<option value="0">Nem tételhez kötődik</option>';
+  var hi=document.getElementById('hpItem');
+  if(hi) hi.innerHTML='<option value="">· Melyik szerződésről? (nem kötelező) ·</option>'+S.items.map(function(i){return '<option value="'+i.id+'">'+E(i.name)+'</option>';}).join('');
   /* ügyek */
-  document.getElementById('tktList').innerHTML=S.tickets.length?S.tickets.map(tktHtml).join(''):'<div class="empty">Még nincs ügyed. A fenti gombokkal indíthatsz.</div>';
+  hpRender();
   var open=S.tickets.filter(function(t){return t.status!=='done';}).length;
   var dh=document.getElementById('dotHelp'); dh.style.display=open?'':'none'; dh.textContent=open;
   /* értesítések */
@@ -1251,9 +1258,9 @@ function renderAll(){
 function inviteLink(){ var code=(S.advisor&&S.advisor.code)||''; return location.href.split('#')[0].split('?')[0]+(code?('?code='+encodeURIComponent(code)):''); }
 function wheelClick(k){ var w=WHEEL.filter(function(x){return x[0]===k;})[0], st=(S.profile.wheel||{})[k]||'na';
   if(st==='miss'){ go('calc'); toast(w[1]+' '+w[2]+': ezen a területen még nincs megoldásod. Nézd meg a kalkulátort, vagy foglalj konzultációt.'); }
-  else if(st==='rev'){ go('konz'); toast(w[1]+' '+w[2]+': érdemes átnézni a tanácsadóddal.'); }
+  else if(st==='rev'){ helpNew('consult'); toast(w[1]+' '+w[2]+': érdemes átnézni a tanácsadóddal.'); }
   else if(st==='ok'){ toast(w[1]+' '+w[2]+': rendben, a tanácsadód átnézte.'); }
-  else { go('konz'); toast(w[1]+' '+w[2]+': ezt még nem vizsgáltátok. Kérj konzultációt!'); } }
+  else { helpNew('consult'); toast(w[1]+' '+w[2]+': ezt még nem vizsgáltátok. Kérj konzultációt!'); } }
 
 /* ── térkép CRUD ── */
 async function mapAdd(){
@@ -1283,40 +1290,6 @@ async function mapDel(id){
 
 /* ── segítségközpont ── */
 var helpKind='help';
-function helpNew(kind,itemId){
-  helpKind=kind; document.getElementById('helpForm').style.display='block';
-  document.getElementById('helpFormT').textContent=KIND[kind]||kind;
-  if(itemId) document.getElementById('hfItem').value=String(itemId);
-  go('help'); setTimeout(function(){ document.getElementById('helpForm').scrollIntoView({behavior:'smooth',block:'center'}); },100);
-}
-function slaDue(urg){ var days=(S.profile.tier==='vip')?1:3; if(urg==='urgent') days=1; return new Date(Date.now()+days*86400000).toISOString(); }
-async function helpSend(){
-  var txt=document.getElementById('hfTxt').value.trim(); if(!txt){ toast('Írd le pár mondatban, miben segítsünk!'); return; }
-  var urg=document.getElementById('hfUrg').value, it=+document.getElementById('hfItem').value||null;
-  var r=await sb.from('hub_tickets').insert({user_id:S.user.id,advisor_email:S.profile.advisor_email,kind:helpKind,item_id:it||null,urgency:urg,text:txt,status:'new',sla_due:slaDue(urg)}).select();
-  if(r.error){ toast('⚠️ '+r.error.message); return; }
-  S.tickets.unshift(r.data[0]); document.getElementById('helpForm').style.display='none'; document.getElementById('hfTxt').value='';
-  renderAll(); toast('✅ Beérkezett! A tanácsadód megkapta. Az állapotát itt követheted.');
-}
-function tktHtml(t){
-  var steps=['new','assigned','progress','done'], ci=steps.indexOf(t.status);
-  var item=S.items.filter(function(i){return i.id===t.item_id;})[0];
-  return '<div class="tkt"><span class="k '+t.kind+'">'+(KIND[t.kind]||t.kind)+'</span> <span class="small">· '+dHu(t.created_at)+(item?(' · '+E(item.name)):'')+(t.urgency==='urgent'?' · <b style="color:var(--pink);">sürgős</b>':'')+'</span>'
-    +'<div style="font-size:.82rem;margin:.3rem 0;">'+E(t.text)+'</div>'
-    +'<div class="steps">'+steps.map(function(s,i){ return '<span class="step'+(i<ci?' done':(i===ci?(s==='done'?' done':' cur'):''))+'">'+TST[s]+'</span>'+(i<3?'<span class="sep">→</span>':''); }).join('')+'</div></div>';
-}
-
-/* ── konzultáció ── */
-var SLOTS=['hétfő de.','hétfő du.','kedd de.','kedd du.','szerda de.','szerda du.','csütörtök de.','csütörtök du.','péntek de.','péntek du.'];
-function slotsRender(){ document.getElementById('slots').innerHTML=SLOTS.map(function(s,i){ return '<span class="slot'+(S.slotSel[i]?' on':'')+'" onclick="S.slotSel['+i+']=!S.slotSel['+i+'];slotsRender()">'+s+'</span>'; }).join(''); }
-async function konzBook(){
-  var sel=SLOTS.filter(function(s,i){return S.slotSel[i];}); if(!sel.length){ toast('Jelölj be legalább egy időszakot!'); return; }
-  var txt='Téma: '+document.getElementById('kTopic').value+' · Forma: '+document.getElementById('kMode').value+' · Ráérek: '+sel.join(', ')+(document.getElementById('kQ').value.trim()?(' · Kérdés: '+document.getElementById('kQ').value.trim()):'');
-  var r=await sb.from('hub_tickets').insert({user_id:S.user.id,advisor_email:S.profile.advisor_email,kind:'consult',urgency:'normal',text:txt,status:'new',sla_due:slaDue('normal')}).select();
-  if(r.error){ toast('⚠️ '+r.error.message); return; }
-  S.tickets.unshift(r.data[0]); S.slotSel={}; slotsRender(); document.getElementById('kQ').value=''; renderAll();
-  toast('📅 Elküldve! A tanácsadód visszaigazolja a pontos időpontot.');
-}
 
 /* ── élethelyzet ── */
 async function life(ev,lbl){
@@ -1358,6 +1331,111 @@ var EDU=[['👶','Gyermeket várok','checklist + támogatások'],['🏠','Lakás
 document.getElementById('eduGrid').innerHTML=EDU.map(function(e){ return '<div class="edu-tile" onclick="toast(\'🎓 Hamarosan: „'+e[1]+'" · 3 perces útmutató, checklisttel. Addig kérdezz a Segítségközpontban!\')"><span class="ic">'+e[0]+'</span><b>'+e[1]+'</b><span>'+e[2]+'</span></div>'; }).join('');
 var KB=[{c:'Megtakarítás',t:'Mi az a TBSZ, és mikor éri meg?',d:'5 lekötési év után adómentes hozam. Kinek jó, kinek nem.'},{c:'Adó',t:'Kamatadó és szocho: mikor kell fizetni?',d:'15% + 13%, és hogyan lehet legálisan nullára vinni.'},{c:'Lakás',t:'Mennyi önerő kell egy lakáshoz?',d:'Szabályok, kivételek, és mit néz a bank valójában.'},{c:'Biztonság',t:'Mekkora vésztartalék az elég?',d:'A 3-6 havi szabály, és hol tartsd, hogy ne veszítsen.'},{c:'Nyugdíj',t:'Nyugdíjbiztosítás, NYESZ vagy pénztár?',d:'A három forma összevetése 2 percben.'},{c:'Család',t:'Gyermekjövő: babakötvény vagy biztosítós megtakarítás?',d:'Hozzáférés, hozam, támogatás, védelem.'},{c:'Biztosítás',t:'Mit fedez egy lakásbiztosítás, és mit nem?',d:'Az 5 leggyakoribb meglepetés kárnál.'},{c:'Befektetés',t:'Rendszeres vagy egyösszegű befektetés?',d:'Átlagár-hatás, időzítés, és mikor melyik.'},{c:'Hitel',t:'Fix vagy változó kamat?',d:'Mi számít most, és mi 10 év múlva.'},{c:'Adó',t:'Milyen adókedvezményeket hagysz kihasználatlanul?',d:'Nyugdíj, egészségpénztár, családi kedvezmény.'},{c:'Öröklés',t:'Ki örökli a megtakarításodat?',d:'Kedvezményezett vs hagyatéki eljárás.'},{c:'Alap',t:'Hogyan olvass egy éves kimutatást?',d:'A 4 szám, amit tényleg nézni kell.'}];
 function kbRender(){ var q=(document.getElementById('kbQ').value||'').toLowerCase().trim(); var list=KB.filter(function(k){ return !q||(k.t+' '+k.d+' '+k.c).toLowerCase().indexOf(q)>-1; }); document.getElementById('kbGrid').innerHTML=list.map(function(k){ return '<div class="edu-tile" onclick="toast(\'📚 Hamarosan: „'+k.t+'" · 2-3 perc olvasás. Addig kérdezz a Segítségközpontban!\')"><span class="wst" style="background:var(--teal-light);color:var(--teal-deep);">'+k.c+'</span><b>'+k.t+'</b><span>'+k.d+'</span></div>'; }).join('')||'<div class="empty">Nincs találat. Kérdezd meg a tanácsadódat a Segítségközpontban!</div>'; document.getElementById('kbCnt').textContent=list.length+' cikk'; }
+
+var SLOTS=['hétfő de.','hétfő du.','kedd de.','kedd du.','szerda de.','szerda du.','csütörtök de.','csütörtök du.','péntek de.','péntek du.'];
+function slotsRender(){ document.getElementById('slots').innerHTML=SLOTS.map(function(s,i){ return '<span class="slot'+(S.slotSel[i]?' on':'')+'" onclick="S.slotSel['+i+']=!S.slotSel['+i+'];slotsRender()">'+s+'</span>'; }).join(''); }
+
+/* ═══ SEGÍTSÉG ÉS IDŐPONT · egy oldal, teljes ügy-életciklus ═══ */
+var HP_KIND={help:['🙋','Segítségkérés','kérdésem van, kérnék valamit'],
+             claim:['⚡','Kárbejelentés','történt valami, intézni kell'],
+             consult:['📅','Időpont-egyeztetés','átbeszélnénk a pénzügyeimet']};
+var HP_TOPIC={
+  help:[['szerzodes','Kérdés egy szerződésemről'],['modositas','Adatmódosítás, címváltozás'],['dij','Díjfizetés, díjhátralék'],
+        ['ajanlat','Ajánlatot kérek valamire'],['dijhatralek','Díjhátralékom van'],['lejarat','Lejáró szerződés'],
+        ['felmondas','Felmondás, megszüntetés'],['egyeb','Egyéb kérdés']],
+  claim:[['lakas','Lakás- vagy vagyonkár'],['gepjarmu','Gépjárműkár'],['baleset','Baleset, egészségügyi'],['egyeb','Egyéb káresemény']],
+  consult:[['eves','Éves pénzügyi nagyszerviz'],['nyugdij','Nyugdíj, hosszú táv'],['gyermek','Gyermek jövője'],
+           ['lakas','Lakásvásárlás, hitel'],['befektetes','Befektetés'],['atnezes','Teljes átnézés'],['egyeb','Egyéb téma']]};
+var HP_ST={new:['Beérkezett','b'],taken:['Átvettük','b'],progress:['Folyamatban','y'],
+           waiting:['Tőled várunk információt','p'],done:['Megoldva','g']};
+var HP_ORDER=['new','taken','progress','waiting','done'];
+var HP={kind:'help',view:'open'};
+
+function hpPick(k){
+  HP.kind=k;
+  document.querySelectorAll('#hpBtns .helpbtn').forEach(function(e){ e.classList.toggle('on',e.getAttribute('data-k')===k); });
+  var f=document.getElementById('hpForm'); f.style.display='block';
+  document.getElementById('hpFormT').innerHTML=HP_KIND[k][0]+' <em>'+HP_KIND[k][1]+'</em>';
+  document.getElementById('hpTopic').innerHTML='<option value="">· Miről van szó? ·</option>'
+    +HP_TOPIC[k].map(function(t){ return '<option value="'+t[0]+'">'+t[1]+'</option>'; }).join('');
+  document.getElementById('hpItemWrap').style.display=(k==='consult')?'none':'';
+  document.getElementById('hpSlotWrap').style.display=(k==='consult')?'':'none';
+  document.getElementById('hpSlots').style.display=(k==='consult')?'':'none';
+  var d=(k==='claim')?1:(myTier()==='vip'?2:(myTier()==='plus'?3:5));
+  document.getElementById('hpSlaNote').innerHTML=(k==='claim')
+    ? 'Kárbejelentésnél a vállalt válaszidő <b>1 munkanap</b>, függetlenül a csomagodtól.'
+    : 'Vállalt válaszidő a te '+TIER[myTier()].n+' szinteden: <b>'+d+' munkanap</b>.';
+  document.getElementById('hpTxt').placeholder=(k==='claim')
+    ? 'Mi történt, mikor, hol? Ha van fotód a kárról, azt utána feltöltheted a szerződés adatlapján.'
+    : (k==='consult' ? 'Van előzetes kérdésed? (nem kötelező)' : 'Írd le pár mondatban, miben segítsünk.');
+  setTimeout(function(){ f.scrollIntoView({behavior:'smooth',block:'center'}); },80);
+}
+function helpNew(kind,itemId){
+  go('help'); hpPick(kind||'help');
+  if(itemId){ var e=document.getElementById('hpItem'); if(e) e.value=String(itemId); }
+}
+async function hpSend(){
+  var txt=(document.getElementById('hpTxt').value||'').trim();
+  var topic=document.getElementById('hpTopic').value;
+  if(HP.kind!=='consult'&&!txt){ toast('Írd le pár mondatban, miben segítsünk.'); return; }
+  if(!topic){ toast('Válaszd ki, miről van szó.'); return; }
+  var row={user_id:S.user.id,advisor_email:S.profile.advisor_email,kind:HP.kind,topic:topic,
+           text:txt||'(nincs előzetes kérdés)',status:'new'};
+  if(HP.kind!=='consult'){ row.item_id=+document.getElementById('hpItem').value||null; }
+  else {
+    var sel=SLOTS.filter(function(s,i){ return S.slotSel[i]; });
+    if(!sel.length){ toast('Jelöld be, mikor érnél rá.'); return; }
+    row.slots=sel.join(', '); row.mode=document.getElementById('hpMode').value;
+  }
+  var b=document.getElementById('hpSendBtn'); b.disabled=true; b.textContent='Küldés…';
+  var r=await sb.from('hub_tickets').insert(row).select();
+  b.disabled=false; b.textContent='Beküldöm';
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  if(r.data&&r.data[0]) S.tickets.unshift(r.data[0]);
+  document.getElementById('hpForm').style.display='none';
+  document.getElementById('hpTxt').value='';
+  S.slotSel={}; slotsRender();
+  await loadAll(); renderAll();
+  toast('✅ '+((r.data&&r.data[0]&&r.data[0].ref)||'Az ügyed')+' beérkezett. Az állapotát itt követheted.');
+}
+function hpView(v){ HP.view=v; hpRender(); }
+function hpRender(){
+  var all=(S.tickets||[]);
+  var open=all.filter(function(t){ return t.status!=='done'; });
+  var done=all.filter(function(t){ return t.status==='done'; });
+  var need=open.filter(function(t){ return t.status==='waiting'; });
+  document.getElementById('hpTabs').innerHTML=
+     '<span class="fchip'+(HP.view==='open'?' on':'')+'" onclick="hpView(&quot;open&quot;)">Folyamatban ('+open.length+')</span>'
+    +'<span class="fchip'+(HP.view==='done'?' on':'')+'" onclick="hpView(&quot;done&quot;)">Lezárt ('+done.length+')</span>';
+  var nb=document.getElementById('hpNeed');
+  nb.style.display=need.length?'':'none';
+  nb.innerHTML=need.length?('⏳ <b>'+need.length+' ügyednél tőled várunk információt.</b> Nézd meg lent, mire van szükség.'):'';
+  var list=(HP.view==='done'?done:open);
+  document.getElementById('hpList').innerHTML=list.length?list.map(hpTktHtml).join('')
+    :'<div class="empty">'+(HP.view==='done'?'Még nincs lezárt ügyed.':'Nincs folyamatban lévő ügyed. Fent indíthatsz újat.')+'</div>';
+}
+function hpTktHtml(t){
+  var ci=HP_ORDER.indexOf(t.status), k=HP_KIND[t.kind]||['📌',t.kind,''];
+  var item=(S.items||[]).filter(function(i){return i.id===t.item_id;})[0];
+  var over=t.sla_due&&t.status!=='done'&&(new Date(t.sla_due)<new Date());
+  var topicL=((HP_TOPIC[t.kind]||[]).filter(function(x){return x[0]===t.topic;})[0]||[])[1];
+  return '<div class="tkt'+(t.status==='waiting'?' need':'')+'">'
+    +'<div class="tk-h"><span class="tk-ref">'+E(t.ref||('#'+t.id))+'</span>'
+      +'<b>'+k[0]+' '+k[1]+(topicL?(' · '+E(topicL)):'')+'</b>'
+      +'<span class="bad '+(HP_ST[t.status]||HP_ST.new)[1]+'">'+(HP_ST[t.status]||HP_ST.new)[0]+'</span></div>'
+    +'<div class="tk-m">Beküldve: '+dHu(t.created_at)+(item?(' · '+E(item.name)):'')
+      +(t.slots?(' · ráérsz: '+E(t.slots)):'')+(t.mode?(' · '+E(t.mode)):'')
+      +' · utolsó mozgás: '+dHu(t.last_act||t.updated_at||t.created_at)+'</div>'
+    +'<div class="tk-t">'+E(t.text||'')+'</div>'
+    +(t.next_step?'<div class="tk-next">➡️ <b>Következő lépés:</b> '+E(t.next_step)+'</div>':'')
+    +(t.need_client?'<div class="tk-need">⏳ <b>Tőled várjuk:</b> '+E(t.need_client)+'</div>':'')
+    +'<div class="steps">'+HP_ORDER.map(function(s,i){
+        return '<span class="step'+(i<ci?' done':(i===ci?(s==='done'?' done':' cur'):''))+'">'+HP_ST[s][0]+'</span>'
+          +(i<HP_ORDER.length-1?'<span class="sep">→</span>':'');
+      }).join('')+'</div>'
+    +(t.status!=='done'&&t.sla_due?'<div class="tk-sla'+(over?' over':'')+'">'+(over?'⚠️ A vállalt válaszidőt túlléptük, a tanácsadód jelzést kapott.':'Vállalt válasz: '+dHu(t.sla_due))+'</div>':'')
+    +'</div>';
+}
 
 /* ═══ SZERZŐDÉSEK · adatgazdag kártya, csatolmányok, kategóriák ═══ */
 var CT_AREA=[['ingatlan','🏠','Ingatlan és lakhatás'],['szemely','❤️','Személybiztosítás'],['gyermek','🧒','Gyermek jövője'],
@@ -2147,9 +2225,34 @@ async function advOpen(uid){
   document.getElementById('advDetail').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function advTktHtml(t){
-  return '<div class="tkt"><span class="k '+t.kind+'">'+(KIND[t.kind]||t.kind)+'</span> <span class="small">· '+dHu(t.created_at)+(t.urgency==='urgent'?' · <b style="color:var(--pink);">sürgős</b>':'')+(t.sla_due?' · határidő: '+dHu(t.sla_due):'')+'</span>'
-    +'<div style="font-size:.82rem;margin:.3rem 0;">'+E(t.text)+'</div>'
-    +'<select onchange="advTktStatus('+t.id+',this.value)" style="font-size:.76rem;">'+Object.keys(TST).map(function(k){return '<option value="'+k+'"'+(t.status===k?' selected':'')+'>'+TST[k]+'</option>';}).join('')+'</select></div>';
+  var k=HP_KIND[t.kind]||['📌',t.kind,''];
+  var over=t.sla_due&&t.status!=='done'&&(new Date(t.sla_due)<new Date());
+  var topicL=((HP_TOPIC[t.kind]||[]).filter(function(x){return x[0]===t.topic;})[0]||[])[1];
+  return '<div class="tkt'+(over?' need':'')+'">'
+    +'<div class="tk-h"><span class="tk-ref">'+E(t.ref||('#'+t.id))+'</span>'
+      +'<b>'+k[0]+' '+k[1]+(topicL?(' · '+E(topicL)):'')+'</b>'
+      +(t.urgency==='urgent'?'<span class="bad p">sürgős</span>':'')
+      +'<span class="bad '+(HP_ST[t.status]||HP_ST.new)[1]+'">'+(HP_ST[t.status]||HP_ST.new)[0]+'</span></div>'
+    +'<div class="tk-m">Beküldve: '+dHu(t.created_at)+' · utolsó mozgás: '+dHu(t.last_act||t.updated_at||t.created_at)
+      +(t.sla_due?(' · vállalt válasz: '+dHu(t.sla_due)+(over?' ⚠️ LEJÁRT':'')):'')
+      +(t.slots?(' · ráér: '+E(t.slots)):'')+(t.mode?(' · '+E(t.mode)):'')+'</div>'
+    +'<div class="tk-t">'+E(t.text)+'</div>'
+    +'<div class="adm-les" style="margin-top:.5rem;">'
+      +'<select onchange="advTktStatus('+t.id+',this.value)" style="font-size:.76rem;flex:0 0 auto;">'
+        +HP_ORDER.map(function(x){return '<option value="'+x+'"'+(t.status===x?' selected':'')+'>'+HP_ST[x][0]+'</option>';}).join('')+'</select>'
+      +'<input id="tn'+t.id+'" class="t" value="'+E(t.next_step||'')+'" placeholder="Következő lépés (az ügyfél látja)">'
+      +'<input id="tc'+t.id+'" class="u" value="'+E(t.need_client||'')+'" placeholder="Mit várunk az ügyféltől (ő is látja)">'
+      +'<input id="ta'+t.id+'" class="u" value="'+E(t.adv_note||'')+'" placeholder="Belső jegyzet (az ügyfél NEM látja)">'
+      +'<button class="btn primary sv" onclick="advTktSave('+t.id+')">Mentés</button>'
+    +'</div></div>';
+}
+async function advTktSave(id){
+  var g=function(p){ var e=document.getElementById(p+id); return e?e.value.trim():''; };
+  var upd={next_step:g('tn')||null,need_client:g('tc')||null,adv_note:g('ta')||null};
+  var r=await sb.from('hub_tickets').update(upd).eq('id',id);
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  var t=(S.advT||[]).filter(function(x){return x.id===id;})[0]; if(t) Object.assign(t,upd);
+  toast('✅ Mentve. Az ügyfél azonnal látja a következő lépést.');
 }
 async function advUnlockDel(uid,room){
   var r=await sb.from('hub_edu_unlocks').delete().eq('user_id',uid).eq('room',room);
@@ -2170,7 +2273,7 @@ async function advProfileSave(){
   Object.assign(S.cur,upd); advRender();
   toast('✅ Mentve. '+(upd.tier?('Az ügyfél szintje: '+TIER[upd.tier].n+', a böngészőjében azonnal frissül.'):'Az ügyfél azonnal látja.'));
 }
-async function advTktStatus(id,st){ var r=await sb.from('hub_tickets').update({status:st,updated_at:new Date().toISOString()}).eq('id',id); if(r.error){ toast('⚠️ '+r.error.message); return; } var t=(S.advT||[]).filter(function(x){return x.id===id;})[0]; if(t) t.status=st; advRender(); toast('✅ Állapot: '+TST[st]); }
+async function advTktStatus(id,st){ var r=await sb.from('hub_tickets').update({status:st,updated_at:new Date().toISOString()}).eq('id',id); if(r.error){ toast('⚠️ '+r.error.message); return; } var t=(S.advT||[]).filter(function(x){return x.id===id;})[0]; if(t) t.status=st; if(document.querySelector('.page.on').id==='advq') advQRender(); else advRender(); toast('✅ Állapot: '+((HP_ST[st]||[st])[0])); }
 async function advLifeDone(id){ var r=await sb.from('hub_life_events').update({handled:true}).eq('id',id); if(r.error){ toast('⚠️ '+r.error.message); return; } var l=(S.advL||[]).filter(function(x){return x.id===id;})[0]; if(l) l.handled=true; advRender(); advOpen(S.cur.user_id); }
 async function advDocOpen(uid,name){ var r=await sb.storage.from('hub-docs').createSignedUrl(uid+'/'+name,600); if(r.error){ toast('⚠️ '+r.error.message); return; } window.open(r.data.signedUrl,'_blank'); }
 async function advQRender(){
@@ -2194,7 +2297,7 @@ async function advQRender(){
         return '<div class="tkt"><b style="font-family:var(--fb);">'+(KIND[t.kind]||t.kind)+'</b> <span class="small">· '+E(who(t.user_id))+' · '+dHu(t.created_at)+'</span>'
           +'<div style="font-size:.8rem;margin:.3rem 0;">'+E(t.text||'')+'</div>'
           +'<div style="display:flex;gap:.35rem;flex-wrap:wrap;">'
-          +['assigned','progress','done'].map(function(k){ return '<button class="btn" onclick="advTktStatus('+t.id+',\''+k+'\')">'+TST[k]+'</button>'; }).join('')
+          +['taken','progress','waiting','done'].map(function(k){ return '<button class="btn" onclick="advTktStatus('+t.id+',\''+k+'\')">'+HP_ST[k][0]+'</button>'; }).join('')
           +'<button class="btn" onclick="advOpen(\''+t.user_id+'\')">Ügyfél megnyitása</button></div></div>';
       }).join(''):'<div class="empty">Nincs nyitott ügy. Szép munka.</div>')
     +'<div class="pt" style="font-size:1rem;margin:1rem 0 .5rem;">💬 Élethelyzet-jelzések <span class="small" style="font-weight:400;">· '+lfs.length+' db</span></div>'
