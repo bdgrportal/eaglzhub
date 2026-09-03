@@ -495,6 +495,38 @@ body.navon .nav-btn span::after{top:0;transform:rotate(-45deg);}
 .ctc .row{display:flex;justify-content:space-between;font-size:.73rem;color:var(--gray);padding:.15rem 0;}
 .ctc .row b{color:var(--navy);font-family:var(--fb);}
 .ctc .feet{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.6rem;align-items:center;}
+.pf-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem;}
+.pf-tab{font-family:var(--fb);font-weight:700;font-size:.76rem;border:1px solid var(--border);background:#fff;color:var(--navy);border-radius:100px;padding:.44rem .9rem;cursor:pointer;transition:all .14s;white-space:nowrap;}
+.pf-tab:hover{border-color:var(--teal);color:var(--teal-deep);}
+.pf-tab.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+.pf-form{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+.pf-form label{display:block;font-family:var(--fb);font-weight:700;font-size:.7rem;color:var(--gray);letter-spacing:.03em;}
+.pf-form input,.pf-form select{width:100%;margin-top:.22rem;}
+.pf-rows{display:flex;flex-direction:column;}
+.pf-row{display:flex;justify-content:space-between;gap:.8rem;align-items:baseline;padding:.42rem 0;border-bottom:1px dashed var(--border);font-size:.79rem;color:var(--gray);}
+.pf-row:last-child{border-bottom:none;}
+.pf-row b{font-family:var(--fb);color:var(--navy);text-align:right;font-size:.8rem;}
+.pf-meter{height:5px;border-radius:100px;background:#eef2f7;overflow:hidden;margin-top:.55rem;}
+.pf-meter span{display:block;height:100%;width:0;border-radius:100px;transition:width .2s,background .2s;}
+.pf-meter span.w1{background:#e05555;} .pf-meter span.w2{background:#f0b429;}
+.pf-meter span.w3{background:#7dc8c0;} .pf-meter span.w4{background:var(--green);}
+.pf-sw{display:flex;align-items:center;gap:.75rem;border:1px solid var(--border);border-radius:12px;padding:.7rem .85rem;margin-bottom:.5rem;cursor:pointer;transition:border-color .14s,background .14s;background:#fff;}
+.pf-sw:hover{border-color:var(--teal);}
+.pf-sw.on{background:linear-gradient(180deg,#fff,rgba(125,200,192,.07));border-color:rgba(125,200,192,.5);}
+.pf-sw .ic{font-size:1.25rem;}
+.pf-sw b{display:block;font-family:var(--fb);font-size:.83rem;}
+.pf-sw>div>span{font-size:.71rem;color:var(--gray);line-height:1.45;}
+.pf-sw .sw{margin-left:auto;flex:none;width:40px;height:22px;border-radius:100px;background:#dfe6ee;position:relative;transition:background .16s;}
+.pf-sw .sw i{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.22);transition:left .16s;}
+.pf-sw.on .sw{background:var(--green);} .pf-sw.on .sw i{left:20px;}
+.pf-see{font-size:.78rem;color:var(--gray);margin-bottom:.8rem;}
+.pf-see b{display:block;font-family:var(--fb);color:var(--navy);font-size:.8rem;margin-bottom:.3rem;}
+.pf-see ul{margin:0 0 0 1.05rem;} .pf-see li{margin-bottom:.2rem;line-height:1.5;}
+.pf-see.no b{color:var(--gold);}
+.pf-hr{height:1px;background:var(--border);margin:1rem 0;}
+.pf-del{font-size:.78rem;background:rgba(240,180,41,.14);border-radius:10px;padding:.6rem .75rem;color:#7a5600;margin-top:.5rem;}
+.nf-sec{font-family:var(--fb);font-weight:800;font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gray);padding:0 0 .5rem;}
+.nf-sec.mt{padding-top:1.1rem;margin-top:.9rem;border-top:1px solid var(--border);}
 .vbadge{font-family:var(--fb);font-weight:800;font-size:.56rem;letter-spacing:.05em;border-radius:100px;padding:.16rem .5rem;white-space:nowrap;}
 .vbadge.ok{background:rgba(15,157,143,.13);color:var(--green);}
 .vbadge.own{background:#eef2f7;color:var(--gray);}
@@ -572,6 +604,8 @@ body.navon .nav-btn span::after{top:0;transform:rotate(-45deg);}
 @media(max-width:700px){
   .filt-row input,.filt-row select{flex:1 1 100%;min-width:0;}
   .refform{grid-template-columns:1fr;}
+  .pf-form{grid-template-columns:1fr;}
+  .pf-tabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding-bottom:.25rem;}
   .tblwrap{max-height:none;border-radius:12px;}
   .dtbl{font-size:.76rem;}
   .dtbl thead th,.dtbl tbody td{padding:.45rem .4rem;}
@@ -689,6 +723,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="side-sec">Segítség</div>
     <div class="nav-item" data-p="help" onclick="go('help')">🆘 Segítség és időpont <span class="dot" id="dotHelp" style="display:none;"></span></div>
     <div class="side-sec">Tudás</div>
+    <div class="nav-item" data-p="cls" onclick="go('cls')">🎬 Videótár</div>
     <div class="nav-item" data-p="tud" onclick="go('tud')">📚 Tudástár</div>
     <div class="nav-item" data-p="notif" onclick="go('notif')">🔔 Értesítések <span class="dot" id="dotNotif" style="display:none;"></span></div>
     <div class="nav-item" data-p="profile" onclick="go('profile')">👤 Fiókom</div>
@@ -839,17 +874,6 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="calc-grid" id="calcGrid"></div>
   </div>
 
-  <!-- 7) ÉLETHELYZETEK -->
-  <div class="page" id="p-edu">
-    <button class="btn" style="margin-bottom:.85rem;" onclick="go('tud')">← Vissza a Tudástárba</button>
-    <div class="pt">🎓 <em>Élethelyzeteim</em> <span class="small" style="font-weight:400;">· 3 perces útmutatók, checklist, konzultáció</span></div>
-    <div class="edu-grid" id="eduGrid"></div>
-    <div class="card lock" id="kidsCard" style="margin-top:1rem;">
-      <div class="pt" style="margin-bottom:.3rem;font-size:1.05rem;">🧒 Gyerek pénzügyi akadémia</div>
-      <p class="small">Életkor szerinti mini tananyagok, zsebpénz-tervező, családi megtakarítási célok. VIP ügyfeleknek, hamarosan.</p>
-    </div>
-  </div>
-
   <!-- 7b) TUDÁSTÁR -->
   <div class="page" id="p-kb">
     <button class="btn" style="margin-bottom:.85rem;" onclick="go('tud')">← Vissza a Tudástárba</button>
@@ -870,7 +894,6 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
   <!-- 7c) TANTERMEK -->
   <div class="page" id="p-cls">
     <div id="clsGridWrap">
-      <button class="btn" style="margin-bottom:.85rem;" onclick="go('tud')">← Vissza a Tudástárba</button>
       <div class="pt">🎬 <em>Videótár</em> <span class="small" style="font-weight:400;">· rövid videók, a te élethelyzetedre szabva</span></div>
       <div class="card" style="margin-bottom:1rem;"><p class="small" id="clsHead"></p></div>
       <div class="cls-grid" id="clsGrid"></div>
@@ -912,18 +935,117 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
   <!-- 9) FIÓKOM -->
   <div class="page" id="p-profile">
     <div class="pt">👤 <em>Fiókom</em></div>
-    <div class="dash2">
-      <div class="card">
-        <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">Adataim</div>
-        <div class="addform" style="grid-template-columns:1fr;">
-          <input id="pfName" placeholder="Teljes neved">
-          <input id="pfEmail" disabled>
-          <button class="btn pri" onclick="profileSave()">Mentés</button>
+    <div class="pf-tabs" id="pfTabs"></div>
+
+    <!-- ADATAIM -->
+    <div class="pf-sec" id="pfs-adat">
+      <div class="dash2">
+        <div class="card">
+          <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">Elérhetőségeid</div>
+          <p class="small" style="margin-bottom:.75rem;">Ezeket a tanácsadód látja, hogy el tudjon érni. Bármikor módosíthatod.</p>
+          <div class="pf-form">
+            <label>Teljes neved<input id="pfName" placeholder="pl. Kovács Anna"></label>
+            <label>E-mail címed<input id="pfEmail" disabled title="A belépési e-mail címed. Módosítást a tanácsadódnál kérhetsz."></label>
+            <label>Telefonszám<input id="pfPhone" placeholder="+36 30 123 4567"></label>
+            <label>Város<input id="pfCity" placeholder="pl. Budapest"></label>
+            <label>Mikor hívhatunk?<select id="pfWhen">
+              <option value="">Mindegy, bármikor</option>
+              <option>Hétköznap délelőtt</option>
+              <option>Hétköznap délután</option>
+              <option>Hétköznap 17 óra után</option>
+              <option>Hétvégén</option>
+              <option>Csak írásban, ne hívjatok</option>
+            </select></label>
+          </div>
+          <button class="btn pri" style="margin-top:.85rem;" onclick="pfSave()">Adatok mentése</button>
         </div>
-        <p class="small" style="margin-top:.8rem;">Tanácsadód: <b id="pfAdv">…</b> · Szinted: <b id="pfTier">…</b></p>
-        <p class="small" style="margin-top:.4rem;">A tanácsadód látja: a pénzügyi térképed, a segítségkéréseid, az élethelyzet-jelzéseid<span id="pfDocs"></span>. Nem látja: semmi mást.</p>
-        <button class="btn" style="margin-top:.9rem;" onclick="logout()">Kilépés</button>
+        <div class="card">
+          <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">A fiókod</div>
+          <div class="pf-rows">
+            <div class="pf-row"><span>Tanácsadód</span><b id="pfAdv">…</b></div>
+            <div class="pf-row"><span>Szinted</span><b id="pfTier">…</b></div>
+            <div class="pf-row"><span>Megnyitott tantermek</span><b id="pfRooms">…</b></div>
+            <div class="pf-row"><span>Szerződéseid</span><b id="pfItems">…</b></div>
+            <div class="pf-row"><span>Ügyeid</span><b id="pfTkts">…</b></div>
+            <div class="pf-row"><span>Regisztráltál</span><b id="pfSince">…</b></div>
+          </div>
+          <p class="small" id="pfTierHint" style="margin-top:.8rem;"></p>
+        </div>
       </div>
+    </div>
+
+    <!-- BIZTONSÁG -->
+    <div class="pf-sec" id="pfs-biz" style="display:none;">
+      <div class="dash2">
+        <div class="card">
+          <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">🔑 Jelszó módosítása</div>
+          <p class="small" style="margin-bottom:.75rem;">Legalább 8 karakter. Olyat válassz, amit máshol nem használsz.</p>
+          <div class="pf-form" style="grid-template-columns:1fr;">
+            <label>Új jelszó<input id="pfPw1" type="password" autocomplete="new-password" placeholder="Új jelszó" oninput="pfPwPaint()"></label>
+            <label>Új jelszó még egyszer<input id="pfPw2" type="password" autocomplete="new-password" placeholder="Ismételd meg"></label>
+          </div>
+          <div class="pf-meter"><span id="pfPwBar"></span></div>
+          <div class="small" id="pfPwMsg" style="margin-top:.35rem;"></div>
+          <button class="btn pri" style="margin-top:.7rem;" onclick="pfPassword()">Jelszó mentése</button>
+        </div>
+        <div class="card">
+          <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">🛡️ Belépések</div>
+          <div class="pf-rows">
+            <div class="pf-row"><span>Utolsó belépésed</span><b id="pfLast">…</b></div>
+            <div class="pf-row"><span>Automatikus kiléptetés</span><b>30 perc tétlenség után</b></div>
+          </div>
+          <p class="small" style="margin:.8rem 0;">Ha idegen gépen maradtál bejelentkezve, egy kattintással mindenhonnan kiléptethetsz. Ezután minden eszközön újra be kell jelentkezned.</p>
+          <button class="btn" onclick="pfLogoutAll()">Kiléptetés minden eszközről</button>
+          <button class="btn" style="margin-left:.4rem;" onclick="logout()">Kilépés itt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉRTESÍTÉSEK -->
+    <div class="pf-sec" id="pfs-ert" style="display:none;">
+      <div class="card">
+        <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">🔔 Mit küldjünk e-mailben?</div>
+        <p class="small" style="margin-bottom:.9rem;">A portálon minden értesítést látsz. Itt csak azt állítod, mi menjen ki e-mailben is.</p>
+        <div id="pfNotif"></div>
+        <button class="btn pri" style="margin-top:.9rem;" onclick="pfNotifSave()">Beállítások mentése</button>
+      </div>
+    </div>
+
+    <!-- ADATVÉDELEM -->
+    <div class="pf-sec" id="pfs-adv" style="display:none;">
+      <div class="dash2">
+        <div class="card">
+          <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">👁️ Ki mit lát</div>
+          <div class="pf-see"><b>A tanácsadód látja</b><ul>
+            <li>a pénzügyi térképedet és a rögzített szerződéseidet</li>
+            <li>a beküldött ügyeidet és az élethelyzet-jelzéseidet</li>
+            <li>az elérhetőségeidet, hogy fel tudjon keresni</li>
+            <li id="pfDocsLi">a dokumentumaidat, ha megosztottad velük</li>
+          </ul></div>
+          <div class="pf-see no"><b>Senki nem látja</b><ul>
+            <li>a jelszavadat, azt titkosítva tároljuk</li>
+            <li>hogy melyik videót mikor nézted meg, csak az összesített haladást</li>
+            <li>a kalkulátorokba beírt számaidat, amíg te nem küldöd el</li>
+          </ul></div>
+          <button class="btn" style="margin-top:.6rem;" onclick="termsShow(true)">Adatkezelési tájékoztató</button>
+        </div>
+        <div class="card">
+          <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">📥 Az adataid</div>
+          <p class="small">Letöltheted egy fájlban mindazt, amit rólad tárolunk. Ez a te másolatod, bárhová elviheted.</p>
+          <button class="btn" style="margin-top:.6rem;" onclick="pfExport()" id="pfExpBtn">⬇️ Adataim letöltése</button>
+          <div class="pf-hr"></div>
+          <div class="pt" style="font-size:1rem;margin-bottom:.4rem;">📜 Hozzájárulásaid</div>
+          <div id="pfConsents" class="small"></div>
+          <div class="pf-hr"></div>
+          <div class="pt" style="font-size:1rem;margin-bottom:.4rem;color:var(--gold);">🗑️ Fiók törlése</div>
+          <p class="small">A törlési kérelmedet a tanácsadód 30 napon belül elintézi. A szerződéseid ettől nem szűnnek meg, csak a portál-hozzáférésed és az itt tárolt adataid.</p>
+          <div id="pfDelBox"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AJÁNLÁS -->
+    <div class="pf-sec" id="pfs-aj" style="display:none;">
       <div class="card">
         <div class="pt" style="font-size:1.05rem;margin-bottom:.4rem;">🤝 Küldj egy ajánlást a tanácsadódnak</div>
         <p class="small">Ismersz valakit, akinek jól jönne, ha rendbe tennék a pénzügyeit? Add meg az elérhetőségét, és a tanácsadód felveszi vele a kapcsolatot. Csak akkor add meg, ha az illető tud róla.</p>
@@ -1248,6 +1370,7 @@ function go(p){
   if(p==='advcode') advCodeRender();
   if(p==='cls') clsLoad();
   if(p==='tud'){ tudRender(); }
+  if(p==='profile'){ pfRender(); pfTab(PF.tab); }
   if(p==='calc') calcRender();
   if(p==='kb') kbRender();
   if(p==='clsadm') clsAdmOpen();
@@ -1271,7 +1394,6 @@ function renderAll(){
   tc.title=(tr==='vip'?'A legmagasabb szinten vagy, minden tananyag és szolgáltatás nyitva.':'A tanácsadód tudja megnyitni a következő szintet.');
   document.getElementById('advName').textContent=adv.name; document.getElementById('advAva').textContent=ini(adv.name);
   refList();
-  document.getElementById('kidsCard').classList.toggle('lock',!tOk('vip'));
   document.getElementById('kbVip').classList.toggle('lock',!tOk('vip'));
   /* hero */
   var now=new Date(), in60=new Date(Date.now()+60*86400000);
@@ -1311,17 +1433,31 @@ function renderAll(){
   var open=S.tickets.filter(function(t){return t.status!=='done';}).length;
   var dh=document.getElementById('dotHelp'); dh.style.display=open?'':'none'; dh.textContent=open;
   /* értesítések */
-  var nf=[];
-  exp.forEach(function(i){ nf.push(['⏰',E(i.name)+' lejár '+dHu(i.end_date),'Kattints a Segítségközpontra, és a tanácsadód bekéri az ajánlatokat.']); });
-  S.tickets.filter(function(t){return t.status==='done';}).slice(0,3).forEach(function(t){ nf.push(['✅',KIND[t.kind]+' megoldva','Frissítve: '+dHu(t.updated_at)]); });
-  if(p.next_review) nf.push(['📅','Felülvizsgálatod: '+dHu(p.next_review),'Foglalj időpontot, 20 perc az egész.']);
-  S.life.slice(0,2).forEach(function(l){ nf.push([l.handled?'✅':'💬',(LIFE[l.event]||l.event)+(l.handled?' · a tanácsadód látta':' · elküldve'),dHu(l.created_at)]); });
-  document.getElementById('notifList').innerHTML=nf.length?nf.map(function(n){return '<div class="notif"><span class="ic">'+n[0]+'</span><div><b>'+n[1]+'</b><span>'+n[2]+'</span></div></div>';}).join(''):'<div class="empty">Nincs új értesítés.</div>';
-  var dn=document.getElementById('dotNotif'); dn.style.display=nf.length?'':'none'; dn.textContent=nf.length;
+  var todo=[], info=[];
+  exp.forEach(function(i){ todo.push(['⏰',E(i.name)+' lejár '+dHu(i.end_date),'Szólj a tanácsadódnak a Segítség oldalon, és bekéri az ajánlatokat.']); });
+  S.tickets.filter(function(t){return t.status==='waiting';}).forEach(function(t){
+    todo.push(['⏳',(t.ref?E(t.ref)+' · ':'')+'Tőled várunk információt',E(t.need_client||'Nézd meg a Segítség oldalon, mire van szükség.')]); });
+  if(p.next_review&&new Date(p.next_review)<=new Date(Date.now()+30*86400000))
+    todo.push(['📅','Felülvizsgálatod: '+dHu(p.next_review),'Foglalj időpontot, 20 perc az egész.']);
+  S.life.filter(function(l){return !l.handled;}).slice(0,3).forEach(function(l){
+    todo.push(['💬',(LIFE[l.event]||l.event)+' · elküldve',dHu(l.created_at)+' · a tanácsadód hamarosan jelentkezik.']); });
+
+  S.tickets.filter(function(t){return t.status==='done';}).slice(0,3).forEach(function(t){
+    info.push(['✅',(t.ref?E(t.ref)+' · ':'')+(KIND[t.kind]||t.kind)+' megoldva','Lezárva: '+dHu(t.updated_at)]); });
+  S.life.filter(function(l){return l.handled;}).slice(0,2).forEach(function(l){
+    info.push(['✅',(LIFE[l.event]||l.event)+' · a tanácsadód látta',dHu(l.created_at)]); });
+  if(p.next_review&&new Date(p.next_review)>new Date(Date.now()+30*86400000))
+    info.push(['📅','Következő felülvizsgálatod: '+dHu(p.next_review),'Még ráérsz, majd szólunk időben.']);
+
+  function nfHtml(a){ return a.map(function(n){
+    return '<div class="notif"><span class="ic">'+n[0]+'</span><div><b>'+n[1]+'</b><span>'+n[2]+'</span></div></div>'; }).join(''); }
+  document.getElementById('notifList').innerHTML=
+    (todo.length?'<div class="nf-sec">Teendőid</div>'+nfHtml(todo):'')
+   +(info.length?'<div class="nf-sec'+(todo.length?' mt':'')+'">Ami történt</div>'+nfHtml(info):'')
+   +((todo.length||info.length)?'':'<div class="empty">Nincs értesítésed. Ha valami történik a szerződéseiddel vagy az ügyeiddel, itt jelezzük.</div>');
+  var dn=document.getElementById('dotNotif'); dn.style.display=todo.length?'':'none'; dn.textContent=todo.length;
   /* fiók */
-  document.getElementById('pfName').value=p.name||''; document.getElementById('pfEmail').value=S.user.email;
-  document.getElementById('pfAdv').textContent=adv.name; document.getElementById('pfTier').textContent=vip?'VIP':(p.status==='waitlist'?'Várólistás':'Basic');
-  document.getElementById('pfDocs').textContent=p.docs_shared?', a dokumentumaid':'';
+  pfRender();
   document.getElementById('docShare').checked=!!p.docs_shared;
 }
 function inviteLink(){ var code=(S.advisor&&S.advisor.code)||''; return location.href.split('#')[0].split('?')[0]+(code?('?code='+encodeURIComponent(code)):''); }
@@ -1384,11 +1520,170 @@ async function docUpload(){
 async function docOpen(name){ var r=await sb.storage.from('hub-docs').createSignedUrl(S.user.id+'/'+name,600); if(r.error){ toast('⚠️ '+r.error.message); return; } window.open(r.data.signedUrl,'_blank'); }
 async function docDel(name){ if(window.__docArm!==name){ window.__docArm=name; toast('Biztos törlöd? Kattints még egyszer.'); return; } window.__docArm=null; var r=await sb.storage.from('hub-docs').remove([S.user.id+'/'+name]); if(r.error){ toast('⚠️ '+r.error.message); return; } toast('Törölve.'); docsLoad(); }
 async function docShareToggle(){ var v=document.getElementById('docShare').checked; var r=await sb.from('hub_profiles').update({docs_shared:v,updated_at:new Date().toISOString()}).eq('user_id',S.user.id); if(r.error){ toast('⚠️ '+r.error.message); return; } S.profile.docs_shared=v; renderAll(); toast(v?'A tanácsadód mostantól látja a dokumentumaidat.':'A dokumentumaid privátak.'); }
-async function profileSave(){ var nm=document.getElementById('pfName').value.trim(); if(!nm){ toast('Adj meg egy nevet.'); return; } var r=await sb.from('hub_profiles').update({name:nm,updated_at:new Date().toISOString()}).eq('user_id',S.user.id); if(r.error){ toast('⚠️ '+r.error.message); return; } S.profile.name=nm; renderAll(); showApp(); toast('✅ Mentve.'); }
+/* ═══ FIÓKOM · adatok, biztonság, értesítések, adatvédelem ═══ */
+var PF_TABS=[['adat','👤','Adataim'],['biz','🔑','Belépés és biztonság'],['ert','🔔','Értesítések'],['adv','🛡️','Adatvédelem'],['aj','🤝','Ajánlás']];
+var PF_NOTIF=[
+ ['expiry','⏰','Lejáró vagy évfordulós szerződés','60 nappal előre szólunk, hogy legyen időd dönteni.',true],
+ ['ticket','📥','Ügyeim állapotváltozása','Ha megmozdul egy ügyed, vagy tőled várunk valamit.',true],
+ ['review','📅','Éves felülvizsgálat emlékeztető','Évente egyszer, amikor esedékes a nagyszerviz.',true],
+ ['edu','🎬','Új videó vagy anyag a Videótárban','Amikor új tananyag kerül fel a szintedhez.',false],
+ ['news','📰','Hírlevél, pénzügyi tippek','Havonta egy levél. Bármikor leiratkozhatsz.',false]
+];
+var PF={tab:'adat'};
+
+function pfTab(k){
+  PF.tab=k;
+  PF_TABS.forEach(function(t){ var e=document.getElementById('pfs-'+t[0]); if(e) e.style.display=(t[0]===k?'':'none'); });
+  pfTabsRender();
+  if(k==='adv') pfPrivacyLoad();
+}
+function pfTabsRender(){
+  var el=document.getElementById('pfTabs'); if(!el) return;
+  el.innerHTML=PF_TABS.map(function(t){
+    return '<span class="pf-tab'+(PF.tab===t[0]?' on':'')+'" onclick="pfTab(&quot;'+t[0]+'&quot;)">'+t[1]+' '+t[2]+'</span>';
+  }).join('');
+}
+
+/* ── adatok mentése ── */
+async function pfSave(){
+  var nm=(document.getElementById('pfName').value||'').trim();
+  if(!nm){ toast('Adj meg egy nevet.'); return; }
+  var ph=(document.getElementById('pfPhone').value||'').trim();
+  if(ph&&!/^[+0-9 ()\/-]{6,20}$/.test(ph)){ toast('A telefonszám nem tűnik érvényesnek.'); return; }
+  var upd={name:nm,phone:ph||null,city:(document.getElementById('pfCity').value||'').trim()||null,
+           call_window:document.getElementById('pfWhen').value||null,updated_at:new Date().toISOString()};
+  var r=await sb.from('hub_profiles').update(upd).eq('user_id',S.user.id);
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  Object.assign(S.profile,upd);
+  /* csak a topbar nevét frissítjük, az oldalról nem dobunk ki */
+  document.getElementById('tbName').textContent=nm; document.getElementById('tbAva').textContent=ini(nm);
+  renderAll(); pfTab(PF.tab); toast('✅ Adataid mentve.');
+}
+function profileSave(){ return pfSave(); }
+
+/* ── jelszó ── */
+function pfPwScore(p){
+  var s=0; if(p.length>=8)s++; if(p.length>=12)s++;
+  if(/[a-z]/.test(p)&&/[A-Z]/.test(p))s++; if(/[0-9]/.test(p))s++; if(/[^A-Za-z0-9]/.test(p))s++;
+  return Math.min(s,4);
+}
+function pfPwPaint(){
+  var p=document.getElementById('pfPw1').value||'', sc=pfPwScore(p);
+  var lab=['gyenge','gyenge','közepes','jó','erős'][sc];
+  var b=document.getElementById('pfPwBar');
+  b.style.width=(p?(sc*25||8):0)+'%';
+  b.className=['w1','w1','w2','w3','w4'][sc];
+  document.getElementById('pfPwMsg').textContent=p
+    ? ('Jelszó erőssége: '+lab+(p.length<8?' · legalább 8 karakter kell':''))
+    : '';
+}
+async function pfPassword(){
+  var a=document.getElementById('pfPw1').value||'', b=document.getElementById('pfPw2').value||'';
+  if(a.length<8){ toast('A jelszó legyen legalább 8 karakter.'); return; }
+  if(a!==b){ toast('A két jelszó nem egyezik.'); return; }
+  if(pfPwScore(a)<2){ toast('Ez túl könnyen kitalálható. Tegyél bele számot vagy nagybetűt.'); return; }
+  var r=await sb.auth.updateUser({password:a});
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  document.getElementById('pfPw1').value=''; document.getElementById('pfPw2').value=''; pfPwPaint();
+  toast('✅ Jelszavad módosítva.');
+}
+async function pfLogoutAll(){
+  if(!confirm('Minden eszközön kiléptetünk. Utána újra be kell jelentkezned. Folytatod?')) return;
+  try{ await sb.auth.signOut({scope:'global'}); }catch(e){ await sb.auth.signOut(); }
+  location.reload();
+}
+
+/* ── értesítések ── */
+function pfNotifRender(){
+  var n=(S.profile&&S.profile.notif)||{};
+  document.getElementById('pfNotif').innerHTML=PF_NOTIF.map(function(x){
+    var on=(x[0] in n)?!!n[x[0]]:x[4];
+    if(x[0]==='news') on=!!(S.profile&&S.profile.marketing_ok);
+    return '<div class="pf-sw'+(on?' on':'')+'" onclick="pfNotifTog(&quot;'+x[0]+'&quot;)" data-k="'+x[0]+'">'
+      +'<span class="ic">'+x[1]+'</span><div><b>'+x[2]+'</b><span>'+E(x[3])+'</span></div>'
+      +'<span class="sw"><i></i></span></div>';
+  }).join('');
+}
+function pfNotifTog(k){
+  var el=document.querySelector('.pf-sw[data-k="'+k+'"]'); if(!el) return;
+  el.classList.toggle('on');
+}
+async function pfNotifSave(){
+  var n={}, mk=false;
+  document.querySelectorAll('#pfNotif .pf-sw').forEach(function(e){
+    var k=e.getAttribute('data-k'), on=e.classList.contains('on');
+    if(k==='news') mk=on; else n[k]=on;
+  });
+  var r=await sb.from('hub_profiles').update({notif:n,marketing_ok:mk,updated_at:new Date().toISOString()}).eq('user_id',S.user.id);
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  S.profile.notif=n; S.profile.marketing_ok=mk;
+  toast('✅ Értesítési beállításaid mentve.');
+  pfPrivacyLoad();
+}
+
+/* ── adatvédelem ── */
+async function pfPrivacyLoad(){
+  var c=await sb.from('hub_consents').select('*').eq('user_id',S.user.id).order('created_at',{ascending:false}).limit(12);
+  var CK={terms:'Adatkezelési tájékoztató',marketing:'Hírlevél, marketing',deletion:'Fióktörlési kérelem'};
+  var rows=(c.data||[]);
+  document.getElementById('pfConsents').innerHTML=rows.length
+    ? rows.map(function(x){ return '<div class="pf-row"><span>'+(CK[x.kind]||x.kind)+'</span><b>'+(x.granted?'✅ megadva':'🚫 visszavonva')+' · '+dHu(x.created_at)+'</b></div>'; }).join('')
+    : '<div class="empty" style="padding:.6rem;">Még nincs naplózott hozzájárulásod. Amint kapcsolgatsz valamit, itt látod.</div>';
+  var d=S.profile&&S.profile.deletion_at;
+  document.getElementById('pfDelBox').innerHTML=d
+    ? '<div class="pf-del">🗑️ <b>Törlési kérelmedet rögzítettük</b> ('+dHu(d)+'). A tanácsadód felveszi veled a kapcsolatot. Ha meggondoltad magad, szólj neki a Segítség oldalon.</div>'
+    : '<button class="btn" style="margin-top:.5rem;color:var(--gold);border-color:rgba(230,62,120,.35);" onclick="pfDelete()">Fiók törlésének kérése</button>';
+}
+async function pfExport(){
+  var b=document.getElementById('pfExpBtn'); b.disabled=true; b.textContent='Készítjük…';
+  var r=await sb.rpc('hub_my_export');
+  b.disabled=false; b.textContent='⬇️ Adataim letöltése';
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  var blob=new Blob([JSON.stringify(r.data,null,2)],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='eaglz-hub-adataim-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); },4000);
+  toast('✅ Letöltve. A fájl a te másolatod, bárhová elviheted.');
+}
+async function pfDelete(){
+  var why=prompt('Sajnáljuk, hogy mész. Leírnád egy mondatban, miért? (nem kötelező)');
+  if(why===null) return;
+  if(!confirm('Rögzítjük a törlési kérelmedet, és a tanácsadód 30 napon belül elintézi. Folytatod?')) return;
+  var r=await sb.rpc('hub_request_deletion',{p_reason:why||null});
+  if(r.error){ toast('⚠️ '+r.error.message); return; }
+  S.profile.deletion_at=new Date().toISOString();
+  await loadAll(); renderAll(); pfPrivacyLoad();
+  toast('✅ Kérelmed rögzítve'+(r.data?(' ('+r.data+')'):'')+'. A tanácsadód keresni fog.');
+}
+
+/* ── a Fiókom oldal feltöltése ── */
+function pfRender(){
+  if(!S.profile) return;
+  var p=S.profile;
+  document.getElementById('pfName').value=p.name||'';
+  document.getElementById('pfEmail').value=S.user.email||'';
+  document.getElementById('pfPhone').value=p.phone||'';
+  document.getElementById('pfCity').value=p.city||'';
+  document.getElementById('pfWhen').value=p.call_window||'';
+  var tr=myTier();
+  document.getElementById('pfAdv').textContent=(S.advisor&&S.advisor.name)||'a tanácsadód';
+  document.getElementById('pfTier').textContent=TIER[tr].lab;
+  document.getElementById('pfRooms').textContent=Object.keys(C.unl||{}).length+' / '+clsSlots();
+  document.getElementById('pfItems').textContent=(S.items||[]).length+' db';
+  document.getElementById('pfTkts').textContent=(S.tickets||[]).filter(function(t){return t.status!=='done';}).length+' nyitott · '
+    +(S.tickets||[]).filter(function(t){return t.status==='done';}).length+' lezárt';
+  document.getElementById('pfSince').textContent=p.created_at?dHu(p.created_at):'·';
+  document.getElementById('pfTierHint').textContent=(tr==='vip')
+    ? 'A legmagasabb szinten vagy, minden tananyag nyitva áll.'
+    : 'A következő szintet a tanácsadód nyitja meg, ha ajánlásokkal segíted a munkáját.';
+  var dl=document.getElementById('pfDocsLi'); if(dl) dl.style.display=p.docs_shared?'':'none';
+  var lg=(S.user&&(S.user.last_sign_in_at||(S.user.identities&&S.user.identities[0]&&S.user.identities[0].last_sign_in_at)));
+  document.getElementById('pfLast').textContent=lg?dHu(lg):'ez a mostani';
+  pfTabsRender(); pfNotifRender();
+}
 
 /* ── statikus tartalom ── */
-var EDU=[['👶','Gyermeket várok','checklist + támogatások'],['🏠','Lakást vennék','önerő, hitel, biztosítás'],['👨‍👩‍👧','Családot alapítottam','védelem és megtakarítás'],['🚀','Vállalkozást indítok','adó, tartalék, nyugdíj'],['💼','Munkahelyet váltottam','mit vigyél magaddal'],['✈️','Külföldre költözöm','mi marad, mi szűnik meg'],['🌅','Nyugdíjra készülök','mennyi kell és honnan'],['🎁','Örököltem','okos első lépések'],['⚡','Káresemény történt','ezt tedd most azonnal']];
-document.getElementById('eduGrid').innerHTML=EDU.map(function(e){ return '<div class="edu-tile" onclick="toast(\'🎓 Hamarosan: „'+e[1]+'" · 3 perces útmutató, checklisttel. Addig kérdezz a Segítségközpontban!\')"><span class="ic">'+e[0]+'</span><b>'+e[1]+'</b><span>'+e[2]+'</span></div>'; }).join('');
 var KB=[
  {c:'Megtakarítás',tp:'alap',t:'Mi az a TBSZ, és mikor éri meg?',d:'5 lekötési év után adómentes hozam. Kinek jó, kinek nem.'},
  {c:'Adó',tp:'tamogatas',t:'Kamatadó és szocho: mikor kell fizetni?',d:'15% + 13%, és hogyan lehet legálisan nullára vinni.'},
@@ -1470,10 +1765,9 @@ function tudRender(){
   /* a négy terület csempéi */
   var opened=Object.keys(C.unl||{}).length, tot=(C.rooms||[]).length;
   document.getElementById('tudTiles').innerHTML=
-     tudTile('cls','🎬','Videótár', tot?(opened+' / '+clsSlots()+' tantermed megnyitva'):'Rövid videók az élethelyzetedre')
-    +tudTile('kb','❓','Rövid válaszok', KB.length+' gyakori kérdés, 2 perc mindegyik')
+     tudTile('kb','❓','Rövid válaszok', KB.length+' gyakori kérdés, 2 perc mindegyik')
     +tudTile('calc','🧮','Kalkulátorok', CALCS.length+' számoló, feltételezésekkel együtt')
-    +tudTile('edu','🎓','Élethelyzeteim','Mi a teendő, ha változik valami');
+    ;
 }
 function tudTile(p,ic,t,s){
   return '<div class="tud-tile" onclick="go(&quot;'+p+'&quot;)"><span class="ic">'+ic+'</span><b>'+t+'</b><span>'+E(s)+'</span></div>';
