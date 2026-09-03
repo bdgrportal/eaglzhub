@@ -104,6 +104,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 .wseg.rev{border-left:4px solid var(--blue);} .wseg.rev .wst{background:rgba(43,108,176,.12);color:var(--blue);}
 .wseg.miss{border-left:4px solid var(--red);background:rgba(230,62,120,.03);} .wseg.miss .wst{background:rgba(230,62,120,.1);color:var(--red);}
 .wseg.na{border-left:4px solid #cbd5e1;} .wseg.na .wst{background:#eef2f7;color:var(--gray);}
+.wseg.nr{border-left:4px solid #e2e8f0;background:#fbfcfe;} .wseg.nr b,.wseg.nr .ic{opacity:.55;} .wseg.nr .wst{background:#f3f6fa;color:#94a3b8;}
 
 .todo{display:flex;align-items:center;gap:.6rem;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:11px;padding:.6rem .8rem;margin-bottom:.45rem;background:#fff;transition:all .13s;}
 .todo:hover{transform:translateX(2px);box-shadow:0 4px 12px rgba(27,56,88,.08);}
@@ -595,7 +596,7 @@ body.navon .nav-btn span::after{top:0;transform:rotate(-45deg);}
 .tchip.vip{background:rgba(230,62,120,.14);color:#b8285d;}
 .wcells{display:flex;gap:2px;}
 .wc{width:15px;height:15px;border-radius:4px;background:#eef2f7;display:inline-block;}
-.wc.ok{background:var(--green);} .wc.rev{background:var(--blue);} .wc.miss{background:var(--gold);} .wc.na{background:#dbe3ec;}
+.wc.ok{background:var(--green);} .wc.rev{background:var(--blue);} .wc.miss{background:var(--gold);} .wc.na{background:#dbe3ec;} .wc.nr{background:#fff;box-shadow:inset 0 0 0 1.5px #dbe3ec;}
 .dtbl .num{font-family:var(--fb);font-weight:800;text-align:center;}
 .dtbl .num.hot{color:var(--gold);}
 .pager{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-top:.8rem;font-family:var(--fb);font-weight:700;font-size:.76rem;color:var(--gray);}
@@ -1092,7 +1093,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
         <select id="fStatus" onchange="advQ(1)"><option value="">Minden státusz</option><option value="active">Aktív</option><option value="waitlist">Várólistás</option></select>
         <select id="fAdvisor" onchange="advQ(1)" style="display:none;"><option value="">Minden tanácsadó</option></select>
         <select id="fArea" onchange="advQ(1)"><option value="">Bármelyik terület</option></select>
-        <select id="fAreaSt" onchange="advQ(1)"><option value="miss">hiányzik</option><option value="rev">felülvizsgálandó</option><option value="ok">rendben</option><option value="na">nem vizsgált</option></select>
+        <select id="fAreaSt" onchange="advQ(1)"><option value="miss">hiányzik</option><option value="rev">felülvizsgálandó</option><option value="ok">rendben</option><option value="na">nem vizsgált</option><option value="nr">nem releváns</option></select>
         <select id="fSort" onchange="advQ(1)"><option value="uj">Legújabb elöl</option><option value="nev">Név szerint</option><option value="rev">Felülvizsgálat szerint</option><option value="nyitott">Nyitott ügy szerint</option></select>
       </div>
       <button class="filt-tog" onclick="document.body.classList.toggle('filtopen')"><svg class="i" aria-hidden="true"><use href="#i-sliders"></use></svg> Szűrők</button>
@@ -1219,7 +1220,7 @@ var CFG={
 var sb=null;
 var S={user:null,profile:null,advisor:null,items:[],tickets:[],life:[],docs:[],advRow:null,mode:'client',clients:[],cur:null,curData:null,slotSel:{}};
 var WHEEL=[['ingatlan','<svg class="i" aria-hidden="true"><use href="#i-home"></use></svg>','Ingatlan'],['szemely','<svg class="i" aria-hidden="true"><use href="#i-heart"></use></svg>','Személybizt.'],['gyermek','<svg class="i" aria-hidden="true"><use href="#i-child"></use></svg>','Gyermekjövő'],['vagyon','<svg class="i" aria-hidden="true"><use href="#i-car"></use></svg>','Vagyonbizt.'],['nyugdij','<svg class="i" aria-hidden="true"><use href="#i-sunrise"></use></svg>','Nyugdíj'],['befektetes','<svg class="i" aria-hidden="true"><use href="#i-trend"></use></svg>','Befektetések'],['ado','<svg class="i" aria-hidden="true"><use href="#i-receipt"></use></svg>','Adókedvezmény'],['bank','<svg class="i" aria-hidden="true"><use href="#i-bank"></use></svg>','Bankolás']];
-var WST={ok:['ok','✓ rendben'],rev:['rev','↻ felülvizsgálandó'],miss:['miss','! hiányzik'],na:['na','· nem vizsgált']};
+var WST={ok:['ok','✓ rendben'],rev:['rev','↻ felülvizsgálandó'],miss:['miss','! hiányzik'],na:['na','· nem vizsgált'],nr:['nr','· nem releváns']};
 var TYP={biztositas:'Biztosítás',megtakaritas:'Megtakarítás',hitel:'Hitel',bankszamla:'Bankszámla',ingatlan:'Ingatlan'};
 var KIND={help:'<svg class="i" aria-hidden="true"><use href="#i-hand"></use></svg> Segítségkérés',claim:'<svg class="i" aria-hidden="true"><use href="#i-zap"></use></svg> Kárbejelentés',consult:'<svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Konzultáció-igény'};
 var TST={new:'Beérkezett',assigned:'Felelős kijelölve',progress:'Folyamatban',done:'Megoldva'};
@@ -1479,6 +1480,7 @@ function wheelClick(k){ var w=WHEEL.filter(function(x){return x[0]===k;})[0], st
   if(st==='miss'){ go('calc'); toast(w[1]+' '+w[2]+': ezen a területen még nincs megoldásod. Nézd meg a kalkulátort, vagy foglalj konzultációt.'); }
   else if(st==='rev'){ helpNew('consult'); toast(w[1]+' '+w[2]+': érdemes átnézni a tanácsadóddal.'); }
   else if(st==='ok'){ toast(w[1]+' '+w[2]+': rendben, a tanácsadód átnézte.'); }
+  else if(st==='nr'){ toast(w[1]+' '+w[2]+': a tanácsadóddal ezt a területet nem relevánsnak jelöltétek. Ha változott a helyzeted, szólj neki.'); }
   else { helpNew('consult'); toast(w[1]+' '+w[2]+': ezt még nem vizsgáltátok. Kérj konzultációt!'); } }
 
 /* ── térkép CRUD ── */
