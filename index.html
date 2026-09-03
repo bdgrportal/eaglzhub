@@ -399,6 +399,65 @@ body.navon .nav-btn span::after{top:0;transform:rotate(-45deg);}
   .tb-pill{font-size:.56rem;padding:.16rem .42rem;}
 }
 
+/* ── ÜGYFÉLNYILVÁNTARTÓ (pult) ── */
+.dstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.55rem;margin-bottom:.9rem;}
+.dst{background:#fff;border:1px solid var(--border);border-radius:12px;padding:.6rem .8rem;box-shadow:0 2px 8px rgba(15,32,53,.06);cursor:pointer;transition:all .14s;}
+.dst:hover{border-color:var(--teal);transform:translateY(-2px);}
+.dst.on{border-color:var(--teal);background:rgba(125,200,192,.09);box-shadow:0 0 0 2px rgba(125,200,192,.25);}
+.dst .l{font-family:var(--fb);font-weight:800;font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;color:var(--gray);}
+.dst .v{font-family:var(--fb);font-weight:800;font-size:1.25rem;color:var(--navy);margin-top:.1rem;}
+.dst.alert .v{color:var(--gold);}
+.filt{margin-bottom:.9rem;padding:.8rem .9rem;}
+.filt-row{display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;}
+.filt-row input{flex:2;min-width:190px;}
+.filt-row select{flex:1;min-width:130px;font-size:.78rem;}
+.filt-tog{display:none;align-items:center;justify-content:center;gap:.4rem;width:100%;margin-top:.5rem;font-family:var(--fb);font-weight:700;font-size:.76rem;color:var(--teal-deep);background:rgba(125,200,192,.1);border:1px solid rgba(125,200,192,.35);border-radius:10px;padding:.5rem;cursor:pointer;}
+.filt-chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.55rem;align-items:center;}
+.fchip{font-family:var(--fb);font-weight:700;font-size:.68rem;border:1px solid var(--border);background:#fff;color:var(--gray);border-radius:100px;padding:.28rem .7rem;cursor:pointer;transition:all .13s;}
+.fchip:hover{border-color:var(--teal);color:var(--teal-deep);}
+.fchip.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+.fchip.clr{color:var(--gold);border-color:rgba(230,62,120,.35);}
+.tblwrap{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:auto;box-shadow:0 2px 8px rgba(15,32,53,.06);max-height:64vh;}
+.dtbl{width:100%;border-collapse:separate;border-spacing:0;font-size:.8rem;}
+.dtbl thead th{position:sticky;top:0;z-index:2;background:var(--navy);color:rgba(255,255,255,.9);font-family:var(--fb);font-weight:700;font-size:.62rem;letter-spacing:.07em;text-transform:uppercase;text-align:left;padding:.6rem .55rem;white-space:nowrap;}
+.dtbl tbody td{padding:.5rem .55rem;border-bottom:1px solid var(--border);vertical-align:middle;}
+.dtbl tbody tr{cursor:pointer;transition:background .12s;}
+.dtbl tbody tr:hover{background:rgba(125,200,192,.09);}
+.dtbl tbody tr:last-child td{border-bottom:none;}
+.dtbl .nm{font-family:var(--fb);font-weight:700;color:var(--navy);white-space:nowrap;}
+.dtbl .em{font-size:.68rem;color:var(--gray);}
+.tchip{font-family:var(--fb);font-weight:800;font-size:.6rem;border-radius:100px;padding:.15rem .5rem;white-space:nowrap;}
+.tchip.basic{background:#eef2f7;color:var(--gray);}
+.tchip.plus{background:rgba(125,200,192,.18);color:var(--teal-deep);}
+.tchip.vip{background:rgba(230,62,120,.14);color:#b8285d;}
+.wcells{display:flex;gap:2px;}
+.wc{width:15px;height:15px;border-radius:4px;background:#eef2f7;display:inline-block;}
+.wc.ok{background:var(--green);} .wc.rev{background:var(--blue);} .wc.miss{background:var(--gold);} .wc.na{background:#dbe3ec;}
+.dtbl .num{font-family:var(--fb);font-weight:800;text-align:center;}
+.dtbl .num.hot{color:var(--gold);}
+.pager{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-top:.8rem;font-family:var(--fb);font-weight:700;font-size:.76rem;color:var(--gray);}
+.pager .btn{padding:.4rem .8rem;}
+.refform{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.7rem;}
+.refform input,.refform select{width:100%;}
+.refrow{display:flex;align-items:center;gap:.5rem;font-size:.76rem;border:1px solid var(--border);border-radius:10px;padding:.45rem .65rem;margin-bottom:.35rem;background:#fff;}
+.refrow b{font-family:var(--fb);flex:1;}
+@media(max-width:700px){
+  .filt-row input,.filt-row select{flex:1 1 100%;min-width:0;}
+  .refform{grid-template-columns:1fr;}
+  .tblwrap{max-height:none;border-radius:12px;}
+  .dtbl{font-size:.76rem;}
+  .dtbl thead th,.dtbl tbody td{padding:.45rem .4rem;}
+  .dtbl .hm{display:none;}
+  .wc{width:13px;height:13px;}
+  .dstats{grid-template-columns:repeat(4,1fr);gap:.4rem;}
+  .dst{padding:.45rem .4rem;text-align:center;}
+  .dst .l{font-size:.5rem;letter-spacing:.04em;}
+  .dst .v{font-size:1rem;}
+  .filt{padding:.6rem .7rem;}
+  body:not(.filtopen) .filt-row select,body:not(.filtopen) .filt-chips{display:none;}
+  .filt-tog{display:flex!important;}
+}
+
 /* ── érintés és akadálymentesség ── */
 *{-webkit-tap-highlight-color:rgba(125,200,192,.16);}
 :focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
@@ -502,7 +561,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="side-sec">Tudás</div>
     <div class="nav-item" data-p="calc" onclick="go('calc')">🧮 Kalkulátorok</div>
     <div class="nav-item" data-p="edu" onclick="go('edu')">🎓 Élethelyzeteim</div>
-    <div class="nav-item" data-p="cls" onclick="go('cls')">🎬 Tantermek</div>
+    <div class="nav-item" data-p="cls" onclick="go('cls')">🎬 Videótár</div>
     <div class="nav-item" data-p="kb" onclick="go('kb')">📚 Tudástár</div>
     <div class="nav-item" data-p="notif" onclick="go('notif')">🔔 Értesítések <span class="dot" id="dotNotif" style="display:none;"></span></div>
     <div class="nav-item" data-p="profile" onclick="go('profile')">👤 Fiókom</div>
@@ -541,7 +600,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
           <div class="pt" style="margin-bottom:.6rem;font-size:1.15rem;">✅ Ajánlott teendőid</div>
           <div id="todos"></div>
           <div class="ach-row" id="achRow"></div>
-          <button class="btn gold" style="width:100%;margin-top:.7rem;" onclick="go('profile')">🎁 Hívd meg egy ismerősöd · adj neki VIP hozzáférést</button>
+          <button class="btn gold" style="width:100%;margin-top:.7rem;" onclick="go('profile')">🤝 Ajánlj valakit a tanácsadódnak</button>
         </div>
         <div class="card">
           <div class="pt" style="margin-bottom:.4rem;font-size:1.15rem;">💬 Mi változott mostanában?</div>
@@ -692,12 +751,12 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
   <!-- 7c) TANTERMEK -->
   <div class="page" id="p-cls">
     <div id="clsGridWrap">
-      <div class="pt">🎬 <em>Tantermek</em> <span class="small" style="font-weight:400;">· rövid videók, a te élethelyzetedre szabva</span></div>
+      <div class="pt">🎬 <em>Videótár</em> <span class="small" style="font-weight:400;">· rövid videók, a te élethelyzetedre szabva</span></div>
       <div class="card" style="margin-bottom:1rem;"><p class="small" id="clsHead"></p></div>
       <div class="cls-grid" id="clsGrid"></div>
     </div>
     <div id="clsRoomView" style="display:none;">
-      <button class="btn" style="margin-bottom:.85rem;" onclick="clsRender()">← Vissza a tantermekhez</button>
+      <button class="btn" style="margin-bottom:.85rem;" onclick="clsRender()">← Vissza a Videótárba</button>
       <div class="pt" id="clsRT"></div>
       <p class="small" id="clsRG" style="margin:.25rem 0 .8rem;"></p>
       <div id="clsRP" style="margin-bottom:1.1rem;"></div>
@@ -746,18 +805,49 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
         <button class="btn" style="margin-top:.9rem;" onclick="logout()">Kilépés</button>
       </div>
       <div class="card">
-        <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">🎁 Hívd meg egy ismerősöd</div>
-        <p class="small">Adj VIP hozzáférést valakinek, akinek hasznos lenne rendbe tenni a pénzügyeit. Az ismerősöd ezzel a linkkel regisztrál, és a te tanácsadódhoz kerül. Az elemzésig várólistás fiókot kap.</p>
-        <input id="pfInvite" readonly style="width:100%;margin-top:.6rem;font-size:.78rem;">
-        <button class="btn gold" style="width:100%;margin-top:.5rem;" onclick="copyInvite()">📋 Meghívó link másolása</button>
+        <div class="pt" style="font-size:1.05rem;margin-bottom:.4rem;">🤝 Küldj egy ajánlást a tanácsadódnak</div>
+        <p class="small">Ismersz valakit, akinek jól jönne, ha rendbe tennék a pénzügyeit? Add meg az elérhetőségét, és a tanácsadód felveszi vele a kapcsolatot. Csak akkor add meg, ha az illető tud róla.</p>
+        <div class="refform">
+          <input id="rfName" placeholder="Az ismerősöd neve *">
+          <input id="rfPhone" placeholder="Telefonszám vagy e-mail *">
+          <select id="rfNeed">
+            <option value="">Milyen témában? (ha tudod)</option>
+            <option>Lakásvásárlás, hitel</option>
+            <option>Nyugdíj, hosszú távú megtakarítás</option>
+            <option>Gyermek jövője</option>
+            <option>Biztosítások átnézése</option>
+            <option>Befektetés, egyösszegű pénz</option>
+            <option>Vállalkozói pénzügyek</option>
+            <option>Egyéb, majd kiderül</option>
+          </select>
+          <input id="rfNote" placeholder="Megjegyzés (pl. mikor hívható)">
+        </div>
+        <button class="btn gold" style="width:100%;margin-top:.6rem;" onclick="refSend()">🤝 Ajánlás elküldése</button>
+        <div id="rfMsg" class="small" style="margin-top:.5rem;"></div>
+        <div id="rfList" style="margin-top:.7rem;"></div>
       </div>
     </div>
   </div>
 
   <!-- ═══ TANÁCSADÓI NÉZET ═══ -->
   <div class="page" id="p-adv">
-    <div class="pt">👥 <em>Ügyfeleim</em> a Hubban <span class="small" style="font-weight:400;" id="advCnt"></span></div>
-    <div class="adv-list" id="advList"></div>
+    <div class="pt">👥 <em>Ügyfeleim</em> <span class="small" style="font-weight:400;" id="advCnt"></span></div>
+    <div class="dstats" id="advStats"></div>
+    <div class="card filt">
+      <div class="filt-row">
+        <input id="fq" placeholder="🔍 Keresés névre vagy e-mailre…" oninput="advQ()">
+        <select id="fTier" onchange="advQ(1)"><option value="">Minden szint</option><option value="basic">Basic</option><option value="plus">✦ Plus</option><option value="vip">⭐ VIP</option></select>
+        <select id="fStatus" onchange="advQ(1)"><option value="">Minden státusz</option><option value="active">Aktív</option><option value="waitlist">Várólistás</option></select>
+        <select id="fAdvisor" onchange="advQ(1)" style="display:none;"><option value="">Minden tanácsadó</option></select>
+        <select id="fArea" onchange="advQ(1)"><option value="">Bármelyik terület</option></select>
+        <select id="fAreaSt" onchange="advQ(1)"><option value="miss">hiányzik</option><option value="rev">felülvizsgálandó</option><option value="ok">rendben</option><option value="na">nem vizsgált</option></select>
+        <select id="fSort" onchange="advQ(1)"><option value="uj">Legújabb elöl</option><option value="nev">Név szerint</option><option value="rev">Felülvizsgálat szerint</option><option value="nyitott">Nyitott ügy szerint</option></select>
+      </div>
+      <button class="filt-tog" onclick="document.body.classList.toggle('filtopen')">⚙️ Szűrők</button>
+      <div class="filt-chips" id="fChips"></div>
+    </div>
+    <div class="tblwrap"><table class="dtbl" id="advTbl"><thead id="advThead"></thead><tbody id="advTbody"></tbody></table></div>
+    <div class="pager" id="advPager"></div>
     <div id="advDetail" style="margin-top:1rem;"></div>
   </div>
   <div class="page" id="p-advq">
@@ -1027,6 +1117,7 @@ function renderAll(){
   tc.title=(tr==='vip'?'A legmagasabb szinten vagy, minden tananyag és szolgáltatás nyitva.':'A tanácsadód tudja megnyitni a következő szintet.');
   document.getElementById('advName').textContent=adv.name; document.getElementById('advAva').textContent=ini(adv.name);
   document.getElementById('konzAdv').textContent=adv.name+'val';
+  refList();
   document.getElementById('kidsCard').classList.toggle('lock',!tOk('vip'));
   document.getElementById('kbVip').classList.toggle('lock',!tOk('vip'));
   var c3=document.getElementById('calc3wrap');
@@ -1082,11 +1173,9 @@ function renderAll(){
   document.getElementById('pfName').value=p.name||''; document.getElementById('pfEmail').value=S.user.email;
   document.getElementById('pfAdv').textContent=adv.name; document.getElementById('pfTier').textContent=vip?'VIP':(p.status==='waitlist'?'Várólistás':'Basic');
   document.getElementById('pfDocs').textContent=p.docs_shared?', a dokumentumaid':'';
-  document.getElementById('pfInvite').value=inviteLink();
   document.getElementById('docShare').checked=!!p.docs_shared;
 }
 function inviteLink(){ var code=(S.advisor&&S.advisor.code)||''; return location.href.split('#')[0].split('?')[0]+(code?('?code='+encodeURIComponent(code)):''); }
-function copyInvite(){ copyText(document.getElementById('pfInvite').value,'Meghívó link a vágólapon'); }
 function wheelClick(k){ var w=WHEEL.filter(function(x){return x[0]===k;})[0], st=(S.profile.wheel||{})[k]||'na';
   if(st==='miss'){ go('calc'); toast(w[1]+' '+w[2]+': ezen a területen még nincs megoldásod. Nézd meg a kalkulátort, vagy foglalj konzultációt.'); }
   else if(st==='rev'){ go('konz'); toast(w[1]+' '+w[2]+': érdemes átnézni a tanácsadóddal.'); }
@@ -1567,41 +1656,172 @@ function idleNotice(){
   }
 })();
 
+
+/* ═══ ÜGYFÉLNYILVÁNTARTÓ · szerveroldali keresés, szűrés, lapozás (2000+ fő) ═══ */
+var Q={q:'',tier:'',status:'',advisor:'',area:'',areaSt:'miss',flag:'',sort:'uj',limit:50,offset:0};
+var _qT=null, _qBusy=false;
+
+function advQ(reset){
+  Q.q=(document.getElementById('fq').value||'').trim();
+  Q.tier=document.getElementById('fTier').value;
+  Q.status=document.getElementById('fStatus').value;
+  Q.advisor=document.getElementById('fAdvisor').value;
+  Q.area=document.getElementById('fArea').value;
+  Q.areaSt=document.getElementById('fAreaSt').value;
+  Q.sort=document.getElementById('fSort').value;
+  if(reset) Q.offset=0;
+  clearTimeout(_qT); _qT=setTimeout(function(){ Q.offset=reset?0:Q.offset; advFetch(); },280);
+}
+function advFlag(f){ Q.flag=(Q.flag===f?'':f); Q.offset=0; advFetch(); }
+function advPage(d){ Q.offset=Math.max(0,Q.offset+d*Q.limit); advFetch(); }
+function advReset(){
+  Q={q:'',tier:'',status:'',advisor:'',area:'',areaSt:'miss',flag:'',sort:'uj',limit:50,offset:0};
+  ['fq','fTier','fStatus','fAdvisor','fArea','fSort'].forEach(function(i){ var e=document.getElementById(i); if(e) e.value=''; });
+  document.getElementById('fAreaSt').value='miss';
+  advFetch();
+}
+async function advFetch(){
+  if(_qBusy) return; _qBusy=true;
+  var tb=document.getElementById('advTbody');
+  tb.innerHTML='<tr><td colspan="9"><div class="empty">Keresés…</div></td></tr>';
+  var r=await sb.rpc('hub_clients_page',{p_q:Q.q,p_tier:Q.tier,p_status:Q.status,p_advisor:Q.advisor,
+    p_area:Q.area,p_area_st:Q.areaSt,p_flag:Q.flag,p_sort:Q.sort,p_limit:Q.limit,p_offset:Q.offset});
+  _qBusy=false;
+  if(r.error){ tb.innerHTML='<tr><td colspan="9"><div class="empty">⚠️ '+E(r.error.message)+'<br><span class="small">Futott már a hub_scale.sql?</span></div></td></tr>'; return; }
+  S.clients=r.data||[];
+  advTblRender((r.data&&r.data[0])?Number(r.data[0].total_cnt):0);
+}
+function advTblRender(total){
+  var adm=isAdmin(), rows=S.clients;
+  document.getElementById('advThead').innerHTML='<tr><th>Ügyfél</th><th>Szint</th>'+(adm?'<th class="hm">Tanácsadó</th>':'')
+    +'<th title="'+WHEEL.map(function(w){return w[2];}).join(' · ')+'">Pénzügyi kerék</th>'
+    +'<th class="hm">Tételek</th><th>Nyitott</th><th class="hm">Videótár</th><th class="hm">Felülvizsgálat</th><th class="hm"></th></tr>';
+  document.getElementById('advTbody').innerHTML=rows.length?rows.map(function(c){
+    var w=c.wheel||{}, op=(c.open_tickets||0)+(c.open_life||0);
+    return '<tr onclick="advOpen(\''+c.user_id+'\')">'
+      +'<td><div class="nm">'+E(c.name||c.email)+(c.status==='waitlist'?' <span class="tchip basic">⏳</span>':'')+'</div><div class="em">'+E(c.email||'')+'</div></td>'
+      +'<td><span class="tchip '+(c.tier||'basic')+'">'+TIER[c.tier||'basic'].lab+'</span></td>'
+      +(adm?'<td class="em hm">'+E(advName(c.advisor_email))+'</td>':'')
+      +'<td><div class="wcells">'+WHEEL.map(function(x){ return '<span class="wc '+(w[x[0]]||'na')+'" title="'+x[2]+': '+(WST[w[x[0]]||'na']||WST.na)[1]+'"></span>'; }).join('')+'</div></td>'
+      +'<td class="num hm">'+(c.items_cnt||0)+'</td>'
+      +'<td class="num'+(op?' hot':'')+'">'+(op||'·')+'</td>'
+      +'<td class="num hm">'+(c.edu_cnt||0)+'</td>'
+      +'<td class="em hm">'+(c.next_review?dHu(c.next_review):'·')+'</td>'
+      +'<td class="em hm">'+(c.docs_shared?'📁':'')+'</td></tr>';
+  }).join(''):'<tr><td colspan="9"><div class="empty">Nincs a szűrésnek megfelelő ügyfél.</div></td></tr>';
+  var from=total?Q.offset+1:0, to=Math.min(Q.offset+Q.limit,total);
+  document.getElementById('advPager').innerHTML=
+     '<button class="btn" onclick="advPage(-1)"'+(Q.offset<=0?' disabled':'')+'>← Előző</button>'
+    +'<span>'+from+'-'+to+' / '+total+' ügyfél</span>'
+    +'<button class="btn" onclick="advPage(1)"'+(to>=total?' disabled':'')+'>Következő →</button>'
+    +'<span style="flex:1;"></span>'
+    +'<button class="btn" onclick="advCsv()">⬇️ Letöltés táblázatba (CSV)</button>';
+}
+function advChips(){
+  var C_=[['','Mind'],['open','📥 Van nyitott ügye'],['rev','📅 Felülvizsgálat 30 napon belül'],['miss','⚠️ Hiányzó terület'],['docs','📁 Megosztotta a doksijait'],['edu','🎬 Nézett videót']];
+  document.getElementById('fChips').innerHTML=C_.map(function(x){
+    return '<span class="fchip'+(Q.flag===x[0]?' on':'')+'" onclick="advFlag(\''+x[0]+'\')">'+x[1]+'</span>';
+  }).join('')+'<span class="fchip clr" onclick="advReset()">✕ Szűrők törlése</span>';
+}
+async function advCsv(){
+  toast('Táblázat készítése…');
+  var all=[], off=0;
+  for(var k=0;k<20;k++){
+    var r=await sb.rpc('hub_clients_page',{p_q:Q.q,p_tier:Q.tier,p_status:Q.status,p_advisor:Q.advisor,
+      p_area:Q.area,p_area_st:Q.areaSt,p_flag:Q.flag,p_sort:Q.sort,p_limit:500,p_offset:off});
+    if(r.error||!r.data||!r.data.length) break;
+    all=all.concat(r.data); off+=500;
+    if(r.data.length<500) break;
+  }
+  var hd=['Név','E-mail','Szint','Státusz','Tanácsadó'].concat(WHEEL.map(function(w){return w[2];})).concat(['Tételek','Nyitott ügyek','Élethelyzet-jelzés','Videótár leckék','Következő felülvizsgálat','Doksi megosztva']);
+  var lines=[hd.join(';')];
+  all.forEach(function(c){
+    var w=c.wheel||{};
+    var row=[c.name||'',c.email||'',TIER[c.tier||'basic'].n,(c.status==='waitlist'?'Várólistás':'Aktív'),advName(c.advisor_email)]
+      .concat(WHEEL.map(function(x){ return (WST[w[x[0]]||'na']||WST.na)[1].replace(/^[^ ]+ /,''); }))
+      .concat([c.items_cnt||0,c.open_tickets||0,c.open_life||0,c.edu_cnt||0,c.next_review||'',c.docs_shared?'igen':'nem']);
+    lines.push(row.map(function(v){ return '"'+String(v).replace(/"/g,'""')+'"'; }).join(';'));
+  });
+  var blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8;'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='eaglz-hub-ugyfelek-'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  toast('✓ '+all.length+' ügyfél letöltve táblázatba.');
+}
+
+/* ═══ AJÁNLÁSKÜLDÉS ═══ */
+async function refSend(){
+  var n=(document.getElementById('rfName').value||'').trim();
+  var p=(document.getElementById('rfPhone').value||'').trim();
+  var need=document.getElementById('rfNeed').value;
+  var note=(document.getElementById('rfNote').value||'').trim();
+  var m=document.getElementById('rfMsg');
+  if(n.length<3||p.length<5){ m.style.color='var(--gold)'; m.textContent='A név és az elérhetőség kötelező.'; return; }
+  var txt='🤝 AJÁNLÁS · '+n+' · '+p+(need?(' · téma: '+need):'')+(note?(' · '+note):'');
+  var r=await sb.from('hub_tickets').insert({user_id:S.user.id,advisor_email:(S.advisor&&S.advisor.email)||S.profile.advisor_email,
+    kind:'help',urgency:'normal',text:txt,status:'new'});
+  if(r.error){ m.style.color='var(--gold)'; m.textContent='⚠️ '+r.error.message; return; }
+  document.getElementById('rfName').value=''; document.getElementById('rfPhone').value='';
+  document.getElementById('rfNote').value=''; document.getElementById('rfNeed').value='';
+  m.style.color='var(--green)'; m.textContent='✓ Köszönjük! A tanácsadód megkapta, hamarosan felveszi vele a kapcsolatot.';
+  await loadAll(); refList(); renderAll();
+  toast('🤝 Ajánlás elküldve '+((S.advisor&&S.advisor.name)||'a tanácsadódnak')+'.');
+}
+function refList(){
+  var el=document.getElementById('rfList'); if(!el) return;
+  var refs=(S.tickets||[]).filter(function(t){ return String(t.text||'').indexOf('🤝 AJÁNLÁS')===0; });
+  el.innerHTML=refs.length?('<div class="small" style="margin-bottom:.35rem;font-weight:700;">Eddigi ajánlásaid ('+refs.length+')</div>'
+    +refs.slice(0,6).map(function(t){
+      var nm=String(t.text).split(' · ')[1]||'·';
+      return '<div class="refrow">🤝<b>'+E(nm)+'</b><span class="small">'+dHu(t.created_at)+'</span>'+(t.status==='done'?'<span class="bad g">felvette</span>':'<span class="bad b">folyamatban</span>')+'</div>';
+    }).join('')):'';
+}
+
 /* ═══ TANÁCSADÓI NÉZET ═══ */
 function isAdmin(){ return !!(S.advRow&&S.advRow.role==='admin'); }
 async function advLoad(){
   var adm=isAdmin();
-  var qp=sb.from('hub_profiles').select('*'); if(!adm) qp=qp.eq('advisor_email',S.user.email);
-  var r=await qp.order('created_at',{ascending:false}); S.clients=r.data||[];
-  var qt=sb.from('hub_tickets').select('*'); if(!adm) qt=qt.eq('advisor_email',S.user.email);
-  var t=await qt.order('created_at',{ascending:false}); S.advT=t.data||[];
-  var ql=sb.from('hub_life_events').select('*'); if(!adm) ql=ql.eq('advisor_email',S.user.email);
-  var l=await ql.order('created_at',{ascending:false}); S.advL=l.data||[];
   S.advisors=[];
   if(adm){ var a=await sb.from('hub_advisors').select('*').order('name'); S.advisors=a.data||[]; }
   document.getElementById('navAdvs').style.display=adm?'':'none';
   document.getElementById('navClsAdm').style.display=adm?'':'none';
-  advRender();
+  var fa=document.getElementById('fAdvisor');
+  fa.style.display=adm?'':'none';
+  if(adm) fa.innerHTML='<option value="">Minden tanácsadó</option>'+S.advisors.map(function(x){ return '<option value="'+E(x.email)+'">👤 '+E(x.name)+'</option>'; }).join('');
+  var far=document.getElementById('fArea');
+  if(far.options.length<2) far.innerHTML='<option value="">Bármelyik terület</option>'+WHEEL.map(function(w){ return '<option value="'+w[0]+'">'+w[1]+' '+w[2]+'</option>'; }).join('');
+  advChips();
+  await advStats();
+  await advFetch();
+}
+async function advStats(){
+  var r=await sb.rpc('hub_desk_stats');
+  var d=(r&&r.data)||{};
+  document.getElementById('advCnt').textContent='· '+(d.clients||0)+' fiók'+(isAdmin()?' · 👑 nagy admin: teljes csapat':'');
+  var dot=document.getElementById('dotAdv'); var op=(d.open_tickets||0)+(d.open_life||0);
+  dot.style.display=op?'':'none'; dot.textContent=op;
+  var cards=[['Ügyfél','clients',''],['⭐ VIP','vip',''],['✦ Plus','plus',''],['Várólistás','waitlist',''],
+             ['Nyitott ügy','open_tickets','open'],['Élethelyzet','open_life','open'],['Felülvizsgálat 30 nap','rev_due','rev'],['Doksi megosztva','docs','docs']];
+  document.getElementById('advStats').innerHTML=cards.map(function(c){
+    var v=d[c[1]]||0, hot=(c[2]==='open'||c[2]==='rev')&&v>0;
+    return '<div class="dst'+(hot?' alert':'')+(c[2]&&Q.flag===c[2]?' on':'')+'"'+(c[2]?(' onclick="advFlag(\''+c[2]+'\');advChips();advStats()"'):'')+'><div class="l">'+c[0]+'</div><div class="v">'+v+'</div></div>';
+  }).join('');
 }
 function advName(email){ var a=(S.advisors||[]).filter(function(x){return x.email===email;})[0]; return a?a.name:(email||'·'); }
-function advRender(){
-  var openT=S.advT.filter(function(x){return x.status!=='done';}).length, openL=S.advL.filter(function(x){return !x.handled;}).length;
-  var d=document.getElementById('dotAdv'); d.style.display=(openT+openL)?'':'none'; d.textContent=openT+openL;
-  document.getElementById('advCnt').textContent='· '+S.clients.length+' fiók · '+openT+' nyitott ügy · '+openL+' élethelyzet-jelzés'+(isAdmin()?' · 👑 nagy admin: teljes csapat':'');
-  document.getElementById('advList').innerHTML=S.clients.length?S.clients.map(function(c){
-    var ot=S.advT.filter(function(x){return x.user_id===c.user_id&&x.status!=='done';}).length, ol=S.advL.filter(function(x){return x.user_id===c.user_id&&!x.handled;}).length;
-    return '<div class="adv-cl" onclick="advOpen(\''+c.user_id+'\')"><b>'+E(c.name||c.email)+'</b><div class="m">'+E(c.email)+' · '+(c.tier==='vip'?'⭐ VIP':(c.tier==='plus'?'✦ Plus':'Basic'))+(c.status==='waitlist'?' · ⏳ várólistás':'')+(isAdmin()?' · 👤 '+E(advName(c.advisor_email)):'')+'</div>'
-      +(ot?'<span class="bad p">'+ot+' nyitott ügy</span>':'')+(ol?'<span class="bad b">'+ol+' élethelyzet</span>':'')+(c.docs_shared?'<span class="bad g">📁 doksik megosztva</span>':'')+'</div>';
-  }).join(''):'<div class="empty" style="grid-column:1/-1;">Még nincs Hub-fiókos ügyfeled. Add át a meghívókódod az elemzés végén! (🔑 Meghívókódom)</div>';
-}
+function advRender(){ advStats(); advFetch(); }
 async function advOpen(uid){
-  S.cur=S.clients.filter(function(c){return c.user_id===uid;})[0]; if(!S.cur) return;
+  S.cur=S.clients.filter(function(c){return c.user_id===uid;})[0];
+  if(!S.cur){ var one=await sb.from('hub_profiles').select('*').eq('user_id',uid).maybeSingle(); S.cur=one.data; }
+  if(!S.cur) return;
   var it=await sb.from('hub_items').select('*').eq('user_id',uid).order('created_at'); var items=it.data||[];
   var unl=await sb.from('hub_edu_unlocks').select('*').eq('user_id',uid); var unls=unl.data||[];
   if(!C.rooms.length){ var rr=await sb.from('hub_edu_rooms').select('*').order('ord'); C.rooms=rr.data||[]; }
   var docs=[]; if(S.cur.docs_shared){ var dr=await sb.storage.from('hub-docs').list(uid,{limit:100}); docs=(dr.data||[]).filter(function(f){return f.name!=='.emptyFolderPlaceholder';}); }
   var c=S.cur, w=c.wheel||{};
-  var tks=S.advT.filter(function(x){return x.user_id===uid;}), lfs=S.advL.filter(function(x){return x.user_id===uid;});
+  var tq=await sb.from('hub_tickets').select('*').eq('user_id',uid).order('created_at',{ascending:false});
+  var lq=await sb.from('hub_life_events').select('*').eq('user_id',uid).order('created_at',{ascending:false});
+  var tks=tq.data||[], lfs=lq.data||[];
+  S.advT=tks; S.advL=lfs;
   document.getElementById('advDetail').innerHTML='<div class="card">'
     +'<div class="pt" style="font-size:1.15rem;margin-bottom:.6rem;">👤 '+E(c.name||c.email)+' <span class="small" style="font-weight:400;">'+E(c.email)+'</span><span style="margin-left:auto;display:flex;gap:.4rem;flex-wrap:wrap;">'
       +'<select id="advTier" onchange="advProfileSave()" title="Csomagszint · az ügyfélnél azonnal frissül">'
@@ -1649,24 +1869,52 @@ async function advProfileSave(){
   if(r.error){ toast('⚠️ '+r.error.message); return; }
   if(upd.advisor_email){
     try{ await sb.from('hub_tickets').update({advisor_email:upd.advisor_email}).eq('user_id',S.cur.user_id); await sb.from('hub_life_events').update({advisor_email:upd.advisor_email}).eq('user_id',S.cur.user_id); }catch(e){}
-    S.advT.forEach(function(t){ if(t.user_id===S.cur.user_id) t.advisor_email=upd.advisor_email; });
+    (S.advT||[]).forEach(function(t){ if(t.user_id===S.cur.user_id) t.advisor_email=upd.advisor_email; });
   }
   Object.assign(S.cur,upd); advRender();
   toast('✅ Mentve. '+(upd.tier?('Az ügyfél szintje: '+TIER[upd.tier].n+', a böngészőjében azonnal frissül.'):'Az ügyfél azonnal látja.'));
 }
-async function advTktStatus(id,st){ var r=await sb.from('hub_tickets').update({status:st,updated_at:new Date().toISOString()}).eq('id',id); if(r.error){ toast('⚠️ '+r.error.message); return; } var t=S.advT.filter(function(x){return x.id===id;})[0]; if(t) t.status=st; advRender(); toast('✅ Állapot: '+TST[st]); }
-async function advLifeDone(id){ var r=await sb.from('hub_life_events').update({handled:true}).eq('id',id); if(r.error){ toast('⚠️ '+r.error.message); return; } var l=S.advL.filter(function(x){return x.id===id;})[0]; if(l) l.handled=true; advRender(); advOpen(S.cur.user_id); }
+async function advTktStatus(id,st){ var r=await sb.from('hub_tickets').update({status:st,updated_at:new Date().toISOString()}).eq('id',id); if(r.error){ toast('⚠️ '+r.error.message); return; } var t=(S.advT||[]).filter(function(x){return x.id===id;})[0]; if(t) t.status=st; advRender(); toast('✅ Állapot: '+TST[st]); }
+async function advLifeDone(id){ var r=await sb.from('hub_life_events').update({handled:true}).eq('id',id); if(r.error){ toast('⚠️ '+r.error.message); return; } var l=(S.advL||[]).filter(function(x){return x.id===id;})[0]; if(l) l.handled=true; advRender(); advOpen(S.cur.user_id); }
 async function advDocOpen(uid,name){ var r=await sb.storage.from('hub-docs').createSignedUrl(uid+'/'+name,600); if(r.error){ toast('⚠️ '+r.error.message); return; } window.open(r.data.signedUrl,'_blank'); }
-function advQRender(){
-  var list=S.advT.filter(function(x){return x.status!=='done';});
-  document.getElementById('advQ').innerHTML='<div class="card">'+(list.length?list.map(function(t){ var c=S.clients.filter(function(x){return x.user_id===t.user_id;})[0]; return '<div style="font-family:var(--fb);font-weight:800;font-size:.8rem;margin-top:.4rem;cursor:pointer;" onclick="go(\'adv\');advOpen(\''+t.user_id+'\')">👤 '+E(c?(c.name||c.email):'?')+'</div>'+advTktHtml(t); }).join(''):'<div class="empty">🎉 Nincs nyitott ügy.</div>')+'</div>';
+async function advQRender(){
+  var el=document.getElementById('advQ');
+  el.innerHTML='<div class="card"><div class="empty">Betöltés…</div></div>';
+  var tq=await sb.from('hub_tickets').select('*').neq('status','done').order('created_at',{ascending:false}).limit(200);
+  var lq=await sb.from('hub_life_events').select('*').eq('handled',false).order('created_at',{ascending:false}).limit(200);
+  var tks=tq.data||[], lfs=lq.data||[];
+  S.advT=tks; S.advL=lfs;
+  var ids={}; tks.concat(lfs).forEach(function(x){ ids[x.user_id]=1; });
+  var names={};
+  var idl=Object.keys(ids);
+  if(idl.length){
+    var pr=await sb.from('hub_profiles').select('user_id,name,email').in('user_id',idl.slice(0,300));
+    (pr.data||[]).forEach(function(p){ names[p.user_id]=p.name||p.email; });
+  }
+  function who(u){ return names[u]||'ügyfél'; }
+  el.innerHTML='<div class="card">'
+    +'<div class="pt" style="font-size:1rem;margin-bottom:.5rem;">📥 Nyitott ügyek <span class="small" style="font-weight:400;">· '+tks.length+' db</span></div>'
+    +(tks.length?tks.map(function(t){
+        return '<div class="tkt"><b style="font-family:var(--fb);">'+(KIND[t.kind]||t.kind)+'</b> <span class="small">· '+E(who(t.user_id))+' · '+dHu(t.created_at)+'</span>'
+          +'<div style="font-size:.8rem;margin:.3rem 0;">'+E(t.text||'')+'</div>'
+          +'<div style="display:flex;gap:.35rem;flex-wrap:wrap;">'
+          +['assigned','progress','done'].map(function(k){ return '<button class="btn" onclick="advTktStatus('+t.id+',\''+k+'\')">'+TST[k]+'</button>'; }).join('')
+          +'<button class="btn" onclick="advOpen(\''+t.user_id+'\')">Ügyfél megnyitása</button></div></div>';
+      }).join(''):'<div class="empty">Nincs nyitott ügy. Szép munka.</div>')
+    +'<div class="pt" style="font-size:1rem;margin:1rem 0 .5rem;">💬 Élethelyzet-jelzések <span class="small" style="font-weight:400;">· '+lfs.length+' db</span></div>'
+    +(lfs.length?lfs.map(function(l){
+        return '<div class="tkt"><b>'+(LIFE[l.event]||l.event)+'</b> <span class="small">· '+E(who(l.user_id))+' · '+dHu(l.created_at)+'</span>'
+          +' <button class="btn" style="float:right;" onclick="advLifeDone('+l.id+')">✔ Kezeltem</button></div>';
+      }).join(''):'<div class="empty">Nincs új jelzés.</div>')
+    +'</div>';
 }
-function advsRender(){
+async function advsRender(){
   var l=document.getElementById('advsList');
+  try{ var cc=await sb.rpc('hub_advisor_counts'); S.advCounts={}; ((cc&&cc.data)||[]).forEach(function(x){ S.advCounts[x.advisor_email]=x.db; }); }catch(e){ S.advCounts={}; }
   l.innerHTML=(S.advisors||[]).length?'<div style="overflow-x:auto;"><table class="c2-stat-tbl" style="width:100%;border-collapse:collapse;font-size:.8rem;">'
     +'<tr><th style="text-align:left;">Név</th><th style="text-align:left;">E-mail</th><th>Kód</th><th>Szerep</th><th>Ügyfelek</th><th>Aktív</th></tr>'
     +S.advisors.map(function(a){
-      var n=S.clients.filter(function(c){return c.advisor_email===a.email;}).length;
+      var n=(S.advCounts&&S.advCounts[a.email])||0;
       return '<tr style="border-top:1px solid var(--border);"><td style="padding:.45rem .3rem;font-family:var(--fb);font-weight:700;">'+E(a.name)+'</td><td style="padding:.45rem .3rem;">'+E(a.email)+'</td>'
         +'<td style="text-align:center;font-family:var(--fb);font-weight:800;letter-spacing:.08em;">'+E(a.code)+'</td>'
         +'<td style="text-align:center;"><select onchange="advsSet(\''+E(a.email)+'\',{role:this.value})" style="font-size:.74rem;"><option value="advisor"'+(a.role!=='admin'?' selected':'')+'>kis admin</option><option value="admin"'+(a.role==='admin'?' selected':'')+'>👑 nagy admin</option></select></td>'
