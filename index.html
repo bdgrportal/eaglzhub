@@ -1134,7 +1134,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
             <!-- FIGYELEM: ez a tábla csak azt írja, amit a rendszer TÉNYLEGESEN betart.
                  Tantermek: hub_tier_slots(). Válaszidő: hub_ticket_sla().
                  Ha új sort veszel fel, előbb legyen mögötte valódi szabály. -->
-            <tr><td>Megnyitható tantermek</td><td>3</td><td>6</td><td>9</td></tr>
+            <tr><td>Megnyitható tantermek</td><td>3</td><td>5</td><td>6</td></tr>
             <tr><td>Vállalt válaszidő ügyekre</td><td>5 munkanap</td><td>3 munkanap</td><td>2 munkanap</td></tr>
             <tr><td>Ehhez kell</td><td>mindenkinek jár</td><td>5 ajánlás</td><td>10 ajánlás</td></tr>
           </tbody></table>
@@ -1501,7 +1501,8 @@ async function loadAll(){
   if(!S.profile) return;
   var a=await sb.rpc('hub_my_advisor'); S.advisor=a.data||null;
   var it=await sb.from('hub_items').select('*').eq('user_id',S.user.id).order('created_at'); S.items=it.data||[];
-  var tk=await sb.from('hub_tickets').select('*').eq('user_id',S.user.id).order('created_at',{ascending:false}); S.tickets=tk.data||[];
+  /* a nezeten at olvasunk: a belso tanacsadoi jegyzet (adv_note) igy nem jut ki az ugyfelhez */
+  var tk=await sb.from('hub_my_tickets').select('*').eq('user_id',S.user.id).order('created_at',{ascending:false}); S.tickets=tk.data||[];
   var lf=await sb.from('hub_life_events').select('*').eq('user_id',S.user.id).order('created_at',{ascending:false}); S.life=lf.data||[];
 }
 function renderAll(){
@@ -2462,8 +2463,8 @@ async function ctDates(){
 /* ═══ CSOMAGSZINTEK ═══ */
 var TIER={basic:{r:1,n:'Basic',lab:'Basic',ic:''},plus:{r:2,n:'Plus',lab:'Plus',ic:'gem'},vip:{r:3,n:'VIP',lab:'VIP',ic:'star'}};
 function tierLab(t){ var x=TIER[t]||TIER.basic; return (x.ic?ico(x.ic)+' ':'')+x.lab; }
-var ROOM_IC=['compass','rocket','home','shield','sunrise','child','bank','trend','gem','money','cap','heart','car','receipt','buoy','bulb','calculator','gift','briefcase','flag','key','baby','ring','users','book','chart','map','clock','zap','build'];
-var ROOM_IC_LAB={compass:'Iránytű',rocket:'Rakéta',home:'Otthon',shield:'Pajzs',sunrise:'Napfelkelte',child:'Gyermek',bank:'Bank',trend:'Növekedés',gem:'Gyémánt',money:'Pénz',cap:'Diploma',heart:'Szív',car:'Autó',receipt:'Számla',buoy:'Mentőöv',bulb:'Ötlet',calculator:'Kalkulátor',gift:'Ajándék',briefcase:'Aktatáska',flag:'Zászló',key:'Kulcs',baby:'Babakocsi',ring:'Gyűrű',users:'Család',book:'Könyv',chart:'Diagram',map:'Térkép',clock:'Óra',zap:'Villám',build:'Építés'};
+var ROOM_IC=['users','briefcase','child','refresh','calendar','sparkles','compass','rocket','home','shield','sunrise','bank','trend','gem','money','cap','heart','car','receipt','buoy','bulb','calculator','gift','flag','key','baby','ring','book','chart','map','clock','zap','build'];
+var ROOM_IC_LAB={refresh:'Szerviz',calendar:'Naptár',sparkles:'Ragyogás',compass:'Iránytű',rocket:'Rakéta',home:'Otthon',shield:'Pajzs',sunrise:'Napfelkelte',child:'Gyermek',bank:'Bank',trend:'Növekedés',gem:'Gyémánt',money:'Pénz',cap:'Diploma',heart:'Szív',car:'Autó',receipt:'Számla',buoy:'Mentőöv',bulb:'Ötlet',calculator:'Kalkulátor',gift:'Ajándék',briefcase:'Aktatáska',flag:'Zászló',key:'Kulcs',baby:'Babakocsi',ring:'Gyűrű',users:'Család',book:'Könyv',chart:'Diagram',map:'Térkép',clock:'Óra',zap:'Villám',build:'Építés'};
 function roomIco(v){ v=String(v||''); if(v && document.getElementById('i-'+v)) return ico(v); return v?E(v):ico('cap'); }
 function roomIcoOpts(sel){ return ROOM_IC.map(function(k){ return '<option value="'+k+'"'+(k===sel?' selected':'')+'>'+ROOM_IC_LAB[k]+'</option>'; }).join(''); }
 var TIER_REF={plus:5,vip:10};   /* hány ajánlástól nyílik meg a következő szint */
@@ -2482,9 +2483,9 @@ function lvlRender(){
     +'<span class="'+(t==='plus'?'cur':(tRank(t)>2?'on':''))+'">Plus · '+TIER_REF.plus+' ajánlás</span>'
     +'<span class="'+(t==='vip'?'cur':'')+'">VIP · '+TIER_REF.vip+' ajánlás</span></div>';
   var note;
-  if(!nx) note='<div class="lvl-note">A <b>legmagasabb szinten</b> vagy: mind a 9 tantermet megnyithatod, és elsőbbséget élvezel az időpontoknál.</div>';
+  if(!nx) note='<div class="lvl-note">A <b>legmagasabb szinten</b> vagy: mind a 6 tantermet megnyithatod, és elsőbbséget élvezel az időpontoknál.</div>';
   else if(left===0) note='<div class="lvl-note">Összejött a <b>'+need+' ajánlás</b> a '+tName(nx)+' szinthez. A tanácsadód nyitja meg neked, szólj neki a következő beszélgetéskor.</div>';
-  else note='<div class="lvl-note">Még <b>'+left+' ajánlás</b>, és megnyílhat a '+tName(nx)+' szint: '+(nx==='plus'?'6':'9')+' tanterem a mostani '+clsSlots()+' helyett, és gyorsabb válaszidő. A szintet a tanácsadód állítja be.</div>';
+  else note='<div class="lvl-note">Még <b>'+left+' ajánlás</b>, és megnyílhat a '+tName(nx)+' szint: '+(nx==='plus'?'5':'6')+' tanterem a mostani '+clsSlots()+' helyett, és gyorsabb válaszidő. A szintet a tanácsadód állítja be.</div>';
   el.innerHTML='<div class="lvl"><span class="lvl-now">'+tierLab(t)+' szint</span>'
       +'<span class="lvl-cnt">'+n+' ajánlásod van</span></div>'
     +'<div class="lvl-bar"><i style="width:'+pct+'%"></i></div>'+steps+note;
@@ -2538,7 +2539,7 @@ function clsItems(room){ return C.items.filter(function(x){return x.room===room;
 function clsDone(room){ return clsItems(room).filter(function(x){return C.prog[x.id];}).length; }
 function clsUnlocked(room,pos){ if(pos<=0) return true; var it=clsItems(room); return !!(it[pos-1]&&C.prog[it[pos-1].id]); }
 function clsNum(v){ return String(v).replace('.',','); }
-function clsSlots(){ var t=myTier(); return t==='vip'?9:(t==='plus'?6:3); }
+function clsSlots(){ var t=myTier(); return t==='vip'?6:(t==='plus'?5:3); }
 function clsUsed(){ return Object.keys(C.unl).length; }
 function clsFree(){ return Math.max(0,clsSlots()-clsUsed()); }
 
