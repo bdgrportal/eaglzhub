@@ -890,7 +890,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="nav-item" data-p="advact" onclick="go('advact')"><svg class="i" aria-hidden="true"><use href="#i-trend"></use></svg> Aktivitás</div>
   <div class="nav-item" data-p="advcode" onclick="go('advcode')"><svg class="i" aria-hidden="true"><use href="#i-key"></use></svg> Meghívókódom</div>
     <div class="nav-item" data-p="advs" onclick="go('advs')" id="navAdvs" style="display:none;"><svg class="i" aria-hidden="true"><use href="#i-crown"></use></svg> Tanácsadók és kódok</div>
-    <div class="nav-item" data-p="clsadm" onclick="go('clsadm')" id="navClsAdm" style="display:none;"><svg class="i" aria-hidden="true"><use href="#i-video"></use></svg> Tananyagok</div>
+    <div class="nav-item" data-p="clsadm" onclick="go('clsadm')" id="navClsAdm" style="display:none;"><svg class="i" aria-hidden="true"><use href="#i-sliders"></use></svg> Tartalom</div>
   </div>
   <div class="side-foot" id="sideFoot">
     <div class="adv"><div class="ava" id="advAva">..</div><div><b id="advName">…</b><span>a személyes tanácsadód</span></div></div>
@@ -906,18 +906,18 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="pt"><svg class="i" aria-hidden="true"><use href="#i-flag"></use></svg> <em>Itt kezdj!</em> <span class="small" style="font-weight:400;">· három perc, és otthon vagy a Hubban</span></div>
     <div class="card start-card">
       <div class="start-vid" id="startVid"></div>
-      <h3>Amikor kinyitod az EAGLZ Hub ajtaját</h3>
-      <p>Egy új felület vár rád, ami elsőre soknak tűnhet. Azért van, hogy a tanácsadóddal közös munkából a legtöbbet hozd ki.</p>
-      <p>Adj magadnak pár percet, amíg megérted, hogyan működik. Utána vesd bele magad abba, ami téged érdekel. Itt vagyunk, hogy segítsünk eligazodni.</p>
-      <p>A legfontosabbakat öt pontban összeszedtük. Két perc, aztán tiéd a Hub.</p>
-      <h4>Mi az az EAGLZ Hub?</h4>
-      <p>A személyes pénzügyi központod, ahol:</p>
+      <h3 id="startT">Amikor kinyitod az EAGLZ Hub ajtaját</h3>
+      <p id="startP0">Egy új felület vár rád, ami elsőre soknak tűnhet. Azért van, hogy a tanácsadóddal közös munkából a legtöbbet hozd ki.</p>
+      <p id="startP1">Adj magadnak pár percet, amíg megérted, hogyan működik. Utána vesd bele magad abba, ami téged érdekel. Itt vagyunk, hogy segítsünk eligazodni.</p>
+      <p id="startP2">A legfontosabbakat öt pontban összeszedtük. Két perc, aztán tiéd a Hub.</p>
+      <h4 id="startH">Mi az az EAGLZ Hub?</h4>
+      <p id="startLead">A személyes pénzügyi központod, ahol:</p>
       <ol class="start-list">
-        <li><span><b>Egy helyen látod a szerződéseidet</b> és a pénzügyi térképedet, a lejáratokra időben szólunk.</span><button class="btn" onclick="go('map')">Szerződéseim</button></li>
-        <li><span><b>Bármikor segítséget kérsz,</b> kárt jelentesz be vagy időpontot foglalsz a tanácsadódnál.</span><button class="btn" onclick="go('help')">Segítség és időpont</button></li>
-        <li><span><b>Rövid videókból tanulsz</b> az élethelyzetedhez illő témákról, a magad tempójában.</span><button class="btn" onclick="go('cls')">Videótár</button></li>
-        <li><span><b>Magad számolsz és tájékozódsz</b> a kalkulátorokkal és a Tudástárral, mielőtt döntesz.</span><button class="btn" onclick="go('tud')">Tudástár</button></li>
-        <li><span><b>A csomagszinteddel egyre több figyelmet</b> és anyagot kapsz: ajánlással lépsz feljebb.</span><button class="btn" onclick="go('profile');pfTab('csomag')">Profil / Csomag</button></li>
+        <li><span id="startL0"><b>Egy helyen látod a szerződéseidet</b> és a pénzügyi térképedet, a lejáratokra időben szólunk.</span><button class="btn" onclick="go('map')">Szerződéseim</button></li>
+        <li><span id="startL1"><b>Bármikor segítséget kérsz,</b> kárt jelentesz be vagy időpontot foglalsz a tanácsadódnál.</span><button class="btn" onclick="go('help')">Segítség és időpont</button></li>
+        <li><span id="startL2"><b>Rövid videókból tanulsz</b> az élethelyzetedhez illő témákról, a magad tempójában.</span><button class="btn" onclick="go('cls')">Videótár</button></li>
+        <li><span id="startL3"><b>Magad számolsz és tájékozódsz</b> a kalkulátorokkal és a Tudástárral, mielőtt döntesz.</span><button class="btn" onclick="go('tud')">Tudástár</button></li>
+        <li><span id="startL4"><b>A csomagszinteddel egyre több figyelmet</b> és anyagot kapsz: ajánlással lépsz feljebb.</span><button class="btn" onclick="go('profile');pfTab('csomag')">Profil / Csomag</button></li>
       </ol>
       <div class="start-cta">
         <button class="btn pri" onclick="go('home')"><svg class="i" aria-hidden="true"><use href="#i-home"></use></svg> Irány a Főoldal</button>
@@ -1132,7 +1132,10 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
 
   <!-- 7d) TANANYAGOK (nagy admin) -->
   <div class="page" id="p-clsadm">
-    <div class="pt"><svg class="i" aria-hidden="true"><use href="#i-video"></use></svg> <em>Tananyagok</em> <span class="small" style="font-weight:400;" id="clsAdmCnt"></span></div>
+    <div class="pt"><svg class="i" aria-hidden="true"><use href="#i-sliders"></use></svg> <em>Tartalom</em> <span class="small" style="font-weight:400;">· innen vezérled, amit az ügyfelek látnak</span></div>
+    <div class="pf-tabs" id="admTabs"></div>
+    <div class="adm-sec" id="adm-video">
+    <p class="small" style="margin-bottom:.6rem;" id="clsAdmCnt"></p>
     <div class="card" style="margin-bottom:1rem;">
       <p class="small">Illeszd be a videó linkjét a lecke mellé, majd Mentés. Támogatott: YouTube (nem listázott is), Google Drive, Vimeo és közvetlen mp4 link. Amelyik leckénél nincs link, azt az ügyfél „Hamarosan” felirattal látja. A leckék sorban nyílnak: a következő csak akkor válik elérhetővé, ha az ügyfél az előzőt megnézte és csillagokkal értékelte.</p>
     </div>
@@ -1146,6 +1149,13 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
         <button class="btn primary" onclick="clsAdmAddRoom()">Létrehozom</button>
       </div>
     </div>
+    </div>
+    <div class="adm-sec" id="adm-posts" style="display:none;">
+    <div class="card" id="recAdmCard" style="margin-bottom:1rem;">
+      <div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;"><svg class="i" aria-hidden="true"><use href="#i-video"></use></svg> Felvételek <span class="small" style="font-weight:400;">· az Események oldal alján, VIP ügyfeleknek</span></div>
+      <p class="small">Írd át a címet, illeszd be a videó linkjét (YouTube, Vimeo, Drive, mp4), Mentés. Amelyiknél nincs link, az ügyfél „hamarosan" jelzést lát. Sorrendi zár nincs, bármelyik nézhető.</p>
+      <div id="recAdm"></div>
+    </div>
     <div class="card" id="postAdmCard">
       <div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;"><svg class="i" aria-hidden="true"><use href="#i-news"></use></svg> Főoldali hírek és hírlevél <span class="small" style="font-weight:400;" id="postAdmCnt"></span></div>
       <p class="small">A főoldalon minden ügyfél a legfrissebb <b>közzétett</b> havi hírt és hírlevelet látja. Amíg nincs közzétett darab, placeholder van a helyén. A PDF-hez Google Drive „bárki a linkkel” megosztás vagy közvetlen PDF-link kell.</p>
@@ -1156,6 +1166,33 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
         <button class="btn" onclick="postAdmAdd('event')">+ új esemény</button>
         <button class="btn" onclick="postAdmAdd('webinar')">+ új webinar</button>
         <button class="btn" onclick="postAdmAdd('start')">+ Itt kezdj! videó</button>
+      </div>
+    </div>
+    </div>
+    <div class="adm-sec" id="adm-kb" style="display:none;">
+      <div class="card">
+        <div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;"><svg class="i" aria-hidden="true"><use href="#i-book"></use></svg> Tudástár cikkek <span class="small" style="font-weight:400;" id="kbAdmCnt"></span></div>
+        <p class="small">Ezeket látja az ügyfél a Tudástárban, a mappája szerint. A link a teljes cikkre mutat (Drive, Notion, blog); amíg nincs link, az ügyfél „hamarosan" jelzést lát. Az „aktív" pipa nélkül a cikk nem jelenik meg.</p>
+        <div id="kbAdm"></div>
+        <button class="btn" style="margin-top:.5rem;" onclick="kbAdmAdd()">+ új cikk</button>
+      </div>
+    </div>
+    <div class="adm-sec" id="adm-start" style="display:none;">
+      <div class="card">
+        <div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;"><svg class="i" aria-hidden="true"><use href="#i-flag"></use></svg> Itt kezdj! oldal szövegei</div>
+        <p class="small">A bemutató videót a „Hírek és események" fülön töltöd fel („Itt kezdj! videó" fajta). Itt a szövegeket írod át. Az 5 pont gombjai fixek (Szerződéseim, Segítség, Videótár, Tudástár, Profil), a szövegük szabad.</p>
+        <div id="startAdm"></div>
+      </div>
+    </div>
+    <div class="adm-sec" id="adm-map" style="display:none;">
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;"><svg class="i" aria-hidden="true"><use href="#i-folders"></use></svg> Tudástár mappák és csomagok</div>
+        <p class="small">Melyik mappa melyik csomagtól nyílik. A csomagtábla ígérete: Essential 3, Plus 5, VIP mind a 9 mappa. Ha ettől eltérsz, a tábla is módosítandó.</p>
+        <div id="topicAdm"></div>
+      </div>
+      <div class="card">
+        <div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;"><svg class="i" aria-hidden="true"><use href="#i-gem"></use></svg> Ami nem innen állítható</div>
+        <p class="small">A <b>csomagtábla</b> értékei (válaszidő, dokumentumkeret, mappaszám, szerviz-ritmus) szerverszabályokhoz vannak kötve, ezért nem szabad szövegként átírni: ha a tábla mást írna, mint amit a rendszer betart, az ügyfél előtt bukna. Változtatás: fejlesztői feladat (hub_ticket_sla, hub_doc_limit, hub_tier_slots + PKG). A <b>kalkulátorok</b> képletei és a <b>tesztfázis-tájékoztató</b> szintén kódban vannak.</p>
       </div>
     </div>
   </div>
@@ -1614,9 +1651,11 @@ function showApp(){
   document.getElementById('tbDate').textContent=new Date().toLocaleDateString('hu-HU',{month:'short',day:'numeric',weekday:'short'})+' · '+new Date().getFullYear();
   document.getElementById('modePill').style.display=S.advRow?'':'none';
   idleStart(); tierWatch();
-  applyMode();
+  applyMode(!S.booted);   /* csak az elso belepeskor navigalunk; kesobbi route() nem valt oldalt */
+  S.booted=true;
 }
-function applyMode(){
+function applyMode(nav){
+  if(nav===undefined) nav=true;
   var adv=(S.mode==='advisor');
   document.body.classList.toggle('advmode',adv);
   document.getElementById('navClient').style.display=adv?'none':'block';
@@ -1624,7 +1663,7 @@ function applyMode(){
   document.getElementById('sideFoot').style.display=adv?'none':'block';
   document.getElementById('tierChip').style.display=adv?'none':'';
   document.getElementById('modePill').innerHTML=adv?(ico('user')+' Ügyfél-nézet'):(ico('advisor')+' Tanácsadói nézet');
-  if(adv){ go('adv'); advLoad(); } else { renderAll(); go('home'); }
+  if(adv){ if(nav) go('adv'); advLoad(); } else { renderAll(); if(nav) go('home'); }
 }
 function modeToggle(){
   if(S.mode==='client'){ S.mode='advisor'; applyMode(); }
@@ -1666,6 +1705,11 @@ async function loadAll(){
   var lf=await sb.from('hub_life_events').select('*').eq('user_id',S.user.id).order('created_at',{ascending:false}); S.life=lf.data||[];
   var ps=await sb.from('hub_posts').select('*').eq('published',true).order('month',{ascending:false}); S.posts=(ps&&ps.data)||[];
   var fm=await sb.from('hub_family').select('*').eq('user_id',S.user.id).order('id'); S.family=(fm&&fm.data)||[];
+  /* Tudastar cikkek es beallitasok: ha az admin mar feltoltotte, azok szamitanak; kulonben a kodbeli alapertek */
+  var kq=await sb.from('hub_kb').select('*').eq('active',true).order('ord').order('id');
+  if(kq&&kq.data&&kq.data.length) KB=kq.data.map(function(k){ return {id:k.id,c:k.cat||'Alap',tp:k.topic||'alap',t:k.title,d:k.summary||'',url:k.url||''}; });
+  var sq=await sb.from('hub_settings').select('*'); S.settings={}; ((sq&&sq.data)||[]).forEach(function(r){ S.settings[r.k]=r.v; });
+  topicTiersApply();
 }
 /* ── CSALÁDI PROFIL (VIP) · hub_family, a szerver csak VIP-nek engedi az irast ── */
 var FAM_REL=['házastárs','élettárs','gyermek','szülő','egyéb'];
@@ -1711,6 +1755,7 @@ async function famDel(id){
 function startSeen(){ try{ return localStorage.getItem('hub_start_seen')==='1'; }catch(e){ return true; } }
 function startRender(){
   try{ localStorage.setItem('hub_start_seen','1'); }catch(e){}
+  startApply();
   var d=document.getElementById('dotStart'); if(d) d.style.display='none';
   var el=document.getElementById('startVid'); if(!el) return;
   var p=postsOf('start')[0];
@@ -2219,7 +2264,7 @@ function kbRender(){
   }).join('')||'<div class="empty">Ehhez a szűréshez még nincs anyag. Kérdezd meg a tanácsadódat a Segítség oldalon.</div>';
   document.getElementById('kbCnt').textContent=list.length+' cikk'+(hid?' · '+hid+' további a zárt mappákban':'');
 }
-function kbOpen(i){ var k=KB[i]; if(!k) return; toast('@info Hamarosan: '+k.t+' · 2-3 perc olvasás. Addig kérdezz a Segítség oldalon.'); }
+function kbOpen(i){ var k=KB[i]; if(!k) return; trk('kb','kb',{id:k.id||null}); if(k.url){ window.open(k.url,'_blank','noopener'); return; } toast('@info Hamarosan: '+k.t+' · 2-3 perc olvasás. Addig kérdezz a Segítség oldalon.'); }
 
 var SLOTS=['hétfő de.','hétfő du.','kedd de.','kedd du.','szerda de.','szerda du.','csütörtök de.','csütörtök du.','péntek de.','péntek du.'];
 function slotsRender(){ document.getElementById('slots').innerHTML=SLOTS.map(function(s,i){ return '<span class="slot'+(S.slotSel[i]?' on':'')+'" onclick="S.slotSel['+i+']=!S.slotSel['+i+'];slotsRender()">'+s+'</span>'; }).join(''); }
@@ -3194,10 +3239,160 @@ async function clsSaveRate(){
 }
 
 /* ── TANANYAGOK (nagy admin) ── */
+var ADM={tab:'video'};
+var ADM_TABS=[['video',ico('video'),'Videótár'],['posts',ico('news'),'Hírek és események'],['kb',ico('book'),'Tudástár cikkek'],['start',ico('flag'),'Itt kezdj!'],['map',ico('folders'),'Mappák és csomagok']];
+function admTab(k){
+  ADM.tab=k;
+  document.querySelectorAll('#admTabs .pf-tab').forEach(function(e){ e.classList.toggle('on',e.getAttribute('data-t')===k); });
+  document.querySelectorAll('.adm-sec').forEach(function(e){ e.style.display=(e.id==='adm-'+k)?'':'none'; });
+  if(k==='kb') kbAdmLoad();
+  if(k==='posts') recAdmRender();
+  if(k==='start') startAdmRender();
+  if(k==='map') topicAdmRender();
+}
 function clsAdmOpen(){
+  var tb=document.getElementById('admTabs');
+  if(tb) tb.innerHTML=ADM_TABS.map(function(t){ return '<span class="pf-tab'+(ADM.tab===t[0]?' on':'')+'" data-t="'+t[0]+'" onclick="admTab(&quot;'+t[0]+'&quot;)">'+t[1]+' '+t[2]+'</span>'; }).join('');
+  admTab(ADM.tab);
   postAdmLoad();
-  if(!C.loaded){ document.getElementById('clsAdm').innerHTML='<div class="empty">Betöltés…</div>'; clsLoad(true).then(clsAdmRender); return; }
-  clsAdmRender();
+  if(!C.loaded){ document.getElementById('clsAdm').innerHTML='<div class="empty">Betöltés…</div>'; clsLoad(true).then(function(){ clsAdmRender(); recAdmRender(); }); return; }
+  clsAdmRender(); recAdmRender();
+}
+/* ── FELVÉTELEK (az auto_open mappa leckéi) admin: ugyanazok a mezők, mint a Videótárban ── */
+function recAdmRender(){
+  var el=document.getElementById('recAdm'); if(!el) return;
+  var rooms=(C.rooms||[]).filter(function(r){return r.auto_open;});
+  if(!C.loaded){ el.innerHTML='<div class="empty">Betöltés…</div>'; return; }
+  if(!rooms.length){ el.innerHTML='<div class="empty">Nincs Események-menüpontra állított mappa. A Videótár fülön pipáld be egy mappánál az „Események menüpont" kapcsolót.</div>'; return; }
+  el.innerHTML=rooms.map(function(r){
+    var its=clsItems(r.room);
+    return its.map(function(it){
+      return '<div class="adm-les">'
+        +'<span class="no">'+it.idx+'</span>'
+        +'<input class="t" id="ct'+it.id+'" value="'+E(it.title)+'" placeholder="A felvétel címe">'
+        +'<input class="u" id="cu'+it.id+'" value="'+E(it.url||'')+'" placeholder="Videó link (YouTube, Drive, Vimeo, mp4)">'
+        +'<input class="m" id="cm'+it.id+'" value="'+(it.mins||'')+'" placeholder="perc">'
+        +'<button class="btn primary sv" onclick="clsAdmSave('+it.id+')">Mentés</button>'
+        +'<button class="btn dl" onclick="clsAdmDel('+it.id+',this)" title="Felvétel törlése">&#10005;</button>'
+        +'<span class="st">'+(it.url?ico('video'):ico('hourglass'))+'</span>'
+      +'</div>';
+    }).join('')+'<button class="btn" style="margin-top:.55rem;" onclick="clsAdmAdd('+r.room+')">+ új felvétel-hely</button>';
+  }).join('');
+}
+/* ── TUDÁSTÁR CIKKEK (hub_kb) admin ── */
+var KA={list:[]};
+async function kbAdmLoad(){
+  var r=await sb.from('hub_kb').select('*').order('ord').order('id');
+  KA.list=(r&&r.data)||[]; kbAdmRender();
+}
+function kbAdmRender(){
+  var el=document.getElementById('kbAdm'); if(!el) return;
+  var c=document.getElementById('kbAdmCnt'); if(c) c.textContent='· '+KA.list.length+' cikk · '+KA.list.filter(function(k){return k.active;}).length+' aktív · '+KA.list.filter(function(k){return k.url;}).length+' linkkel';
+  if(!KA.list.length){ el.innerHTML='<div class="empty">Még nincs cikk. Futtasd le a hub_all.sql-t, az feltölti a 20 alapcikket, vagy vegyél fel újat.</div>'; return; }
+  el.innerHTML=KA.list.map(function(k){
+    return '<div class="post-adm" id="ka'+k.id+'">'
+      +'<input class="k" type="number" id="kao'+k.id+'" value="'+(k.ord||0)+'" title="Sorrend">'
+      +'<select class="m" id="kat'+k.id+'" title="Mappa">'+TOPICS.map(function(t){ return '<option value="'+t[0]+'"'+(k.topic===t[0]?' selected':'')+'>'+t[2]+'</option>'; }).join('')+'</select>'
+      +'<input class="t" id="kaT'+k.id+'" value="'+E(k.title)+'" placeholder="A cikk címe (kérdésként a legjobb)">'
+      +'<label class="pub"><input type="checkbox" id="kaa'+k.id+'"'+(k.active?' checked':'')+'> aktív</label>'
+      +'<textarea class="sum" id="kas'+k.id+'" placeholder="Egy mondat, ami a csempén látszik" style="min-height:44px;">'+E(k.summary||'')+'</textarea>'
+      +'<input class="v" id="kac'+k.id+'" value="'+E(k.cat||'')+'" placeholder="Címke a csempén (pl. Nyugdíj)">'
+      +'<input class="pdf" id="kau'+k.id+'" value="'+E(k.url||'')+'" placeholder="A teljes cikk linkje (üres = hamarosan)">'
+      +'<div class="act"><button class="btn primary" onclick="kbAdmSave('+k.id+')">Mentés</button>'
+      +'<button class="btn" style="color:var(--pink);" onclick="kbAdmDel('+k.id+')">Törlés</button>'
+      +'<span class="small">'+(k.active?ico('check')+' látszik':ico('eye')+' rejtve')+(k.url?'':' · link nélkül: hamarosan')+'</span></div>'
+      +'</div>';
+  }).join('');
+}
+async function kbAdmSave(id){
+  var g=function(k){ var e=document.getElementById(k+id); return e?e.value:''; };
+  var t=g('kaT').trim(); if(!t){ toast('A cím nem lehet üres.'); return; }
+  var row={ord:+g('kao')||0,topic:g('kat'),title:t,summary:g('kas').trim()||null,cat:g('kac').trim()||'Alap',url:g('kau').trim()||null,active:document.getElementById('kaa'+id).checked};
+  var r=await sb.from('hub_kb').update(row).eq('id',id);
+  if(r.error){ toast('@err '+r.error.message); return; }
+  toast('@ok Mentve.'); await kbAdmLoad(); await loadAll();
+}
+async function kbAdmAdd(){
+  var r=await sb.from('hub_kb').insert({ord:(KA.list.length+1)*10,cat:'Alap',topic:'alap',title:'Új cikk címe',active:false});
+  if(r.error){ toast('@err '+r.error.message); return; }
+  await kbAdmLoad(); toast('@ok Felvéve, rejtve. Írd át, tedd be a linket, pipáld be az aktívot.');
+}
+async function kbAdmDel(id){
+  if(window.__kbArm!==id){ window.__kbArm=id; toast('Biztos törlöd? Kattints még egyszer.'); return; }
+  window.__kbArm=null;
+  var r=await sb.from('hub_kb').delete().eq('id',id);
+  if(r.error){ toast('@err '+r.error.message); return; }
+  await kbAdmLoad(); await loadAll(); toast('@ok Törölve.');
+}
+/* ── BEÁLLÍTÁSOK (hub_settings) ── */
+async function setSave(k,v){
+  var r=await sb.from('hub_settings').upsert({k:k,v:v,updated_at:new Date().toISOString()});
+  if(r.error){ toast('@err '+r.error.message); return false; }
+  S.settings=S.settings||{}; S.settings[k]=v; return true;
+}
+function setGet(k,d){ return (S.settings&&S.settings[k])||d; }
+/* Itt kezdj! szovegek */
+var START_DEF={title:'Amikor kinyitod az EAGLZ Hub ajtaját',
+  p:['Egy új felület vár rád, ami elsőre soknak tűnhet. Azért van, hogy a tanácsadóddal közös munkából a legtöbbet hozd ki.',
+     'Adj magadnak pár percet, amíg megérted, hogyan működik. Utána vesd bele magad abba, ami téged érdekel. Itt vagyunk, hogy segítsünk eligazodni.',
+     'A legfontosabbakat öt pontban összeszedtük. Két perc, aztán tiéd a Hub.'],
+  h:'Mi az az EAGLZ Hub?', lead:'A személyes pénzügyi központod, ahol:',
+  pts:[['Egy helyen látod a szerződéseidet','és a pénzügyi térképedet, a lejáratokra időben szólunk.'],
+       ['Bármikor segítséget kérsz,','kárt jelentesz be vagy időpontot foglalsz a tanácsadódnál.'],
+       ['Rövid videókból tanulsz','az élethelyzetedhez illő témákról, a magad tempójában.'],
+       ['Magad számolsz és tájékozódsz','a kalkulátorokkal és a Tudástárral, mielőtt döntesz.'],
+       ['A csomagszinteddel egyre több figyelmet','és anyagot kapsz: ajánlással lépsz feljebb.']]};
+function startApply(){
+  var d=setGet('start_page',null); if(!d) return;
+  var q=function(id){ return document.getElementById(id); };
+  if(d.title&&q('startT')) q('startT').textContent=d.title;
+  (d.p||[]).forEach(function(t,i){ if(q('startP'+i)&&t) q('startP'+i).textContent=t; });
+  if(d.h&&q('startH')) q('startH').textContent=d.h;
+  if(d.lead&&q('startLead')) q('startLead').textContent=d.lead;
+  (d.pts||[]).forEach(function(pt,i){ if(q('startL'+i)&&pt) q('startL'+i).innerHTML='<b>'+E(pt[0])+'</b> '+E(pt[1]); });
+}
+function startAdmRender(){
+  var el=document.getElementById('startAdm'); if(!el) return;
+  var d=setGet('start_page',START_DEF);
+  var h='<div class="addform" style="grid-template-columns:1fr;">'
+    +'<label class="small">Cím</label><input id="saT" value="'+E(d.title||'')+'">';
+  for(var i=0;i<3;i++) h+='<label class="small">'+(i+1)+'. bekezdés</label><textarea id="saP'+i+'" style="min-height:52px;">'+E((d.p||[])[i]||'')+'</textarea>';
+  h+='<label class="small">Alcím</label><input id="saH" value="'+E(d.h||'')+'">'
+    +'<label class="small">Felvezető</label><input id="saLead" value="'+E(d.lead||'')+'">';
+  for(var j=0;j<5;j++){ var pt=(d.pts||[])[j]||['','']; h+='<label class="small">'+(j+1)+'. pont: félkövér rész + folytatás</label><div style="display:grid;grid-template-columns:1fr 2fr;gap:.4rem;"><input id="saB'+j+'" value="'+E(pt[0])+'"><input id="saX'+j+'" value="'+E(pt[1])+'"></div>'; }
+  h+='<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.3rem;"><button class="btn primary" onclick="startAdmSave()">Mentés</button><button class="btn" onclick="startAdmReset()">Vissza az alapszövegre</button></div></div>';
+  el.innerHTML=h;
+}
+async function startAdmSave(){
+  var g=function(id){ var e=document.getElementById(id); return e?e.value.trim():''; };
+  var d={title:g('saT'),p:[g('saP0'),g('saP1'),g('saP2')],h:g('saH'),lead:g('saLead'),pts:[]};
+  for(var j=0;j<5;j++) d.pts.push([g('saB'+j),g('saX'+j)]);
+  if(!d.title){ toast('A cím nem lehet üres.'); return; }
+  if(await setSave('start_page',d)){ startApply(); toast('@ok Mentve, az ügyfelek ezt látják.'); }
+}
+async function startAdmReset(){ if(await setSave('start_page',START_DEF)){ startAdmRender(); startApply(); toast('@ok Alapszöveg visszaállítva.'); } }
+/* Tudastar mappak csomagja */
+function topicTiersApply(){
+  var m=setGet('topic_tiers',null); if(!m) return;
+  TOPICS.forEach(function(t){ if(m[t[0]]&&TIER[m[t[0]]]) t[3]=m[t[0]]; });
+}
+function topicAdmRender(){
+  var el=document.getElementById('topicAdm'); if(!el) return;
+  el.innerHTML=TOPICS.map(function(t){
+    return '<div class="docrow"><span class="ic">'+t[1]+'</span><b>'+t[2]+'</b><span class="small">'+KB.filter(function(k){return k.tp===t[0];}).length+' cikk</span>'
+      +'<select id="ta_'+t[0]+'" onchange="topicAdmSave()">'+['basic','plus','vip'].map(function(k){ return '<option value="'+k+'"'+((t[3]||'basic')===k?' selected':'')+'>'+TIER[k].n+' csomagtól</option>'; }).join('')+'</select></div>';
+  }).join('')+'<div class="small" style="margin-top:.5rem;" id="topicAdmSum"></div>';
+  topicAdmSum();
+}
+function topicAdmSum(){
+  var n={basic:0,plus:0,vip:0}; TOPICS.forEach(function(t){ n[t[3]||'basic']++; });
+  var el=document.getElementById('topicAdmSum'); if(!el) return;
+  var e=n.basic, p=n.basic+n.plus, v=TOPICS.length;
+  el.innerHTML='Így nyílik: <b>Essential '+e+'</b> · <b>Plus '+p+'</b> · <b>VIP '+v+'</b> mappa.'+((e!==3||p!==5)?' <span style="color:var(--pink);">Ez eltér a csomagtábla 3 / 5 / összes ígéretétől.</span>':' Egyezik a csomagtáblával.');
+}
+async function topicAdmSave(){
+  var m={}; TOPICS.forEach(function(t){ var e=document.getElementById('ta_'+t[0]); if(e) m[t[0]]=e.value; });
+  if(await setSave('topic_tiers',m)){ topicTiersApply(); topicAdmSum(); toast('@ok Mentve.'); }
 }
 function clsAdmRender(){
   var sel=document.getElementById('clsNewRoomI');
@@ -3209,8 +3404,10 @@ function clsAdmRender(){
     return '<div class="card" style="margin-bottom:1rem;">'
       +'<div class="pt" style="font-size:1.05rem;margin-bottom:.15rem;">'+roomIco(r.icon)+' <em>'+E(r.title)+'</em> <span class="small" style="font-weight:400;">· '+r.room+'. terem'+(r.auto_open?' · saját menüpont (Események), nem foglal helyet':'')+'</span>'
         +' <select onchange="clsAdmRoomIcon('+r.room+',this.value)" title="A terem ikonja" style="font-size:.75rem;padding:.25rem .5rem;">'+roomIcoOpts(r.icon)+'</select>'+' <select onchange="clsAdmRoomTier('+r.room+',this.value)" title="Melyik csomagszinttől érhető el" style="font-size:.75rem;padding:.25rem .5rem;">'
-        +['basic','plus','vip'].map(function(k){ return '<option value="'+k+'"'+((r.min_tier||'basic')===k?' selected':'')+'>'+TIER[k].n+' szinttől</option>'; }).join('')
-        +'</select></div>'
+        +['basic','plus','vip'].map(function(k){ return '<option value="'+k+'"'+((r.min_tier||'basic')===k?' selected':'')+'>'+TIER[k].n+' csomagtól</option>'; }).join('')
+        +'</select>'
+        +' <label class="small" style="display:inline-flex;align-items:center;gap:.3rem;" title="Nem foglal helyet, az Események menüpontban jelenik meg"><input type="checkbox" onchange="clsAdmRoomAuto('+r.room+',this.checked)"'+(r.auto_open?' checked':'')+'> Események menüpont</label>'
+        +'</div>'
       +'<p class="small" style="margin-bottom:.75rem;">'+E(r.goal||'')+'</p>'
       +its.map(function(it){
         return '<div class="adm-les">'
@@ -3236,7 +3433,7 @@ async function clsAdmSave(id){
   if(r&&r.error){ toast('@err '+r.error.message); return; }
   var it=C.items.filter(function(x){return x.id===id;})[0];
   if(it){ it.title=t; it.url=u||null; it.mins=m; }
-  toast('@ok Mentve: '+t); clsAdmRender();
+  toast('@ok Mentve: '+t); clsAdmRender(); recAdmRender();
 }
 async function clsAdmDel(id,btn){
   if(btn.getAttribute('data-c')!=='1'){ btn.setAttribute('data-c','1'); btn.textContent='Biztos? ✕'; setTimeout(function(){ if(btn){ btn.removeAttribute('data-c'); btn.textContent='✕'; } },4000); return; }
@@ -3251,6 +3448,12 @@ async function clsAdmRoomIcon(room,v){
   var x=C.rooms.filter(function(y){return y.room===room;})[0]; if(x) x.icon=v;
   clsAdmRender(); toast('@ok A terem ikonja frissült.');
 }
+async function clsAdmRoomAuto(room,v){
+  var r=await sb.from('hub_edu_rooms').update({auto_open:!!v}).eq('room',room);
+  if(r&&r.error){ toast('@err '+r.error.message); return; }
+  var rm=C.rooms.filter(function(x){return x.room===room;})[0]; if(rm) rm.auto_open=!!v;
+  clsAdmRender(); toast('@ok '+(v?'A mappa mostantól az Események menüpontban van, nem foglal helyet.':'A mappa visszakerült a Videótár rácsába.'));
+}
 async function clsAdmRoomTier(room,v){
   var r=await sb.from('hub_edu_rooms').update({min_tier:v}).eq('room',room);
   if(r&&r.error){ toast('@err '+r.error.message); return; }
@@ -3262,7 +3465,7 @@ async function clsAdmAdd(room){
   var r=await sb.from('hub_edu_items').insert({room:room,idx:nx,title:'Új lecke '+nx}).select();
   if(r&&r.error){ toast('@err '+r.error.message); return; }
   if(r&&r.data&&r.data[0]) C.items.push(r.data[0]);
-  clsAdmRender(); toast('@ok Új lecke hozzáadva, írd át a címét és tedd be a linket.');
+  clsAdmRender(); recAdmRender(); toast('@ok Új hely hozzáadva, írd át a címét és tedd be a linket.');
 }
 async function clsAdmAddRoom(){
   var t=(document.getElementById('clsNewRoomT').value||'').trim();
@@ -3717,7 +3920,14 @@ function advCodeRender(){ var a=S.advRow||{}; document.getElementById('advCodeBi
   slotsRender(); kbRender();
   if(!CFG.url||CFG.url.indexOf('XXXXXXXXXXXX')>-1||!CFG.key||CFG.key==='ANON_PUBLIC_KEY_IDE'||CFG.key.length<20){ document.getElementById('cfgWarn').style.display='block'; gShow('gLogin'); return; }
   sb=window.supabase.createClient(CFG.url,CFG.key);
-  sb.auth.onAuthStateChange(function(ev){ if(ev==='PASSWORD_RECOVERY'){ gShow('gReset'); return; } if(ev==='SIGNED_IN'||ev==='SIGNED_OUT'||ev==='INITIAL_SESSION') route(); });
+  /* FIGYELEM: a supabase-js a lap fokuszalasakor es a token frissitesekor is SIGNED_IN-t kuld.
+     Ha ilyenkor ujra route()-olnank, a felulet visszaugrana a Fooldalra (ez volt a hiba).
+     Ezert SIGNED_IN csak akkor szamit, ha meg nincs bent a felhasznalo. */
+  sb.auth.onAuthStateChange(function(ev){
+    if(ev==='PASSWORD_RECOVERY'){ gShow('gReset'); return; }
+    if(ev==='SIGNED_OUT'){ S.booted=false; route(); return; }
+    if(ev==='INITIAL_SESSION'||(ev==='SIGNED_IN'&&!S.user)) route();
+  });
 })();
 </script>
 
