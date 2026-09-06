@@ -385,6 +385,38 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 .start-list li span{flex:1;min-width:200px;}
 .start-list li b{color:var(--navy);}
 .start-cta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;}
+.sub-h{display:flex;align-items:center;gap:.5rem;font-family:var(--fb);font-weight:800;font-size:.9rem;color:var(--navy);margin:.9rem 0 .35rem;padding-bottom:.3rem;border-bottom:2px solid var(--border);}
+.sub-h .no{width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:.7rem;display:inline-flex;align-items:center;justify-content:center;}
+.sub-h .small{font-weight:400;margin-left:auto;}
+.tag{display:inline-block;font-family:var(--fb);font-weight:700;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;border-radius:100px;padding:.14rem .45rem;margin-left:.3rem;vertical-align:middle;white-space:nowrap;}
+.tag.e{background:rgba(125,200,192,.2);color:var(--teal-deep);} .tag.k{background:rgba(230,62,120,.12);color:var(--pink);}
+.tag.g{background:#eef3f7;color:var(--gray);} .tag.w{background:rgba(240,180,41,.18);color:#8a6100;}
+.les .meta{display:block;font-size:.72rem;color:var(--gray);margin-top:.15rem;font-weight:400;}
+.pop-x{padding:0 1.3rem 1rem;}
+.pop-x .descr{font-size:.86rem;line-height:1.55;color:#2b3d55;margin-bottom:.6rem;}
+.pop-x .meta{font-size:.74rem;color:var(--gray);margin-bottom:.6rem;}
+.pop-x .acts{display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;}
+.pop-x .acts a.btn{text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;}
+.pop-x .btn{width:auto;flex:0 0 auto;}
+.pop-x .svc{margin-top:.7rem;padding-top:.6rem;border-top:1px dashed var(--border);display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;font-size:.8rem;}
+/* admin videoszerkeszto */
+.vid-adm{display:grid;grid-template-columns:34px 1.3fr 1fr 200px;grid-template-areas:'no t t m' 'no u u k' 'no d d cta' 'no p pdf pdf' 'no x x x' 'no act act act';gap:.4rem;background:#fff;border:1px solid var(--border);border-radius:12px;padding:.6rem;margin-bottom:.55rem;}
+.vid-adm .no{grid-area:no;width:26px;height:26px;border-radius:50%;background:#f1f6f9;color:var(--teal-deep);font-family:var(--fb);font-weight:800;font-size:.72rem;display:flex;align-items:center;justify-content:center;}
+.vid-adm .t{grid-area:t;} .vid-adm .m{grid-area:m;} .vid-adm .u{grid-area:u;} .vid-adm .k{grid-area:k;} .vid-adm .d{grid-area:d;} .vid-adm .cta{grid-area:cta;} .vid-adm .p{grid-area:p;} .vid-adm .pdf{grid-area:pdf;} .vid-adm .x{grid-area:x;display:flex;gap:.4rem;flex-wrap:wrap;} .vid-adm .act{grid-area:act;display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;}
+.vid-adm input,.vid-adm select,.vid-adm textarea{width:100%;font-size:.78rem;padding:.38rem .5rem;}
+.vid-adm .x input,.vid-adm .x select{flex:1;min-width:120px;}
+.vid-adm .x label{font-size:.7rem;color:var(--gray);display:flex;flex-direction:column;gap:.15rem;flex:1;min-width:120px;}
+.sub-adm{border-left:3px solid var(--teal);padding-left:.7rem;margin:.8rem 0;}
+.sub-adm .sub-hd{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.45rem;}
+.sub-adm .sub-hd input{flex:1;min-width:180px;font-size:.85rem;font-weight:700;font-family:var(--fb);}
+.sub-adm .sub-hd input[type=number]{flex:0 0 64px;min-width:0;}
+.sub-adm .sub-hd .no{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--fb);font-weight:800;font-size:.72rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.room-adm-hd{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin:.5rem 0 .3rem;}
+.room-adm-hd input{width:100%;font-size:.8rem;padding:.38rem .5rem;}
+.rev-row{display:flex;gap:.5rem;align-items:center;padding:.4rem 0;border-bottom:1px dashed var(--border);font-size:.8rem;}
+.rev-row:last-child{border-bottom:0;}
+.rev-row b{font-family:var(--fb);}
+.rev-row .why{margin-left:auto;white-space:nowrap;}
 /* esemenyek */
 .ev-item{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--border);}
 .ev-item:last-child{border-bottom:0;}
@@ -469,6 +501,8 @@ body.navon .nav-btn span::after{top:0;transform:rotate(-45deg);}
   .pkg .soon{display:block;margin:.2rem 0 0;width:max-content;}
   .pkg th{font-size:.62rem;letter-spacing:.06em;}
   .post-adm{grid-template-columns:1fr 1fr;grid-template-areas:'k m' 't t' 'pub pub' 'sum sum' 'v v' 'pdf pdf' 'act act';}
+  .vid-adm{grid-template-columns:30px 1fr;grid-template-areas:'no t' 'no m' 'no u' 'no k' 'no d' 'no cta' 'no p' 'no pdf' 'no x' 'no act';}
+  .room-adm-hd{grid-template-columns:1fr;}
   .main{margin-left:0;padding:calc(var(--top) + 1rem) 1rem 2.6rem;}
   #hubFoot{margin-left:0!important;padding:0 1rem 1.3rem;}
   .nav-btn{display:flex;}
@@ -1137,15 +1171,15 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="adm-sec" id="adm-video">
     <p class="small" style="margin-bottom:.6rem;" id="clsAdmCnt"></p>
     <div class="card" style="margin-bottom:1rem;">
-      <p class="small">Illeszd be a videó linkjét a lecke mellé, majd Mentés. Támogatott: YouTube (nem listázott is), Google Drive, Vimeo és közvetlen mp4 link. Amelyik leckénél nincs link, azt az ügyfél „Hamarosan” felirattal látja. A leckék sorban nyílnak: a következő csak akkor válik elérhetővé, ha az ügyfél az előzőt megnézte és csillagokkal értékelte.</p>
+      <p class="small">Mappa → almappa → videó. Minden szerkeszthető: név, cél, ikon, csomag, mezők. A videó linkje lehet YouTube (nem listázott is), Vimeo, Google Drive vagy közvetlen mp4; minden videóhoz tehető leírás és PDF. E = tanulás, K = döntés (gombbal a videó alatt: időpont, segítség vagy kalkulátor). A mappa profilja adja a plusz mezőket: Kids → korosztály; Szerviz → szolgáltató, folyamat, utolsó frissítés (6 havi felülvizsgálati lista); Szezonális → évszám, meddig aktuális (utána automatikusan archív). Almappán belül a 2. videó az 1. értékelése után nyílik.</p>
     </div>
     <div id="clsAdm"></div>
     <div class="card" style="margin-bottom:1rem;">
-      <div class="pt" style="font-size:1.05rem;margin-bottom:.55rem;"><svg class="i" aria-hidden="true"><use href="#i-plus"></use></svg> Új tanterem</div>
+      <div class="pt" style="font-size:1.05rem;margin-bottom:.55rem;"><svg class="i" aria-hidden="true"><use href="#i-plus"></use></svg> Új mappa</div>
       <div class="addform">
         <select id="clsNewRoomI" title="A terem ikonja"></select>
-        <input id="clsNewRoomT" placeholder="A terem neve">
-        <input id="clsNewRoomG" placeholder="Mi a terem célja?">
+        <input id="clsNewRoomT" placeholder="A mappa neve">
+        <input id="clsNewRoomG" placeholder="Mi a mappa célja?">
         <button class="btn primary" onclick="clsAdmAddRoom()">Létrehozom</button>
       </div>
     </div>
@@ -1457,6 +1491,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
       <span class="cls-x" onclick="clsClose()">✕</span>
     </div>
     <div class="cls-vid" id="clsPopV"></div>
+    <div class="pop-x" id="clsPopX"></div>
     <div class="cls-rate">
       <div><b>Hogy tetszett ez a lecke?</b><div class="small" id="clsHint"></div></div>
       <div class="stars" id="clsStars" onmouseleave="clsPaint(C.tmp)"></div>
@@ -1707,7 +1742,7 @@ async function loadAll(){
   var fm=await sb.from('hub_family').select('*').eq('user_id',S.user.id).order('id'); S.family=(fm&&fm.data)||[];
   /* Tudastar cikkek es beallitasok: ha az admin mar feltoltotte, azok szamitanak; kulonben a kodbeli alapertek */
   var kq=await sb.from('hub_kb').select('*').eq('active',true).order('ord').order('id');
-  if(kq&&kq.data&&kq.data.length) KB=kq.data.map(function(k){ return {id:k.id,c:k.cat||'Alap',tp:k.topic||'alap',t:k.title,d:k.summary||'',url:k.url||''}; });
+  if(kq&&kq.data&&kq.data.length) KB=kq.data.map(function(k){ return {id:k.id,c:k.cat||'Alap',tp:k.topic||'alap',t:k.title,d:k.summary||'',url:k.url||'',pdf:k.pdf_url||''}; });
   var sq=await sb.from('hub_settings').select('*'); S.settings={}; ((sq&&sq.data)||[]).forEach(function(r){ S.settings[r.k]=r.v; });
   topicTiersApply();
 }
@@ -2260,11 +2295,11 @@ function kbRender(){
     : 'Rövid, érthető válaszok. Szűrj témakörre a Tudástár főoldalán.';
   var g=document.getElementById('kbGrid'); if(!g) return;
   g.innerHTML=list.map(function(k){
-    return '<div class="edu-tile" onclick="kbOpen('+KB.indexOf(k)+')"><span class="wst" style="background:var(--teal-light);color:var(--teal-deep);">'+E(k.c)+'</span><b>'+E(k.t)+'</b><span>'+E(k.d)+'</span></div>';
+    return '<div class="edu-tile" onclick="kbOpen('+KB.indexOf(k)+')"><span class="wst" style="background:var(--teal-light);color:var(--teal-deep);">'+E(k.c)+'</span><b>'+E(k.t)+'</b><span>'+E(k.d)+'</span>'+(k.pdf?'<span class="small" style="margin-top:.3rem;display:block;">'+ico('file')+' PDF melléklet</span>':'')+'</div>';
   }).join('')||'<div class="empty">Ehhez a szűréshez még nincs anyag. Kérdezd meg a tanácsadódat a Segítség oldalon.</div>';
   document.getElementById('kbCnt').textContent=list.length+' cikk'+(hid?' · '+hid+' további a zárt mappákban':'');
 }
-function kbOpen(i){ var k=KB[i]; if(!k) return; trk('kb','kb',{id:k.id||null}); if(k.url){ window.open(k.url,'_blank','noopener'); return; } toast('@info Hamarosan: '+k.t+' · 2-3 perc olvasás. Addig kérdezz a Segítség oldalon.'); }
+function kbOpen(i){ var k=KB[i]; if(!k) return; trk('kb','kb',{id:k.id||null}); if(k.url){ window.open(k.url,'_blank','noopener'); return; } if(k.pdf){ window.open(k.pdf,'_blank','noopener'); return; } toast('@info Hamarosan: '+k.t+' · 2-3 perc olvasás. Addig kérdezz a Segítség oldalon.'); }
 
 var SLOTS=['hétfő de.','hétfő du.','kedd de.','kedd du.','szerda de.','szerda du.','csütörtök de.','csütörtök du.','péntek de.','péntek du.'];
 function slotsRender(){ document.getElementById('slots').innerHTML=SLOTS.map(function(s,i){ return '<span class="slot'+(S.slotSel[i]?' on':'')+'" onclick="S.slotSel['+i+']=!S.slotSel['+i+'];slotsRender()">'+s+'</span>'; }).join(''); }
@@ -3018,11 +3053,14 @@ async function clsLoad(force){
   if(C.loaded&&!force){ clsRender(); return; }
   var r=await sb.from('hub_edu_rooms').select('*').order('ord');
   var i=await sb.from('hub_edu_items').select('*').order('room').order('idx');
+  var sq=await sb.from('hub_edu_subs').select('*').order('room').order('idx'); C.subs=(sq&&sq.data)||[];
   if(r.error||i.error){
     document.getElementById('clsGrid').innerHTML='<div class="empty"><svg class="i" aria-hidden="true"><use href="#i-alert"></use></svg> A tantermek még nincsenek beállítva. Futtasd le a hub_edu.sql fájlt a Supabase SQL Editorában.</div>';
     document.getElementById('clsHead').textContent=''; return;
   }
   C.rooms=r.data||[]; C.items=i.data||[]; C.prog={}; C.unl={};
+  /* lejart szezonalis video: az ugyfelnek archiv (a szerver is szuri), az admin latja */
+  if(S.mode==='client'&&!isAdmin()){ var td=new Date().toISOString().slice(0,10); C.items=C.items.filter(function(x){ return !x.valid_until||String(x.valid_until)>=td; }); }
   if(S.user){
     var p=await sb.from('hub_edu_progress').select('*').eq('user_id',S.user.id);
     (p.data||[]).forEach(function(x){ C.prog[x.item_id]={rating:+x.rating,done_at:x.done_at}; });
@@ -3031,9 +3069,47 @@ async function clsLoad(force){
   }
   C.loaded=true; clsRender(); contRender();
 }
-function clsItems(room){ return C.items.filter(function(x){return x.room===room;}).sort(function(a,b){return a.idx-b.idx;}); }
+function clsSubs(room){ return (C.subs||[]).filter(function(x){return x.room===room&&x.active!==false;}).sort(function(a,b){return a.idx-b.idx;}); }
+function subIdx(sid){ var s=(C.subs||[]).filter(function(x){return x.id===sid;})[0]; return s?s.idx:9999; }
+function clsItems(room){ return C.items.filter(function(x){return x.room===room;}).sort(function(a,b){ var d=subIdx(a.sub_id)-subIdx(b.sub_id); return d||(a.idx-b.idx); }); }
 function clsDone(room){ return clsItems(room).filter(function(x){return C.prog[x.id];}).length; }
-function clsUnlocked(room,pos){ if(pos<=0) return true; var it=clsItems(room); return !!(it[pos-1]&&C.prog[it[pos-1].id]); }
+/* a sorrendi zar almappan belul ervenyes: az almappa 1. videoja mindig nyitott, a kovetkezo az elozo ertekelese utan */
+function clsUnlocked(room,pos){
+  if(pos<=0) return true; var it=clsItems(room), cur=it[pos], prev=it[pos-1];
+  if(!cur||!prev) return true;
+  if((cur.sub_id||null)!==(prev.sub_id||null)) return true;
+  return !!C.prog[prev.id];
+}
+var CTA_LAB={none:'',consult:'Időpontot egyeztetek',help:'Segítséget kérek',parent:'Szülőként kérdésed van? Időpontot egyeztetek'};
+function calcTitle(k){ var c=(typeof CALCS!=='undefined'?CALCS:[]).filter(function(x){return x.k===k;})[0]; return c?c.t:'Kalkulátor'; }
+function ctaHtml(it){
+  var c=it.cta||'none'; if(c==='none') return '';
+  if(c.indexOf('calc:')===0){ var k=c.slice(5); return '<button class="btn pri" onclick="clsClose();go(\'calc\');calcOpen(\''+E(k)+'\')">'+ico('calculator')+' Számold ki: '+E(calcTitle(k))+'</button>'; }
+  if(c==='consult'||c==='parent') return '<button class="btn pri" onclick="clsClose();helpNew(\'consult\')">'+ico('calendar')+' '+E(CTA_LAB[c])+'</button>';
+  if(c==='help') return '<button class="btn pri" onclick="clsClose();helpNew(\'help\')">'+ico('hand')+' '+E(CTA_LAB.help)+'</button>';
+  return '';
+}
+function itBadges(it,r){
+  var p=(r&&r.profile)||'general', h='';
+  if(it.kind==='K') h+='<span class="tag k">döntés</span>'; else h+='<span class="tag e">tanulás</span>';
+  if(p==='kids'&&it.age) h+='<span class="tag g">'+E(it.age)+' év</span>';
+  if(p==='seasonal'){ if(it.year) h+='<span class="tag g">'+it.year+'</span>'; if(it.valid_until) h+='<span class="tag '+(String(it.valid_until)<new Date(Date.now()+30*86400000).toISOString().slice(0,10)?'w':'g')+'">'+E(dHu(it.valid_until))+'-ig</span>'; }
+  if(p==='service'&&it.provider) h+='<span class="tag g">'+E(it.provider)+'</span>';
+  return h;
+}
+function itMeta(it,r){
+  var p=(r&&r.profile)||'general', m=[];
+  if(p==='service'){ if(it.provider) m.push('Szolgáltató: '+E(it.provider)); if(it.process) m.push('Folyamat: '+E(it.process)); m.push('Utolsó frissítés: '+(it.updated_on?E(dHu(it.updated_on)):'nincs megadva')); }
+  if(p==='seasonal'){ if(it.year) m.push(it.year+'. évi'); if(it.updated_on) m.push('Frissítve: '+E(dHu(it.updated_on))); if(it.valid_until) m.push('Aktuális: '+E(dHu(it.valid_until))+'-ig'); }
+  if(p==='kids'&&it.age) m.push('Ajánlott korosztály: '+E(it.age)+' év');
+  if(it.mins) m.push(it.mins+' perc');
+  return m.join(' · ');
+}
+function svcResolved(id,ok){
+  trk(ok?'resolved':'not_resolved','cls',{item:id});
+  if(ok){ toast('@ok Köszönjük a visszajelzést!'); }
+  else { clsClose(); helpNew('help'); }
+}
 function clsNum(v){ return String(v).replace('.',','); }
 function hunBol(n){ var e=[1,2,4,5,7,9,10,11,12,14,15,17,19]; return 'a(z) '+n+(e.indexOf(n)>=0?'-ből':'-ból'); }
 function clsSlots(){ var t=myTier(); return t==='vip'?5:(t==='plus'?5:3); }
@@ -3129,15 +3205,23 @@ function clsRoom(room){
   document.getElementById('clsRG').textContent=r.goal||'';
   document.getElementById('clsRP').innerHTML='<div class="cls-bar" style="margin-top:0;"><i style="width:'+pc+'%"></i></div><div class="cls-meta"><span>'+d+' / '+its.length+' lecke kész</span><span>'+pc+'%</span></div>';
   document.getElementById('clsRO').innerHTML=r.outcome?('<svg class="i" aria-hidden="true"><use href="#i-flag"></use></svg> <b>Teremzáró eredmény:</b> '+E(r.outcome)):'';
-  document.getElementById('clsList').innerHTML=its.length?its.map(function(it,k){
+  var subs=clsSubs(room), lastSub=-1, n=0, html='';
+  its.forEach(function(it,k){
+    var sid=it.sub_id||null;
+    if(sid!==lastSub){
+      lastSub=sid; var sb_=subs.filter(function(x){return x.id===sid;})[0];
+      var sits=its.filter(function(x){return (x.sub_id||null)===sid;}), sd=sits.filter(function(x){return C.prog[x.id];}).length;
+      html+='<div class="sub-h">'+(sb_?'<span class="no">'+sb_.idx+'</span>'+E(sb_.title):ico('folder')+' Egyéb videók')+'<span class="small">'+sd+' / '+sits.length+'</span></div>';
+    }
+    n++;
     var done=C.prog[it.id], open=clsUnlocked(room,k), has=!!it.url;
     var st=done?('★ '+clsNum(done.rating)):(open?(has?'Megnézem &#8599;&#65038;':'Hamarosan'):'<svg class="i" aria-hidden="true"><use href="#i-lock"></use></svg> Zárva');
-    var cl=done?'done':(open&&has?'open':'lk');
-    return '<div class="les '+cl+'"'+((open&&has)||done?(' onclick="clsOpen('+it.id+')"'):'')+'>'
-      +'<span class="no">'+(done?'✓':it.idx)+'</span><b>'+E(it.title)+'</b>'
-      +(it.mins?'<span class="st">'+it.mins+' perc</span>':'')
+    var cl=done?'done':(open&&has?'open':'lk'), meta=itMeta(it,r);
+    html+='<div class="les '+cl+'"'+((open&&has)||done?(' onclick="clsOpen('+it.id+')"'):'')+'>'
+      +'<span class="no">'+(done?'✓':n)+'</span><b>'+E(it.title)+itBadges(it,r)+(meta?'<span class="meta">'+meta+'</span>':'')+'</b>'
       +'<span class="st">'+st+'</span></div>';
-  }).join(''):'<div class="empty">Ehhez a teremhez még nincs lecke.</div>';
+  });
+  document.getElementById('clsList').innerHTML=its.length?html:'<div class="empty">Ehhez a mappához még nincs videó.</div>';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function clsCfOpen(r){
@@ -3187,15 +3271,23 @@ function clsOpen(id){
   C.item=it; C.tmp=(C.prog[id]?C.prog[id].rating:0);
   trk('video','cls',{room:it.room,idx:it.idx});
   var r=C.rooms.filter(function(x){return x.room===it.room;})[0]||{};
-  document.getElementById('clsPopRoom').innerHTML=roomIco(r.icon)+' '+E(r.title||'')+' · '+it.idx+'. lecke';
-  document.getElementById('clsPopT').textContent=it.title;
+  var sb_=(C.subs||[]).filter(function(x){return x.id===it.sub_id;})[0];
+  document.getElementById('clsPopRoom').innerHTML=roomIco(r.icon)+' '+E(r.title||'')+(sb_?' · '+E(sb_.title):'')+' · '+(pos+1)+'. videó';
+  document.getElementById('clsPopT').innerHTML=E(it.title)+itBadges(it,r);
   document.getElementById('clsPopV').innerHTML=clsEmbed(it.url);
+  var meta=itMeta(it,r), x='';
+  if(it.descr) x+='<div class="descr">'+E(it.descr)+'</div>';
+  if(meta) x+='<div class="meta">'+meta+'</div>';
+  var acts=((r.profile||'')==='service'&&(it.cta||'')==='help'?'':ctaHtml(it))+(it.pdf_url?'<a class="btn" href="'+E(it.pdf_url)+'" target="_blank" rel="noopener" onclick="trk(\'pdf\',\'cls\',{item:'+it.id+'})">'+ico('download')+' PDF</a>':'');
+  if(acts) x+='<div class="acts">'+acts+'</div>';
+  if((r.profile||'')==='service') x+='<div class="svc"><b>Megoldódott?</b><button class="btn" onclick="svcResolved('+it.id+',true)">'+ico('check')+' Igen, sikerült</button><button class="btn" onclick="svcResolved('+it.id+',false)">'+ico('hand')+' Nem, segítséget kérek</button></div>';
+  document.getElementById('clsPopX').innerHTML=x;
   clsRateBox();
   document.getElementById('clsOv').style.display='flex';
 }
 function clsClose(){
   document.getElementById('clsOv').style.display='none';
-  document.getElementById('clsPopV').innerHTML='';
+  document.getElementById('clsPopV').innerHTML=''; var px=document.getElementById('clsPopX'); if(px) px.innerHTML='';
   C.item=null;
 }
 function clsStarsBuild(){
@@ -3298,6 +3390,7 @@ function kbAdmRender(){
       +'<textarea class="sum" id="kas'+k.id+'" placeholder="Egy mondat, ami a csempén látszik" style="min-height:44px;">'+E(k.summary||'')+'</textarea>'
       +'<input class="v" id="kac'+k.id+'" value="'+E(k.cat||'')+'" placeholder="Címke a csempén (pl. Nyugdíj)">'
       +'<input class="pdf" id="kau'+k.id+'" value="'+E(k.url||'')+'" placeholder="A teljes cikk linkje (üres = hamarosan)">'
+      +'<input class="v" id="kap'+k.id+'" value="'+E(k.pdf_url||'')+'" placeholder="PDF melléklet linkje (nem kötelező)" style="grid-area:auto;grid-column:1 / -1;">'
       +'<div class="act"><button class="btn primary" onclick="kbAdmSave('+k.id+')">Mentés</button>'
       +'<button class="btn" style="color:var(--pink);" onclick="kbAdmDel('+k.id+')">Törlés</button>'
       +'<span class="small">'+(k.active?ico('check')+' látszik':ico('eye')+' rejtve')+(k.url?'':' · link nélkül: hamarosan')+'</span></div>'
@@ -3307,7 +3400,7 @@ function kbAdmRender(){
 async function kbAdmSave(id){
   var g=function(k){ var e=document.getElementById(k+id); return e?e.value:''; };
   var t=g('kaT').trim(); if(!t){ toast('A cím nem lehet üres.'); return; }
-  var row={ord:+g('kao')||0,topic:g('kat'),title:t,summary:g('kas').trim()||null,cat:g('kac').trim()||'Alap',url:g('kau').trim()||null,active:document.getElementById('kaa'+id).checked};
+  var row={ord:+g('kao')||0,topic:g('kat'),title:t,summary:g('kas').trim()||null,cat:g('kac').trim()||'Alap',url:g('kau').trim()||null,pdf_url:g('kap').trim()||null,active:document.getElementById('kaa'+id).checked};
   var r=await sb.from('hub_kb').update(row).eq('id',id);
   if(r.error){ toast('@err '+r.error.message); return; }
   toast('@ok Mentve.'); await kbAdmLoad(); await loadAll();
@@ -3394,53 +3487,150 @@ async function topicAdmSave(){
   var m={}; TOPICS.forEach(function(t){ var e=document.getElementById('ta_'+t[0]); if(e) m[t[0]]=e.value; });
   if(await setSave('topic_tiers',m)){ topicTiersApply(); topicAdmSum(); toast('@ok Mentve.'); }
 }
+var PROFILES={general:'Általános',kids:'Kids (korosztály)',service:'Szerviz (szolgáltató, folyamat, frissítés)',seasonal:'Szezonális (évszám, meddig aktuális)',events:'Események (felvételek)'};
+var CTA_OPTS=[['none','nincs'],['consult','Időpont egyeztetése'],['help','Segítséget kérek'],['parent','Szülőknek: időpont']];
+function ctaOpts(sel){
+  var o=CTA_OPTS.map(function(c){ return '<option value="'+c[0]+'"'+((sel||'none')===c[0]?' selected':'')+'>CTA: '+c[1]+'</option>'; });
+  (typeof CALCS!=='undefined'?CALCS:[]).forEach(function(c){ var v='calc:'+c.k; o.push('<option value="'+v+'"'+(sel===v?' selected':'')+'>Kalkulátor: '+E(c.t)+'</option>'); });
+  return o.join('');
+}
+function vidAdmHtml(it,r){
+  var p=(r&&r.profile)||'general', x='';
+  if(p==='kids') x+='<label>Ajánlott korosztály<select id="ca'+it.id+'">'+['','6-9','10-13','14-17'].map(function(a){ return '<option value="'+a+'"'+((it.age||'')===a?' selected':'')+'>'+(a||'nincs')+(a?' év':'')+'</option>'; }).join('')+'</select></label>';
+  if(p==='service') x+='<label>Szolgáltató<input id="cp'+it.id+'" value="'+E(it.provider||'')+'" placeholder="pl. Allianz"></label><label>Folyamat<input id="cq'+it.id+'" value="'+E(it.process||'')+'" placeholder="pl. díjfizetés módosítása"></label><label>Utolsó frissítés<input type="date" id="cd'+it.id+'" value="'+E(String(it.updated_on||'').slice(0,10))+'"></label>';
+  if(p==='seasonal') x+='<label>Évszám<input type="number" id="cy'+it.id+'" value="'+(it.year||'')+'" placeholder="2026"></label><label>Meddig aktuális (utána archív)<input type="date" id="cv'+it.id+'" value="'+E(String(it.valid_until||'').slice(0,10))+'"></label><label>Utolsó frissítés<input type="date" id="cd'+it.id+'" value="'+E(String(it.updated_on||'').slice(0,10))+'"></label>';
+  var subs=clsSubs(r.room);
+  return '<div class="vid-adm" id="va'+it.id+'">'
+    +'<span class="no">'+it.idx+'</span>'
+    +'<input class="t" id="ct'+it.id+'" value="'+E(it.title)+'" placeholder="A videó címe">'
+    +'<input class="m" id="cm'+it.id+'" value="'+(it.mins||'')+'" placeholder="perc" title="Hossz percben">'
+    +'<input class="u" id="cu'+it.id+'" value="'+E(it.url||'')+'" placeholder="Videó link: YouTube, Vimeo, Google Drive vagy mp4">'
+    +'<select class="k" id="ck'+it.id+'" title="E = edukációs, K = konverziós"><option value="E"'+(it.kind!=='K'?' selected':'')+'>E · tanulás</option><option value="K"'+(it.kind==='K'?' selected':'')+'>K · döntés</option></select>'
+    +'<textarea class="d" id="cx'+it.id+'" placeholder="Leírás a videó alatt (1-3 mondat)" style="min-height:44px;">'+E(it.descr||'')+'</textarea>'
+    +'<select class="cta" id="cc'+it.id+'" title="Gomb a videó alatt">'+ctaOpts(it.cta)+'</select>'
+    +'<select class="p" id="cs'+it.id+'" title="Almappa"><option value="">Almappa nélkül</option>'+subs.map(function(sb_){ return '<option value="'+sb_.id+'"'+(it.sub_id===sb_.id?' selected':'')+'>'+sb_.idx+'. '+E(sb_.title)+'</option>'; }).join('')+'</select>'
+    +'<input class="pdf" id="cf'+it.id+'" value="'+E(it.pdf_url||'')+'" placeholder="PDF link (Drive vagy közvetlen)">'
+    +(x?'<div class="x">'+x+'</div>':'<div class="x" style="display:none;"></div>')
+    +'<div class="act"><button class="btn primary" onclick="clsAdmSave('+it.id+')">Mentés</button>'
+    +'<button class="btn" style="color:var(--pink);" onclick="clsAdmDel('+it.id+',this)">Törlés</button>'
+    +'<span class="small">'+(it.url?ico('video')+' videó':ico('hourglass')+' link nélkül')+(it.pdf_url?' · '+ico('file')+' PDF':'')+(it.valid_until&&String(it.valid_until)<new Date().toISOString().slice(0,10)?' · <b style="color:var(--pink);">archív</b>':'')+'</span></div>'
+    +'</div>';
+}
+function clsAdmReview(){
+  var td=new Date(), tds=td.toISOString().slice(0,10), old=new Date(td.getTime()-183*86400000).toISOString().slice(0,10), soon=new Date(td.getTime()+30*86400000).toISOString().slice(0,10);
+  var out=[];
+  C.items.forEach(function(it){
+    var r=C.rooms.filter(function(x){return x.room===it.room;})[0]; if(!r) return;
+    var sb_=(C.subs||[]).filter(function(x){return x.id===it.sub_id;})[0];
+    var where=E(r.title)+(sb_?' · '+E(sb_.title):'');
+    if(r.profile==='service'){ if(!it.updated_on) out.push([where,it.title,'nincs frissítési dátum']); else if(String(it.updated_on)<old) out.push([where,it.title,'6 hónapnál régebbi: '+dHu(it.updated_on)]); }
+    if(r.profile==='seasonal'){ if(!it.valid_until) out.push([where,it.title,'nincs lejárat']); else if(String(it.valid_until)<tds) out.push([where,it.title,'archív: lejárt '+dHu(it.valid_until)]); else if(String(it.valid_until)<soon) out.push([where,it.title,'30 napon belül lejár: '+dHu(it.valid_until)]); }
+    if(r.profile==='kids'&&!it.age) out.push([where,it.title,'nincs korosztály']);
+  });
+  return out;
+}
 function clsAdmRender(){
   var sel=document.getElementById('clsNewRoomI');
   if(sel && !sel.options.length) sel.innerHTML=roomIcoOpts('cap');
   var filled=C.items.filter(function(x){return x.url;}).length;
-  document.getElementById('clsAdmCnt').textContent='· '+C.rooms.length+' terem · '+C.items.length+' lecke · '+filled+' videó feltöltve';
-  document.getElementById('clsAdm').innerHTML=C.rooms.map(function(r){
-    var its=clsItems(r.room);
-    return '<div class="card" style="margin-bottom:1rem;">'
-      +'<div class="pt" style="font-size:1.05rem;margin-bottom:.15rem;">'+roomIco(r.icon)+' <em>'+E(r.title)+'</em> <span class="small" style="font-weight:400;">· '+r.room+'. terem'+(r.auto_open?' · saját menüpont (Események), nem foglal helyet':'')+'</span>'
-        +' <select onchange="clsAdmRoomIcon('+r.room+',this.value)" title="A terem ikonja" style="font-size:.75rem;padding:.25rem .5rem;">'+roomIcoOpts(r.icon)+'</select>'+' <select onchange="clsAdmRoomTier('+r.room+',this.value)" title="Melyik csomagszinttől érhető el" style="font-size:.75rem;padding:.25rem .5rem;">'
-        +['basic','plus','vip'].map(function(k){ return '<option value="'+k+'"'+((r.min_tier||'basic')===k?' selected':'')+'>'+TIER[k].n+' csomagtól</option>'; }).join('')
-        +'</select>'
+  document.getElementById('clsAdmCnt').textContent='· '+C.rooms.length+' mappa · '+(C.subs||[]).length+' almappa · '+C.items.length+' videó · '+filled+' linkkel';
+  var rev=clsAdmReview();
+  var revHtml='<div class="card" style="margin-bottom:1rem;" id="clsRev"><div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;">'+ico('alert')+' Felülvizsgálandó <span class="small" style="font-weight:400;">· '+rev.length+' videó</span></div>'
+    +'<p class="small">Szerviz-videó 6 hónapnál régebbi vagy dátum nélküli; szezonális videó lejárt vagy 30 napon belül lejár; Kids-videó korosztály nélkül. A lejárt szezonális videót az ügyfél már nem látja (archív), amíg új lejáratot nem adsz.</p>'
+    +(rev.length?rev.map(function(x){ return '<div class="rev-row"><span class="small">'+x[0]+'</span><b>'+E(x[1])+'</b><span class="why small" style="color:var(--pink);">'+E(x[2])+'</span></div>'; }).join(''):'<div class="empty">Minden rendben, nincs teendő.</div>')
+    +'</div>';
+  document.getElementById('clsAdm').innerHTML=revHtml+C.rooms.map(function(r){
+    var its=clsItems(r.room), subs=clsSubs(r.room);
+    var hd='<div class="card" style="margin-bottom:1rem;" id="ra'+r.room+'">'
+      +'<div class="pt" style="font-size:1.05rem;margin-bottom:.15rem;">'+roomIco(r.icon)+' <em>'+E(r.title)+'</em> <span class="small" style="font-weight:400;">· '+r.room+'. mappa · '+subs.length+' almappa · '+its.length+' videó'+(r.auto_open?' · Események menüpont':'')+'</span>'
+        +' <select onchange="clsAdmRoomIcon('+r.room+',this.value)" title="A mappa ikonja" style="font-size:.75rem;padding:.25rem .5rem;">'+roomIcoOpts(r.icon)+'</select>'
+        +' <select onchange="clsAdmRoomTier('+r.room+',this.value)" title="Melyik csomagtól érhető el" style="font-size:.75rem;padding:.25rem .5rem;">'
+        +['basic','plus','vip'].map(function(k){ return '<option value="'+k+'"'+((r.min_tier||'basic')===k?' selected':'')+'>'+TIER[k].n+' csomagtól</option>'; }).join('')+'</select>'
+        +' <select onchange="clsAdmRoomProfile('+r.room+',this.value)" title="Milyen mezők tartoznak a mappa videóihoz" style="font-size:.75rem;padding:.25rem .5rem;">'
+        +Object.keys(PROFILES).map(function(k){ return '<option value="'+k+'"'+((r.profile||'general')===k?' selected':'')+'>'+PROFILES[k]+'</option>'; }).join('')+'</select>'
         +' <label class="small" style="display:inline-flex;align-items:center;gap:.3rem;" title="Nem foglal helyet, az Események menüpontban jelenik meg"><input type="checkbox" onchange="clsAdmRoomAuto('+r.room+',this.checked)"'+(r.auto_open?' checked':'')+'> Események menüpont</label>'
         +'</div>'
-      +'<p class="small" style="margin-bottom:.75rem;">'+E(r.goal||'')+'</p>'
-      +its.map(function(it){
-        return '<div class="adm-les">'
-          +'<span class="no">'+it.idx+'</span>'
-          +'<input class="t" id="ct'+it.id+'" value="'+E(it.title)+'" placeholder="A lecke címe">'
-          +'<input class="u" id="cu'+it.id+'" value="'+E(it.url||'')+'" placeholder="Videó link (YouTube, Drive, Vimeo, mp4)">'
-          +'<input class="m" id="cm'+it.id+'" value="'+(it.mins||'')+'" placeholder="perc">'
-          +'<button class="btn primary sv" onclick="clsAdmSave('+it.id+')">Mentés</button>'
-          +'<button class="btn dl" onclick="clsAdmDel('+it.id+',this)" title="Lecke törlése">✕</button>'
-          +'<span class="st">'+(it.url?'<svg class="i" aria-hidden="true"><use href="#i-video"></use></svg>':'·')+'</span>'
+      +'<div class="room-adm-hd"><input id="rt'+r.room+'" value="'+E(r.title)+'" placeholder="A mappa neve"><input id="rg'+r.room+'" value="'+E(r.goal||'')+'" placeholder="Mi a mappa célja? (az ügyfél látja)"><input id="ro'+r.room+'" value="'+E(r.outcome||'')+'" placeholder="Mappazáró eredmény (az ügyfél látja)"><div><button class="btn primary" onclick="clsAdmRoomSave('+r.room+')">Mappa mentése</button></div></div>';
+    var body=subs.map(function(sb_){
+      var sits=its.filter(function(x){return x.sub_id===sb_.id;});
+      return '<div class="sub-adm" id="sa'+sb_.id+'"><div class="sub-hd"><span class="no">'+sb_.idx+'</span>'
+        +'<input id="st'+sb_.id+'" value="'+E(sb_.title)+'" placeholder="Az almappa neve">'
+        +'<input id="si'+sb_.id+'" type="number" value="'+sb_.idx+'" title="Sorrend" style="width:64px;">'
+        +'<button class="btn primary" onclick="subAdmSave('+sb_.id+')">Mentés</button>'
+        +'<button class="btn" style="color:var(--pink);" onclick="subAdmDel('+sb_.id+',this)" title="Almappa törlése (a videói almappa nélkül maradnak)">Törlés</button></div>'
+        +sits.map(function(it){ return vidAdmHtml(it,r); }).join('')
+        +'<button class="btn" onclick="clsAdmAdd('+r.room+','+sb_.id+')">+ új videó ebbe az almappába</button>'
         +'</div>';
-      }).join('')
-      +'<button class="btn" style="margin-top:.55rem;" onclick="clsAdmAdd('+r.room+')">+ új lecke ehhez a teremhez</button>'
-    +'</div>';
-  }).join('')||'<div class="empty">Még nincs terem. Futtasd le a hub_edu.sql fájlt, vagy hozz létre egyet alább.</div>';
+    }).join('');
+    var loose=its.filter(function(x){return !x.sub_id||!subs.some(function(sb_){return sb_.id===x.sub_id;});});
+    if(loose.length) body+='<div class="sub-adm" style="border-color:#d3dbe4;"><div class="sub-hd"><span class="no" style="background:#8a97a8;">·</span><b class="small">Almappa nélkül</b></div>'+loose.map(function(it){ return vidAdmHtml(it,r); }).join('')+'</div>';
+    body+='<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem;"><button class="btn" onclick="subAdmAdd('+r.room+')">+ új almappa</button><button class="btn" onclick="clsAdmAdd('+r.room+',null)">+ új videó almappa nélkül</button></div>';
+    return hd+body+'</div>';
+  }).join('')||'<div class="empty">Még nincs mappa. Futtasd le a hub_all.sql fájlt, vagy hozz létre egyet alább.</div>';
+}
+async function clsAdmRoomSave(room){
+  var g=function(k){ var e=document.getElementById(k+room); return e?e.value.trim():''; };
+  var t=g('rt'); if(!t){ toast('A mappa neve nem lehet üres.'); return; }
+  var r=await sb.from('hub_edu_rooms').update({title:t,goal:g('rg')||null,outcome:g('ro')||null}).eq('room',room);
+  if(r&&r.error){ toast('@err '+r.error.message); return; }
+  var rm=C.rooms.filter(function(x){return x.room===room;})[0]; if(rm){ rm.title=t; rm.goal=g('rg')||null; rm.outcome=g('ro')||null; }
+  clsAdmRender(); toast('@ok Mappa mentve.');
+}
+async function clsAdmRoomProfile(room,v){
+  var r=await sb.from('hub_edu_rooms').update({profile:v}).eq('room',room);
+  if(r&&r.error){ toast('@err '+r.error.message); return; }
+  var rm=C.rooms.filter(function(x){return x.room===room;})[0]; if(rm) rm.profile=v;
+  clsAdmRender(); toast('@ok A mappa mezői: '+PROFILES[v]);
+}
+async function subAdmAdd(room){
+  var subs=clsSubs(room), nx=subs.length?subs[subs.length-1].idx+1:1;
+  var r=await sb.from('hub_edu_subs').insert({room:room,idx:nx,title:'Új almappa '+nx}).select();
+  if(r&&r.error){ toast('@err '+r.error.message); return; }
+  if(r&&r.data&&r.data[0]) C.subs.push(r.data[0]);
+  clsAdmRender(); toast('@ok Új almappa. Írd át a nevét, és tegyél bele videót.');
+}
+async function subAdmSave(id){
+  var t=(document.getElementById('st'+id).value||'').trim(), ix=parseInt(document.getElementById('si'+id).value,10)||1;
+  if(!t){ toast('Az almappa neve nem lehet üres.'); return; }
+  var r=await sb.from('hub_edu_subs').update({title:t,idx:ix}).eq('id',id);
+  if(r&&r.error){ toast('@err '+r.error.message); return; }
+  var sb_=C.subs.filter(function(x){return x.id===id;})[0]; if(sb_){ sb_.title=t; sb_.idx=ix; }
+  clsAdmRender(); toast('@ok Almappa mentve.');
+}
+async function subAdmDel(id,btn){
+  if(btn.getAttribute('data-c')!=='1'){ btn.setAttribute('data-c','1'); btn.textContent='Biztos? Törlés'; setTimeout(function(){ if(btn){ btn.removeAttribute('data-c'); btn.textContent='Törlés'; } },4000); return; }
+  var r=await sb.from('hub_edu_subs').delete().eq('id',id);
+  if(r&&r.error){ toast('@err '+r.error.message); return; }
+  C.subs=C.subs.filter(function(x){return x.id!==id;}); C.items.forEach(function(it){ if(it.sub_id===id) it.sub_id=null; });
+  clsAdmRender(); toast('Almappa törölve, a videói almappa nélkül maradtak.');
 }
 async function clsAdmSave(id){
-  var t=(document.getElementById('ct'+id).value||'').trim();
-  var u=(document.getElementById('cu'+id).value||'').trim();
-  var m=parseInt(document.getElementById('cm'+id).value,10)||0;
-  if(!t){ toast('A lecke címe nem lehet üres.'); return; }
-  var r=await sb.from('hub_edu_items').update({title:t,url:u||null,mins:m}).eq('id',id);
+  var g=function(k){ var e=document.getElementById(k+id); return e?String(e.value||'').trim():null; };
+  var t=g('ct'); if(!t){ toast('A videó címe nem lehet üres.'); return; }
+  var upd={title:t,url:g('cu')||null,mins:parseInt(g('cm'),10)||0};
+  if(g('ck')!==null) upd.kind=(g('ck')==='K'?'K':'E');
+  if(g('cc')!==null) upd.cta=g('cc')||'none';
+  if(g('cx')!==null) upd.descr=g('cx')||null;
+  if(g('cf')!==null) upd.pdf_url=g('cf')||null;
+  if(g('cs')!==null) upd.sub_id=g('cs')?+g('cs'):null;
+  if(g('ca')!==null) upd.age=g('ca')||null;
+  if(g('cp')!==null) upd.provider=g('cp')||null;
+  if(g('cq')!==null) upd.process=g('cq')||null;
+  if(g('cd')!==null) upd.updated_on=g('cd')||null;
+  if(g('cy')!==null) upd.year=g('cy')?+g('cy'):null;
+  if(g('cv')!==null) upd.valid_until=g('cv')||null;
+  var r=await sb.from('hub_edu_items').update(upd).eq('id',id);
   if(r&&r.error){ toast('@err '+r.error.message); return; }
   var it=C.items.filter(function(x){return x.id===id;})[0];
-  if(it){ it.title=t; it.url=u||null; it.mins=m; }
+  if(it) Object.assign(it,upd);
   toast('@ok Mentve: '+t); clsAdmRender(); recAdmRender();
 }
 async function clsAdmDel(id,btn){
-  if(btn.getAttribute('data-c')!=='1'){ btn.setAttribute('data-c','1'); btn.textContent='Biztos? ✕'; setTimeout(function(){ if(btn){ btn.removeAttribute('data-c'); btn.textContent='✕'; } },4000); return; }
+  if(btn.getAttribute('data-c')!=='1'){ btn.setAttribute('data-c','1'); btn.setAttribute('data-o',btn.textContent); btn.textContent='Biztos? Törlés'; setTimeout(function(){ if(btn){ btn.removeAttribute('data-c'); btn.textContent=btn.getAttribute('data-o')||'Törlés'; } },4000); return; }
   var r=await sb.from('hub_edu_items').delete().eq('id',id);
   if(r&&r.error){ toast('@err '+r.error.message); return; }
   C.items=C.items.filter(function(x){return x.id!==id;});
-  clsAdmRender(); toast('Lecke törölve.');
+  clsAdmRender(); recAdmRender(); toast('Videó törölve.');
 }
 async function clsAdmRoomIcon(room,v){
   var r=await sb.from('hub_edu_rooms').update({icon:v}).eq('room',room);
@@ -3460,9 +3650,10 @@ async function clsAdmRoomTier(room,v){
   var rm=C.rooms.filter(function(x){return x.room===room;})[0]; if(rm) rm.min_tier=v;
   toast('@ok A terem mostantól '+TIER[v].n+' szinttől érhető el.');
 }
-async function clsAdmAdd(room){
-  var its=clsItems(room), nx=its.length?its[its.length-1].idx+1:1;
-  var r=await sb.from('hub_edu_items').insert({room:room,idx:nx,title:'Új lecke '+nx}).select();
+async function clsAdmAdd(room,subId){
+  var its=clsItems(room), nx=its.length?Math.max.apply(null,its.map(function(x){return x.idx;}))+1:1;
+  var row={room:room,idx:nx,title:'Új videó '+nx,kind:'E',cta:'none'}; if(subId) row.sub_id=subId;
+  var r=await sb.from('hub_edu_items').insert(row).select();
   if(r&&r.error){ toast('@err '+r.error.message); return; }
   if(r&&r.data&&r.data[0]) C.items.push(r.data[0]);
   clsAdmRender(); recAdmRender(); toast('@ok Új hely hozzáadva, írd át a címét és tedd be a linket.');
