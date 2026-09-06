@@ -4157,7 +4157,11 @@ async function actRender(){
 function advName(email){ var a=(S.advisors||[]).filter(function(x){return x.email===email;})[0]; return a?a.name:(email||'·'); }
 function advRender(){ advStats(); advFetch(); }
 async function advOpen(uid){
-  S.cur=S.clients.filter(function(c){return c.user_id===uid;})[0];
+  /* az Ügyfelek oldalra váltunk, ha máshonnan (pl. Nyitott ügyek) hívták: az adatlap ott van */
+  var pg=document.querySelector('.page.on');
+  if(!pg||pg.id!=='p-adv'){ go('adv'); }
+  var det=document.getElementById('advDetail'); if(det) det.innerHTML='<div class="card"><div class="empty">Ügyfél betöltése…</div></div>';
+  S.cur=(S.clients||[]).filter(function(c){return c.user_id===uid;})[0];
   if(!S.cur){ var one=await sb.from('hub_profiles').select('*').eq('user_id',uid).maybeSingle(); S.cur=one.data; }
   if(!S.cur) return;
   var it=await sb.from('hub_items').select('*').eq('user_id',uid).order('created_at'); var items=it.data||[];
