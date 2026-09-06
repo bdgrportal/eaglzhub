@@ -316,6 +316,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 .atile .go{position:absolute;right:.8rem;top:.8rem;font-size:.7rem;color:var(--gray);}
 .atile .wmini{display:flex;flex-wrap:wrap;gap:2px;margin-top:.4rem;}
 .adv-hd{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.inv-res{border:1px solid rgba(15,157,143,.4);background:rgba(15,157,143,.06);border-radius:14px;padding:.9rem 1rem;margin-top:.8rem;}
+.inv-res .code-in{font-size:1.9rem;margin:.4rem 0;color:var(--navy);letter-spacing:.35em;}
+.inv-tbl{width:100%;border-collapse:collapse;font-size:.8rem;} .inv-tbl th{text-align:left;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);padding:.3rem;}
+.inv-tbl td{padding:.45rem .3rem;border-top:1px solid var(--border);vertical-align:middle;} .inv-tbl .cd{font-family:var(--fb);font-weight:800;letter-spacing:.14em;}
+.inv-tbl .btn{padding:.3rem .55rem;font-size:.7rem;}
+.pend{border:1px solid rgba(240,180,41,.7);background:rgba(240,180,41,.09);border-radius:12px;padding:.7rem .9rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;}
+.pend b{font-family:var(--fb);} .pend .sp{flex:1;}
 .adv-hd .ctl{margin-left:auto;display:flex;gap:.4rem;flex-wrap:wrap;}
 @media(max-width:700px){.adv-hd .ctl{margin-left:0;width:100%;}}
 .wheel-ed label{display:flex;align-items:center;gap:.4rem;font-size:.78rem;border:1px solid var(--border);border-radius:9px;padding:.4rem .55rem;background:#fff;}
@@ -909,11 +916,21 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="gate-sub" style="text-align:center;font-family:var(--fb);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);">EAGLZ Hub</div>
     <div class="gate-sub">Még egy lépés, és bent vagy</div>
     <h3><svg class="i" aria-hidden="true"><use href="#i-key"></use></svg> Add meg a meghívókódod</h3>
-    <p>A kódot a tanácsadódtól kaptad az elemzésetek végén. Ez köti össze a fiókodat vele, hogy mindig ő lásson rád.</p>
-    <input class="code-in" id="gCodeIn" placeholder="PL. ZOE-24" maxlength="16" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')gRedeem()">
+    <p>A tanácsadód a te e-mail címedre szóló, 6 karakteres meghívót adott. Ha a linkre kattintottál, a kód már itt van. A meghívó egyszer váltható be, és ahhoz az e-mail címhez tartozik, amivel most beléptél.</p>
+    <input class="code-in" id="gCodeIn" placeholder="PL. FQBR8P" maxlength="16" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')gRedeem()">
+    <input id="gPhoneIn" placeholder="Telefonszámod (ahogy a tanácsadódnak megadtad)" type="tel" style="display:none;margin-top:.5rem;" onkeydown="if(event.key==='Enter')gRedeem()">
     <div class="msg" id="gCodeMsg"></div>
     <button class="btn pri" onclick="gRedeem()">Fiók aktiválása</button>
-    <div class="hint">Nincs kódod? Akkor még nem ültetek le elemzésre. Írj nekünk: <b class="cmail">gentischer.richard@ovb.hu</b>, és összekötünk egy tanácsadóval.</div>
+    <div class="hint">Nincs meghívód? Akkor még nem ültetek le elemzésre. Írj nekünk: <b class="cmail">gentischer.richard@ovb.hu</b>, és összekötünk egy tanácsadóval.</div>
+    <span class="link" onclick="logout()">Kilépek</span>
+  </div>
+
+  <div class="gate-box" id="gPending" style="display:none;">
+    <div class="gate-sub" style="text-align:center;font-family:var(--fb);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);">EAGLZ Hub</div>
+    <div class="gate-sub">Majdnem kész</div>
+    <h3><svg class="i" aria-hidden="true"><use href="#i-hourglass"></use></svg> A tanácsadód jóváhagyására vár a fiókod</h3>
+    <p>A meghívót beváltottad, <b id="gPendAdv">a tanácsadód</b> kap egy jelzést, és egy kattintással beenged. Ez általában még aznap megtörténik. Ha sürgős, írj neki.</p>
+    <button class="btn pri" onclick="route()">Frissítem</button>
     <span class="link" onclick="logout()">Kilépek</span>
   </div>
 
@@ -980,7 +997,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="nav-item on" data-p="adv" onclick="go('adv')"><svg class="i" aria-hidden="true"><use href="#i-users"></use></svg> Ügyfeleim</div>
     <div class="nav-item" data-p="advq" onclick="go('advq')"><svg class="i" aria-hidden="true"><use href="#i-inbox"></use></svg> Nyitott ügyek <span class="dot" id="dotAdv" style="display:none;"></span></div>
     <div class="nav-item" data-p="advact" onclick="go('advact')"><svg class="i" aria-hidden="true"><use href="#i-trend"></use></svg> Aktivitás</div>
-  <div class="nav-item" data-p="advcode" onclick="go('advcode')"><svg class="i" aria-hidden="true"><use href="#i-key"></use></svg> Meghívókódom</div>
+  <div class="nav-item" data-p="advcode" onclick="go('advcode')"><svg class="i" aria-hidden="true"><use href="#i-key"></use></svg> Meghívóim <span class="dot" id="dotInv" style="display:none;"></span></div>
     <div class="nav-item" data-p="advs" onclick="go('advs')" id="navAdvs" style="display:none;"><svg class="i" aria-hidden="true"><use href="#i-crown"></use></svg> Tanácsadók és kódok</div>
     <div class="nav-item" data-p="clsadm" onclick="go('clsadm')" id="navClsAdm" style="display:none;"><svg class="i" aria-hidden="true"><use href="#i-sliders"></use></svg> Tartalom</div>
   </div>
@@ -1458,7 +1475,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
       <div class="filt-row">
         <input id="fq" placeholder="Keresés névre vagy e-mailre…" oninput="advQ()">
         <select id="fTier" onchange="advQ(1)"><option value="">Minden szint</option><option value="basic">Basic</option><option value="plus">Plus</option><option value="vip">VIP</option></select>
-        <select id="fStatus" onchange="advQ(1)"><option value="">Minden státusz</option><option value="active">Aktív</option><option value="waitlist">Várólistás</option></select>
+        <select id="fStatus" onchange="advQ(1)"><option value="">Minden státusz</option><option value="active">Aktív</option><option value="pending">Jóváhagyásra vár</option><option value="waitlist">Várólistás</option></select>
         <select id="fAdvisor" onchange="advQ(1)" style="display:none;"><option value="">Minden tanácsadó</option></select>
         <select id="fArea" onchange="advQ(1)"><option value="">Bármelyik termékkategória</option></select>
         <select id="fAreaSt" onchange="advQ(1)"><option value="na">jelölés nélkül</option><option value="prog">intézés alatt</option><option value="ok">kész, tanácsadóval</option><option value="ext">kész, máshol</option><option value="nr">nem releváns</option></select>
@@ -1492,15 +1509,23 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
   </div>
 
   <div class="page" id="p-advcode">
-    <div class="pt"><svg class="i" aria-hidden="true"><use href="#i-key"></use></svg> <em>Meghívókódom</em></div>
-    <div class="card" style="max-width:560px;">
-      <p class="small">Ezt a kódot add át az ügyfelednek az elemzés végén. Ezzel köti hozzád a fiókját.</p>
-      <div class="code-in" id="advCodeBig" style="font-size:2rem;margin:.8rem 0;color:var(--navy);"></div>
-      <input id="advInvite" readonly style="width:100%;font-size:.78rem;">
-      <div style="display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap;">
-        <button class="btn pri" onclick="copyText(document.getElementById('advCodeBig').textContent,'Kód a vágólapon')"><svg class="i" aria-hidden="true"><use href="#i-clipboard"></use></svg> Kód másolása</button>
-        <button class="btn" onclick="copyText(document.getElementById('advInvite').value,'Link a vágólapon')"><svg class="i" aria-hidden="true"><use href="#i-link"></use></svg> Meghívó link másolása</button>
+    <div class="pt"><svg class="i" aria-hidden="true"><use href="#i-key"></use></svg> <em>Meghívóim</em> <span class="small" style="font-weight:400;">· így kerül hozzád egy ügyfél</span></div>
+    <div id="advPend"></div>
+    <div class="card" style="max-width:760px;">
+      <div class="pt" style="font-size:1.05rem;margin-bottom:.2rem;"><svg class="i" aria-hidden="true"><use href="#i-userplus"></use></svg> Új ügyfél meghívása</div>
+      <p class="small">Írd be az ügyfél nevét és az e-mail címét, amivel regisztrálni fog. A rendszer egyszer használatos, 7 napig élő meghívót készít, ami csak ehhez az e-mail címhez jó. Add át linkként vagy a 6 karakteres kóddal.</p>
+      <div class="addform">
+        <input id="invName" placeholder="Ügyfél neve">
+        <input id="invEmail" placeholder="E-mail címe (ezzel fog regisztrálni) *" type="email">
+        <input id="invPhone" placeholder="Telefonszáma (nem kötelező)" type="tel">
+        <input id="invNote" placeholder="Belső megjegyzés (csak te látod)">
+        <button class="btn pri" onclick="invCreate()"><svg class="i" aria-hidden="true"><use href="#i-key"></use></svg> Meghívó készítése</button>
       </div>
+      <div id="invRes"></div>
+    </div>
+    <div class="card" style="margin-top:1rem;">
+      <div class="pt" style="font-size:1.05rem;margin-bottom:.2rem;"><svg class="i" aria-hidden="true"><use href="#i-doclist"></use></svg> Meghívóim <span class="small" style="font-weight:400;" id="invCnt"></span></div>
+      <div id="invList"><div class="empty">Betöltés…</div></div>
     </div>
     <div class="card" style="max-width:560px;margin-top:1rem;">
       <div class="pt" style="font-size:1.05rem;margin-bottom:.2rem;"><svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Időpontfoglaló linkem</div>
@@ -1717,7 +1742,7 @@ async function acceptTerms(){
 
 /* ── kapu ── */
 var gMode='in';
-function gShow(id){ ['gLogin','gCode','gMail','gReset','gTerms'].forEach(function(x){ document.getElementById(x).style.display=(x===id?'block':'none'); }); document.getElementById('gate').style.display='flex'; }
+function gShow(id){ ['gLogin','gCode','gMail','gReset','gTerms','gPending'].forEach(function(x){ document.getElementById(x).style.display=(x===id?'block':'none'); }); document.getElementById('gate').style.display='flex'; }
 function gTab(m){ gMode=m; document.getElementById('tabIn').classList.toggle('on',m==='in'); document.getElementById('tabUp').classList.toggle('on',m==='up'); document.getElementById('gName').style.display=m==='up'?'block':'none'; document.getElementById('gBtn').textContent=m==='up'?'Regisztrálok':'Belépek'; document.getElementById('gMsg').textContent=''; }
 function gMsg(t,ok){ var m=document.getElementById('gMsg'); m.innerHTML=msgHtml(t); m.className='msg'+(ok?' ok':''); }
 async function gSubmit(){
@@ -1768,12 +1793,20 @@ async function gSetPass(){
 }
 async function gRedeem(){
   var c=document.getElementById('gCodeIn').value.trim().toUpperCase();
-  if(!c){ document.getElementById('gCodeMsg').textContent='Írd be a kódot.'; return; }
+  var m=document.getElementById('gCodeMsg');
+  if(!c){ m.textContent='Írd be a kódot.'; return; }
   var nm=(S.user.user_metadata&&S.user.user_metadata.name)||S.user.email;
-  var r=await sb.rpc('hub_redeem_code',{p_code:c,p_name:nm});
+  var ph=document.getElementById('gPhoneIn'); var phv=(ph&&ph.style.display!=='none')?ph.value.trim():null;
+  var r=await sb.rpc('hub_redeem_code',{p_code:c,p_name:nm,p_phone:phv||null});
   var d=r.data||{};
-  if(r.error||!d.ok){ document.getElementById('gCodeMsg').innerHTML=ico('xcircle')+' Ismeretlen kód. Kérd el újra a tanácsadódtól.'; return; }
-  toast('@win Aktiválva! Mostantól '+d.advisor+' a személyes tanácsadód a Hubban.');
+  if(r.error||!d.ok){
+    if(d.need_phone&&ph){ ph.style.display='block'; ph.focus(); }
+    m.innerHTML=ico('xcircle')+' '+E(d.msg||'Nem találjuk ezt a meghívót. Kérd el újra a tanácsadódtól.');
+    trk('redeem_fail',null,{err:d.err||'rpc'}); return;
+  }
+  trk('redeem',null,{legacy:!!d.legacy});
+  if(d.status==='pending'){ toast('@info Beváltva. '+d.advisor+' egy kattintással beenged.'); }
+  else toast('@win Aktiválva! Mostantól '+d.advisor+' a személyes tanácsadód a Hubban.');
   await route();
 }
 async function logout(){ try{ localStorage.removeItem('hub_last'); }catch(e){} await sb.auth.signOut(); location.reload(); }
@@ -1781,16 +1814,24 @@ async function logout(){ try{ localStorage.removeItem('hub_last'); }catch(e){} a
 /* ── útválasztás ── */
 async function route(){
   var s=await sb.auth.getSession(); S.user=s.data.session?s.data.session.user:null;
-  if(!S.user){ gShow('gLogin'); hideApp(); idleNotice(); return; }
+  if(!S.user){
+    gShow('gLogin'); hideApp(); idleNotice();
+    try{ var q0=new URLSearchParams(location.search); if(q0.get('inv')){ gTab('up'); if(q0.get('e')){ document.getElementById('gEmail').value=q0.get('e'); } gMsg('@info Meghívóval érkeztél: regisztrálj ugyanazzal az e-mail címmel, amire a meghívót kaptad.',true); } }catch(e){}
+    return;
+  }
   if(idleMins()>=IDLE_MIN){ idleLogout(); return; }
   var pr=await sb.from('hub_profiles').select('*').eq('user_id',S.user.id).maybeSingle();
   S.profile=pr.data||null;
   var ar=await sb.from('hub_advisors').select('*').eq('email',S.user.email).maybeSingle();
   S.advRow=ar.data||null;
   if(!S.profile&&!S.advRow){
-    var qp=new URLSearchParams(location.search).get('code');
+    var qs=new URLSearchParams(location.search), qp=qs.get('inv')||qs.get('code');
     if(qp) document.getElementById('gCodeIn').value=qp.toUpperCase();
     gShow('gCode'); hideApp(); return;
+  }
+  if(S.profile&&S.profile.status==='pending'&&!S.advRow){
+    var pa=document.getElementById('gPendAdv'); if(pa){ var adv=await sb.rpc('hub_my_advisor'); pa.textContent=(adv&&adv.data&&adv.data.name)||'a tanácsadód'; }
+    gShow('gPending'); hideApp(); return;
   }
   /* ügyfélként belépőnek kötelező a tesztfázis-tájékoztató elfogadása */
   if(S.profile&&!S.profile.terms_accepted_at&&!(S.advRow&&!S.profile)){
@@ -4066,7 +4107,7 @@ function advTblRender(total){
   document.getElementById('advTbody').innerHTML=rows.length?rows.map(function(c){
     var w=c.wheel||{}, op=(c.open_tickets||0)+(c.open_life||0);
     return '<tr onclick="advOpen(\''+c.user_id+'\')">'
-      +'<td><div class="nm">'+E(c.name||c.email)+(c.status==='waitlist'?' <span class="tchip basic"><svg class="i" aria-hidden="true"><use href="#i-hourglass"></use></svg></span>':'')+'</div><div class="em">'+E(c.email||'')+'</div></td>'
+      +'<td><div class="nm">'+E(c.name||c.email)+(c.status==='waitlist'?' <span class="tchip basic" title="Várólistás"><svg class="i" aria-hidden="true"><use href="#i-hourglass"></use></svg></span>':(c.status==='pending'?' <span class="bad y" title="Jóváhagyásra vár">vár</span>':''))+'</div><div class="em">'+E(c.email||'')+'</div></td>'
       +'<td><span class="tchip '+(c.tier||'basic')+'">'+tierLab(c.tier||'basic')+'</span></td>'
       +(adm?'<td class="em hm">'+E(advName(c.advisor_email))+'</td>':'')
       +'<td><div class="wcells">'+WHEEL.map(function(x){ return '<span class="wc '+wstOf(w[x[0]])+'" title="'+x[2]+': '+WST[wstOf(w[x[0]])][1]+'"></span>'; }).join('')+'</div></td>'
@@ -4155,6 +4196,7 @@ async function advLoad(){
   var fa=document.getElementById('fAdvisor');
   fa.style.display=adm?'':'none';
   if(adm) fa.innerHTML='<option value="">Minden tanácsadó</option>'+S.advisors.map(function(x){ return '<option value="'+E(x.email)+'">'+E(x.name)+'</option>'; }).join('');
+  invPendLoad();
   var far=document.getElementById('fArea');
   if(far.options.length<2) far.innerHTML='<option value="">Bármelyik termékkategória</option>'+WHEEL.map(function(w){ return '<option value="'+w[0]+'">'+w[2]+'</option>'; }).join('');
   advChips();
@@ -4258,10 +4300,11 @@ function advDetailDraw(){
         +'<option value="basic"'+((c.tier||'basic')==='basic'?' selected':'')+'>Essential</option>'
         +'<option value="plus"'+(c.tier==='plus'?' selected':'')+'>Plus</option>'
         +'<option value="vip"'+(c.tier==='vip'?' selected':'')+'>VIP</option></select>'
-      +'<select id="advStatus" onchange="advProfileSave()"><option value="active"'+(c.status!=='waitlist'?' selected':'')+'>Aktív (elemezve)</option><option value="waitlist"'+(c.status==='waitlist'?' selected':'')+'>Várólistás</option></select>'
+      +'<select id="advStatus" onchange="advProfileSave()"><option value="active"'+((c.status||'active')==='active'?' selected':'')+'>Aktív (elemezve)</option><option value="pending"'+(c.status==='pending'?' selected':'')+'>Jóváhagyásra vár</option><option value="waitlist"'+(c.status==='waitlist'?' selected':'')+'>Várólistás</option></select>'
       +'<input type="date" id="advReview" value="'+(c.next_review||'')+'" onchange="advProfileSave()" title="Következő felülvizsgálat">'
       +(isAdmin()?'<select id="advOwner" onchange="advProfileSave()" title="Tanácsadó átrendelése">'+(S.advisors||[]).map(function(a){return '<option value="'+E(a.email)+'"'+(a.email===c.advisor_email?' selected':'')+'>'+E(a.name)+'</option>';}).join('')+'</select>':'')
     +'</span></div>'
+    +(c.status==='pending'?'<div class="pend" style="margin-top:.6rem;">'+ico('hourglass')+'<b>Jóváhagyásra vár</b><span class="small">beváltotta a meghívót, még nem lát semmit</span><span class="sp"></span><button class="btn pri" onclick="invApprove(\''+uid+'\',true)">'+ico('check')+' Beengedem</button></div>':'')
     +'<div class="small">Kattints egy kártyára: a részletek felugró ablakban nyílnak, nem kell görgetni.</div>'
     +'<div class="adv-tiles">'
     +tile('map','map','Pénzügyi térkép',(cnt.ok+cnt.ext)+' <span style="font-size:.8rem;font-weight:700;color:var(--gray);">/ '+WHEEL.length+' kész</span>',
@@ -4425,8 +4468,10 @@ function advQDraw(){
 async function advsRender(){
   var l=document.getElementById('advsList');
   try{ var cc=await sb.rpc('hub_advisor_counts'); S.advCounts={}; ((cc&&cc.data)||[]).forEach(function(x){ S.advCounts[x.advisor_email]=x.db; }); }catch(e){ S.advCounts={}; }
-  l.innerHTML=(S.advisors||[]).length?'<div style="overflow-x:auto;"><table class="c2-stat-tbl" style="width:100%;border-collapse:collapse;font-size:.8rem;">'
-    +'<tr><th style="text-align:left;">Név</th><th style="text-align:left;">E-mail</th><th>Kód</th><th>Szerep</th><th>Ügyfelek</th><th>Aktív</th><th style="text-align:left;">Időpontfoglaló link</th></tr>'
+  var legacy=setGet('legacy_codes',false)===true;
+  l.innerHTML='<label class="switch" style="margin-bottom:.6rem;font-size:.8rem;"><input type="checkbox" id="legacyChk"'+(legacy?' checked':'')+' onchange="legacySet(this.checked)"> <span><b>Régi statikus kódok elfogadása</b> (RICSI-01 stb.) · átmenetre. Kikapcsolva csak a Meghívóim oldalon készített, e-mailhez kötött meghívó váltható be.</span></label>'
+    +((S.advisors||[]).length?'<div style="overflow-x:auto;"><table class="c2-stat-tbl" style="width:100%;border-collapse:collapse;font-size:.8rem;">'
+    +'<tr><th style="text-align:left;">Név</th><th style="text-align:left;">E-mail</th><th title="Régi statikus kód, csak ha a régi kódok elfogadása be van kapcsolva">Régi kód</th><th>Szerep</th><th>Ügyfelek</th><th>Aktív</th><th title="A beváltás után a tanácsadó engedi be az ügyfelet">Jóváhagyás</th><th title="Az ügyfélnek a meghívóban megadott telefonszámot is be kell írnia">Telefon</th><th style="text-align:left;">Időpontfoglaló link</th></tr>'
     +S.advisors.map(function(a){
       var n=(S.advCounts&&S.advCounts[a.email])||0;
       return '<tr style="border-top:1px solid var(--border);"><td style="padding:.45rem .3rem;font-family:var(--fb);font-weight:700;">'+E(a.name)+'</td><td style="padding:.45rem .3rem;">'+E(a.email)+'</td>'
@@ -4434,9 +4479,12 @@ async function advsRender(){
         +'<td style="text-align:center;"><select onchange="advsSet(\''+E(a.email)+'\',{role:this.value})" style="font-size:.74rem;"><option value="advisor"'+(a.role!=='admin'?' selected':'')+'>kis admin</option><option value="admin"'+(a.role==='admin'?' selected':'')+'>nagy admin</option></select></td>'
         +'<td style="text-align:center;font-family:var(--fb);font-weight:700;">'+n+'</td>'
         +'<td style="text-align:center;"><input type="checkbox"'+(a.active!==false?' checked':'')+' onchange="advsSet(\''+E(a.email)+'\',{active:this.checked})"></td>'
+        +'<td style="text-align:center;"><input type="checkbox"'+(a.approve_required?' checked':'')+' onchange="advsSet(\''+E(a.email)+'\',{approve_required:this.checked})"></td>'
+        +'<td style="text-align:center;"><input type="checkbox"'+(a.phone_required?' checked':'')+' onchange="advsSet(\''+E(a.email)+'\',{phone_required:this.checked})"></td>'
         +'<td style="padding:.3rem;"><input value="'+E(a.booking_url||'')+'" placeholder="https://calendar.google.com/..." style="width:100%;min-width:200px;font-size:.72rem;" onchange="advsBook(\''+E(a.email)+'\',this.value)"></td></tr>';
-    }).join('')+'</table></div>':'<div class="empty">Még nincs tanácsadó felvéve.</div>';
+    }).join('')+'</table></div>':'<div class="empty">Még nincs tanácsadó felvéve.</div>');
 }
+async function legacySet(on){ if(await setSave('legacy_codes',!!on)) toast(on?'@info Régi kódok elfogadva (átmenet). Ne felejtsd kikapcsolni.':'@ok Csak meghívóval lehet bejutni.'); }
 async function advsAdd(){
   var em=document.getElementById('naEmail').value.trim().toLowerCase(), nm=document.getElementById('naName').value.trim(), cd=document.getElementById('naCode').value.trim().toUpperCase(), role=document.getElementById('naRole').value;
   if(!em||!nm||!cd){ toast('E-mail, név és kód is kell.'); return; }
@@ -4445,6 +4493,70 @@ async function advsAdd(){
   S.advisors.push(r.data[0]); advsRender(); toast('@ok Felvéve: '+nm+' · kód: '+cd);
   ['naEmail','naName','naCode'].forEach(function(i){document.getElementById(i).value='';});
 }
+/* ── MEGHÍVÓK ── */
+function invLink(code,email){ return location.href.split('#')[0].split('?')[0]+'?inv='+encodeURIComponent(code)+(email?('&e='+encodeURIComponent(email)):''); }
+function invStatus(i){
+  if(i.used_at) return ['g','beváltva '+dHu(i.used_at)];
+  if(i.revoked_at) return ['','visszavonva'];
+  if(new Date(i.expires_at)<new Date()) return ['y','lejárt '+dHu(i.expires_at)];
+  if(i.locked_until&&new Date(i.locked_until)>new Date()) return ['p','zárolva (túl sok próbálkozás)'];
+  return ['b','él, '+dHu(i.expires_at)+'-ig'];
+}
+function invMailText(i){
+  var adv=(S.advRow&&S.advRow.name)||'a tanácsadód';
+  return 'Szia'+(i.name?' '+i.name.split(' ').slice(-1)[0]:'')+'!\n\nElkészült a személyes EAGLZ Hub-fiókod meghívója. Így lépsz be:\n1. Nyisd meg ezt a linket: '+invLink(i.code,i.email)+'\n2. Regisztrálj ezzel az e-mail címmel: '+i.email+'\n3. A meghívókódod, ha kérné: '+i.code+'\n\nA meghívó 7 napig él, és csak erre az e-mail címre jó.\n\nÜdv,\n'+adv;
+}
+function invResHtml(i){
+  return '<div class="inv-res" id="invResBox"><div class="small" style="font-family:var(--fb);font-weight:700;color:var(--navy);">Meghívó kész: '+E(i.name||'')+' · '+E(i.email)+' · '+dHu(i.expires_at)+'-ig él</div>'
+    +'<div class="code-in">'+E(i.code)+'</div>'
+    +'<input readonly value="'+E(invLink(i.code,i.email))+'" style="width:100%;font-size:.76rem;" onclick="this.select()">'
+    +'<div style="display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap;">'
+    +'<button class="btn pri" onclick="copyText(invLink(\''+E(i.code)+'\',\''+E(i.email)+'\'),\'Link a vágólapon\')">'+ico('link')+' Link másolása</button>'
+    +'<button class="btn" onclick="copyText(\''+E(i.code)+'\',\'Kód a vágólapon\')">'+ico('clipboard')+' Kód másolása</button>'
+    +'<a class="btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;" href="mailto:'+encodeURIComponent(i.email)+'?subject='+encodeURIComponent('EAGLZ Hub · a meghívód')+'&body='+encodeURIComponent(invMailText(i))+'">'+ico('mail')+' E-mail megnyitása a szöveggel</a>'
+    +'</div><div class="small" style="margin-top:.5rem;">Az ügyfél a linkre kattintva egyből a regisztrációhoz jut, az e-mail címe és a kód előtöltve.</div></div>';
+}
+async function invCreate(){
+  var em=document.getElementById('invEmail').value.trim(), nm=document.getElementById('invName').value.trim();
+  if(!em||em.indexOf('@')<1){ toast('Adj meg érvényes e-mail címet.'); return; }
+  var r=await sb.rpc('hub_invite_create',{p_email:em,p_name:nm||null,p_phone:document.getElementById('invPhone').value.trim()||null,p_note:document.getElementById('invNote').value.trim()||null});
+  if(r.error){ toast('@err '+r.error.message); return; }
+  var d=r.data||{}; if(!d.ok){ toast('@err '+(d.msg||'Nem sikerült.')); return; }
+  d.name=nm; document.getElementById('invRes').innerHTML=invResHtml(d);
+  ['invName','invEmail','invPhone','invNote'].forEach(function(i){ document.getElementById(i).value=''; });
+  trk('invite_create',null,{}); toast('@ok Meghívó kész, add át az ügyfélnek.');
+  invLoad();
+}
+async function invLoad(){
+  var el=document.getElementById('invList'); if(!el) return;
+  var r=await sb.from('hub_invites').select('*').order('created_at',{ascending:false});
+  var list=(r&&r.data)||[]; S.invites=list;
+  var cnt=document.getElementById('invCnt'); if(cnt) cnt.textContent='· '+list.length+' db · '+list.filter(function(i){return !i.used_at&&!i.revoked_at&&new Date(i.expires_at)>=new Date();}).length+' él';
+  el.innerHTML=list.length?'<div style="overflow-x:auto;"><table class="inv-tbl"><tr><th>Ügyfél</th><th>E-mail</th><th>Kód</th><th>Állapot</th>'+(isAdmin()?'<th>Tanácsadó</th>':'')+'<th></th></tr>'
+    +list.map(function(i){ var st=invStatus(i), live=!i.used_at&&!i.revoked_at&&new Date(i.expires_at)>=new Date();
+      return '<tr><td><b style="font-family:var(--fb);">'+E(i.name||'·')+'</b>'+(i.note?'<div class="small">'+E(i.note)+'</div>':'')+'</td><td>'+E(i.email)+'</td>'
+        +'<td class="cd">'+(i.used_at?'<span class="small">·</span>':E(i.code))+'</td>'
+        +'<td><span class="bad '+st[0]+'">'+E(st[1])+'</span></td>'
+        +(isAdmin()?'<td class="small">'+E(advName(i.advisor_email))+'</td>':'')
+        +'<td style="white-space:nowrap;">'
+        +(live?'<button class="btn" onclick="invShow('+i.id+')">Link</button> <button class="btn" onclick="invRevoke('+i.id+')">Visszavonom</button>':'')
+        +(!i.used_at&&!live?'<button class="btn" onclick="invRenew('+i.id+')">Újat küldök</button>':'')
+        +'</td></tr>'; }).join('')+'</table></div>':'<div class="empty">Még nincs meghívód. Fent készíthetsz egyet, 20 másodperc.</div>';
+}
+function invShow(id){ var i=(S.invites||[]).filter(function(x){return x.id===id;})[0]; if(!i) return; document.getElementById('invRes').innerHTML=invResHtml(i); document.getElementById('invRes').scrollIntoView({behavior:'smooth',block:'center'}); }
+async function invRevoke(id){ var r=await sb.rpc('hub_invite_revoke',{p_id:id}); var d=(r&&r.data)||{}; if(r.error||!d.ok){ toast('@err '+(d.msg||(r.error&&r.error.message)||'Nem sikerült.')); return; } toast('@ok Visszavonva, a kód nem váltható be.'); invLoad(); }
+async function invRenew(id){ var r=await sb.rpc('hub_invite_renew',{p_id:id}); var d=(r&&r.data)||{}; if(r.error||!d.ok){ toast('@err '+(d.msg||(r.error&&r.error.message)||'Nem sikerült.')); return; }
+  var old=(S.invites||[]).filter(function(x){return x.id===id;})[0]||{}; d.name=old.name; document.getElementById('invRes').innerHTML=invResHtml(d); toast('@ok Új kód, új 7 nap. Küldd el újra.'); invLoad(); }
+/* jóváhagyásra váró ügyfelek (ha a tanácsadónál be van kapcsolva) */
+async function invPendLoad(){
+  var el=document.getElementById('advPend'); if(!el) return;
+  var r=await sb.from('hub_profiles').select('user_id,name,email,created_at').eq('status','pending').order('created_at',{ascending:false});
+  var list=(r&&r.data)||[];
+  el.innerHTML=list.map(function(c){ return '<div class="pend">'+ico('hourglass')+'<b>'+E(c.name||c.email)+'</b><span class="small">'+E(c.email)+' · beváltotta a meghívót '+dHu(c.created_at)+', a jóváhagyásodra vár</span><span class="sp"></span>'
+    +'<button class="btn pri" onclick="invApprove(\''+c.user_id+'\',true)">'+ico('check')+' Beengedem</button><button class="btn" onclick="invApprove(\''+c.user_id+'\',false)">Várólistára</button></div>'; }).join('');
+  var dot=document.getElementById('dotInv'); if(dot){ dot.style.display=list.length?'':'none'; dot.textContent=list.length; }
+}
+async function invApprove(uid,ok){ var r=await sb.rpc('hub_client_approve',{p_user:uid,p_ok:ok}); var d=(r&&r.data)||{}; if(r.error||!d.ok){ toast('@err '+(d.msg||(r.error&&r.error.message)||'Nem sikerült.')); return; } toast(ok?'@ok Beengedve, az ügyfél azonnal beléphet.':'@ok Várólistára téve.'); invPendLoad(); advRender(); }
 function advsBook(email,v){ v=(v||'').trim(); if(v&&!/^https:\/\//.test(v)){ toast('Csak https:// kezdetű link adható meg.'); return; } advsSet(email,{booking_url:v||null}); }
 async function advsSet(email,patch){
   var r=await sb.from('hub_advisors').update(patch).eq('email',email);
@@ -4452,7 +4564,8 @@ async function advsSet(email,patch){
   var a=S.advisors.filter(function(x){return x.email===email;})[0]; if(a) Object.assign(a,patch);
   toast('@ok Mentve.');
 }
-function advCodeRender(){ var a=S.advRow||{}; document.getElementById('advCodeBig').textContent=a.code||'·'; document.getElementById('advInvite').value=location.href.split('#')[0].split('?')[0]+'?code='+encodeURIComponent(a.code||'');
+function advCodeRender(){ var a=S.advRow||{};
+  invLoad(); invPendLoad();
   var b=document.getElementById('advBook'); if(b) b.value=a.booking_url||'';
   var tb=document.getElementById('advBookTest'); if(tb){ tb.style.display=a.booking_url?'inline-flex':'none'; tb.href=a.booking_url||'#'; } }
 async function advBookSave(){
