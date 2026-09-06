@@ -105,8 +105,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 /* a mobil szabályok a fájl végén, a MOBIL blokkban */
 
 /* pénzügyi kerék · pgx-csempe stílus */
-.wheel{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem;}
-@media(max-width:700px){.wheel{grid-template-columns:repeat(2,1fr);}}
+.wheel{display:block;}
 .wheel .wseg{padding:.6rem .6rem .55rem;} .wheel .wseg b{font-size:.8rem;line-height:1.2;}
 .wseg{position:relative;border:1px solid var(--border);border-radius:12px;padding:.75rem .75rem .65rem;cursor:pointer;transition:transform .16s,box-shadow .16s,border-color .16s;background:#fff;box-shadow:0 2px 8px rgba(15,32,53,.06);overflow:hidden;}
 .wseg::after{content:'\2197\FE0E';position:absolute;top:.55rem;right:.7rem;color:var(--teal);font-size:.9rem;font-weight:800;opacity:0;transition:opacity .16s;}
@@ -115,11 +114,19 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 .wseg .ic{font-size:1.3rem;}
 .wseg b{display:block;font-family:var(--fb);font-size:.78rem;margin:.25rem 0 .3rem;}
 .wst{font-family:var(--fb);font-weight:800;font-size:.6rem;border-radius:100px;padding:.15rem .55rem;display:inline-block;}
-.wseg.ok{border-left:4px solid var(--green);} .wseg.ok .wst{background:rgba(15,157,143,.12);color:var(--green);}
-.wseg.rev{border-left:4px solid var(--blue);} .wseg.rev .wst{background:rgba(43,108,176,.12);color:var(--blue);}
-.wseg.miss{border-left:4px solid var(--red);background:rgba(230,62,120,.03);} .wseg.miss .wst{background:rgba(230,62,120,.1);color:var(--red);}
-.wseg.na{border-left:4px solid #cbd5e1;} .wseg.na .wst{background:#eef2f7;color:var(--gray);}
-.wseg.nr{border-left:4px solid #e2e8f0;background:#fbfcfe;} .wseg.nr b,.wseg.nr .ic{opacity:.55;} .wseg.nr .wst{background:#f3f6fa;color:#94a3b8;}
+.wseg.ok{border-left:4px solid var(--green);background:rgba(15,157,143,.07);} .wseg.ok .wst{background:rgba(15,157,143,.14);color:var(--green);}
+.wseg.ext{border-left:4px solid var(--blue);background:rgba(43,108,176,.07);} .wseg.ext .wst{background:rgba(43,108,176,.13);color:var(--blue);}
+.wseg.prog{border-left:4px solid #f0b429;background:rgba(240,180,41,.1);} .wseg.prog .wst{background:rgba(240,180,41,.22);color:#8a6100;}
+.wseg.nr{border-left:4px solid #cbd5e1;background:#eef2f6;} .wseg.nr b,.wseg.nr .ic{opacity:.55;} .wseg.nr .wst{background:#e2e8f0;color:#64748b;}
+.wseg.na{border-left:4px solid #e6ebf1;background:#fff;} .wseg.na .wst{background:#f3f6fa;color:#94a3b8;}
+.wfam{margin-bottom:.9rem;} .wfam:last-child{margin-bottom:0;}
+.wfam-h{display:flex;align-items:center;gap:.6rem;margin:0 0 .5rem;font-family:var(--fb);font-weight:700;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);}
+.wfam-h:after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(27,56,88,.18),rgba(27,56,88,.03));}
+.wfam-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem;}
+@media(max-width:700px){.wfam-g{grid-template-columns:repeat(2,1fr);}}
+.wleg{display:flex;flex-wrap:wrap;gap:.5rem .9rem;margin-top:.9rem;padding-top:.7rem;border-top:1px solid var(--border);font-size:.7rem;color:var(--gray);}
+.wleg span{display:inline-flex;align-items:center;gap:.35rem;} .wleg i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.08);}
+.wleg i.ok{background:rgba(15,157,143,.35);} .wleg i.ext{background:rgba(43,108,176,.35);} .wleg i.prog{background:rgba(240,180,41,.55);} .wleg i.nr{background:#dbe3ec;} .wleg i.na{background:#fff;}
 
 .todo{display:flex;align-items:center;gap:.6rem;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:11px;padding:.6rem .8rem;margin-bottom:.45rem;background:#fff;transition:all .13s;}
 .todo:hover{transform:translateX(2px);box-shadow:0 4px 12px rgba(27,56,88,.08);}
@@ -797,7 +804,7 @@ body.navon .nav-btn span::after{top:0;transform:rotate(-45deg);}
 .tchip.vip{background:rgba(230,62,120,.14);color:#b8285d;}
 .wcells{display:flex;gap:2px;flex-wrap:wrap;max-width:190px;}
 .wc{width:15px;height:15px;border-radius:4px;background:#eef2f7;display:inline-block;}
-.wc.ok{background:var(--green);} .wc.rev{background:var(--blue);} .wc.miss{background:var(--gold);} .wc.na{background:#dbe3ec;} .wc.nr{background:#fff;box-shadow:inset 0 0 0 1.5px #dbe3ec;}
+.wc.ok{background:var(--green);} .wc.ext{background:var(--blue);} .wc.prog{background:var(--gold);} .wc.nr{background:#cbd5e1;} .wc.na{background:#fff;box-shadow:inset 0 0 0 1.5px #dbe3ec;}
 .dtbl .num{font-family:var(--fb);font-weight:800;text-align:center;}
 .dtbl .num.hot{color:var(--gold);}
 .pager{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-top:.8rem;font-family:var(--fb);font-weight:700;font-size:.76rem;color:var(--gray);}
@@ -1430,7 +1437,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
         <select id="fStatus" onchange="advQ(1)"><option value="">Minden státusz</option><option value="active">Aktív</option><option value="waitlist">Várólistás</option></select>
         <select id="fAdvisor" onchange="advQ(1)" style="display:none;"><option value="">Minden tanácsadó</option></select>
         <select id="fArea" onchange="advQ(1)"><option value="">Bármelyik termékkategória</option></select>
-        <select id="fAreaSt" onchange="advQ(1)"><option value="miss">hiányzik</option><option value="rev">felülvizsgálandó</option><option value="ok">rendben</option><option value="na">nem vizsgált</option><option value="nr">nem releváns</option></select>
+        <select id="fAreaSt" onchange="advQ(1)"><option value="na">jelölés nélkül</option><option value="prog">intézés alatt</option><option value="ok">kész, tanácsadóval</option><option value="ext">kész, máshol</option><option value="nr">nem releváns</option></select>
         <select id="fSort" onchange="advQ(1)"><option value="uj">Legújabb elöl</option><option value="nev">Név szerint</option><option value="rev">Felülvizsgálat szerint</option><option value="nyitott">Nyitott ügy szerint</option></select>
       </div>
       <button class="filt-tog" onclick="document.body.classList.toggle('filtopen')"><svg class="i" aria-hidden="true"><use href="#i-sliders"></use></svg> Szűrők</button>
@@ -1584,34 +1591,41 @@ var CFG={
 
 var sb=null;
 var S={user:null,profile:null,advisor:null,items:[],tickets:[],life:[],docs:[],advRow:null,mode:'client',clients:[],cur:null,curData:null,slotSel:{}};
-/* ── PÉNZÜGYI TÉRKÉP · 19 termékkategória (kulcs, ikon, név, típus az összesítéshez, tudástár-témakör) ──
-   A hub_items.area ezek egyike. A sorrend a térképé. A typ a szerveren is a kategóriából számolódik (hub_prod_typ). */
+/* ── PÉNZÜGYI TÉRKÉP · 21 termékkategória termékcsaládonként ──
+   [kulcs, ikon, név, typ az összesítéshez, tudástár-témakör, termékcsalád]. A hub_items.area ezek egyike.
+   A sorrend a térképé. A typ a szerveren is a kategóriából számolódik (hub_prod_typ). */
+var FAM=[['megtak','Megtakarítás és befektetés'],['bank','Bank és hitel'],['bizt','Biztosítás'],['vall','Vállalati'],['egyeb','Egyéb']];
 var PROD=[
- ['rendszeres','<svg class="i" aria-hidden="true"><use href="#i-gem"></use></svg>','Rendszeres megtakarítás','megtakaritas','befektetes'],
- ['egyszeri','<svg class="i" aria-hidden="true"><use href="#i-trend"></use></svg>','Egyszeri díjas befektetés','megtakaritas','befektetes'],
- ['ltp','<svg class="i" aria-hidden="true"><use href="#i-build"></use></svg>','Lakástakarékpénztár','megtakaritas','lakas'],
- ['nyugdij','<svg class="i" aria-hidden="true"><use href="#i-sunrise"></use></svg>','Nyugdíjcélú megtakarítás','megtakaritas','nyugdij'],
- ['bankszamla','<svg class="i" aria-hidden="true"><use href="#i-card"></use></svg>','Bankszámla','bankszamla','alap'],
- ['lakashitel','<svg class="i" aria-hidden="true"><use href="#i-home"></use></svg>','Lakáshitel','hitel','lakas'],
- ['szemelyi','<svg class="i" aria-hidden="true"><use href="#i-money"></use></svg>','Személyi kölcsön','hitel','alap'],
- ['lakasbizt','<svg class="i" aria-hidden="true"><use href="#i-shield"></use></svg>','Lakásbiztosítás','biztositas','lakas'],
- ['kgfb','<svg class="i" aria-hidden="true"><use href="#i-car"></use></svg>','Kötelező biztosítás','biztositas','biztositas'],
- ['casco','<svg class="i" aria-hidden="true"><use href="#i-key"></use></svg>','Casco biztosítás','biztositas','biztositas'],
- ['asszisztencia','<svg class="i" aria-hidden="true"><use href="#i-buoy"></use></svg>','Asszisztencia biztosítás','biztositas','biztositas'],
- ['egeszsegpenztar','<svg class="i" aria-hidden="true"><use href="#i-hospital"></use></svg>','Egészségpénztár','megtakaritas','penztar'],
- ['utasbizt','<svg class="i" aria-hidden="true"><use href="#i-map"></use></svg>','Utasbiztosítás','biztositas','biztositas'],
- ['vall_bizt','<svg class="i" aria-hidden="true"><use href="#i-briefcase"></use></svg>','Vállalati biztosítás','biztositas','vallalkozas'],
- ['vall_bank','<svg class="i" aria-hidden="true"><use href="#i-bank"></use></svg>','Vállalati bankszámla','bankszamla','vallalkozas'],
- ['vall_hitel','<svg class="i" aria-hidden="true"><use href="#i-chart"></use></svg>','Vállalati hitel','hitel','vallalkozas'],
- ['babavaro','<svg class="i" aria-hidden="true"><use href="#i-baby"></use></svg>','Babaváró','hitel','gyerek'],
- ['munkashitel','<svg class="i" aria-hidden="true"><use href="#i-cap"></use></svg>','Munkáshitel','hitel','alap'],
- ['egyeb','<svg class="i" aria-hidden="true"><use href="#i-folder"></use></svg>','Egyéb, máshová nem sorolható','egyeb','alap']
+ ['rendszeres','<svg class="i" aria-hidden="true"><use href="#i-gem"></use></svg>','Rendszeres megtakarítás','megtakaritas','befektetes','megtak'],
+ ['egyszeri','<svg class="i" aria-hidden="true"><use href="#i-trend"></use></svg>','Egyszeri díjas befektetés','megtakaritas','befektetes','megtak'],
+ ['gyermek','<svg class="i" aria-hidden="true"><use href="#i-child"></use></svg>','Gyermekcélú megtakarítás','megtakaritas','gyerek','megtak'],
+ ['ltp','<svg class="i" aria-hidden="true"><use href="#i-build"></use></svg>','Lakástakarékpénztár','megtakaritas','lakas','megtak'],
+ ['nyugdij','<svg class="i" aria-hidden="true"><use href="#i-sunrise"></use></svg>','Nyugdíjcélú megtakarítás','megtakaritas','nyugdij','megtak'],
+ ['egeszsegpenztar','<svg class="i" aria-hidden="true"><use href="#i-hospital"></use></svg>','Egészségpénztár','megtakaritas','penztar','megtak'],
+ ['bankszamla','<svg class="i" aria-hidden="true"><use href="#i-card"></use></svg>','Bankszámla','bankszamla','alap','bank'],
+ ['lakashitel','<svg class="i" aria-hidden="true"><use href="#i-home"></use></svg>','Lakáshitel','hitel','lakas','bank'],
+ ['szemelyi','<svg class="i" aria-hidden="true"><use href="#i-money"></use></svg>','Személyi kölcsön','hitel','alap','bank'],
+ ['babavaro','<svg class="i" aria-hidden="true"><use href="#i-baby"></use></svg>','Babaváró','hitel','gyerek','bank'],
+ ['munkashitel','<svg class="i" aria-hidden="true"><use href="#i-cap"></use></svg>','Munkáshitel','hitel','alap','bank'],
+ ['szemelybizt','<svg class="i" aria-hidden="true"><use href="#i-heart"></use></svg>','Személybiztosítás','biztositas','biztositas','bizt'],
+ ['lakasbizt','<svg class="i" aria-hidden="true"><use href="#i-shield"></use></svg>','Lakásbiztosítás','biztositas','lakas','bizt'],
+ ['kgfb','<svg class="i" aria-hidden="true"><use href="#i-car"></use></svg>','Kötelező biztosítás','biztositas','biztositas','bizt'],
+ ['casco','<svg class="i" aria-hidden="true"><use href="#i-key"></use></svg>','Casco biztosítás','biztositas','biztositas','bizt'],
+ ['asszisztencia','<svg class="i" aria-hidden="true"><use href="#i-buoy"></use></svg>','Asszisztencia biztosítás','biztositas','biztositas','bizt'],
+ ['utasbizt','<svg class="i" aria-hidden="true"><use href="#i-map"></use></svg>','Utasbiztosítás','biztositas','biztositas','bizt'],
+ ['vall_bizt','<svg class="i" aria-hidden="true"><use href="#i-briefcase"></use></svg>','Vállalati biztosítás','biztositas','vallalkozas','vall'],
+ ['vall_bank','<svg class="i" aria-hidden="true"><use href="#i-bank"></use></svg>','Vállalati bankszámla','bankszamla','vallalkozas','vall'],
+ ['vall_hitel','<svg class="i" aria-hidden="true"><use href="#i-chart"></use></svg>','Vállalati hitel','hitel','vallalkozas','vall'],
+ ['egyeb','<svg class="i" aria-hidden="true"><use href="#i-folder"></use></svg>','Egyéb, máshová nem sorolható','egyeb','alap','egyeb']
 ];
 function prodOf(k){ return PROD.filter(function(x){return x[0]===k;})[0]||null; }
 function prodTyp(k){ var p=prodOf(k); return p?p[3]:'egyeb'; }
 function prodName(k){ var p=prodOf(k); return p?p[2]:(k||'·'); }
-var WHEEL=PROD.map(function(p){ return [p[0],p[1],p[2]]; });
-var WST={ok:['ok','✓ rendben'],rev:['rev','↻ felülvizsgálandó'],miss:['miss','! hiányzik'],na:['na','· nem vizsgált'],nr:['nr','· nem releváns']};
+function famName(f){ var x=FAM.filter(function(a){return a[0]===f;})[0]; return x?x[1]:''; }
+var WHEEL=PROD.map(function(p){ return [p[0],p[1],p[2],p[5]]; });
+/* 5 állapot. Automatika: élő szerződés a tanácsadóval -> ok, máshol kötött élő -> ext; a tanácsadó kézi jelölése (wheel_manual) erősebb. */
+var WST={ok:['ok','✓ kész, tanácsadóval'],ext:['ext','✓ kész, máshol'],prog:['prog','↻ intézés alatt'],nr:['nr','· nem releváns'],na:['na','jelölés nélkül']};
+function wstOf(v){ return WST[v]?v:(v==='rev'?'prog':'na'); } /* régi rev/miss értékek átfordítása */
 var TYP={biztositas:'Biztosítás',megtakaritas:'Megtakarítás',hitel:'Hitel',bankszamla:'Bankszámla',ingatlan:'Ingatlan',egyeb:'Egyéb'};
 var KIND={help:'<svg class="i" aria-hidden="true"><use href="#i-hand"></use></svg> Segítségkérés',claim:'<svg class="i" aria-hidden="true"><use href="#i-zap"></use></svg> Kárbejelentés',consult:'<svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Konzultáció-igény'};
 var TST={new:'Beérkezett',assigned:'Felelős kijelölve',progress:'Folyamatban',done:'Megoldva'};
@@ -2040,12 +2054,11 @@ function renderAll(){
   var now=new Date(), in60=new Date(Date.now()+60*86400000);
   var exp=S.items.filter(function(i){ return i.end_date&&new Date(i.end_date)<=in60&&new Date(i.end_date)>=now; });
   var sum=S.items.reduce(function(a,i){return a+(+i.fee_month||0);},0);
-  var wheel=p.wheel||{}, miss=WHEEL.filter(function(w){return wheel[w[0]]==='miss';}), rev=WHEEL.filter(function(w){return wheel[w[0]]==='rev';});
+  var wheel=p.wheel||{}, prog=WHEEL.filter(function(w){return wstOf(wheel[w[0]])==='prog';});
   var todos=[];
   if(!startSeen()) todos.push({t:'<svg class="i" aria-hidden="true"><use href="#i-flag"></use></svg> Nézd meg az Itt kezdj! oldalt: három perc, és otthon vagy a Hubban',b:'Itt kezdj!',f:"go('start')"});
   exp.forEach(function(i){ todos.push({t:'<svg class="i" aria-hidden="true"><use href="#i-clock"></use></svg> '+E(i.name)+' lejár: '+dHu(i.end_date),b:'Intézzük',f:"helpNew('help',"+i.id+")"}); });
-  miss.forEach(function(w){ todos.push({t:w[1]+' Hiányzó termék: '+w[2],b:'Megnézem',f:"arOpen('"+w[0]+"')"}); });
-  rev.forEach(function(w){ todos.push({t:w[1]+' Felülvizsgálandó: '+w[2],b:'Időpont',f:"bookOpen('todo')"}); });
+  prog.forEach(function(w){ todos.push({t:w[1]+' Intézés alatt: '+w[2],b:'Megnézem',f:"arOpen('"+w[0]+"')"}); });
   if(!S.items.length) todos.push({t:'<svg class="i" aria-hidden="true"><use href="#i-map"></use></svg> Vidd fel az első tételed a térképedre',b:'Térkép',f:"go('map')"});
   document.getElementById('heroDate').textContent=now.toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'});
   document.getElementById('heroTitle').innerHTML='Szia, '+E(firstName(p.name))+'! <em>A pénzügyeid ma</em>';
@@ -2054,17 +2067,22 @@ function renderAll(){
    +'<div class="hk"><div class="l">Havi díjaid összesen</div><div class="v">'+fmt(sum)+'</div></div>'
    +'<div class="hk'+(p.next_review?' warn':'')+'"><div class="l">Köv. felülvizsgálat</div><div class="v">'+(p.next_review?dHu(p.next_review):'egyeztetni')+'</div></div>'
    +'<div class="hk'+(exp.length?' alert':'')+'"><div class="l">Lejár 60 napon belül</div><div class="v">'+exp.length+'</div></div>'
-   +'<div class="hk'+(miss.length?' alert':'')+'"><div class="l">Hiányzó termék</div><div class="v">'+(miss.length?E(miss[0][2]):'nincs')+'</div></div>'
+   +'<div class="hk'+(prog.length?' warn':'')+'"><div class="l">Intézés alatt</div><div class="v">'+(prog.length?(prog.length===1?E(prog[0][2]):prog.length+' termék'):'nincs')+'</div></div>'
    +'<div class="hk'+(todos.length?' warn':'')+'"><div class="l">Ajánlott teendő</div><div class="v">'+todos.length+'</div></div>';
   var man=(p.wheel_manual||{});
-  document.getElementById('wheel').innerHTML=WHEEL.map(function(w){
-    var st=WST[wheel[w[0]]||'na'];
+  function wsegHtml(w){
+    var st=WST[wstOf(wheel[w[0]])];
     var auto=!man[w[0]] && (S.items||[]).some(function(i){ return i.area===w[0] && (i.state||'live')==='live'; });
     return '<div class="wseg '+st[0]+'" onclick="wheelClick(\''+w[0]+'\')">'+(auto?'<span class="auto">TERMÉK</span>':'')
       +'<span class="ic">'+w[1]+'</span><b>'+w[2]+'</b><span class="wst">'+st[1]+'</span></div>';
-  }).join('');
+  }
+  document.getElementById('wheel').innerHTML=FAM.map(function(f){
+    var ws=WHEEL.filter(function(w){ return w[3]===f[0]; }); if(!ws.length) return '';
+    return '<div class="wfam"><div class="wfam-h">'+f[1]+'</div><div class="wfam-g">'+ws.map(wsegHtml).join('')+'</div></div>';
+  }).join('')
+  +'<div class="wleg"><span><i class="ok"></i>kész, a tanácsadóddal</span><span><i class="ext"></i>kész, máshol kötötted</span><span><i class="prog"></i>intézés alatt</span><span><i class="nr"></i>nem releváns</span><span><i class="na"></i>jelölés nélkül</span></div>';
   document.getElementById('todos').innerHTML=todos.length?todos.map(function(t){ return '<div class="todo"><b>'+t.t+'</b><button class="btn" onclick="'+t.f+'">'+t.b+'</button></div>'; }).join(''):'<div class="empty"><svg class="i" aria-hidden="true"><use href="#i-sparkles"></use></svg> Nincs nyitott teendőd. Szép munka!</div>';
-  var ach=[['<svg class="i" aria-hidden="true"><use href="#i-medal"></use></svg> Első lépés',!!p.name],['<svg class="i" aria-hidden="true"><use href="#i-folders"></use></svg> Rendszerező',S.items.length>=3],['<svg class="i" aria-hidden="true"><use href="#i-bulb"></use></svg> Tudatos ügyfél',WHEEL.filter(function(w){return wheel[w[0]]&&wheel[w[0]]!=='na';}).length>=6],['<svg class="i" aria-hidden="true"><use href="#i-shield"></use></svg> Védett család',['lakasbizt','kgfb','casco','asszisztencia','utasbizt'].filter(function(k){return wheel[k]==='ok';}).length>=2],['<svg class="i" aria-hidden="true"><use href="#i-build"></use></svg> Jövőépítő',S.items.some(function(i){return prodTyp(i.area)==='megtakaritas'&&(i.state||'live')==='live';})],['<svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Éves kontroll',!!p.next_review]];
+  var ach=[['<svg class="i" aria-hidden="true"><use href="#i-medal"></use></svg> Első lépés',!!p.name],['<svg class="i" aria-hidden="true"><use href="#i-folders"></use></svg> Rendszerező',S.items.length>=3],['<svg class="i" aria-hidden="true"><use href="#i-bulb"></use></svg> Tudatos ügyfél',WHEEL.filter(function(w){return wstOf(wheel[w[0]])!=='na';}).length>=6],['<svg class="i" aria-hidden="true"><use href="#i-shield"></use></svg> Védett család',['szemelybizt','lakasbizt','kgfb','casco','asszisztencia','utasbizt'].filter(function(k){return wheel[k]==='ok'||wheel[k]==='ext';}).length>=2],['<svg class="i" aria-hidden="true"><use href="#i-build"></use></svg> Jövőépítő',S.items.some(function(i){return prodTyp(i.area)==='megtakaritas'&&(i.state||'live')==='live';})],['<svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Éves kontroll',!!p.next_review]];
   document.getElementById('achRow').innerHTML=ach.map(function(a){ return '<span class="ach'+(a[1]?' done':'')+'">'+a[0]+'</span>'; }).join('');
   /* szerződések */
   ctRender();
@@ -2427,8 +2445,8 @@ function tudRender(){
   var w=(S.profile&&S.profile.wheel)||{};
   var rec=[];
   PROD.forEach(function(x){
-    var st=w[x[0]];
-    if(st==='miss'||st==='rev') rec.push([x[1],x[2],x[4]||'alap',st==='miss'?'Ebből a termékből még nincs megoldásod.':'Érdemes átnézni a tanácsadóddal.']);
+    var st=wstOf(w[x[0]]);
+    if(st==='prog') rec.push([x[1],x[2],x[4]||'alap','Intézés alatt: nézd át, mire figyelj a döntés előtt.']);
   });
   var r=document.getElementById('tudRec');
   r.innerHTML=rec.length?rec.slice(0,4).map(function(x){
@@ -2926,16 +2944,16 @@ function ctClose(){ document.getElementById('ctOv').style.display='none'; CT.cur
 
 /* ── pénzügyi térkép · terület-nézet (a kerék egy cikkére kattintva) ── */
 var AR={cur:null};
-var AR_ST={ok:['g','Rendben','A tanácsadód átnézte ezt a kategóriát. Ha változott a helyzeted, foglalj időpontot.'],
-           rev:['b','Felülvizsgálandó','Érdemes átnézni a tanácsadóddal: foglalj 20 percet, és rendezitek.'],
-           miss:['p','Hiányzik','Ebből a termékből még nincs megoldásod. Számold ki a kalkulátorral, mi hiányzik, vagy foglalj időpontot.'],
-           na:['','Még nem vizsgált','Ezt a kategóriát még nem néztétek át. Vidd fel, amid van, és kérj időpontot.'],
-           nr:['','Nem releváns','A tanácsadóddal ezt a kategóriát nem relevánsnak jelöltétek. Ha változott a helyzeted, szólj neki.']};
+var AR_ST={ok:['g','Kész, a tanácsadóddal','Ezt a tanácsadóddal rendeztétek. Ha változott a helyzeted, foglalj időpontot.'],
+           ext:['b','Kész, máshol kötötted','Van megoldásod, de nem a tanácsadóddal kötötted. Egy átnézés 20 perc: kiderül, jó-e még.'],
+           prog:['y','Intézés alatt','Ezen most dolgoztok a tanácsadóddal. Ha kérdésed van, írj a Segítség oldalon.'],
+           nr:['','Nem releváns','A tanácsadóddal ezt a kategóriát nem relevánsnak jelöltétek. Ha változott a helyzeted, szólj neki.'],
+           na:['','Jelölés nélkül','Ezt a kategóriát még nem néztétek át. Vidd fel, amid van, vagy foglalj időpontot.']};
 function arItems(k){ return (S.items||[]).filter(function(i){ return i.area===k; }); }
 function arOpen(k){
   var w=WHEEL.filter(function(x){return x[0]===k;})[0]; if(!w) return;
   AR.cur=k;
-  var st=(S.profile&&S.profile.wheel||{})[k]||'na', sd=AR_ST[st]||AR_ST.na;
+  var st=wstOf((S.profile&&S.profile.wheel||{})[k]), sd=AR_ST[st]||AR_ST.na;
   var its=arItems(k);
   var live=its.filter(function(i){ return (i.state||'live')==='live'; });
   var sum=live.reduce(function(a,i){ return a+(+i.fee_month||0); },0);
@@ -2955,7 +2973,7 @@ function arOpen(k){
     +'<div class="ar-acts">'
     +'<button class="btn pri" onclick="arBook()">'+ico('calendar')+' Időpontot foglalok</button>'
     +'<button class="btn" onclick="arAdd()">'+ico('plus')+' Új szerződés ebben a kategóriában</button>'
-    +(st==='miss'?'<button class="btn" onclick="arClose();go(\'calc\')">'+ico('calculator')+' Kalkulátor</button>':'')
+    +((st==='na'&&!live.length)?'<button class="btn" onclick="arClose();go(\'calc\')">'+ico('calculator')+' Kalkulátor</button>':'')
     +'</div>';
   document.getElementById('arOv').style.display='flex';
   trk('area','home',{k:k});
@@ -3971,7 +3989,7 @@ function idleNotice(){
 
 
 /* ═══ ÜGYFÉLNYILVÁNTARTÓ · szerveroldali keresés, szűrés, lapozás (2000+ fő) ═══ */
-var Q={q:'',tier:'',status:'',advisor:'',area:'',areaSt:'miss',flag:'',sort:'uj',limit:50,offset:0};
+var Q={q:'',tier:'',status:'',advisor:'',area:'',areaSt:'na',flag:'',sort:'uj',limit:50,offset:0};
 var _qT=null, _qBusy=false;
 
 function advQ(reset){
@@ -3988,9 +4006,9 @@ function advQ(reset){
 function advFlag(f){ Q.flag=(Q.flag===f?'':f); Q.offset=0; advFetch(); }
 function advPage(d){ Q.offset=Math.max(0,Q.offset+d*Q.limit); advFetch(); }
 function advReset(){
-  Q={q:'',tier:'',status:'',advisor:'',area:'',areaSt:'miss',flag:'',sort:'uj',limit:50,offset:0};
+  Q={q:'',tier:'',status:'',advisor:'',area:'',areaSt:'na',flag:'',sort:'uj',limit:50,offset:0};
   ['fq','fTier','fStatus','fAdvisor','fArea','fSort'].forEach(function(i){ var e=document.getElementById(i); if(e) e.value=''; });
-  document.getElementById('fAreaSt').value='miss';
+  document.getElementById('fAreaSt').value='na';
   advFetch();
 }
 async function advFetch(){
@@ -4015,7 +4033,7 @@ function advTblRender(total){
       +'<td><div class="nm">'+E(c.name||c.email)+(c.status==='waitlist'?' <span class="tchip basic"><svg class="i" aria-hidden="true"><use href="#i-hourglass"></use></svg></span>':'')+'</div><div class="em">'+E(c.email||'')+'</div></td>'
       +'<td><span class="tchip '+(c.tier||'basic')+'">'+tierLab(c.tier||'basic')+'</span></td>'
       +(adm?'<td class="em hm">'+E(advName(c.advisor_email))+'</td>':'')
-      +'<td><div class="wcells">'+WHEEL.map(function(x){ return '<span class="wc '+(w[x[0]]||'na')+'" title="'+x[2]+': '+(WST[w[x[0]]||'na']||WST.na)[1]+'"></span>'; }).join('')+'</div></td>'
+      +'<td><div class="wcells">'+WHEEL.map(function(x){ return '<span class="wc '+wstOf(w[x[0]])+'" title="'+x[2]+': '+WST[wstOf(w[x[0]])][1]+'"></span>'; }).join('')+'</div></td>'
       +'<td class="num hm">'+(c.items_cnt||0)+'</td>'
       +'<td class="num'+(op?' hot':'')+'">'+(op||'·')+'</td>'
       +'<td class="num hm">'+(c.edu_cnt||0)+'</td>'
@@ -4031,7 +4049,7 @@ function advTblRender(total){
     +'<button class="btn" onclick="advCsv()"><svg class="i" aria-hidden="true"><use href="#i-download"></use></svg> Letöltés táblázatba (CSV)</button>';
 }
 function advChips(){
-  var C_=[['','Mind'],['open','<svg class="i" aria-hidden="true"><use href="#i-inbox"></use></svg> Van nyitott ügye'],['rev','<svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Felülvizsgálat 30 napon belül'],['miss','<svg class="i" aria-hidden="true"><use href="#i-alert"></use></svg> Hiányzó terület'],['docs','<svg class="i" aria-hidden="true"><use href="#i-folder"></use></svg> Megosztotta a doksijait'],['edu','<svg class="i" aria-hidden="true"><use href="#i-video"></use></svg> Nézett videót']];
+  var C_=[['','Mind'],['open','<svg class="i" aria-hidden="true"><use href="#i-inbox"></use></svg> Van nyitott ügye'],['rev','<svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Felülvizsgálat 30 napon belül'],['prog','<svg class="i" aria-hidden="true"><use href="#i-hourglass"></use></svg> Intézés alatt álló termék'],['docs','<svg class="i" aria-hidden="true"><use href="#i-folder"></use></svg> Megosztotta a doksijait'],['edu','<svg class="i" aria-hidden="true"><use href="#i-video"></use></svg> Nézett videót']];
   document.getElementById('fChips').innerHTML=C_.map(function(x){
     return '<span class="fchip'+(Q.flag===x[0]?' on':'')+'" onclick="advFlag(\''+x[0]+'\')">'+x[1]+'</span>';
   }).join('')+'<span class="fchip clr" onclick="advReset()">✕ Szűrők törlése</span>';
@@ -4051,7 +4069,7 @@ async function advCsv(){
   all.forEach(function(c){
     var w=c.wheel||{};
     var row=[c.name||'',c.email||'',TIER[c.tier||'basic'].n,(c.status==='waitlist'?'Várólistás':'Aktív'),advName(c.advisor_email)]
-      .concat(WHEEL.map(function(x){ return (WST[w[x[0]]||'na']||WST.na)[1].replace(/^[^ ]+ /,''); }))
+      .concat(WHEEL.map(function(x){ return WST[wstOf(w[x[0]])][1].replace(/^[✓↻·] /,''); }))
       .concat([c.items_cnt||0,c.open_tickets||0,c.open_life||0,c.edu_cnt||0,c.next_review||'',c.docs_shared?'igen':'nem']);
     lines.push(row.map(function(v){ return '"'+String(v).replace(/"/g,'""')+'"'; }).join(';'));
   });
@@ -4184,8 +4202,8 @@ async function advOpen(uid){
       +'<input type="date" id="advReview" value="'+(c.next_review||'')+'" onchange="advProfileSave()" title="Következő felülvizsgálat">'
       +(isAdmin()?'<select id="advOwner" onchange="advProfileSave()" title="Tanácsadó átrendelése">'+(S.advisors||[]).map(function(a){return '<option value="'+E(a.email)+'"'+(a.email===c.advisor_email?' selected':'')+'>'+E(a.name)+'</option>';}).join('')+'</select>':'')
     +'</span></div>'
-    +'<div class="pt" style="font-size:.95rem;margin:.6rem 0 .4rem;"><svg class="i" aria-hidden="true"><use href="#i-map"></use></svg> Pénzügyi térkép <span class="small" style="font-weight:400;">· 19 termékkategória, te állítod, az ügyfél látja. Ahol van élő szerződés, magától zöld.</span></div>'
-    +'<div class="wheel-ed">'+WHEEL.map(function(x){ return '<label>'+x[1]+' '+x[2]+'<select data-w="'+x[0]+'" onchange="advProfileSave()">'+Object.keys(WST).map(function(k){return '<option value="'+k+'"'+((w[x[0]]||'na')===k?' selected':'')+'>'+WST[k][1]+'</option>';}).join('')+'</select></label>'; }).join('')+'</div>'
+    +'<div class="pt" style="font-size:.95rem;margin:.6rem 0 .4rem;"><svg class="i" aria-hidden="true"><use href="#i-map"></use></svg> Pénzügyi térkép <span class="small" style="font-weight:400;">· 21 termékkategória. Élő szerződésből magától zöld (veled kötött) vagy kék (máshol). Amit itt beállítasz, az erősebb; a „jelölés nélkül" visszaadja az automatikának.</span></div>'
+    +'<div class="wheel-ed">'+WHEEL.map(function(x){ return '<label>'+x[1]+' '+x[2]+'<select data-w="'+x[0]+'" onchange="advProfileSave()">'+Object.keys(WST).map(function(k){return '<option value="'+k+'"'+(wstOf(w[x[0]])===k?' selected':'')+'>'+WST[k][1]+'</option>';}).join('')+'</select></label>'; }).join('')+'</div>'
     +(fam.length?'<div class="pt" style="font-size:.95rem;margin:.9rem 0 .4rem;">'+ico('users')+' Családi profil <span class="small" style="font-weight:400;">· VIP</span></div><div class="small">'+fam.map(function(f){ return E(f.name)+' ('+E(f.relation)+(f.birth_year?', '+f.birth_year:'')+')'+(f.note?' · '+E(f.note):''); }).join('<br>')+'</div>':'')
     +'<div class="pt" style="font-size:.95rem;margin:.9rem 0 .4rem;"><svg class="i" aria-hidden="true"><use href="#i-map"></use></svg> Térkép ('+items.length+' tétel · '+fmt(items.reduce(function(a,i){return a+(+i.fee_month||0);},0))+'/hó)</div>'
     +(items.length?'<div class="mcards">'+items.map(function(m){ return '<div class="mcard'+(m.eaglz?'':' kulso')+'"><div class="prov">'+E(m.provider||'·')+(m.eaglz?' · '+ctWhoLab(advName(c.advisor_email)):' · máshol kötött')+(m.member?' · '+E(m.member):'')+'</div><h4>'+E(m.name)+'</h4><div class="row"><span>'+E(prodName(m.area))+'</span><b>'+fmt(m.fee_month)+'</b></div><div class="row"><span>Lejárat</span><b>'+dHu(m.end_date)+'</b></div></div>'; }).join('')+'</div>':'<div class="empty">Még nem vitt fel semmit.</div>')
@@ -4241,8 +4259,9 @@ async function advUnlockDel(uid,room){
   advOpen(uid);
 }
 async function advProfileSave(){
-  var w={}; document.querySelectorAll('#advDetail select[data-w]').forEach(function(s){ w[s.getAttribute('data-w')]=s.value; });
-  var upd={wheel:w,tier:document.getElementById('advTier').value,status:document.getElementById('advStatus').value,next_review:document.getElementById('advReview').value||null,updated_at:new Date().toISOString()};
+  /* a kézi réteg: a "jelölés nélkül" kulcs kimarad, ott az automatika (élő szerződés) dönt */
+  var w={}; document.querySelectorAll('#advDetail select[data-w]').forEach(function(s){ if(s.value!=='na') w[s.getAttribute('data-w')]=s.value; });
+  var upd={wheel_manual:w,tier:document.getElementById('advTier').value,status:document.getElementById('advStatus').value,next_review:document.getElementById('advReview').value||null,updated_at:new Date().toISOString()};
   var ow=document.getElementById('advOwner'); if(ow&&ow.value&&ow.value!==S.cur.advisor_email){ upd.advisor_email=ow.value; }
   var r=await sb.from('hub_profiles').update(upd).eq('user_id',S.cur.user_id);
   if(r.error){ toast('@err '+r.error.message); return; }
