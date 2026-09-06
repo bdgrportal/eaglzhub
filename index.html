@@ -355,6 +355,38 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 .newsc .acts a.btn,#postPopV a.btn{text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;}
 .pkg .val{font-family:var(--fb);font-weight:700;font-size:.74rem;color:var(--navy);}
 .pkg .soon{display:inline-block;font-family:var(--fb);font-weight:800;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:#8a6100;background:rgba(240,180,41,.18);border-radius:100px;padding:.1rem .45rem;margin-left:.35rem;vertical-align:middle;}
+.start-vid{position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(135deg,var(--navy) 0%,#123a52 60%,var(--teal-deep) 100%);margin-bottom:1.1rem;}
+.start-vid iframe,.start-vid video{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000;}
+.start-card{max-width:960px;}
+.start-ph{aspect-ratio:21/9;max-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:#fff;text-align:center;padding:1rem;}
+.start-ph .i{width:38px;height:38px;color:var(--teal);}
+.start-ph b{font-family:var(--fb);font-size:1.3rem;}
+.start-ph span{font-size:.8rem;color:rgba(255,255,255,.7);}
+.start-card h3{font-family:var(--fb);font-size:1.35rem;line-height:1.3;margin:.2rem 0 .6rem;}
+.start-card h4{font-family:var(--fb);font-size:1.05rem;margin:1.1rem 0 .4rem;}
+.start-card p{font-size:.92rem;line-height:1.6;color:#2b3d55;margin:0 0 .55rem;}
+.start-list{list-style:none;counter-reset:s;margin:.3rem 0 0;padding:0;}
+.start-list li{position:relative;padding:.55rem 0 .55rem 2.4rem;border-bottom:1px solid var(--border);font-size:.9rem;line-height:1.5;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;}
+.start-list li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:.6rem;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--fb);font-weight:800;font-size:.78rem;display:flex;align-items:center;justify-content:center;}
+.start-list li span{flex:1;min-width:200px;}
+.start-list li b{color:var(--navy);}
+.start-cta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;}
+/* esemenyek */
+.ev-item{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--border);}
+.ev-item:last-child{border-bottom:0;}
+.ev-date{min-width:62px;text-align:center;background:#f1f6f9;border-radius:10px;padding:.35rem .3rem;font-family:var(--fb);}
+.ev-date b{display:block;font-size:1.2rem;line-height:1.1;color:var(--navy);}
+.ev-date span{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep);font-weight:700;}
+.ev-body{flex:1;min-width:0;}
+.ev-body b{font-family:var(--fb);font-size:.95rem;display:block;}
+.ev-body .sum{font-size:.8rem;color:var(--gray);line-height:1.45;margin:.2rem 0 .4rem;}
+.ev-rec{display:flex;align-items:center;gap:.6rem;padding:.55rem 0;border-bottom:1px solid var(--border);font-size:.88rem;}
+.ev-rec:last-child{border-bottom:0;}
+.ev-rec .no{width:26px;height:26px;border-radius:50%;background:#f1f6f9;color:var(--teal-deep);font-family:var(--fb);font-weight:800;font-size:.72rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ev-rec>span:not(.no){flex:1;min-width:0;}
+.ev-rec .small{white-space:nowrap;}
+.ev-lock{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;}
+.ev-lock ul{margin:.4rem 0 0;padding-left:1.1rem;font-size:.85rem;line-height:1.6;color:#2b3d55;}
 /* foldali hirek */
 .news2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
 .newsc .eyebrow{font-family:var(--fb);font-weight:700;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:.25rem;}
@@ -415,6 +447,7 @@ body.navon .nav-btn span::after{top:0;transform:rotate(-45deg);}
 @media(max-width:980px){
   .dash2{grid-template-columns:1fr;}
   .news2{grid-template-columns:1fr;}
+  .ev-lock{grid-template-columns:1fr;}
   .pkg{font-size:.74rem;table-layout:fixed;width:100%;}
   .pkg td,.pkg th{padding:.42rem .2rem;}
   .pkg td:first-child,.pkg th:first-child{min-width:0;width:43%;padding-left:.5rem;overflow-wrap:anywhere;}
@@ -821,6 +854,8 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
 <div class="nav-bk" id="navBk" onclick="navClose()"></div>
 <div class="sidebar" id="sidebar" style="display:none;">
   <div id="navClient">
+    <div class="side-sec">Kezdés</div>
+    <div class="nav-item" data-p="start" onclick="go('start')"><svg class="i" aria-hidden="true"><use href="#i-flag"></use></svg> Itt kezdj! <span class="dot" id="dotStart" style="display:none;">1</span></div>
     <div class="side-sec">Pénzügyeim</div>
     <div class="nav-item on" data-p="home" onclick="go('home')"><svg class="i" aria-hidden="true"><use href="#i-home"></use></svg> Főoldal</div>
     <div class="nav-item" data-p="map" onclick="go('map')"><svg class="i" aria-hidden="true"><use href="#i-chart"></use></svg> Szerződéseim</div>
@@ -829,9 +864,10 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="side-sec">Tudás</div>
     <div class="nav-item" data-p="cls" onclick="go('cls')"><svg class="i" aria-hidden="true"><use href="#i-video"></use></svg> Videótár</div>
     <div class="nav-item" data-p="tud" onclick="go('tud')"><svg class="i" aria-hidden="true"><use href="#i-book"></use></svg> Tudástár</div>
+    <div class="nav-item" data-p="ev" onclick="go('ev')"><svg class="i" aria-hidden="true"><use href="#i-sparkles"></use></svg> Események</div>
     <div class="nav-item" data-p="notif" onclick="go('notif')"><svg class="i" aria-hidden="true"><use href="#i-bell"></use></svg> Értesítések <span class="dot" id="dotNotif" style="display:none;"></span></div>
     <div class="nav-item" data-p="profile" onclick="go('profile')"><svg class="i" aria-hidden="true"><use href="#i-user"></use></svg> Profil / Csomag</div>
-    <div class="nav-item" onclick="termsShow(true)" style="font-size:.76rem;color:rgba(255,255,255,.5);">ℹ️ Tesztfázis és adatvédelem</div>
+    <div class="nav-item" onclick="termsShow(true)" style="font-size:.76rem;color:rgba(255,255,255,.5);"><svg class="i" aria-hidden="true"><use href="#i-flask"></use></svg> Tesztfázis és adatvédelem</div>
   </div>
   <div id="navAdv" style="display:none;">
     <div class="side-sec">Tanácsadói pult</div>
@@ -851,6 +887,37 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
 <div class="main" id="main" style="display:none;">
 
   <!-- 1) HOME -->
+  <!-- 0) ITT KEZDJ! -->
+  <div class="page" id="p-start">
+    <div class="pt"><svg class="i" aria-hidden="true"><use href="#i-flag"></use></svg> <em>Itt kezdj!</em> <span class="small" style="font-weight:400;">· három perc, és otthon vagy a Hubban</span></div>
+    <div class="card start-card">
+      <div class="start-vid" id="startVid"></div>
+      <h3>Amikor kinyitod az EAGLZ Hub ajtaját</h3>
+      <p>Egy új felület vár rád, ami elsőre soknak tűnhet. Azért van, hogy a tanácsadóddal közös munkából a legtöbbet hozd ki.</p>
+      <p>Adj magadnak pár percet, amíg megérted, hogyan működik. Utána vesd bele magad abba, ami téged érdekel. Itt vagyunk, hogy segítsünk eligazodni.</p>
+      <p>A legfontosabbakat öt pontban összeszedtük. Két perc, aztán tiéd a Hub.</p>
+      <h4>Mi az az EAGLZ Hub?</h4>
+      <p>A személyes pénzügyi központod, ahol:</p>
+      <ol class="start-list">
+        <li><span><b>Egy helyen látod a szerződéseidet</b> és a pénzügyi térképedet, a lejáratokra időben szólunk.</span><button class="btn" onclick="go('map')">Szerződéseim</button></li>
+        <li><span><b>Bármikor segítséget kérsz,</b> kárt jelentesz be vagy időpontot foglalsz a tanácsadódnál.</span><button class="btn" onclick="go('help')">Segítség és időpont</button></li>
+        <li><span><b>Rövid videókból tanulsz</b> az élethelyzetedhez illő témákról, a magad tempójában.</span><button class="btn" onclick="go('cls')">Videótár</button></li>
+        <li><span><b>Magad számolsz és tájékozódsz</b> a kalkulátorokkal és a Tudástárral, mielőtt döntesz.</span><button class="btn" onclick="go('tud')">Tudástár</button></li>
+        <li><span><b>A csomagszinteddel egyre több figyelmet</b> és anyagot kapsz: ajánlással lépsz feljebb.</span><button class="btn" onclick="go('profile');pfTab('csomag')">Profil / Csomag</button></li>
+      </ol>
+      <div class="start-cta">
+        <button class="btn pri" onclick="go('home')"><svg class="i" aria-hidden="true"><use href="#i-home"></use></svg> Irány a Főoldal</button>
+        <button class="btn" onclick="helpNew('consult')"><svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Időpontot egyeztetek</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 0b) ESEMÉNYEK -->
+  <div class="page" id="p-ev">
+    <div class="pt"><svg class="i" aria-hidden="true"><use href="#i-sparkles"></use></svg> <em>Események</em> <span class="small" style="font-weight:400;">· zárt EAGLZ rendezvények és a felvételeik</span></div>
+    <div id="evBox"></div>
+  </div>
+
   <div class="page on" id="p-home">
     <div class="hero">
       <div class="eyebrow">Állapotjelentés · <span id="heroDate"></span></div>
@@ -1025,9 +1092,9 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
       <span class="small" id="kbCnt"></span>
     </div>
     <div class="edu-grid" id="kbGrid"></div>
-    <div class="card lock" id="kbVip" style="margin-top:1rem;">
-      <div class="pt" style="margin-bottom:.3rem;font-size:1.05rem;"><svg class="i" aria-hidden="true"><use href="#i-star"></use></svg> VIP tudástár</div>
-      <p class="small">Mélyebb anyagok: adóoptimalizálás vállalkozóknak, öröklés és vagyonátadás, befektetési stratégiák élethelyzet szerint, webinár-felvételek.</p>
+    <div class="card lock" id="kbVip" style="margin-top:1rem;cursor:pointer;" onclick="go('ev')">
+      <div class="pt" style="margin-bottom:.3rem;font-size:1.05rem;"><svg class="i" aria-hidden="true"><use href="#i-sparkles"></use></svg> Zárt EAGLZ események <span class="small" style="font-weight:400;">· VIP</span></div>
+      <p class="small">Ügyfélklub, webinárok, vendégelőadások és a felvételeik egy helyen. VIP szinten automatikusan nyílik, nem foglal helyet a Videótárban.</p>
     </div>
   </div>
 
@@ -1072,6 +1139,8 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
       <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;">
         <button class="btn" onclick="postAdmAdd('news')">+ új havi hír</button>
         <button class="btn" onclick="postAdmAdd('newsletter')">+ új hírlevél</button>
+        <button class="btn" onclick="postAdmAdd('event')">+ új esemény</button>
+        <button class="btn" onclick="postAdmAdd('start')">+ Itt kezdj! videó</button>
       </div>
     </div>
   </div>
@@ -1198,8 +1267,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="pf-sec" id="pfs-csomag" style="display:none;">
       <div class="card" id="lvlBox" style="margin-bottom:1rem;"></div>
       <div class="card" style="margin-bottom:1rem;">
-        <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">Mit ad a három szint</div>
-        <p class="small" style="margin-bottom:.7rem;">A szint nem kedvezmény és nem pénz: a figyelem mértékét adja. Ugyanaz a tanácsadó, ugyanaz a szakmai munka, csak több idő és több anyag. Sürgős ügyben mindenki 1 munkanapon belül választ kap, szinttől függetlenül.</p>
+        <div class="pt" style="font-size:1.05rem;margin-bottom:.7rem;">Csomagok</div>
         <div class="tblwrap" id="pkgBox"></div>
       </div>
       <div class="card">
@@ -1558,6 +1626,8 @@ function go(p){
   if(p==='advs') advsRender();
   if(p==='advcode') advCodeRender();
   if(p==='cls') clsLoad();
+  if(p==='start') startRender();
+  if(p==='ev'){ evRender(); clsLoad().then(evRender); trk('page','ev'); }
   if(p==='tud'){ tudRender(); }
   if(p==='profile'){ pfRender(); pfTab(PF.tab); }
   if(p==='calc') calcRender();
@@ -1577,9 +1647,69 @@ async function loadAll(){
   var lf=await sb.from('hub_life_events').select('*').eq('user_id',S.user.id).order('created_at',{ascending:false}); S.life=lf.data||[];
   var ps=await sb.from('hub_posts').select('*').eq('published',true).order('month',{ascending:false}); S.posts=(ps&&ps.data)||[];
 }
+/* ── ITT KEZDJ! ── */
+function startSeen(){ try{ return localStorage.getItem('hub_start_seen')==='1'; }catch(e){ return true; } }
+function startRender(){
+  try{ localStorage.setItem('hub_start_seen','1'); }catch(e){}
+  var d=document.getElementById('dotStart'); if(d) d.style.display='none';
+  var el=document.getElementById('startVid'); if(!el) return;
+  var p=postsOf('start')[0];
+  if(p&&p.video_url){ el.innerHTML=clsEmbed(p.video_url); trk('page','start',{video:1}); }
+  else el.innerHTML='<div class="start-ph">'+ico('video')+'<b>Bemutató videó hamarosan</b><span>Addig is: alább minden benne van, amit tudnod érdemes.</span></div>';
+}
+/* ── ESEMÉNYEK ── */
+function evRender(){
+  var el=document.getElementById('evBox'); if(!el) return;
+  if(!tOk('vip')){
+    el.innerHTML='<div class="card"><div class="ev-lock"><div>'
+      +'<div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;">'+ico('lock')+' Az Események a VIP szint zárt tere</div>'
+      +'<p class="small">Amit itt találsz VIP szinten:</p><ul>'
+      +'<li>ügyfélklub-találkozók és zárt EAGLZ rendezvények meghívói</li>'
+      +'<li>webinárok és vendégelőadások élőben, jelentkezéssel</li>'
+      +'<li>minden felvétel utólag, egy helyen</li></ul></div>'
+      +'<div><div class="lvl-note" style="margin-top:.2rem;">A VIP szint <b>'+TIER_REF.vip+' ajánlástól</b> nyílik, a tanácsadód állítja be. Nem foglal helyet a Videótárban: automatikusan a tiéd lesz.</div>'
+      +'<button class="btn pri" style="margin-top:.6rem;" onclick="go(\'profile\');pfTab(\'csomag\')">'+ico('userplus')+' Hol tartok a szintekkel?</button></div>'
+      +'</div></div>';
+    return;
+  }
+  var today=new Date().toISOString().slice(0,10);
+  var evs=postsOf('event'), up=evs.filter(function(p){return String(p.month)>=today;}).sort(function(a,b){return String(a.month)<String(b.month)?-1:1;});
+  var past=evs.filter(function(p){return String(p.month)<today&&p.video_url;});
+  var h='<div class="card" style="margin-bottom:1rem;"><div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;">'+ico('calendar')+' Következő események</div>';
+  if(!up.length) h+='<div class="empty">Most nincs meghirdetett esemény. Ha lesz, itt látod először, és értesítünk.</div>';
+  else h+=up.map(function(p){
+    var d=new Date(p.month);
+    return '<div class="ev-item"><div class="ev-date"><b>'+d.getDate()+'</b><span>'+d.toLocaleDateString('hu-HU',{month:'short'}).replace('.','')+'</span></div>'
+      +'<div class="ev-body"><b>'+E(p.title)+'</b>'+(p.summary?'<div class="sum">'+E(p.summary)+'</div>':'')
+      +(p.pdf_url?'<a class="btn pri" href="'+E(p.pdf_url)+'" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;" onclick="trk(\'event_reg\',\'ev\',{post:'+p.id+'})">'+ico('userplus')+' Jelentkezem</a>':'<span class="small">A jelentkezés hamarosan nyílik.</span>')
+      +'</div></div>';
+  }).join('');
+  h+='</div>';
+  var rec=clsItems(6), rm=(C.rooms||[]).filter(function(r){return r.room===6;})[0];
+  h+='<div class="card"><div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;">'+ico('video')+' Felvételek</div>';
+  var rows='';
+  past.forEach(function(p){ rows+='<div class="ev-rec"><span class="no">'+ico('sparkles')+'</span><span><b>'+E(p.title)+'</b> <span class="small">· '+E(dHu(p.month))+'</span></span><button class="btn" onclick="postOpen('+p.id+')">Megnézem</button></div>'; });
+  rec.forEach(function(it){
+    rows+='<div class="ev-rec"><span class="no">'+it.idx+'</span><span>'+E(it.title)+(it.mins?' <span class="small">· '+it.mins+' perc</span>':'')+'</span>'
+      +(it.url?'<button class="btn" onclick="evOpen('+it.id+')">Megnézem</button>':'<span class="small">'+ico('hourglass')+' hamarosan</span>')+'</div>';
+  });
+  h+=rows||'<div class="empty">Az első felvétel hamarosan. Addig a Videótár mappái várnak.</div>';
+  h+='</div>';
+  el.innerHTML=h;
+}
+function evOpen(id){
+  var it=(C.items||[]).filter(function(x){return x.id===id;})[0]; if(!it||!it.url) return;
+  trk('video','ev',{room:6,idx:it.idx});
+  document.getElementById('postPopK').innerHTML=ico('sparkles')+' Események · felvétel';
+  document.getElementById('postPopT').textContent=it.title;
+  document.getElementById('postPopV').innerHTML=clsEmbed(it.url);
+  document.getElementById('postOv').style.display='flex';
+}
 /* ── FŐOLDALI HÍREK ÉS HÍRLEVÉL ── */
 var POST_K={news:{lab:'Havi pénzügyi hírek',ic:'news',ph:'Az első havi összefoglaló hamarosan érkezik: 5 percben, ami a hónapban a pénzügyeidet érinti.'},
-            newsletter:{lab:'Befektetési hírlevél',ic:'trend',ph:'Az első hírlevél hamarosan: videó és letölthető PDF, havonta egyszer.'}};
+            newsletter:{lab:'Befektetési hírlevél',ic:'trend',ph:'Az első hírlevél hamarosan: videó és letölthető PDF, havonta egyszer.'},
+            start:{lab:'Itt kezdj! bemutató',ic:'flag',ph:''},
+            event:{lab:'Esemény',ic:'sparkles',ph:''}};
 function monHu(d){ if(!d) return ''; var x=new Date(d); return isNaN(x)?String(d):x.toLocaleDateString('hu-HU',{year:'numeric',month:'long'}); }
 function postsOf(k){ return (S.posts||[]).filter(function(p){return p.kind===k;}); }
 function postsRender(){
@@ -1620,13 +1750,15 @@ function postAdmRender(){
   el.innerHTML=PA.list.map(function(p){
     var m=String(p.month||'').slice(0,7);
     return '<div class="post-adm" id="pa'+p.id+'">'
-      +'<select class="k" id="pak'+p.id+'"><option value="news"'+(p.kind==='news'?' selected':'')+'>Havi hír</option><option value="newsletter"'+(p.kind==='newsletter'?' selected':'')+'>Hírlevél</option></select>'
-      +'<input class="m" type="month" id="pam'+p.id+'" value="'+E(m)+'" title="Melyik hónap">'
+      +'<select class="k" id="pak'+p.id+'" onchange="postAdmKind('+p.id+',this.value)"><option value="news"'+(p.kind==='news'?' selected':'')+'>Havi hír</option><option value="newsletter"'+(p.kind==='newsletter'?' selected':'')+'>Hírlevél</option><option value="start"'+(p.kind==='start'?' selected':'')+'>Itt kezdj! videó</option><option value="event"'+(p.kind==='event'?' selected':'')+'>Esemény (VIP)</option></select>'
+      +(p.kind==='event'
+         ?'<input class="m" type="date" id="pam'+p.id+'" value="'+E(String(p.month||'').slice(0,10))+'" title="Az esemény napja">'
+         :'<input class="m" type="month" id="pam'+p.id+'" value="'+E(m)+'" title="Melyik hónap">')
       +'<input class="t" id="pat'+p.id+'" value="'+E(p.title)+'" placeholder="Cím">'
       +'<label class="pub"><input type="checkbox" id="pap'+p.id+'"'+(p.published?' checked':'')+'> közzétéve</label>'
       +'<textarea class="sum" id="pas'+p.id+'" placeholder="Rövid összefoglaló, 1-3 mondat" style="min-height:52px;">'+E(p.summary||'')+'</textarea>'
       +'<input class="v" id="pav'+p.id+'" value="'+E(p.video_url||'')+'" placeholder="Videó link (YouTube, Vimeo, Drive, mp4)">'
-      +'<input class="pdf" id="paf'+p.id+'" value="'+E(p.pdf_url||'')+'" placeholder="PDF link (csak hírlevélnél)">'
+      +'<input class="pdf" id="paf'+p.id+'" value="'+E(p.pdf_url||'')+'" placeholder="'+(p.kind==='event'?'Jelentkezési link (űrlap, naptár, e-mail)':'PDF link (csak hírlevélnél)')+'">'
       +'<div class="act"><button class="btn primary" onclick="postAdmSave('+p.id+')">Mentés</button>'
       +(p.video_url?'<button class="btn" onclick="postAdmPrev('+p.id+')">Előnézet</button>':'')
       +'<button class="btn" style="color:var(--pink);" onclick="postAdmDel('+p.id+')">Törlés</button>'
@@ -1634,18 +1766,22 @@ function postAdmRender(){
       +'</div>';
   }).join('');
 }
+function postAdmKind(id,v){ var p=PA.list.filter(function(x){return x.id===id;})[0]; if(p){ p.kind=v; postAdmRender(); } }
 function postAdmPrev(id){ var p=PA.list.filter(function(x){return x.id===id;})[0]; if(!p) return; S.posts=S.posts||[]; if(!S.posts.some(function(x){return x.id===id;})) S.posts.push(p); postOpen(id); }
 async function postAdmSave(id){
   var g=function(k){ var e=document.getElementById(k+id); return e?e.value:''; };
   var t=g('pat').trim(); if(!t){ toast('A cím nem lehet üres.'); return; }
-  var m=g('pam'); if(!/^\d{4}-\d{2}$/.test(m)){ toast('Válaszd ki a hónapot.'); return; }
-  var row={kind:g('pak'),month:m+'-01',title:t,summary:g('pas').trim()||null,video_url:g('pav').trim()||null,pdf_url:g('paf').trim()||null,published:document.getElementById('pap'+id).checked};
+  var m=g('pam'), k=g('pak');
+  if(k==='event'){ if(!/^\d{4}-\d{2}-\d{2}$/.test(m)){ toast('Add meg az esemény napját.'); return; } }
+  else { if(!/^\d{4}-\d{2}$/.test(m)){ toast('Válaszd ki a hónapot.'); return; } m=m+'-01'; }
+  var row={kind:k,month:m,title:t,summary:g('pas').trim()||null,video_url:g('pav').trim()||null,pdf_url:g('paf').trim()||null,published:document.getElementById('pap'+id).checked};
   var r=await sb.from('hub_posts').update(row).eq('id',id);
   if(r.error){ toast('@err '+r.error.message); return; }
   toast('@ok Mentve.'); await postAdmLoad(); await loadAll(); postsRender();
 }
 async function postAdmAdd(kind){
-  var r=await sb.from('hub_posts').insert({kind:kind,title:(kind==='news'?'Havi pénzügyi hírek':'Befektetési hírlevél')+' · '+monHu(new Date()),published:false});
+  var t0={news:'Havi pénzügyi hírek',newsletter:'Befektetési hírlevél',start:'Itt kezdj! bemutató',event:'Új EAGLZ esemény'}[kind]||'Új';
+  var r=await sb.from('hub_posts').insert({kind:kind,title:t0+' · '+monHu(new Date()),published:false});
   if(r.error){ toast('@err '+r.error.message); return; }
   await postAdmLoad(); toast('@ok Felvéve, még nincs közzétéve. Írd át a címét, tedd be a linket, majd pipáld be a közzétételt.');
 }
@@ -1667,6 +1803,7 @@ function renderAll(){
   document.getElementById('advName').textContent=adv.name; document.getElementById('advAva').textContent=ini(adv.name);
   var afl=document.getElementById('afEaglzLab'); if(afl) afl.innerHTML=ctWhoLab(adv.name)+' kötöttem';
   refList(); lvlRender(); pkgRender(); contRender(); postsRender();
+  var ds=document.getElementById('dotStart'); if(ds) ds.style.display=startSeen()?'none':'';
   document.getElementById('kbVip').classList.toggle('lock',!tOk('vip'));
   /* hero */
   var now=new Date(), in60=new Date(Date.now()+60*86400000);
@@ -1674,6 +1811,7 @@ function renderAll(){
   var sum=S.items.reduce(function(a,i){return a+(+i.fee_month||0);},0);
   var wheel=p.wheel||{}, miss=WHEEL.filter(function(w){return wheel[w[0]]==='miss';}), rev=WHEEL.filter(function(w){return wheel[w[0]]==='rev';});
   var todos=[];
+  if(!startSeen()) todos.push({t:'<svg class="i" aria-hidden="true"><use href="#i-flag"></use></svg> Nézd meg az Itt kezdj! oldalt: három perc, és otthon vagy a Hubban',b:'Itt kezdj!',f:"go('start')"});
   exp.forEach(function(i){ todos.push({t:'<svg class="i" aria-hidden="true"><use href="#i-clock"></use></svg> '+E(i.name)+' lejár: '+dHu(i.end_date),b:'Intézzük',f:"helpNew('help',"+i.id+")"}); });
   miss.forEach(function(w){ todos.push({t:w[1]+' Hiányzó terület: '+w[2],b:'Kalkulátor',f:"go('calc')"}); });
   rev.forEach(function(w){ todos.push({t:w[1]+' Felülvizsgálandó: '+w[2],b:'Időpont',f:"helpNew('consult')"}); });
@@ -2641,9 +2779,9 @@ function lvlRender(){
     +'<span class="'+(t==='plus'?'cur':(tRank(t)>2?'on':''))+'">Plus · '+TIER_REF.plus+' ajánlás</span>'
     +'<span class="'+(t==='vip'?'cur':'')+'">VIP · '+TIER_REF.vip+' ajánlás</span></div>';
   var note;
-  if(!nx) note='<div class="lvl-note">A <b>legmagasabb szinten</b> vagy: mind a 6 tantermet megnyithatod, és elsőbbséget élvezel az időpontoknál.</div>';
+  if(!nx) note='<div class="lvl-note">A <b>legmagasabb szinten</b> vagy: mind az 5 mappát megnyithatod, a zárt Események automatikusan a tiéd, és elsőbbséget élvezel az időpontoknál.</div>';
   else if(left===0) note='<div class="lvl-note">Összejött a <b>'+need+' ajánlás</b> a '+tName(nx)+' szinthez. A tanácsadód nyitja meg neked, szólj neki a következő beszélgetéskor.</div>';
-  else note='<div class="lvl-note">Még <b>'+left+' ajánlás</b>, és megnyílhat a '+tName(nx)+' szint: '+(nx==='plus'?'5':'6')+' tanterem a mostani '+clsSlots()+' helyett, és gyorsabb válaszidő. A szintet a tanácsadód állítja be.</div>';
+  else note='<div class="lvl-note">Még <b>'+left+' ajánlás</b>, és megnyílhat a '+tName(nx)+' szint: '+(nx==='plus'?'5 mappa a mostani '+clsSlots()+' helyett':'a zárt Események is, és a tanácsadód végigviszi a kárügyeidet')+', és gyorsabb válaszidő. A szintet a tanácsadód állítja be.</div>';
   el.innerHTML='<div class="lvl"><span class="lvl-now">'+tierLab(t)+' szint</span>'
       +'<span class="lvl-cnt">'+n+' ajánlásod van</span></div>'
     +'<div class="lvl-bar"><i style="width:'+pct+'%"></i></div>'+steps+note;
@@ -2678,7 +2816,7 @@ var PKG=[
    ['Vállalt válaszidő ügyekre','5 munkanap','3 munkanap','2 munkanap'],
    ['Teljes családi profil',0,0,1,'soon'],
    ['Személyes támogatás kárbejelentésnél',0,0,1],
-   ['Zárt EAGLZ események (a Videótár 6. mappája)',0,0,1]
+   ['Zárt EAGLZ események (saját menüpont)',0,0,1]
  ]],
  ['',[
    ['Ehhez kell','mindenkinek jár',TIER_REF.plus+' ajánlás',TIER_REF.vip+' ajánlás']
@@ -2756,7 +2894,9 @@ function clsDone(room){ return clsItems(room).filter(function(x){return C.prog[x
 function clsUnlocked(room,pos){ if(pos<=0) return true; var it=clsItems(room); return !!(it[pos-1]&&C.prog[it[pos-1].id]); }
 function clsNum(v){ return String(v).replace('.',','); }
 function hunBol(n){ var e=[1,2,4,5,7,9,10,11,12,14,15,17,19]; return 'a(z) '+n+(e.indexOf(n)>=0?'-ből':'-ból'); }
-function clsSlots(){ var t=myTier(); return t==='vip'?6:(t==='plus'?5:3); }
+function clsSlots(){ var t=myTier(); return t==='vip'?5:(t==='plus'?5:3); }
+/* a valaszthato mappak: az auto_open (Esemenyek) nem, annak sajat menupontja van */
+function clsPickable(){ return (C.rooms||[]).filter(function(r){ return !r.auto_open; }); }
 function clsUsed(){ return Object.keys(C.unl).length; }
 function clsFree(){ return Math.max(0,clsSlots()-clsUsed()); }
 
@@ -2808,11 +2948,12 @@ function clsRender(){
   var sl=clsSlots(), us=clsUsed(), fr=clsFree(), slots='';
   for(var q=0;q<sl;q++) slots+='<span class="cslot'+(q<us?' on':'')+'"></span>';
   document.getElementById('clsHead').innerHTML=
-     '<b>'+TIER[myTier()].n+' szint: '+sl+' tantermet választhatsz</b> '+hunBol(C.rooms.filter(function(r){return tOk(r.min_tier);}).length)+'. Te döntöd el, melyiket, az élethelyzeted szerint.'
+     '<b>'+TIER[myTier()].n+' szint: '+sl+' tantermet választhatsz</b> '+hunBol(clsPickable().filter(function(r){return tOk(r.min_tier);}).length)+'. Te döntöd el, melyiket, az élethelyzeted szerint.'
+    +(myTier()==='vip'?' A zárt <b>Események</b> külön menüpont, nem foglal helyet.':'')
     +'<div class="cslot-row">'+slots+'<span class="tier-note" style="margin-left:.5rem;">'
       +(fr?(fr+' szabad hely'):'Minden helyedet felhasználtad'+(myTier()==='vip'?'.':', a következő szint többet ad.'))+'</span></div>'
     +(dn?'<div class="tier-note" style="margin-top:.5rem;font-weight:400;color:var(--gray);">Eddig '+dn+' leckét teljesítettél. A leckék sorban nyílnak: ha megnézted és értékelted, jön a következő.</div>':'');
-  document.getElementById('clsGrid').innerHTML=C.rooms.length?C.rooms.map(function(r){
+  document.getElementById('clsGrid').innerHTML=clsPickable().length?clsPickable().map(function(r){
     var tierOk=tOk(r.min_tier), mine=!!C.unl[r.room], free=clsFree();
     var its=clsItems(r.room), d=clsDone(r.room), pc=its.length?Math.round(d/its.length*100):0, full=mine&&its.length&&d===its.length;
     var cls='cls-room'+(full?' done':'')+(mine?'':(!tierOk?' tlock':(free?' pick':' tlock')));
@@ -2969,7 +3110,7 @@ function clsAdmRender(){
   document.getElementById('clsAdm').innerHTML=C.rooms.map(function(r){
     var its=clsItems(r.room);
     return '<div class="card" style="margin-bottom:1rem;">'
-      +'<div class="pt" style="font-size:1.05rem;margin-bottom:.15rem;">'+roomIco(r.icon)+' <em>'+E(r.title)+'</em> <span class="small" style="font-weight:400;">· '+r.room+'. terem</span>'
+      +'<div class="pt" style="font-size:1.05rem;margin-bottom:.15rem;">'+roomIco(r.icon)+' <em>'+E(r.title)+'</em> <span class="small" style="font-weight:400;">· '+r.room+'. terem'+(r.auto_open?' · saját menüpont (Események), nem foglal helyet':'')+'</span>'
         +' <select onchange="clsAdmRoomIcon('+r.room+',this.value)" title="A terem ikonja" style="font-size:.75rem;padding:.25rem .5rem;">'+roomIcoOpts(r.icon)+'</select>'+' <select onchange="clsAdmRoomTier('+r.room+',this.value)" title="Melyik csomagszinttől érhető el" style="font-size:.75rem;padding:.25rem .5rem;">'
         +['basic','plus','vip'].map(function(k){ return '<option value="'+k+'"'+((r.min_tier||'basic')===k?' selected':'')+'>'+TIER[k].n+' szinttől</option>'; }).join('')
         +'</select></div>'
