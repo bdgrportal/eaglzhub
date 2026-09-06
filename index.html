@@ -3227,13 +3227,9 @@ function clsSubs(room){ return (C.subs||[]).filter(function(x){return x.room===r
 function subIdx(sid){ var s=(C.subs||[]).filter(function(x){return x.id===sid;})[0]; return s?s.idx:9999; }
 function clsItems(room){ return C.items.filter(function(x){return x.room===room;}).sort(function(a,b){ var d=subIdx(a.sub_id)-subIdx(b.sub_id); return d||(a.idx-b.idx); }); }
 function clsDone(room){ return clsItems(room).filter(function(x){return C.prog[x.id];}).length; }
-/* a sorrendi zar almappan belul ervenyes: az almappa 1. videoja mindig nyitott, a kovetkezo az elozo ertekelese utan */
-function clsUnlocked(room,pos){
-  if(pos<=0) return true; var it=clsItems(room), cur=it[pos], prev=it[pos-1];
-  if(!cur||!prev) return true;
-  if((cur.sub_id||null)!==(prev.sub_id||null)) return true;
-  return !!C.prog[prev.id];
-}
+/* v14: nincs sorrendi zar. A megnyitott mappan belul barmelyik video inditható, erdeklodes szerint.
+   (A csomag-kapu a mappara vonatkozik, az valtozatlan: tier + feloldott hely.) */
+function clsUnlocked(room,pos){ return true; }
 var CTA_LAB={none:'',consult:'Időpontot egyeztetek',help:'Segítséget kérek',parent:'Szülőként kérdésed van? Időpontot egyeztetek'};
 function calcTitle(k){ var c=(typeof CALCS!=='undefined'?CALCS:[]).filter(function(x){return x.k===k;})[0]; return c?c.t:'Kalkulátor'; }
 function ctaHtml(it){
@@ -3323,7 +3319,7 @@ function clsRender(){
     +(myTier()==='vip'?' A zárt <b>Események</b> külön menüpont, nem foglal helyet.':'')
     +'<div class="cslot-row">'+slots+'<span class="tier-note" style="margin-left:.5rem;">'
       +(fr?(fr+' szabad hely'):'Minden helyedet felhasználtad'+(myTier()==='vip'?'.':', a következő szint többet ad.'))+'</span></div>'
-    +(dn?'<div class="tier-note" style="margin-top:.5rem;font-weight:400;color:var(--gray);">Eddig '+dn+' leckét teljesítettél. A leckék sorban nyílnak: ha megnézted és értékelted, jön a következő.</div>':'');
+    +(dn?'<div class="tier-note" style="margin-top:.5rem;font-weight:400;color:var(--gray);">Eddig '+dn+' leckét teljesítettél. Bármelyik videót elindíthatod, abban a sorrendben, ahogy téged érdekel. Ha értékeled, a haladásod itt látszik.</div>':'');
   document.getElementById('clsGrid').innerHTML=clsPickable().length?clsPickable().map(function(r){
     var tierOk=tOk(r.min_tier), mine=!!C.unl[r.room], free=clsFree();
     var its=clsItems(r.room), d=clsDone(r.room), pc=its.length?Math.round(d/its.length*100):0, full=mine&&its.length&&d===its.length;
@@ -3419,7 +3415,6 @@ function clsEmbed(u){
 function clsOpen(id){
   var it=C.items.filter(function(x){return x.id===id;})[0]; if(!it) return;
   var its=clsItems(it.room), pos=its.map(function(x){return x.id;}).indexOf(id);
-  if(!clsUnlocked(it.room,pos)){ toast('@lock Előbb nézd meg és értékeld az előző leckét.'); return; }
   if(!it.url){ toast('@info Ez a lecke hamarosan érkezik.'); return; }
   C.item=it; C.tmp=(C.prog[id]?C.prog[id].rating:0);
   trk('video','cls',{room:it.room,idx:it.idx});
