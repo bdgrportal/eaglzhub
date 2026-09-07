@@ -363,6 +363,7 @@ input,select,textarea{max-width:100%;box-sizing:border-box;}
 .les.open .st{color:var(--teal-deep);} .les.done .st{color:var(--green);}
 .les .ribbon{position:absolute;top:.75rem;right:-2.1rem;transform:rotate(38deg);background:var(--green);color:#fff;font-family:var(--fb);font-weight:800;font-size:.54rem;letter-spacing:.12em;padding:.18rem 2.2rem;}
 .les .descr{font-size:.72rem;color:var(--gray);line-height:1.45;}
+.tlink{color:var(--teal-deep);font-weight:700;text-decoration:underline;text-underline-offset:2px;word-break:break-all;} .tlink:hover{color:var(--navy);}
 .sub-h{margin-top:1.1rem;}
 
 .cls-pop{position:relative;z-index:2;background:#fff;border-radius:18px;width:min(880px,95vw);max-height:92vh;overflow:auto;box-shadow:0 30px 70px rgba(9,22,38,.45);}
@@ -1708,6 +1709,8 @@ var TST={new:'Beérkezett',assigned:'Felelős kijelölve',progress:'Folyamatban'
 var LIFE={uj_munkahely:'<svg class="i" aria-hidden="true"><use href="#i-briefcase"></use></svg> Új munkahely',gyermek:'<svg class="i" aria-hidden="true"><use href="#i-baby"></use></svg> Gyermek érkezik',lakas:'<svg class="i" aria-hidden="true"><use href="#i-home"></use></svg> Lakásvásárlás',hazassag:'<svg class="i" aria-hidden="true"><use href="#i-ring"></use></svg> Házasság',vallalkozas:'<svg class="i" aria-hidden="true"><use href="#i-rocket"></use></svg> Vállalkozás',jovedelem:'<svg class="i" aria-hidden="true"><use href="#i-money"></use></svg> Jövedelemváltozás'};
 
 function E(x){ return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+/* szoveg escape + a benne levo http(s) linkek kattinthatok (uj lap, noopener); sortores megmarad */
+function L(x){ return E(x).replace(/\n/g,'<br>').replace(/(https?:\/\/[^\s<>"']+[^\s<>"'.,;:!?)])/g,function(u){ return '<a href="'+u+'" target="_blank" rel="noopener" class="tlink">'+u+'</a>'; }); }
 function fmt(n){ return (+n||0).toLocaleString('hu-HU')+' Ft'; }
 function dHu(d){ if(!d) return '·'; var x=new Date(d); return isNaN(x)?d:x.toLocaleDateString('hu-HU',{year:'numeric',month:'short',day:'numeric'}); }
 /* ── esemény-napló: tűzd és felejtsd el, sosem blokkol és sosem hibázik hangosan ── */
@@ -2004,7 +2007,7 @@ function evRender(){
   if(!web) h+='<div class="empty">A következő webinar időpontja hamarosan. A korábbiak felvételét lent találod.</div>';
   else { var wd=new Date(web.month);
     h+='<div class="ev-item"><div class="ev-date"><b>'+wd.getDate()+'</b><span>'+wd.toLocaleDateString('hu-HU',{month:'short'}).replace('.','')+'</span></div>'
-      +'<div class="ev-body"><b>'+E(web.title)+'</b>'+(web.summary?'<div class="sum">'+E(web.summary)+'</div>':'')
+      +'<div class="ev-body"><b>'+E(web.title)+'</b>'+(web.summary?'<div class="sum">'+L(web.summary)+'</div>':'')
       +(web.pdf_url?'<a class="btn pri" href="'+E(web.pdf_url)+'" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;" onclick="trk(\'webinar_reg\',\'ev\',{post:'+web.id+'})">'+ico('laptop')+' Csatlakozom</a>':'<span class="small">A csatlakozási link a webinar előtt kerül ide.</span>')
       +'</div></div>'; }
   h+='</div>';
@@ -2013,7 +2016,7 @@ function evRender(){
   else h+=up.map(function(p){
     var d=new Date(p.month);
     return '<div class="ev-item"><div class="ev-date"><b>'+d.getDate()+'</b><span>'+d.toLocaleDateString('hu-HU',{month:'short'}).replace('.','')+'</span></div>'
-      +'<div class="ev-body"><b>'+E(p.title)+'</b>'+(p.summary?'<div class="sum">'+E(p.summary)+'</div>':'')
+      +'<div class="ev-body"><b>'+E(p.title)+'</b>'+(p.summary?'<div class="sum">'+L(p.summary)+'</div>':'')
       +(p.pdf_url?'<a class="btn pri" href="'+E(p.pdf_url)+'" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;" onclick="trk(\'event_reg\',\'ev\',{post:'+p.id+'})">'+ico('userplus')+' Jelentkezem</a>':'<span class="small">A jelentkezés hamarosan nyílik.</span>')
       +'</div></div>';
   }).join('');
@@ -2052,7 +2055,7 @@ function postsRender(){
     var d=POST_K[k], list=postsOf(k), p=list[0];
     var h='<div class="eyebrow">'+ico(d.ic)+' '+d.lab+(p?' · '+E(monHu(p.month)):'')+'</div>';
     if(!p){ el.innerHTML=h+'<div class="ph">'+ico('hourglass')+'<span>'+d.ph+'</span></div>'; return; }
-    h+='<h4>'+E(p.title)+'</h4>'+(p.summary?'<div class="sum">'+E(p.summary)+'</div>':'')+'<div class="acts">';
+    h+='<h4>'+E(p.title)+'</h4>'+(p.summary?'<div class="sum">'+L(p.summary)+'</div>':'')+'<div class="acts">';
     h+=p.video_url?'<button class="btn pri" onclick="postOpen('+p.id+')">'+ico('video')+' Megnézem</button>':'<span class="small">'+ico('hourglass')+' A videó hamarosan</span>';
     if(p.pdf_url) h+=pdfBtn(p.pdf_url,'PDF','trk(\'pdf\',\'home\',{post:'+p.id+'})'); else if(k==='newsletter') h+='<span class="small">'+ico('file')+' PDF hamarosan</span>';
     h+='</div>';
@@ -3465,7 +3468,7 @@ function clsRoom(room){
       +'<div class="vtop"><span class="no">'+(done?'✓':n)+'</span><span class="st">'+st+'</span></div>'
       +'<span class="ic">'+ico(has?'video':'clock')+'</span>'
       +'<b>'+E(it.title)+itBadges(it,r)+'</b>'
-      +(it.descr?'<span class="descr">'+E(it.descr)+'</span>':'')
+      +(it.descr?'<span class="descr">'+L(it.descr)+'</span>':'')
       +(meta?'<span class="meta">'+meta+'</span>':'')
       +'</div>';
   });
@@ -3524,7 +3527,7 @@ function clsOpen(id){
   document.getElementById('clsPopT').innerHTML=E(it.title)+itBadges(it,r);
   document.getElementById('clsPopV').innerHTML=clsEmbed(it.url);
   var meta=itMeta(it,r), x='';
-  if(it.descr) x+='<div class="descr">'+E(it.descr)+'</div>';
+  if(it.descr) x+='<div class="descr">'+L(it.descr)+'</div>';
   if(meta) x+='<div class="meta">'+meta+'</div>';
   var acts=((r.profile||'')==='service'&&(it.cta||'')==='help'?'':ctaHtml(it))+pdfBtn(it.pdf_url,'PDF: '+pdfName(it.pdf_url),'trk(\'pdf\',\'cls\',{item:'+it.id+'})');
   if(acts) x+='<div class="acts">'+acts+'</div>';
