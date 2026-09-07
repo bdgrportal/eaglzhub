@@ -94,11 +94,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 
 .hero h2{font-family:var(--fb);font-weight:800;font-size:1.6rem;margin-bottom:1.05rem;}
 .hero h2 em{font-style:normal;color:var(--teal);}
 .hero-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;}
-.hk{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:.7rem .85rem;backdrop-filter:blur(2px);transition:all .14s;}
+.hk{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:.7rem .85rem;transition:all .14s;}
 .hk:hover{background:rgba(255,255,255,.11);transform:translateY(-2px);}
 .hk .l{font-size:.6rem;font-family:var(--fb);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8fb3cc;}
 .hk .v{font-family:var(--fb);font-weight:800;font-size:1.18rem;margin-top:.15rem;overflow-wrap:anywhere;word-break:break-word;line-height:1.2;}
-.hk .v.lg{font-size:.92rem;}
+.hk .v.longv{font-size:.92rem;}
 .hk{min-width:0;}
 .hk .v em{font-style:normal;font-size:.72rem;color:var(--teal);}
 .hk.warn .v{color:#9ec5f0;}
@@ -2159,7 +2159,7 @@ function renderAll(){
    +'<div class="hk"><div class="l">Havi díjaid összesen</div><div class="v">'+fmt(sum)+'</div></div>'
    +'<div class="hk'+(p.next_review?' warn':'')+'"><div class="l">Köv. felülvizsgálat</div><div class="v">'+(p.next_review?dHu(p.next_review):'egyeztetni')+'</div></div>'
    +'<div class="hk'+(exp.length?' alert':'')+'"><div class="l">Lejár 60 napon belül</div><div class="v">'+exp.length+'</div></div>'
-   +'<div class="hk'+(prog.length?' warn':'')+'"><div class="l">Intézés alatt</div><div class="v'+((prog.length===1&&prog[0][2].length>12)?' lg':'')+'">'+(prog.length?(prog.length===1?E(prog[0][2]):prog.length+' termék'):'nincs')+'</div></div>'
+   +'<div class="hk'+(prog.length?' warn':'')+'"><div class="l">Intézés alatt</div><div class="v'+((prog.length===1&&prog[0][2].length>12)?' longv':'')+'">'+(prog.length?(prog.length===1?E(prog[0][2]):prog.length+' termék'):'nincs')+'</div></div>'
    +'<div class="hk'+(todos.length?' warn':'')+'"><div class="l">Ajánlott teendő</div><div class="v">'+todos.length+'</div></div>';
   var man=(p.wheel_manual||{});
   function wsegHtml(w){
