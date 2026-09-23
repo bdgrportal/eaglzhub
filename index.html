@@ -65,6 +65,9 @@ a{color:inherit;}
 .nav-item .dot{margin-left:auto;background:var(--red);color:#fff;font-size:.6rem;font-weight:800;border-radius:100px;padding:.05rem .4rem;box-shadow:0 0 10px rgba(230,62,120,.5);}
 .side-foot{margin:auto .8rem 0;background:linear-gradient(150deg,rgba(125,200,192,.14),rgba(43,108,176,.14));border:1px solid rgba(125,200,192,.25);border-radius:14px;padding:.8rem .85rem;}
 .side-foot .adv{display:flex;align-items:center;gap:.6rem;}
+.side-foot .adv{cursor:pointer;border-radius:10px;transition:opacity .14s;} .side-foot .adv:hover{opacity:.85;}
+.side-foot .ava{background-size:cover;background-position:center;overflow:hidden;}
+.side-foot .ava.has{color:transparent;}
 .side-foot .ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--purple));color:#fff;font-family:var(--fb);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.82rem;box-shadow:0 0 0 3px rgba(125,200,192,.2),0 0 18px rgba(125,200,192,.35);}
 .side-foot b{font-family:var(--fb);font-size:.84rem;color:#fff;display:block;}
 .side-foot span{font-size:.62rem;color:#a9c4d8;}
@@ -354,6 +357,14 @@ input,select,textarea{max-width:100%;box-sizing:border-box;}
 .prof-form{display:grid;grid-template-columns:1fr 1fr;gap:.55rem .7rem;} .prof-form label{font-size:.76rem;color:var(--gray);display:flex;flex-direction:column;gap:.2rem;font-family:var(--fb);font-weight:700;} .prof-form label.w{grid-column:1/-1;}
 .prof-form input,.prof-form textarea{font-family:var(--ft);font-weight:400;} .prof-form textarea{min-height:96px;}
 .prof-cnt{font-size:.72rem;color:var(--gray);font-weight:400;} .prof-cnt.bad{color:var(--pink);font-weight:700;}
+/* tanácsadó-avatar az ügyfél oldalán */
+.advav{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--teal-deep));color:#fff;font-family:var(--fb);font-weight:800;font-size:.78rem;display:inline-flex;align-items:center;justify-content:center;background-size:cover;background-position:center;flex:0 0 auto;vertical-align:middle;}
+.advav.has{color:transparent;}
+.advav.sm{width:24px;height:24px;font-size:.62rem;}
+.advav.lg{width:46px;height:46px;font-size:1rem;}
+.advline{display:inline-flex;align-items:center;gap:.45rem;}
+.advline .who{cursor:pointer;text-decoration:underline;text-decoration-color:rgba(27,56,88,.25);text-underline-offset:2px;}
+.hp-book .bkhd{display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem;}
 .prof-form label.switch{flex-direction:row;align-items:center;gap:.5rem;font-weight:400;color:var(--ink);}
 .tm-adm .hd .av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--teal-deep));color:#fff;font-family:var(--fb);font-weight:800;font-size:.7rem;display:inline-flex;align-items:center;justify-content:center;background-size:cover;background-position:center;flex:0 0 auto;}
 .prof-prev{background:#f7f9fc;border:1px solid var(--border);border-radius:12px;padding:.8rem .9rem;font-size:.82rem;margin-top:.8rem;}
@@ -594,6 +605,14 @@ input,select,textarea{max-width:100%;box-sizing:border-box;}
 .post-adm .sum{grid-area:sum;} .post-adm .v{grid-area:v;} .post-adm .pdf{grid-area:pdf;} .post-adm .act{grid-area:act;display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;}
 .post-adm input,.post-adm select,.post-adm textarea{width:100%;font-size:.8rem;padding:.42rem .55rem;}
 .cls-room.pick{border-style:dashed;border-color:rgba(125,200,192,.75);background:linear-gradient(180deg,#fff,rgba(125,200,192,.07));}
+/* v18: hamarosan nyíló mappa (más szín, nem választható) és mindenkinek nyitott mappa */
+.cls-room.soon{border-style:dashed;border-color:rgba(230,62,120,.45);background:linear-gradient(180deg,#fff,rgba(230,62,120,.06));cursor:default;}
+.cls-room.soon:hover{border-color:rgba(230,62,120,.45);transform:none;box-shadow:0 2px 8px rgba(15,32,53,.06);}
+.cls-room.soon .ic{opacity:.55;}
+.cls-room.soon h4{color:var(--gray);}
+.cls-tag{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--fb);font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .5rem;border-radius:999px;}
+.cls-tag.s{background:rgba(230,62,120,.12);color:var(--pink);}
+.cls-tag.f{background:rgba(125,200,192,.18);color:var(--teal-deep);}
 .cls-room.pick:hover{border-style:solid;border-color:var(--teal);}
 .cls-pick-btn{display:block;width:100%;margin-top:.7rem;font-family:var(--fb);font-weight:800;font-size:.72rem;color:#fff;background:linear-gradient(135deg,var(--teal-deep),var(--teal));border:none;border-radius:100px;padding:.5rem .8rem;cursor:pointer;}
 .cls-room.pick:hover .cls-pick-btn{box-shadow:0 6px 16px rgba(47,122,116,.35);}
@@ -1092,7 +1111,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
     <div class="nav-item" data-p="clsadm" onclick="go('clsadm')" id="navClsAdm" style="display:none;"><svg class="i" aria-hidden="true"><use href="#i-sliders"></use></svg> Tartalom</div>
   </div>
   <div class="side-foot" id="sideFoot">
-    <div class="adv"><div class="ava" id="advAva">..</div><div><b id="advName">…</b><span>a személyes tanácsadód</span></div></div>
+    <div class="adv" onclick="advCardOpen()" title="Megnézem az adatlapját"><div class="ava" id="advAva">..</div><div><b id="advName">…</b><span>a személyes tanácsadód</span></div></div>
     <button class="side-cta" onclick="bookOpen('side')"><svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Időpontot egyeztetek</button>
   </div>
 </div>
@@ -1261,7 +1280,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
       <div class="small" id="hpGuideVip" style="margin-top:.6rem;"></div>
     </div>
     <div class="hp-book" id="hpBook" style="display:none;">
-      <div class="pt" style="font-size:1.05rem;margin-bottom:.25rem;"><svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Foglalj közvetlenül <span id="hpBookAdv">a tanácsadód</span> naptárába</div>
+      <div class="bkhd"><div id="hpBookAva"></div><div class="pt" style="font-size:1.05rem;margin:0;"><svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Foglalj közvetlenül <span id="hpBookAdv">a tanácsadód</span> naptárába</div></div>
       <p class="small" style="margin:0;">A gombra kattintva új lapon nyílik a Google időpontfoglaló: ott látod a szabad időpontokat, és azonnal le is foglalod. Visszaigazolást e-mailben kapsz.</p>
       <div class="acts">
         <button class="btn pri" onclick="bookOpen('help')"><svg class="i" aria-hidden="true"><use href="#i-calendar"></use></svg> Időpontfoglaló megnyitása</button>
@@ -1382,7 +1401,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
       <div class="lead" id="admLeadVideo"></div>
     <p class="small" style="margin-bottom:.6rem;" id="clsAdmCnt"></p>
     <div class="card" style="margin-bottom:1rem;">
-      <p class="small">Mappa → almappa → videó. Kattints a mappa vagy almappa fejlécére a kinyitáshoz. Minden szerkeszthető: név, cél, ikon, csomag, mezők. A videó linkje lehet YouTube (nem listázott is), Vimeo, Google Drive vagy közvetlen mp4; minden videóhoz tehető leírás és feltölthető PDF. A CTA egy gomb a videó alatt: időpont, segítség vagy kalkulátor. A mappa profilja adja a plusz mezőket: Kids → korosztály; Szerviz → szolgáltató, folyamat, utolsó frissítés (6 havi felülvizsgálati lista); Szezonális → évszám, meddig aktuális (utána automatikusan archív). Almappán belül a 2. videó az 1. értékelése után nyílik.</p>
+      <p class="small">Mappa → almappa → videó. Kattints a mappa vagy almappa fejlécére a kinyitáshoz. Minden szerkeszthető: név, cél, ikon, csomag, mezők. A videó linkje lehet YouTube (nem listázott is), Vimeo, Google Drive vagy közvetlen mp4; minden videóhoz tehető leírás és feltölthető PDF. A CTA egy gomb a videó alatt: időpont, segítség vagy kalkulátor. A mappa profilja adja a plusz mezőket: Kids → korosztály; Szerviz → szolgáltató, folyamat, utolsó frissítés (6 havi felülvizsgálati lista); Szezonális → évszám, meddig aktuális (utána automatikusan archív). A mappán belül bármelyik videó indítható. Két mappa-kapcsoló: „Mindenkinek nyitva” (nem foglal helyet a csomagban) és „Hamarosan” (az ügyfél látja a kártyát, de még nem nyithatja meg).</p>
     </div>
     <div id="clsAdm"></div>
     <div class="card" style="margin-bottom:1rem;">
@@ -1406,7 +1425,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
       </div>
       <div class="card" style="margin-bottom:1rem;">
         <div class="pt" style="font-size:1.05rem;margin-bottom:.3rem;"><svg class="i" aria-hidden="true"><use href="#i-folders"></use></svg> Tudástár mappák és csomagok</div>
-        <p class="small">Melyik mappa melyik csomagtól nyílik. A csomagtábla ígérete: Essential 3, Plus 5, VIP mind a 9 mappa. Ha ettől eltérsz, a tábla is módosítandó.</p>
+        <p class="small">Melyik mappa melyik csomagtól nyílik. A csomagtábla ígérete: Essential 3 mappa, Plus és VIP az összes. A „Mindenkinek nyitva” és a „Hamarosan” mappák nem foglalnak helyet. Ha ettől eltérsz, a tábla is módosítandó.</p>
         <div id="topicAdm"></div>
       </div>
       <div class="card">
@@ -1484,7 +1503,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0
         <div class="card">
           <div class="pt" style="font-size:1.05rem;margin-bottom:.5rem;">A fiókod</div>
           <div class="pf-rows">
-            <div class="pf-row"><span>Tanácsadód</span><b id="pfAdv">…</b></div>
+            <div class="pf-row"><span>Tanácsadód</span><b><span class="advline"><span id="pfAdvAva"></span><span class="who" id="pfAdv" onclick="advCardOpen()">…</span></span></b></div>
             <div class="pf-row"><span>Szinted</span><b id="pfTier">…</b></div>
             <div class="pf-row"><span>Megnyitott tantermek</span><b id="pfRooms">…</b></div>
             <div class="pf-row"><span>Szerződéseid</span><b id="pfItems">…</b></div>
@@ -2332,7 +2351,7 @@ function renderAll(){
   tc.title=(tr==='vip'?'A legmagasabb szinten vagy. Kattints a részletekért.':'Kattints: mit ad a szinted, és mi kell a következőhöz.');
   tc.style.cursor='pointer';
   tc.onclick=function(){ if(S.mode==='client'){ go('profile'); pfTab('csomag'); } };
-  document.getElementById('advName').textContent=adv.name; document.getElementById('advAva').textContent=ini(adv.name);
+  document.getElementById('advName').textContent=adv.name; advAvaSet('advAva');
   var afl=document.getElementById('afEaglzLab'); if(afl) afl.innerHTML=ctWhoLab(adv.name)+' kötöttem';
   refList(); lvlRender(); pkgRender(); contRender(); postsRender();
   var ds=document.getElementById('dotStart'); if(ds) ds.style.display=startSeen()?'none':'';
@@ -2638,6 +2657,7 @@ function pfRender(){
   document.getElementById('pfWhen').value=p.call_window||'';
   var tr=myTier();
   document.getElementById('pfAdv').textContent=(S.advisor&&S.advisor.name)||'a tanácsadód';
+  var pa=document.getElementById('pfAdvAva'); if(pa) pa.innerHTML=advAvaHtml('sm');
   document.getElementById('pfTier').innerHTML=tierLab(tr);
   document.getElementById('pfRooms').textContent=Object.keys(C.unl||{}).length+' / '+clsSlots();
   document.getElementById('pfItems').textContent=(S.items||[]).length+' db';
@@ -3018,7 +3038,8 @@ function hpPick(k){
   var f=document.getElementById('hpForm'), bk=document.getElementById('hpBook');
   var direct=(k==='consult'&&!!bookUrl());
   f.style.display=direct?'none':'block';
-  if(bk){ bk.style.display=direct?'block':'none'; var ba=document.getElementById('hpBookAdv'); if(ba) ba.textContent=(S.advisor&&S.advisor.name)||'a tanácsadód'; }
+  if(bk){ bk.style.display=direct?'block':'none'; var ba=document.getElementById('hpBookAdv'); if(ba) ba.textContent=(S.advisor&&S.advisor.name)||'a tanácsadód';
+    var bv=document.getElementById('hpBookAva'); if(bv) bv.innerHTML=advAvaHtml('lg'); }
   document.getElementById('hpFormT').innerHTML=HP_KIND[k][0]+' <em>'+HP_KIND[k][1]+'</em>';
   document.getElementById('hpTopic').innerHTML='<option value="">· Miről van szó? ·</option>'
     +HP_TOPIC[k].map(function(t){ return '<option value="'+t[0]+'">'+t[1]+'</option>'; }).join('');
@@ -3408,6 +3429,26 @@ function lvlRender(){
 }
 /* a szerzodes "hol kotottem" cimkeje: a sajat tanacsado neve, nem a ceg */
 function advNm(){ return (S.advisor&&S.advisor.name)||'a tanácsadóm'; }
+/* a saját tanácsadó arca: ugyanaz a kép, amit a Csapat oldalon is lát az ügyfél */
+function advAvaHtml(cls){
+  var a=S.advisor||{}, u=a.avatar_url||'';
+  return '<div class="advav'+(cls?' '+cls:'')+(u?' has':'')+'"'+(u?' style="background-image:url(&quot;'+E(u)+'&quot;)"':'')+' title="'+E(a.name||'')+'">'+E(ini(a.name||'?'))+'</div>';
+}
+function advAvaSet(el){
+  if(typeof el==='string') el=document.getElementById(el);
+  if(!el) return;
+  var a=S.advisor||{}, u=a.avatar_url||'';
+  el.textContent=u?'':ini(a.name||'?');
+  el.classList.toggle('has',!!u);
+  el.style.backgroundImage=u?('url("'+u+'")'):'';
+}
+/* az oldalsáv kártyájáról az ügyfél megnyitja a tanácsadója adatlapját */
+async function advCardOpen(){
+  var a=S.advisor; if(!a||!a.name) return;
+  if(!S.team||!S.team.length) await teamLoad();
+  var m=(S.team||[]).filter(function(x){ return x.email===a.email; })[0]||a;
+  teamPopFill(m); trk('adv_card','team',{});
+}
 function ctWhoLab(name){ return E(name)+' segítségével'; }
 /* ── CSOMAGTARTALOM ──
    FIGYELEM: a tabla csak azt irja, amit a rendszer TENYLEGESEN betart, vagy ami
@@ -3431,7 +3472,7 @@ var PKG=[
  ['',[
    ['Kalkulátorok','Vésztartalék, nyugdíj, hitel, gyermekjövő: számolj magad.',1,1,1],
    ['Tudástár','Cikkek élethelyzet szerint, mappákba rendezve.','3 mappa','5 mappa','összes mappa'],
-   ['Videótár','Rövid leckék, a te tempódban, a te témáidban.','3 mappa','5 mappa','összes mappa']
+   ['Videótár','Rövid leckék, a te tempódban, a te témáidban.','3 mappa','összes mappa','összes mappa + Események']
  ]],
  ['',[
    ['Szerviz munka','Rendszeres átnézés a tanácsadóddal.','éves','negyedéves','havi'],
@@ -3551,14 +3592,20 @@ function svcResolved(id,ok){
 function clsNum(v){ return String(v).replace('.',','); }
 function hunBol(n){ var e=[1,2,4,5,7,9,10,11,12,14,15,17,19]; return 'a(z) '+n+(e.indexOf(n)>=0?'-ből':'-ból'); }
 function clsSlots(){ var t=myTier(); return t==='vip'?5:(t==='plus'?5:3); }
-/* a valaszthato mappak: az auto_open (Esemenyek) nem, annak sajat menupontja van */
+/* a racsban latszo mappak: az auto_open (Esemenyek) nem, annak sajat menupontja van */
 function clsPickable(){ return (C.rooms||[]).filter(function(r){ return !r.auto_open; }); }
+/* free = mindenkinek nyitva, nem foglal helyet · soon = hamarosan, meg nem valaszthato */
+function clsIsFree(r){ return !!(r&&r.free); }
+function clsIsSoon(r){ return !!(r&&r.soon); }
+function clsOpenRoom(r){ return !!(r&&(C.unl[r.room]||clsIsFree(r))); }
+/* amibol a helyeket koltjuk: se nem free, se nem soon, es a szint engedi */
+function clsChoosable(){ return clsPickable().filter(function(r){ return !clsIsFree(r)&&!clsIsSoon(r); }); }
 function clsUsed(){ return Object.keys(C.unl).length; }
 function clsFree(){ return Math.max(0,clsSlots()-clsUsed()); }
 
 /* a következő megnézhető lecke: az első megnyitott teremben, ahol van hátra */
 function clsNext(){
-  var rooms=(C.rooms||[]).filter(function(r){ return C.unl[r.room]; });
+  var rooms=(C.rooms||[]).filter(function(r){ return clsOpenRoom(r)&&!clsIsSoon(r); });
   for(var i=0;i<rooms.length;i++){
     var its=clsItems(rooms[i].room);
     for(var j=0;j<its.length;j++){
@@ -3601,20 +3648,26 @@ function clsRender(){
   document.getElementById('clsRoomView').style.display='none';
   document.getElementById('clsGridWrap').style.display='';
   var tot=C.items.length, dn=C.items.filter(function(x){return C.prog[x.id];}).length;
+  var ch=clsChoosable().filter(function(r){return tOk(r.min_tier);}).length;
   var sl=clsSlots(), us=clsUsed(), fr=clsFree(), slots='';
   for(var q=0;q<sl;q++) slots+='<span class="cslot'+(q<us?' on':'')+'"></span>';
   document.getElementById('clsHead').innerHTML=
-     '<b>'+TIER[myTier()].n+' szint: '+sl+' tantermet választhatsz</b> '+hunBol(clsPickable().filter(function(r){return tOk(r.min_tier);}).length)+'. Te döntöd el, melyiket, az élethelyzeted szerint.'
+     '<b>'+TIER[myTier()].n+' szint: '+sl+' tantermet választhatsz</b> '+hunBol(clsChoosable().filter(function(r){return tOk(r.min_tier);}).length)+'. Te döntöd el, melyiket, az élethelyzeted szerint.'
+    +(sl>=ch?' A szinteden minden mappa nyitható.':'')
+    +(function(){ var f=clsPickable().filter(function(r){return clsIsFree(r);}).map(function(r){return '<b>'+E(r.title)+'</b>';});
+        return f.length?(' A '+f.join(' és a ')+' mindenkinek nyitva van, nem foglal helyet.'):''; })()
     +(myTier()==='vip'?' A zárt <b>Események</b> külön menüpont, nem foglal helyet.':'')
     +'<div class="cslot-row">'+slots+'<span class="tier-note" style="margin-left:.5rem;">'
       +(fr?(fr+' szabad hely'):'Minden helyedet felhasználtad'+(myTier()==='vip'?'.':', a következő szint többet ad.'))+'</span></div>'
     +(dn?'<div class="tier-note" style="margin-top:.5rem;font-weight:400;color:var(--gray);">Eddig '+dn+' leckét teljesítettél. Bármelyik videót elindíthatod, abban a sorrendben, ahogy téged érdekel. Ha értékeled, a haladásod itt látszik.</div>':'');
   document.getElementById('clsGrid').innerHTML=clsPickable().length?clsPickable().map(function(r){
-    var tierOk=tOk(r.min_tier), mine=!!C.unl[r.room], free=clsFree();
+    var tierOk=tOk(r.min_tier), mine=clsOpenRoom(r), free=fr, soon=clsIsSoon(r), isfr=clsIsFree(r);
     var its=clsItems(r.room), d=clsDone(r.room), pc=its.length?Math.round(d/its.length*100):0, full=mine&&its.length&&d===its.length;
-    var cls='cls-room'+(full?' done':'')+(mine?'':(!tierOk?' tlock':(free?' pick':' tlock')));
+    var cls='cls-room'+(soon?' soon':((full?' done':'')+(mine?'':(!tierOk?' tlock':(free?' pick':' tlock')))));
     var foot;
-    if(mine) foot='<div class="cls-bar"><i style="width:'+pc+'%"></i></div>'
+    if(soon) foot='<span class="cls-tag s">'+ico('clock')+' Hamarosan</span>';
+    else if(mine) foot=(isfr?'<span class="cls-tag f">'+ico('unlock')+' Mindenkinek nyitva</span>':'')
+                 +'<div class="cls-bar"><i style="width:'+pc+'%"></i></div>'
                  +'<div class="cls-meta"><span>'+d+' / '+its.length+' lecke</span><span>'+pc+'%</span></div>';
     else if(!tierOk) foot='<span class="cls-tl"><svg class="i" aria-hidden="true"><use href="#i-lock"></use></svg> '+tName(r.min_tier)+' szinttől</span>';
     else if(free) foot='<button class="cls-pick-btn"><svg class="i" aria-hidden="true"><use href="#i-unlock"></use></svg> Ezt a termet választom</button>';
@@ -3630,7 +3683,8 @@ function clsRender(){
 }
 function clsRoom(room){
   var r=C.rooms.filter(function(x){return x.room===room;})[0]; if(!r) return;
-  if(!C.unl[room]){
+  if(clsIsSoon(r)){ toast('@info Ez a mappa hamarosan nyílik. Szólunk, amint kész.'); return; }
+  if(!clsOpenRoom(r)){
     if(!tOk(r.min_tier)){ toast('@lock Ez a terem a '+tName(r.min_tier)+' szinttől érhető el.'); return; }
     if(!clsFree()){ toast('Elfogytak a helyeid. A tanácsadód tud magasabb szintet nyitni, vagy átrendezni a választásodat.'); return; }
     clsCfOpen(r); return;
@@ -4036,10 +4090,16 @@ async function feedDel(id){
 /* ── CSAPAT · hub_advisors (hub_team RPC) + "hamarosan" helyőrzők ── */
 var PROF_F=[['name','Név, ahogy az ügyfél látja','',80],['title','Szerep (pl. Fiókvezető)','',40],['phone','Telefon','',20],['contact_email','E-mail az ügyfeleknek','',120],
   ['fav_area','Kedvenc szakmai terület','',80],['fav_music','Kedvenc zene','',80],['fav_film','Kedvenc film','',80],['quote','Kedvenc idézet','w',200],['bio','Rövid bemutatkozás (max 5 mondat)','ta',700]];
-async function teamLoad(){ try{ var r=await sb.rpc('hub_team'); S.team=(r&&r.data)||[]; }catch(e){ S.team=S.team||[]; } return S.team; }
+async function teamLoad(){
+  try{ var r=await sb.rpc('hub_team'); S.team=(r&&r.data)||[]; }catch(e){ S.team=S.team||[]; }
+  /* ha a tanácsadó időközben képet cserélt, az oldalsáv is kövesse */
+  if(S.advisor&&S.advisor.email){ var m=(S.team||[]).filter(function(x){return x.email===S.advisor.email;})[0];
+    if(m&&m.avatar_url!==S.advisor.avatar_url){ S.advisor.avatar_url=m.avatar_url; advAvaSet('advAva'); } }
+  return S.team;
+}
 function teamList(){ return S.team||[]; }
 function tmIni(n){ return E((n||'?').trim().split(/\s+/).map(function(w){return w[0];}).join('').slice(0,2).toUpperCase()); }
-function tmAv(m,extra){ return '<div class="av"'+(m.avatar_url?' style="background-image:url('+E(m.avatar_url)+');background-size:cover;background-position:center;color:transparent;'+(extra||'')+'"':(extra?' style="'+extra+'"':''))+'>'+tmIni(m.name)+'</div>'; }
+function tmAv(m,extra){ return '<div class="av"'+(m.avatar_url?' style="background-image:url(&quot;'+E(m.avatar_url)+'&quot;);background-size:cover;background-position:center;color:transparent;'+(extra||'')+'"':(extra?' style="'+extra+'"':''))+'>'+tmIni(m.name)+'</div>'; }
 function teamRender(){
   var el=document.getElementById('teamGrid'); if(!el) return;
   var list=teamList(), soon=parseInt(setGet('team_soon',4),10)||0, mine=(S.profile&&S.profile.advisor_email)||'';
@@ -4050,7 +4110,7 @@ function teamRender(){
   el.innerHTML=h.length?h.join(''):'<div class="empty">A csapat bemutatkozása hamarosan.</div>';
 }
 function teamPopFill(m){
-  var av=document.getElementById('tmPopAv'); av.innerHTML=m.avatar_url?'':tmIni(m.name); av.style.backgroundImage=m.avatar_url?('url('+m.avatar_url+')'):'linear-gradient(135deg,var(--navy),var(--teal-deep))'; av.style.backgroundSize='cover'; av.style.backgroundPosition='center';
+  var av=document.getElementById('tmPopAv'); av.innerHTML=m.avatar_url?'':tmIni(m.name); av.style.backgroundImage=m.avatar_url?('url("'+m.avatar_url+'")'):'linear-gradient(135deg,var(--navy),var(--teal-deep))'; av.style.backgroundSize='cover'; av.style.backgroundPosition='center';
   document.getElementById('tmPopS').textContent=m.title||'Tanácsadó';
   document.getElementById('tmPopT').textContent=m.name||'';
   var fl=[['Kedvenc szakmai terület',m.fav_area],['Kedvenc zene',m.fav_music],['Kedvenc film',m.fav_film]].filter(function(x){return x[1];});
@@ -4090,7 +4150,7 @@ function profCheck(o){
   return '';
 }
 /* ── Profilom (tanácsadó) ── */
-function profAvDraw(url){ var av=document.getElementById('profAv'); if(!av) return; var a=S.advRow||{}; av.textContent=url?'':tmIni(a.name); av.classList.toggle('has',!!url); av.style.backgroundImage=url?('url('+url+')'):''; var d=document.getElementById('profAvDel'); if(d) d.style.display=url?'':'none'; }
+function profAvDraw(url){ var av=document.getElementById('profAv'); if(!av) return; var a=S.advRow||{}; av.textContent=url?'':tmIni(a.name); av.classList.toggle('has',!!url); av.style.backgroundImage=url?('url("'+url+'")'):''; var d=document.getElementById('profAvDel'); if(d) d.style.display=url?'':'none'; }
 function profRender(){
   var a=S.advRow||{}; var f=document.getElementById('profForm'); if(!f) return;
   if(!a.contact_email) a=Object.assign({},a,{contact_email:a.email||''});
@@ -4326,6 +4386,8 @@ function clsAdmRender(){
         +' <select onchange="clsAdmRoomProfile('+r.room+',this.value)" title="Milyen mezők tartoznak a mappa videóihoz" style="font-size:.75rem;padding:.25rem .5rem;">'
         +Object.keys(PROFILES).map(function(k){ return '<option value="'+k+'"'+((r.profile||'general')===k?' selected':'')+'>'+PROFILES[k]+'</option>'; }).join('')+'</select>'
         +' <label class="small" style="display:inline-flex;align-items:center;gap:.3rem;" title="Nem foglal helyet, az Események menüpontban jelenik meg"><input type="checkbox" onchange="clsAdmRoomAuto('+r.room+',this.checked)"'+(r.auto_open?' checked':'')+'> Események menüpont</label>'
+        +' <label class="small" style="display:inline-flex;align-items:center;gap:.3rem;" title="Mindenkinek nyitva, nem foglal helyet a csomagban"><input type="checkbox" onchange="clsAdmRoomFree('+r.room+',this.checked)"'+(r.free?' checked':'')+'> Mindenkinek nyitva</label>'
+        +' <label class="small" style="display:inline-flex;align-items:center;gap:.3rem;" title="Az ügyfél látja a kártyát, de még nem tudja megnyitni"><input type="checkbox" onchange="clsAdmRoomSoon('+r.room+',this.checked)"'+(r.soon?' checked':'')+'> Hamarosan</label>'
         +'</div>'
       +'<div class="room-adm-hd"><input id="rt'+r.room+'" value="'+E(r.title)+'" placeholder="A mappa neve"><input id="rg'+r.room+'" value="'+E(r.goal||'')+'" placeholder="Mi a mappa célja? (az ügyfél látja)"><input id="ro'+r.room+'" value="'+E(r.outcome||'')+'" placeholder="Mappazáró eredmény (az ügyfél látja)"><div><button class="btn primary" onclick="clsAdmRoomSave('+r.room+')">Mappa mentése</button></div></div>';
     var body=subs.map(function(sb_){
@@ -4422,6 +4484,20 @@ async function clsAdmRoomAuto(room,v){
   if(r&&r.error){ toast('@err '+r.error.message); return; }
   var rm=C.rooms.filter(function(x){return x.room===room;})[0]; if(rm) rm.auto_open=!!v;
   clsAdmRender(); toast('@ok '+(v?'A mappa mostantól az Események menüpontban van, nem foglal helyet.':'A mappa visszakerült a Videótár rácsába.'));
+}
+async function clsAdmRoomFree(room,v){
+  var r=await sb.from('hub_edu_rooms').update({free:!!v}).eq('room',room);
+  if(r&&r.error){ toast('@err '+r.error.message); return; }
+  var rm=C.rooms.filter(function(x){return x.room===room;})[0]; if(rm) rm.free=!!v;
+  toast(v?'@ok A mappa mindenkinek nyitva, helyet nem foglal.':'@ok A mappa újra választható lett.');
+  clsAdmRender();
+}
+async function clsAdmRoomSoon(room,v){
+  var r=await sb.from('hub_edu_rooms').update({soon:!!v}).eq('room',room);
+  if(r&&r.error){ toast('@err '+r.error.message); return; }
+  var rm=C.rooms.filter(function(x){return x.room===room;})[0]; if(rm) rm.soon=!!v;
+  toast(v?'@ok A mappa "Hamarosan" jelölést kapott.':'@ok A mappa élesbe került.');
+  clsAdmRender();
 }
 async function clsAdmRoomTier(room,v){
   var r=await sb.from('hub_edu_rooms').update({min_tier:v}).eq('room',room);
