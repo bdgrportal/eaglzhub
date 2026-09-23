@@ -4230,21 +4230,87 @@ async function profSave(){
 }
 function profPreview(){ var o=profRead('pf_'); o.avatar_url=(S.advRow&&S.advRow.avatar_url)||''; o.booking_url=(S.advRow&&S.advRow.booking_url)||''; teamPopFill(o); }
 /* profilkép: 512 px-es JPEG, a hub-avatars bucketbe, saját mappába; adminnál a kolléga e-mailje szerinti mappába */
-function avResize(file){
+/* ── PROFILKEP ATMERETEZES ─────────────────────────────────────────────
+   A telefonok 12 MP-es fotot adnak (4032x3024). Ha ezt egyetlen lepesben
+   huzzuk le 512 px-re a vaszonra, a mobil bongeszok (kiemelten az iOS)
+   memoriakimeles miatt alulmintaveteleznek: a vegeredmeny egy elmosodott,
+   szinte egyszinu folt lesz. Ezert:
+     1) ha van createImageBitmap, a dekoder kicsinyit (ez memoriabarat es pontos),
+     2) ha nincs, lepcsosen felezunk, nem egy nagy ugrassal,
+     3) a vegen megnezzuk, tenyleg kep-e, amit kaptunk. */
+var AV_S=512;
+function avBlob(c){
+  return new Promise(function(res,rej){ c.toBlob(function(b){ b?res(b):rej(new Error('blob')); },'image/jpeg',.86); });
+}
+function avDraw(src,w,h){
+  var m=Math.min(w,h), c=document.createElement('canvas'); c.width=AV_S; c.height=AV_S;
+  var x=c.getContext('2d'); x.imageSmoothingEnabled=true; x.imageSmoothingQuality='high';
+  x.drawImage(src,(w-m)/2,(h-m)/2,m,m,0,0,AV_S,AV_S);
+  return c;
+}
+function avImgEl(file){
   return new Promise(function(res,rej){
     var img=new Image(), url=URL.createObjectURL(file);
-    img.onload=function(){ try{ var S0=512, w=img.width, h=img.height, m=Math.min(w,h), c=document.createElement('canvas'); c.width=S0; c.height=S0;
-      c.getContext('2d').drawImage(img,(w-m)/2,(h-m)/2,m,m,0,0,S0,S0); URL.revokeObjectURL(url);
-      c.toBlob(function(b){ b?res(b):rej(new Error('blob')); },'image/jpeg',.86); }catch(e){ rej(e); } };
+    img.onload=function(){ res({img:img,url:url}); };
     img.onerror=function(){ URL.revokeObjectURL(url); rej(new Error('img')); };
     img.src=url;
   });
+}
+/* lepcsos kicsinyites: minden korben felezunk, amig a cel duplaja ala nem erunk */
+function avStepDown(img,w,h){
+  var src=img, sw=w, sh=h;
+  while(Math.min(sw,sh)>AV_S*2){
+    var c=document.createElement('canvas'); c.width=Math.round(sw/2); c.height=Math.round(sh/2);
+    var x=c.getContext('2d'); x.imageSmoothingEnabled=true; x.imageSmoothingQuality='high';
+    x.drawImage(src,0,0,c.width,c.height);
+    src=c; sw=c.width; sh=c.height;
+  }
+  return {src:src,w:sw,h:sh};
+}
+/* szorasmeres: ha a kep gyakorlatilag egyszinu, akkor a bongeszo elrontotta a kicsinyitest */
+function avSpread(blob){
+  return new Promise(function(res){
+    var img=new Image(), u=URL.createObjectURL(blob);
+    img.onload=function(){
+      try{
+        var c=document.createElement('canvas'); c.width=32; c.height=32;
+        var x=c.getContext('2d'); x.drawImage(img,0,0,32,32); URL.revokeObjectURL(u);
+        var d=x.getImageData(0,0,32,32).data, n=0, s=0, s2=0;
+        for(var i=0;i<d.length;i+=4){ var l=.299*d[i]+.587*d[i+1]+.114*d[i+2]; s+=l; s2+=l*l; n++; }
+        var m=s/n; res(Math.sqrt(Math.max(0,s2/n-m*m)));
+      }catch(e){ res(99); }
+    };
+    img.onerror=function(){ URL.revokeObjectURL(u); res(99); };
+    img.src=u;
+  });
+}
+async function avResize(file){
+  if(window.createImageBitmap){
+    var bmp=null;
+    try{ bmp=await createImageBitmap(file,{imageOrientation:'from-image'}); }
+    catch(e){ try{ bmp=await createImageBitmap(file); }catch(e2){ bmp=null; } }
+    if(bmp&&bmp.width&&bmp.height){
+      var c=avDraw(bmp,bmp.width,bmp.height);
+      if(bmp.close) bmp.close();
+      return await avBlob(c);
+    }
+  }
+  var o=await avImgEl(file);
+  var w=o.img.naturalWidth||o.img.width, h=o.img.naturalHeight||o.img.height;
+  if(!w||!h){ URL.revokeObjectURL(o.url); throw new Error('meret'); }
+  var st=avStepDown(o.img,w,h);
+  var c2=avDraw(st.src,st.w,st.h);
+  URL.revokeObjectURL(o.url);
+  return await avBlob(c2);
 }
 async function avUpload(file,folder){
   if(!file) return null;
   if(!/^image\//.test(file.type)){ toast('Csak képfájl tölthető fel.'); return null; }
   if(file.size>15*1024*1024){ toast('Maximum 15 MB.'); return null; }
   var blob; try{ blob=await avResize(file); }catch(e){ toast('@err A képet nem sikerült beolvasni.'); return null; }
+  /* ha a kicsinyites egyszinu foltot adott, inkabb ne toltsuk fel */
+  var spread=await avSpread(blob);
+  if(spread<3){ toast('@warn A kép feldolgozása nem sikerült: egyszínű folt lett belőle. Próbáld kisebb képpel, vagy küldd át a fotót magadnak e-mailben, és azt töltsd fel.'); return null; }
   var path=folder+'/avatar.jpg';
   var r=await sb.storage.from('hub-avatars').upload(path,blob,{upsert:true,contentType:'image/jpeg',cacheControl:'3600'});
   if(r.error){ toast('@err '+r.error.message); return null; }
